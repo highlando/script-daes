@@ -1,0 +1,58 @@
+# Basic Definitions and Notions
+
+We consider DAEs in the general form 
+
+\begin{equation}
+    F(t, x, \dot x) = 0
+    (\#eq:gendae)
+\end{equation}
+
+with $F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time interval $I=(t_0,t_e] \subset \mathbb R$ and state spaces $D_x$, $D_{\dot x} \subset \mathbb R^{n}$ and the task to find a function 
+
+\begin{equation}
+    x \colon I \to \mathbb R^{n} \notag
+\end{equation}
+
+with time derivative $\dot x \colon I \to \mathbb R^{n}$ such that (\#eq:gendae) is fulfilled for all $t\in I$.
+
+A dynamical process that evolves in time needs an initial state. Thus, one expects existence of unique solutions DAEs only if an initial value is prescribed 
+
+\begin{equation}
+    x(t_0) = x_0 \in \mathbb R^{n}. (\#eq:gendaeiniv) 
+\end{equation}
+
+
+
+In order to talk of solutions, we need to define what we understand as a solution.  
+
+
+```{definition}
+
+ 1. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in I$.
+
+ 2. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the initial value problem* \@ref(eq:gendae) and \@ref(eq:gendaeiniv), if, furthermore,  $x(t_0)= x_0$ holds.
+
+ 3. An initial condition \@ref(eq:gendaeiniv) is called consistent for the DAE \@ref(eq:gendae), if there exists at least one solution as defined in 2.
+
+```
+
+Some remarks
+
+ * The requirement that $x \in \mathcal C^1$ could be relaxed. Compare Example \@ref(exm:nonsmooth-sols), where certain components of the solution where smoother than others.
+ * Consistency of initial values is a major issue in the treatment of DAEs. See the pendulum...
+
+## Initial Conditions and Consistency
+
+We consider again the equations of motions of the pendulum (Example \@ref(exm:the-pendulum))
+
+\begin{equation}
+  \begin{split}
+      \dot x &= u \\
+      \dot y &= v \\
+      \dot u &= - 2 \lambda (x - c_x) \\ 
+      \dot v &= - 2 \lambda (y - c_y) - mgy \\
+            0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
+  \end{split}
+            (\#eq:pendulum-rvst)
+\end{equation}
+
