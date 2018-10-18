@@ -16,10 +16,11 @@ Free fall: Newton's second law applies:
 
 In 2D, the $x$, $y$ coordinates of a point of mass $m$:
 
-\begin{align}
+\begin{align*}
 m\ddot x &= 0 \\
 m\ddot y &= -mg
-\end{align}
+\end{align*}
+
 where $g$ is the gravity. 
 
 Now the pendulum: *The same point mass attached to a string*.
@@ -94,11 +95,11 @@ A model for the circuit is given through the following principles and considerat
 
 ```{example, label="the-circuit"}
 Summing all up, the equations that model the circuit are given as 
-\begin{align}
-C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R}\notag \\
+\begin{align*}
+C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 0  &= x_1 - x_3 - U \\
-0 &= x_3. \notag
-\end{align}
+0 &= x_3. 
+\end{align*}
 ```
 
 
@@ -139,10 +140,10 @@ Often, DAEs do not have smoothing properties, as opposed to ODEs where the solut
 ```{example, label="nonsmooth-sols"}
 Consider the equation
 
-\begin{align}
-    \dot x_1(t) &= x_2(t) \notag \\
-        0 & = x_2(t) -g(t) \notag
-\end{align}
+\begin{align*}
+    \dot x_1(t) &= x_2(t) \\
+        0 & = x_2(t) -g(t)
+\end{align*}
 
 where $g$ can be a nonsmooth function like
 
