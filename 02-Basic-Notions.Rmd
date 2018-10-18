@@ -3,7 +3,8 @@
 We consider DAEs in the general form 
 
 \begin{equation}
-    F(t, x, \dot x) = 0 (\#eq:gendae)
+    F(t, x, \dot x) = 0
+   	(\#eq:gendae)
 \end{equation}
 
 with $F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time interval $I=(t_0,t_e] \subset \mathbb R$ and state spaces $D_x$, $D_{\dot x} \subset \mathbb R^{n}$ and the task to find a function 
