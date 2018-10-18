@@ -8,9 +8,9 @@ We consider DAEs in the general form
 
 with $F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time interval $I=(t_0,t_e] \subset \mathbb R$ and state spaces $D_x$, $D_{\dot x} \subset \mathbb R^{n}$ and the task to find a function 
 
-\begin{equation}
-    x \colon I \to \mathbb R^{n} \notag
-\end{equation}
+\begin{equation*}
+    x \colon I \to \mathbb R^{n}
+\end{equation*}
 
 with time derivative $\dot x \colon I \to \mathbb R^{n}$ such that \@ref(eq:gendae) is fulfilled for all $t\in I$.
 
@@ -44,14 +44,12 @@ Some remarks
 
 We consider again the equations of motions of the pendulum (Example \@ref(exm:the-pendulum))
 
-\begin{equation}
-\begin{split}
+\begin{align*}
 	\dot x(t) &= u(t) \\
 	\dot y(t) &= v(t) \\
 	\dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
-	\dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy \notag
-\end{split}
-\end{equation}
+	\dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy
+\end{align*}
 
 with the constraint 
 
@@ -60,6 +58,7 @@ with the constraint
 \end{equation}
 
 To use this model to predict the time evolution of the system, a starting point needs to be known, say for $t=0$. This means initial positions and initial velocities:
+
 $$
 \begin{bmatrix} 
 x(0) \\ y(0)
