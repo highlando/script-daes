@@ -51,8 +51,8 @@ one obtains:
 
 | generalized coordinate | equation |
 |:-----------------------|---------:|
-|$q \leftarrow x$ | $m\ddot x(t) + 2 \lambda (x(t) - c_x) = 0$ |
-|$q \leftarrow y$ | $m\ddot y(t) + mgy + 2 \lambda (y(t) - c_y) = 0$ |
+|$q \leftarrow x$ | $m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0$ |
+|$q \leftarrow y$ | $m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0$ |
 |$q \leftarrow \lambda$ | $(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0$ |
 
 After an order reduction via the new variables $u:=\dot x$ and $v=\dot y$ the overall system reads
@@ -73,11 +73,14 @@ where we have omitted the time dependence.
 
 Equation \@ref(eq:pendulum) is a canonical example for a DAE with combined differential and algebraic equations.
 
-### Example -- Electrical Circuit
 
-*charging of a conductor through a resistor*
+Another class of DAEs arises from the modelling electrical circuits. We consider the example of *charging a conductor through a resistor* as illustrated in Figure \@ref(fig:circuit).
 
-![A simple electrical circuit](pics/circuit.png)
+<!-- ![A simple electrical circuit](pics/circuit.png) -->
+
+```{r circuit, echo=FALSE, fig.cap='Electrical circuit with a source, a resistor, and a conductor.', out.width='40%', fig.asp=.75, fig.align='center'}
+knitr::include_graphics("pics/circuit.png")
+```
 
 We formulate the problem in terms of the potentials $x_1$, $x_2$, $x_3$, that are assumed to reside in the wires between a source $U$ and a resistor $R$, the resistor $R$ and the capacitor $C$, and the capacitor and the source.
 
@@ -89,13 +92,16 @@ A model for the circuit is given through the following principles and considerat
  * \emph{Kirchhoff's law} states that everywhere in the circuit the currents sum up to zero: $I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0$
  * finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set $x_3 = 0$.
 
+```{example, label="the-circuit"}
 Summing all up, the equations that model the circuit are given as 
-
 \begin{align}
 C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R}\notag \\
 0  &= x_1 - x_3 - U \\
-0 &= x_3 \notag
+0 &= x_3. \notag
 \end{align}
+```
+
+
 
 ### Example -- Navier-Stokes Equations
 

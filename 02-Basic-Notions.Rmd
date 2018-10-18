@@ -13,7 +13,7 @@ with $F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time in
     x \colon I \to \mathbb R^{n} \notag
 \end{equation}
 
-with time derivative $\dot x \colon I \to \mathbb R^{n}$ such that (\#eq:gendae) is fulfilled for all $t\in I$.
+with time derivative $\dot x \colon I \to \mathbb R^{n}$ such that \@ref(eq:gendae) is fulfilled for all $t\in I$.
 
 A dynamical process that evolves in time needs an initial state. Thus, one expects existence of unique solutions DAEs only if an initial value is prescribed 
 
@@ -45,14 +45,66 @@ Some remarks
 
 We consider again the equations of motions of the pendulum (Example \@ref(exm:the-pendulum))
 
+\begin{align*}
+	\dot x(t) &= u(t) \\
+	\dot y(t) &= v(t) \\
+	\dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
+	\dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy
+\end{align*}
+
+with the constraint 
 \begin{equation}
-  \begin{split}
-      \dot x &= u \\
-      \dot y &= v \\
-      \dot u &= - 2 \lambda (x - c_x) \\ 
-      \dot v &= - 2 \lambda (y - c_y) - mgy \\
-            0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
-  \end{split}
-            (\#eq:pendulum-rvst)
+	0=(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2. (\#eq:pendulum-rvst-cnstrt)
 \end{equation}
 
+To use this model to predict the time evolution of the system, a starting point needs to be known, say for $t=0$. This means initial positions and initial velocities:
+$$
+\begin{bmatrix} 
+x(0) \\ y(0)
+\end{bmatrix}
+=
+\begin{bmatrix} 
+	x_0 \\ y_0
+\end{bmatrix}
+\quad\text{and}\quad
+\begin{bmatrix} 
+u(0) \\ v(0)
+\end{bmatrix}
+=
+\begin{bmatrix} 
+	u_0 \\ v_0.
+\end{bmatrix}
+$$
+
+The constraint \@ref(eq:pendulum-rvst-cnstrt) needs to be fulfilled at all times and also at $t=0$, which gives the constraint for the initial positions:
+
+\begin{equation*}
+	(x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
+\end{equation*}
+
+Moreover, if a constraint $g(x(t), y(t))=0$ holds for all $t$, then, necessarily, $\frac{d}{dt}g=0$ for all $t$. For the pendulum this means that 
+
+\begin{equation}
+	2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 (\#eq:pendulum-rvst-cnstrt-ddt)
+\end{equation}
+
+must hold for all $t$ and in particular at $t=0$ which gives constraints on the initial velocities $u_0$ and $v_0$:
+
+\begin{equation*}
+	2(x_0 - c_x)u_0 + 2(y_0 - c_y)v_0 = 0.
+\end{equation*}
+
+```{remark}
+The so-called *consistency conditions* on $(x_0, y_0, u_0, v_0)$ have the physical interpretation that the initial positions lie on the prescribed circle and that the velocities are tangent to this circle.
+```
+
+```{remark}
+One can show that the variable $\lambda$ is completely defined in terms of $x$ and $y$ and their derivatives. Thus, in the formulation \@ref(eq:pendulum), both in the analysis and in the numerical treatment, there is no need for an initial value for $\lambda$. However, as we will see, DAEs can be reformulated as ODEs through differentiation and substitutions. In such an ODE formulation, a necessary initial condition for $\lambda$ will have to fulfill similar consistency conditions as $(x_0, y_0, u_0, v_0)$.
+
+```
+
+### Observations and Remarks
+
+ * Condition \@ref(eq:pendulum-rvst-cnstrt-ddt) is an example for a *hidden-constraint* -- an algebraic constraint to the system that is not explicit in the original formulation.
+ * In theory, condition \@ref(eq:pendulum-rvst-cnstrt) can be replaced by \@ref(eq:pendulum-rvst-cnstrt-ddt).
+ * Moreover, through differentiation and elimination of constraints, a DAE can be brought into the form of an ODE; see the circuit in Example \@ref(exm:the-circuit)
