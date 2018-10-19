@@ -8,8 +8,8 @@ documentclass: book
 bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: seankross/bookdown-start
-url: 'http\://seankross.com/bookdown-start/'
+github-repo: highlando/script-daes
+url: 'http\://janheiland.de/script-daes/'
 description: "Script to my DAE course at the OVGU in Fall 2018"
 ---
 
