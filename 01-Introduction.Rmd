@@ -126,7 +126,7 @@ The NSE:
 
 \begin{align*}
   \frac{\partial v}{\partial t} + (v\otimes \nabla_\xi)v - \Delta_\xi v + \nabla_\xi p &= 0, \\
-  \nabla \cdot v &= 0,
+  \nabla_\xi \cdot v &= 0,
 \end{align*}
 
 with $\otimes$ denoting the outer product and $\nabla_\xi$ and $\Delta_\xi$ denoting the gradient and the *Laplace* operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE. 
