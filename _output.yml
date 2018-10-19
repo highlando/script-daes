@@ -1,3 +1,8 @@
+bookdown::pdf_book:
+  includes:
+    in_header: preamble.tex
+  latex_engine: xelatex
+  citation_package: natbib
 bookdown::gitbook:
   css: style.css
   split_by: chapter
@@ -8,10 +13,5 @@ bookdown::gitbook:
         <li><a href="./">DAEs</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-bookdown::pdf_book:
-  includes:
-    in_header: preamble.tex
-  latex_engine: xelatex
-  citation_package: natbib
 bookdown::epub_book:
   stylesheet: style.css
