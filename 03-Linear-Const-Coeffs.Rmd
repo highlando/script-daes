@@ -1,6 +1,6 @@
 # Linear DAEs with Constant Coefficients
 
-```{definition}
+```{definition, label="drazin-inverse"}
 
 Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 
 
