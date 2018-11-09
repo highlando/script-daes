@@ -1,0 +1,240 @@
+\newcommand{\rank}{\operatorname{rank}}
+
+# Linear DAEs with Time-varying Coefficients
+
+```{theorem, label="continuous-svd"}
+
+Let $E\in \mathcal C^l(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist pointwise unitary (and, thus, nonsingular) matrix functions $U$ and $V$, such that 
+
+$$
+ U^HEV =
+ \begin{bmatrix}
+ \Sigma & 0 \\
+ 0 & 0
+ \end{bmatrix}
+$$
+with pointwise nonsingular $\Sigma \in \mathcal C^l(I, \mathbb C^{r,r})$. 
+```
+
+```{theorem, label="global-canonical-form"}
+
+Let $E, A \in \mathcal C^l(I, \mathbb C^{m,n})$ be sufficiently smooth and suppose that 
+\begin{equation}
+	r(t) = r, \quad a(t)=a, \quad s(t)=s (\#eq:glob-local-char-vals)
+\end{equation}
+
+for the local characteristic values of $(E(t), A(t))$. Then $(E, A)$ is globally equivalent to the canonical form
+\begin{equation}
+\left(
+\begin{bmatrix}
+I_s &  0  & 0 & 0 \\
+0   & I_d & 0 & 0 \\
+0   &  0  & 0 & 0 \\
+0   &  0  & 0 & 0
+\end{bmatrix}, 
+\begin{bmatrix}
+0   & A_{12}&  0  & A_{14} \\
+0   &   0   &  0  & A_{24} \\
+I_s &   0   & I_d & 0 \\
+0   &   0   &  0  & 0
+\end{bmatrix}
+\right ).
+(\#eq:glob-can-form)
+\end{equation}
+
+All entries are again matrix functions on $I$ and the last block column in both matrix functions of \@ref(eq:glob-can-form) has size $u=n-s-d-a$.
+
+```
+
+```{proof}
+In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form).
+\begin{align*}
+(E,A) & 
+\sim   
+\left(\begin{bmatrix}
+\Sigma & 0 \\
+0 & 0
+\end{bmatrix}\right),
+\left(\begin{bmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{bmatrix}\right) \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_r & 0 \\
+0 & 0
+\end{bmatrix}\right),
+\left(\begin{bmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{bmatrix}\right) \\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_r & 0 \\
+0 & 0
+\end{bmatrix}\right),
+\left(\begin{bmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{bmatrix}\right) \\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_r & 0 \\
+0 & 0
+\end{bmatrix}\right),
+\left(\begin{bmatrix}
+A_{11} & A_{12}V_1 \\
+U_1^HA_{21} & U_1^HA_{22}V_1 
+\end{bmatrix}
+-
+\begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix} 0 & 0 \\ 0 & \dot V_1 \end{bmatrix}
+\right) \\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_r & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+A_{11} & A_{12} & A_{13}\\
+A_{21} & I_a & 0 \\
+A_{31} & A_{22} & 0
+\end{bmatrix}\right) \\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+V_2 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+A_{11}V_2 & A_{12} & A_{13}\\
+A_{21}V_2 & I_a & 0 \\
+U_2^HA_{31}V_2 & 0 & 0
+\end{bmatrix}
+-
+\begin{bmatrix}
+\dot I_r & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix}
+\begin{bmatrix}
+\dot V_2 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{bmatrix} \right)\\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+V_{11} & V_{12} & 0 & 0 \\
+V_{21} & V_{22} & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+A_{11} & A_{12} & A_{13} & A_{14}  \\
+A_{21} & A_{22} & A_{23} & A_{24}  \\
+A_{31} & A_{32} & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix} \right)\\
+%%%%%%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & I_d & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & A_{12} & A_{13} & A_{14}  \\
+0 & A_{22} & A_{23} & A_{24}  \\
+0 & A_{32} & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix} 
+\begin{bmatrix}
+I_s & 0 & 0 & 0  \\
+0 & I_d & 0 & 0  \\
+0 & -A_{32} & I_a & 0 \\
+I_s & 0 & 0 & I_a
+\end{bmatrix} 
+\right) \\
+%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & I_d & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & A_{12} & A_{13} & A_{14}  \\
+0 & A_{22} & A_{23} & A_{24}  \\
+0 & 0 & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}\right)\\
+%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & I_d & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & A_{12} & 0 & A_{14}  \\
+0 & A_{22} & 0 & A_{24}  \\
+0 & 0 & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}\right)\\
+%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & Q_2 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & A_{12}Q_2 & 0 & A_{14}  \\
+0 & A_{22}Q_2-\dot Q_2 & 0 & A_{24}  \\
+0 & 0 & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}\right) \\
+%%%%%%%%%%%%%%%%%
+& \sim   
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & I_d & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & A_{12}Q_2 & 0 & A_{14}  \\
+0 & 0 & 0 & A_{24}  \\
+0 & 0 & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}\right),
+\end{align*}
+where the final equivalence holds, if $Q_2$ is chosen as the (unique and pointwise invertible) solution of the linear matrix valued ODE
+$$
+\dot Q_2 = A_{22}(t)Q_2 ,  \quad Q_2 (t_0 ) = I_d.
+$$
+Then, $A_{22}$ vanishes because of the special choice of $Q_2$ and $E_{22}$ becomes $I_d$ after scaling the second block line by $Q_2^{-1}$.
+```
