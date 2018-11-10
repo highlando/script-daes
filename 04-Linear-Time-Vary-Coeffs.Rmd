@@ -1,6 +1,90 @@
 \newcommand{\rank}{\operatorname{rank}}
+\newcommand{\kernel}{\operatorname{kernel}}
+\newcommand{\corange}{\operatorname{corange}}
+\newcommand{\range}{\operatorname{range}}
+\newcommand{\cokernel}{\operatorname{cokernel}}
 
 # Linear DAEs with Time-varying Coefficients
+
+```{theorem, label="local-canonical-form"}
+Let $E, A \in \mathbb C^{m,n}$ and let
+\begin{equation}
+T,~Z,~T',~V (\#eq:lcf-subspaces)
+\end{equation}
+be 
+
+| Matrix | as the basis of |
+|:-------|:----------------|
+|$T$ | $\kernel E$ |
+|$Z$ | $\corange E = \kernel E^H$ |
+|$T'$ | $\cokernel E = \range E^H$ |
+|$V$ | $\corange (Z^HAT)$ |
+
+then the quantities
+\begin{equation}
+r,~a,~s,~d,~u,~v (\#eq:lcf-quantities)
+\end{equation}
+defined as 
+
+| Quantity | Definition | Name |
+|:-------|:-------------|:-----|
+|$r$ | $\rank E$ | *rank* |
+|$a$ | $\rank (Z^HAT)$ | *algebraic part* |
+|$s$ | $\rank (V^HZ^HAT')$ | *strangeness* |
+|$d$ | $r-s$ | *differential part* |
+|$u$ | $n-r-a$ | *undetermined variables* |
+|$v$ | $m-r-a-s$ | *vanishing equations* |
+are invariant under local equivalence transformations and $(E, A)$ is locally equivalent to the canonical form
+
+\begin{equation}
+\left(\begin{bmatrix}
+I_s & 0 & 0 & 0 \\
+0 & I_d & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix},
+\begin{bmatrix}
+0 & 0 & 0 & 0  \\
+0 & 0 & 0 & 0  \\
+0 & 0 & I_a & 0 \\
+I_s & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}\right),
+(\#eq:local-canonical-form)
+\end{equation}
+where all diagonal blocks are square, except maybe the last one.
+```
+Some remarks on the spaces and how the names are derived for the case $E\dot x = Ax +f$ with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients. 
+
+Let 
+$$x(t) = Ty(t) + T'y'(t),$$
+
+where $y$ denotes the components of $x$ that evolve in the range of $T$ and $y'$ the respective complement. (Since $[T|T']$ is a basis of $\mathbb C^{n}$, there exist such $y$ and $y'$ that uniquely define $x$ and vice versa). With $T$ spanning $\ker E$ we find that 
+
+$$E \dot x(t) = ET\dot y(t) + ET'\dot y'(t)$$
+
+so that the DAE basically reads
+
+$$ET'\dot y'(t) = ATy(t) + AT'y'(t)+f,$$
+
+i.e. the components of $x$ defined through $y$ are, effectively, not differentiated. With $Z$ containing exactly those $v$, for which $v^HE=0$, it follows that 
+
+$$Z^HET'\dot y'(t) = 0 = Z^HATy(t) + Z^HAT'y'(t)+Z^Hf,$$
+
+or 
+
+$$Z^HATy(t) = -Z^HAT'y'(t)-Z^Hf,$$
+
+so that $\rank Z^HAT$ indeed describes the number of purely algebraic equations and variables in the sense that it defines parts of $y$ (which is never going to be differentiated) in terms of algebraic relations (no time derivatives are involved).
+
+With the same arguments and with $V^H=\corange Z^HAT$, it follows that 
+
+$$V^HZ^HAT'y'(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,$$
+
+is the part of $E\dot x = Ax + f$ in which those components $y'$ that are also differentiated are algebraically equated to a right-hand side. This is the *strangeness* (rather in the sense of *skewness*) of DAEs that variables can be both differential and algebraic. Accordingly, $\rank V^HZ^HAT'$ describes the size of the skewness component. 
+
+> *Outlook*: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations will define the strangeness index.
 
 ```{theorem, label="continuous-svd"}
 
@@ -48,14 +132,15 @@ All entries are again matrix functions on $I$ and the last block column in both 
 
 ```{proof}
 In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form).
+<!-- \begin{ofalltheseblockmats} -->
 \begin{align*}
 (E,A) & 
 \sim   
 \left(\begin{bmatrix}
 \Sigma & 0 \\
 0 & 0
-\end{bmatrix}\right),
-\left(\begin{bmatrix}
+\end{bmatrix},
+\begin{bmatrix}
 A_{11} & A_{12} \\
 A_{21} & A_{22}
 \end{bmatrix}\right) \\
@@ -64,18 +149,8 @@ A_{21} & A_{22}
 \left(\begin{bmatrix}
 I_r & 0 \\
 0 & 0
-\end{bmatrix}\right),
-\left(\begin{bmatrix}
-A_{11} & A_{12} \\
-A_{21} & A_{22}
-\end{bmatrix}\right) \\
-%%%%%%%%%%%%%%%%%%%%%%
-& \sim   
-\left(\begin{bmatrix}
-I_r & 0 \\
-0 & 0
-\end{bmatrix}\right),
-\left(\begin{bmatrix}
+\end{bmatrix},
+\begin{bmatrix}
 A_{11} & A_{12} \\
 A_{21} & A_{22}
 \end{bmatrix}\right) \\
@@ -103,7 +178,7 @@ I_r & 0 & 0 \\
 \begin{bmatrix}
 A_{11} & A_{12} & A_{13}\\
 A_{21} & I_a & 0 \\
-A_{31} & A_{22} & 0
+A_{31} & 0  & 0
 \end{bmatrix}\right) \\
 %%%%%%%%%%%%%%%%%%%%%%
 & \sim   
@@ -225,13 +300,14 @@ I_s & 0 & 0 & 0 \\
 0 & 0 & 0 & 0
 \end{bmatrix},
 \begin{bmatrix}
-0 & A_{12}Q_2 & 0 & A_{14}  \\
+0 & A_{12} & 0 & A_{14}  \\
 0 & 0 & 0 & A_{24}  \\
 0 & 0 & I_a & 0 \\
 I_s & 0 & 0 & 0 \\
 0 & 0 & 0 & 0
 \end{bmatrix}\right),
 \end{align*}
+<!-- \end{ofalltheseblockmats} -->
 where the final equivalence holds, if $Q_2$ is chosen as the (unique and pointwise invertible) solution of the linear matrix valued ODE
 $$
 \dot Q_2 = A_{22}(t)Q_2 ,  \quad Q_2 (t_0 ) = I_d.
