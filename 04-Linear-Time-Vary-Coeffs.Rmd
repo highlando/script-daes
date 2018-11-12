@@ -78,13 +78,90 @@ $$Z^HATy(t) = -Z^HAT'y'(t)-Z^Hf,$$
 
 so that $\rank Z^HAT$ indeed describes the number of purely algebraic equations and variables in the sense that it defines parts of $y$ (which is never going to be differentiated) in terms of algebraic relations (no time derivatives are involved).
 
-With the same arguments and with $V^H=\corange Z^HAT$, it follows that 
+With the same arguments and with $V=\corange Z^HAT$, it follows that 
 
 $$V^HZ^HAT'y'(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,$$
 
 is the part of $E\dot x = Ax + f$ in which those components $y'$ that are also differentiated are algebraically equated to a right-hand side. This is the *strangeness* (rather in the sense of *skewness*) of DAEs that variables can be both differential and algebraic. Accordingly, $\rank V^HZ^HAT'$ describes the size of the skewness component. 
 
-> *Outlook*: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations will define the strangeness index.
+> **Outlook**: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size $s$ of the *strange* block here) will define the strangeness index.
+
+
+```{example, label="strangeness-in-the-circuit"}
+With basic scalings and state transforms, one finds for the coefficients of Example \@ref(exm:the-circuit) that:
+$$
+(E, A) \backsim 
+\left(
+\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}
+\right).
+$$
+
+We compute the subspaces as defined in \@ref(eq:lcf-subspaces):
+
+| Matrix | as the basis of/computed as |
+|:----------|:------------------------|
+| $T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ | $\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}$ |
+| $Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ | $\corange\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H$ |
+| $T'=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}$ | $\cokernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\range\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H$ |
+| $Z^HAT=I_1$ | $\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ |
+| $V=0$ | $\corange (Z^HAT) = \kernel I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}$ |
+| $Z^HAT'=0_{2\times 1}$ | $\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} I_2 \\ 0 \end{bmatrix}$ |
+
+and derive the quantities as defined in \@ref(eq:lcf-quantities):
+
+| Name | Value | Derived from |
+|:-----|:------|--------------|
+| rank | $r=2$ | $\rank E = \rank \begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}$ |
+| algebraic part | $a=1$ | $\rank Z^HAT = \rank I_1$ |
+| strangeness | $s=0$ | $\rank V^HZ^HAT' = \rank 0_{2\times 1}$ |
+| differential part | $d=2$ | $d=r-s=2-0$ |
+| undetermined variables | $u=0$ | $u=n-r-a=3-2-1$ |
+| vanishing equations | $v=0$ | $v=m-r-a-s=3-2-1-0$ |
+
+```
+
+```{example, label="strangeness-in-the-nse"}
+With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
+$$
+(E, A) =
+\left(
+\begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} A & B^H \\ B & 0 \end{bmatrix}
+\right)
+\backsim 
+\left(
+\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}
+,
+\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}
+\right).
+$$
+
+We compute the subspaces as defined in \@ref(eq:lcf-subspaces):
+
+| Matrix | as the basis of/computed as|
+|:-----------|:--------------------------|
+| $T=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ | $\kernel \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
+| $Z=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ | $\corange \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
+| $T'=\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}$ | $\cokernel\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
+| $Z^HAT=0_{n_1}$ | $\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ |
+| $V=I_{n_1}$ | $\corange (Z^HAT) = \kernel 0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}$ |
+| $Z^HAT'=\begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}$ | $\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}$ |
+
+and derive the quantities as defined in \@ref(eq:lcf-quantities):
+
+| Name | Value | Derived from |
+|:-----------------|:------|----------------------------|
+| rank | $r=n_1+n_2$ | $\rank E = \rank \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
+| algebraic part | $a=0$ | $\rank Z^HAT = \rank 0_{n_1}$ |
+| strangeness | $s=n_1$ | $\rank V^HZ^HAT' = \rank \begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}$ |
+| differential part | $d=n_2$ | $d=r-s=(n_1 + n_2) - n_1$ |
+| undetermined variables | $u=n_1$ | $u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0$ |
+| vanishing equations | $v=0$ | $v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1$ |
+
+```
 
 ```{theorem, label="continuous-svd"}
 
