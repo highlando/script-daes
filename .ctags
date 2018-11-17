@@ -1,0 +1,5 @@
+--exclude=_book
+--exclude=docs
+--langdef=Bookdown
+--langmap=Bookdown:.Rmd
+--regex-Bookdown=/\\\#(eq:[a-z_-]*)/\1/l,label/

@@ -1,7 +1,7 @@
 set expandtab
 set filetype=rmd
 imap ,le (\#eqx)<++><esc>Fxs
-imap ,re \@ref(eq:x)<++><esc>Fxs
+imap ,re \@ref(eq<c-x><c-]>
 map ,io <CR> * 
 imap ,bg \begin{
 
