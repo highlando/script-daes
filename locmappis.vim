@@ -1,5 +1,7 @@
 set expandtab
 set filetype=rmd
+set iskeyword+=:
+set iskeyword+=-
 imap ,le (\#eqx)<++><esc>Fxs
 imap ,re \@ref(eq<c-x><c-]>
 map ,io <CR> * 

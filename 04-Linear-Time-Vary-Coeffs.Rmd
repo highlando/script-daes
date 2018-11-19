@@ -34,7 +34,9 @@ defined as
 |$d$ | $r-s$ | *differential part* |
 |$u$ | $n-r-a$ | *undetermined variables* |
 |$v$ | $m-r-a-s$ | *vanishing equations* |
+
 are invariant under local equivalence transformations and $(E, A)$ is locally equivalent to the canonical form
+
 
 \begin{equation}
 \left(\begin{bmatrix}
@@ -125,7 +127,7 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 ```{example, label="strangeness-in-the-nse"}
 With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
 $$
-(E, A) =
+(\mathcal E, \mathcal A) =
 \left(
 \begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
 ,
@@ -163,9 +165,9 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 
 ```
 
-```{theorem, label="continuous-svd"}
+```{theorem, label="continuous-svd", name="see Kunkel/Mehrmann, Thm. 3.9"}
 
-Let $E\in \mathcal C^l(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist pointwise unitary (and, thus, nonsingular) matrix functions $U$ and $V$, such that 
+Let $E\in \mathcal C^l(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions $U$ and $V$, such that 
 
 $$
  U^HEV =

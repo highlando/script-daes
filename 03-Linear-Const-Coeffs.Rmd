@@ -13,6 +13,14 @@ Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ 
 is called a *Drazin inverse* of $E$.
 ```
 
+With the following theorem we confirm that a Drazin inverse to a matrix $E$ is unique so that we can write $E^D$ for it.
+
+```{theorem, label="drazin-inverse-unique"}
+
+Every matrix $E\in\mathbb{C}^{n,n}$ has one, and only one, Drazin inverse.
+
+```
+
 ```{proof}
 Uniqueness: Let $X_1$ and $X_2$ be two Drazin inverses of $E$. Then by repeated application of the identities in \@ref(eq:def-drazin-a)--\@ref(eq:def-drazin-c) one derives that 
 
