@@ -1,0 +1,117 @@
+# Numerical Approximation of DAEs
+
+In order to analyse the approximation error of the RKM $(\mathcal A, \beta, \gamma)$ applied to a regular linear DAE with constant coefficients
+
+$$
+ E\dot x = Ax+f(t).
+$$
+
+Without loss of generality, we can assume that
+
+ * $(E,A)$ is in Kronecker Canonical Form $\leftarrow$ RKM are invariant under equivalence transformation
+ * $(E,A)=(N,I)$ $\leftarrow$ the *regular part* can be treated by ODE theory
+ * $E=N=N_\nu$ consists of a single Jordan block $\leftarrow$ otherwise consider each Jordan block separately
+
+Thus, we can consider the special DAE 
+
+\begin{equation}
+\begin{bmatrix}
+0 & 1 &        &         &    \\
+  & 0 & 1      &         &    \\
+  &   & \ddots & \ddots  &    \\
+  &   &        & 0       & 1  \\
+  &   &        &         & 0 
+\end{bmatrix}
+\dot x = x + f(t),
+(\#eq:spec-dae-rkm-cc)
+\end{equation}
+
+ where
+
+ $$
+ x(t) = \begin{bmatrix} x_1(t) \\ x_2(t) \\ \vdots \\ x_\nu(t) \end{bmatrix}
+ \quad\text{and}\quad
+ f(t) = \begin{bmatrix} f_1(t) \\ f_2(t) \\ \vdots \\ f_\nu(t) \end{bmatrix}
+ $$
+
+```{theorem, label="local-consistency-error-rkm-lcc"}
+The local error of an RKM with $\mathcal A$ invertible applied to \@ref(eq:spec-dae-rkm-cc) behaves like 
+
+$$
+x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
+$$
+
+where $\kappa_j$, $j=1, \cdots, \nu$, is the maximum number such that 
+
+|   | Condition                   | range of $k$    |
+|:---|:----------------------------|:----------------|
+| a.) |	$\beta^T\mathcal A^{-k}e = \beta^T\mathcal A^{-j}\gamma^{j-k} / (j-k)!$ | $k=1,2,\cdots,j-1$ |
+| b.) | $\beta^T\mathcal A^{-j}\gamma^k = k! / (k-j+1)!$ | $k=j,j+1,\cdots$ |
+
+for all $k\leq \kappa_j$.
+
+```
+
+## here we code
+
+```{proof}
+Since we consider the pure consistency error, we can assume that $x_i=x(t_i)$. With that and with the definition of the RKM, the error is given as
+$$
+\tau = x(t_{i+1}) - x_{i+1} = -h\sum_{j=1}^s \beta_j \dot X_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x^{(k)}(t_i).
+$$
+
+Because of the special structure of the DAE, we can concentrate on the first error component $\tau_1$ $\leftarrow$ the error component $\tau_2$ is the *first* component of the problem of index $\nu-1$. For $\tau_1$ we have the formula
+
+$$
+\tau_1 = x_1(t_{i+1}) - x_{i+1,1} = h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i).
+$$
+
+One may confirm directly, or by means of the solution formula for $N\dot x = x + f$, that the $\ell$-th component of $x$ is defined as
+$$
+x_\ell(t) = - \sum_{j=\ell}^{\nu}f_j^{(j-\ell)}(t).
+$$
+
+The componentwise Taylor expansion of $Z_{i,\ell}$ reads
+\begin{align*}
+Z_{i\ell} 
+&= 
+\begin{bmatrix}
+x_{i,\ell} + f_\ell(t_i+\gamma_1 h) \\
+x_{i,\ell} + f_\ell(t_i+\gamma_2 h) \\
+\vdots \\
+x_{i,\ell} + f_\ell(t_i+\gamma_s h) 
+\end{bmatrix}
+=
+\begin{bmatrix}
+	x_{i,\ell} + f_\ell(t_i) + \sum_{k\geq 1}\frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma_1^k \\
+  x_{i,\ell} + f_\ell(t_i) + \sum_{k\geq 1}\frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma_2 ^k \\
+\vdots \\
+  x_{i,\ell} + f_\ell(t_i) + \sum_{k\geq 1}\frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma_s ^k 
+\end{bmatrix} \\
+&=
+x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
+\end{align*}
+
+With that and with $x_i=x(t_i)$, we expand the error $\tau_1$ as follows:
+\begin{align*}
+\tau_1 &= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
+&= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
+\end{align*}
+
+which, with $\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)$, becomes
+
+\begin{align*}
+\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
+ &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\
+ &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
+\end{align*}
+
+A shift of indices, $\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)$ and $\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)$, then gives:
+\begin{align*}
+	\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
+\end{align*}
+
+```
+

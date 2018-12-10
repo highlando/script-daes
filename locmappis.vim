@@ -4,7 +4,8 @@ set iskeyword+=:
 set iskeyword+=-
 imap ,le (\#eqx)<++><esc>Fxs
 imap ,re \@ref(eq<c-x><c-]>
-map ,io <CR> * 
+nmap ,io o<esc>C * 
+imap ,io <CR><esc>C * 
 imap ,bg \begin{
 
 function! MarkdownLevel()
