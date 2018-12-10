@@ -52,8 +52,6 @@ for all $k\leq \kappa_j$.
 
 ```
 
-## here we code
-
 ```{proof}
 Since we consider the pure consistency error, we can assume that $x_i=x(t_i)$. With that and with the definition of the RKM, the error is given as
 $$
