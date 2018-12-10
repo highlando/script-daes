@@ -41,14 +41,14 @@ $$
 x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
 $$
 
-where $\kappa_j$, $j=1, \cdots, \nu$, is the maximum number such that 
+where $\kappa_j$ is the maximum number such that 
 
 |   | Condition                   | range of $k$    |
 |:---|:----------------------------|:----------------|
 | a.) |	$\beta^T\mathcal A^{-k}e = \beta^T\mathcal A^{-j}\gamma^{j-k} / (j-k)!$ | $k=1,2,\cdots,j-1$ |
 | b.) | $\beta^T\mathcal A^{-j}\gamma^k = k! / (k-j+1)!$ | $k=j,j+1,\cdots$ |
 
-for all $k\leq \kappa_j$.
+for all $k\leq \kappa_j$ and for $j=1, \cdots, \nu$.
 
 ```
 
