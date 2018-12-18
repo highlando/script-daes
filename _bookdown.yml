@@ -8,6 +8,7 @@ rmd_files: ["index.Rmd",
             "03-Linear-Const-Coeffs.Rmd",
             "04-Linear-Time-Vary-Coeffs.Rmd",
             "05-Num-Apprx-DAEs.Rmd",
+            "06-construct-analyse-RKM-nonldae.Rmd",
             "x-examples.Rmd",
             "xx-exercises.Rmd"]
 clean: [packages.bib, bookdown.bbl]
