@@ -8,6 +8,9 @@ nmap ,io o<esc>C *
 imap ,io <CR><esc>C * 
 imap ,bg \begin{
 
+imap xil X_{i\ell}
+imap dxil \dot X_{i\ell}
+
 function! MarkdownLevel()
     if getline(v:lnum) =~ '^# .*$'
         return ">1"
