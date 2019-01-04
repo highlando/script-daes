@@ -124,7 +124,7 @@ and define two sets of \emph{Lagrange polynomials}
 $$
 L_\ell(\xi) = \prod_{j=0,j\neq \ell}^s \frac{\xi-\gamma_j}{\gamma_\ell-\gamma_j}
 \quad\text{and}\quad
-\tilde L_\ell(\xi) = \prod_{m=0,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m}.
+\tilde L_\ell(\xi) = \prod_{m=1,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m}.
 $$
 
 Let $\mathbb P_k$ be the space of polynomials of degree $\leq k-1$. We define the *collocation polynomial* $x_\pi \in \mathbb P_{s+1}$ via 
@@ -165,11 +165,11 @@ $$
 $$
 Moreover, by comparing the coefficients, we find that 
 $$
-P_\ell(\sigma) = \tilde L_\ell(\sigma),
+\dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
 $$
-which gives that $P_\ell(\gamma_m) = \delta_{\ell m}$ that is
+which gives that $\dot P_\ell(\gamma_m) = \delta_{\ell m}$ that is
 $$
-P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma) = 
+\dot P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma) = 
 \begin{cases}
 1, &\quad \text{for }\ell =m \\
 0, &\quad \text{otherwise} 
