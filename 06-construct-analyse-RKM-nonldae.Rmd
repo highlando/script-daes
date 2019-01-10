@@ -181,7 +181,7 @@ for $\ell, m=1,\dotsc,s$.
 
 Accordingly, if we define $\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}$ and 
 $$
-V:=\bigl[v_{mj}\bigr]_{m,j=1,\dotsc,s} = \bigl[ \dot L_j(\gamma_m) \bigr]_{m,j=1,\dotsc,s} \in \mathbb R^{s,s} 
+V:=\bigl[v_{mj}\bigr]_{m,j=1,\dotsc,s} = \bigl[ \dot L_j(\gamma_m) \bigr]_{m,j=1,\dotsc,s} \in \mathbb R^{s,s} ,
 $$
 it follows that $V=\mathcal A^{-1}$.
 
