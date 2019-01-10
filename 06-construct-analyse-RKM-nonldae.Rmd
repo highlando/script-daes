@@ -61,7 +61,7 @@ Consider a semi-explicit, strangeness-free DAE as in \@ref(eq:semexp-dae-diff)-\
  * with $\mathcal A$ invertible and $\rho:=1-\beta^T\mathcal A^{-1}e$, 
  * applied as in Table \@ref(tab:RKM-semiexp-DAE) with $\varepsilon=0$, 
  * that is convergent of order $p$ for ODEs 
- * and fulfills the _Butcher condition_ $C(q)$ with $q\geq p+1$
+ * and fulfills the *Butcher condition* $C(q)$ with $q\geq p+1$
 
 leads to an global error that behaves like 
 $$
@@ -120,20 +120,22 @@ Concretely, we parametrize $s$ collocation points via
 \begin{equation}
 0< \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 (\#eq:rkm-collo-gamma)
 \end{equation}
-and define two sets of \emph{Lagrange polynomials}
+and define two sets of *Lagrange polynomials*
 $$
 L_\ell(\xi) = \prod_{j=0,j\neq \ell}^s \frac{\xi-\gamma_j}{\gamma_\ell-\gamma_j}
 \quad\text{and}\quad
-\tilde L_\ell(\xi) = \prod_{m=1,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m}.
+\tilde L_\ell(\xi) = \prod_{m=1,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m},
 $$
+with $\ell\in\{0,1,\dotsc,s\}$.
 
 Let $\mathbb P_k$ be the space of polynomials of degree $\leq k-1$. We define the *collocation polynomial* $x_\pi \in \mathbb P_{s+1}$ via 
-$$
+\begin{equation}
 x_\pi (t) = \sum_{\ell=0}^s X_{i\ell}L_\ell\bigl(\frac{t-t_i}{h}\bigr)
-$$
- designed to compute the *stage values* $X_{i\ell}$ where $X_{i0}=x_i$ is already given.
+(\#eq:rkm-coll-collpol)
+\end{equation}
+ designed to compute the *stage values* $X_{i\ell}$, where $X_{i0}=x_i$ is already given.
 
-The stage derivatives are then given via
+The stage derivatives are then defined as
 \begin{equation}
 \dot X_{ij} = \dot x_\pi(t_i+\gamma_jh) = \frac 1h \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_j). (\#eq:rkm-coll-staged)
 \end{equation}
@@ -141,7 +143,7 @@ The stage derivatives are then given via
 To obtain $x_{i+1}=x_\pi(t_{i+1})=X_{is}$, we require the polynomial to satisfy the DAE \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-ftwo) at the collocation points $t_{ij}=t_i+\gamma_jh$, that is
 
 \begin{equation}
-\hat F_1(t,X_{ij},\dot X_{ij}) = 0, \quad \hat F_2(t,X_{ij}) = 0, \quad j=1,\dotsc,s \phantom{F_1} (\#eq:impl-sf-dae-collo)
+\hat F_1(t_i+\gamma_jh,X_{ij},\dot X_{ij}) = 0, \quad \hat F_2(t_i+\gamma_jh,X_{ij}) = 0, \quad j=1,\dotsc,s. \phantom{F_1} (\#eq:impl-sf-dae-collo)
 \end{equation}
 
 Now we show that this collocation defines a RKM discretization of \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-ftwo).
@@ -157,27 +159,29 @@ $$
 
 If we differentiate $P_l$, we get 
 $$
-\dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=\sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
+\dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
 $$
 where define simply define
 $$
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
 $$
-Moreover, by comparing the coefficients, we find that 
+Moreover, by definition of $P_\ell$ (and the *fundamental theorem of calculus*), it holds that 
 $$
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
 $$
 which gives that $\dot P_\ell(\gamma_m) = \delta_{\ell m}$ that is
 $$
-\dot P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma) = 
+\dot P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma_m) = 
 \begin{cases}
-1, &\quad \text{for }\ell =m \\
+1, &\quad \text{if }\ell =m \\
 0, &\quad \text{otherwise} 
-\end{cases}
+\end{cases}.
 $$
-Accordingly, if we define $\mathcal A := \bigl[\alpha_{j\ell}\bigr] \in \mathbb R^{s,s}$ and 
+for $\ell, m=1,\dotsc,s$.
+
+Accordingly, if we define $\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}$ and 
 $$
-V:=\bigl[v_{mj}\bigr] = \bigl[ \dot L_j(\gamma_m) \bigr] \in \mathbb R^{s,s} 
+V:=\bigl[v_{mj}\bigr]_{m,j=1,\dotsc,s} = \bigl[ \dot L_j(\gamma_m) \bigr]_{m,j=1,\dotsc,s} \in \mathbb R^{s,s} 
 $$
 it follows that $V=\mathcal A^{-1}$.
 
@@ -198,16 +202,17 @@ $$
 h\dot X_{im} = \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_m) = v_{m0}x_i + \sum_{\ell=1}^sv_{m\ell}X_{i\ell}.
 $$
 and $h\sum_{m=1}^s\alpha_{\ell m} \dot X_{im}$ as
-\begin{align*}
-  h\sum_{m=1}^s \alpha_{\ell m}\dot X_{im} &= \sum_{m=1}^s \alpha_{\ell m}v_{m0}x_i + \sum_{j,m=1}^s \alpha_{\ell m}v_{mj}X_{ij} \\
-  &= -e_\ell^T \mathcal AV e x_i + \sum_{j=1}^se_\ell^T \mathcal AVe_jX_{ij} \\
-  &= -x_i + X_{i\ell},
-\end{align*}
+\begin{align}
+  h\sum_{m=1}^s \alpha_{\ell m}\dot X_{im} &= \sum_{m=1}^s \alpha_{\ell m}v_{m0}x_i + \sum_{j,m=1}^s \alpha_{\ell m}v_{mj}X_{ij} \notag \\
+  &= -e_\ell^T \mathcal AV e x_i + \sum_{j=1}^se_\ell^T \mathcal AVe_jX_{ij} (\#eq:collo-is-RKM-formula)\\
+  &= -x_i + X_{i\ell}, \notag
+\end{align}
 which, together with \@ref(eq:impl-sf-dae-collo), indeed defines a RKM.
 
 Some remarks:
 
+ * the preceding derivation shows that the collocation \@ref(eq:rkm-coll-collpol) and \@ref(eq:impl-sf-dae-collo) is equivalent to the RKM scheme \@ref(eq:collo-is-RKM-formula) and \@ref(eq:impl-sf-dae-collo)
+ * convergence of these schemes applied to \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-fone) is proven in Kunkel/Mehrmann Theorem 5.17
  * with fixing $\gamma_s=1$, the obtained RKM is *stiffly accurate*
  * the remaining $s-1$ $\gamma$s can be chosen to get optimal convergence rates $\rightarrow$ RadauIIa schemes
  * if also $\gamma_s$ is chosen optimal in terms of convergence, the Gauss schemes are obtained
- * convergence of these schemes applied to \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-fone) is proven in Kunkel/Mehrmann Theorem 5.17

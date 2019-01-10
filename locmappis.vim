@@ -35,3 +35,15 @@ endfunction
 
 setlocal foldexpr=MarkdownLevel()  
 setlocal foldmethod=expr
+
+" This gets rid of the nasty _ italic bug in tpope's vim-markdown
+" block $$...$$
+syn region math start=/\$\$/ end=/\$\$/
+syn region math start=/\\begin{equation}/ end=/\\end{equation}/
+syn region math start=/\\begin{align}/ end=/\\end{align}/
+syn region math start=/\\begin{align\*}/ end=/\\end{align\*}/
+" inline math
+syn match math '\$[^$].\{-}\$'
+
+" actually highlight the region we defined as "math"
+hi link math PreProc
