@@ -10,6 +10,7 @@ rmd_files: ["index.Rmd",
             "05-Num-Apprx-DAEs.Rmd",
             "06-construct-analyse-RKM-nonldae.Rmd",
             "x-examples.Rmd",
-            "xx-exercises.Rmd"]
+            "xx-exercises.Rmd",
+            "xxx-num-code.Rmd"]
 clean: [packages.bib, bookdown.bbl]
 new_session: yes
