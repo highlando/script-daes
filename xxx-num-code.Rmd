@@ -86,7 +86,7 @@ Furthermore, there are solvers for particularly structured DAEs.
 
 | DAEs | Resources |
 |:------------|:------------------------|
-| Navier-Stokes (nl-se-$2$) | See, e.g., our [preprint](http://www.janheiland.de/files/ah18-nsedaef.pdf) on definition of different schemes |
+| Navier-Stokes (nl-se-$2$) | See, e.g., Sec. 4.3 of our [preprint](http://www.janheiland.de/files/ah18-nsedaef.pdf) on definitions of different schemes |
 | Multi-Body (nl-se-$3$) | See, e.g., the code on [Hairer's homepage](https://www.unige.ch/~hairer/software.html) |
 
 
