@@ -33,7 +33,7 @@ kable(data.frame(Problem = c("nonlinear", "linear TV", "linear CC"),
 		   		 strBDFone = c("e", "$\\cdot$", "$\\cdot$")),
   	  booktabs = T,
 	  escape = F,
-	  caption = "Overview of convergence results of BDF/RKM schemes for DAEs of various index and, possibly, semi-explicit structure. Here, we equate \\emph{index-1} and \\emph{strangeness-free}. A $\\cdot$ indicates that this case is included in a result for a more general case \\emph{located} left or above in the table.",
+	  caption = "Overview of convergence results of BDF/RKM schemes for DAEs of various index and, possibly, semi-explicit structure. Here, we equate *index-1* and *strangeness-free*. A $\\cdot$ indicates that this case is included in a result for a more general case \\emph{located} left or above in the table.",
   	  col.names = c("Problem / Index", "$*$", "$2$", "$1$", "$*$", "$2$", "$1$", "$*$", "$2$", "$1$", "$*$", "$2$", "$1$")) %>% 
 kable_styling(latex_options = c("striped")) %>%
 add_header_above(c(" " = 1, "unstructured" = 3, "semi-explicit" = 3, "unstructured" = 3, "semi-explicit" = 3)) %>%
@@ -86,7 +86,7 @@ Furthermore, there are solvers for particularly structured DAEs.
 
 | DAEs | Resources |
 |:------------|:------------------------|
-| Navier-Stokes (nl-se-$2$) | See, e.g., Sec. 4.3 of our [preprint](http://www.janheiland.de/files/ah18-nsedaef.pdf) on definitions of different schemes |
+| Navier-Stokes (nl-se-$2$) | See, e.g., Sec. 4.3 of our [preprint](https://arxiv.org/abs/1901.04002) on definitions of different schemes |
 | Multi-Body (nl-se-$3$) | See, e.g., the code on [Hairer's homepage](https://www.unige.ch/~hairer/software.html) |
 
 

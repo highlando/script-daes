@@ -36,7 +36,7 @@ The general strategy to get a suitable formulation of a time discretization of s
 \dot x = f(t, x, y),  \\
 \varepsilon \dot y = g(t, x, y),
 \end{align*}
-which is an ODE, formulate the RKM, and then let $\varepsilon \to 0$.
+which is an ODE, formulate the RKM, and then let $\varepsilon \to 0$. In the Hairer/Wanner Book, this approach is called *$\varepsilon$-embedding.
 
 This is, consider
 
