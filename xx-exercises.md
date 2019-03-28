@@ -1,0 +1,43 @@
+<!--
+\newcommand{\ker}{\operatorname{ker}}
+\newcommand{\det}{\operatorname{det}}
+-->
+\newcommand{\spann}{\operatorname{span}}
+
+# Exercises
+
+## II.C.1
+
+Let $E$, $A \in \mathbb C^{n,n}$  satisfy $EA=AE$. Then $\ker E \cap \ker A = \{0\}$ implies that $(E, A)$ is regular.
+
+Assume that $\ker A \neq \{0\}$ is of dimension $k\geq 1$. The case that $k=0$ is trivial, since $\lambda E - A$ is regular for $\lambda = 0$. Let $V_0$ be the matrix whose columns span $\ker A$ and let $V_\perp$ be the matrix that consists of all eigenvectors of $A$ that are associated with the nonzero eigenvalues.
+
+It holds that,
+
+$$AV_0 = 0 \quad \text{and} \quad AV_\perp = V_\perp L_\perp$$ 
+
+with an $L_\perp \in C^{n-k,n-k}$ which is invertible. This a consequence of $V_\perp$ spanning the $A$-invariant subspaces with respect to the nonzero eigenvalues.
+
+Because of $ABV_0=BAV_0=0$, it follows that $\spann BV_0 \subset \ker A = \spann V_0$, i.e., $V_0$ is a $B$-invariant subspace which means that there is a $K_0\in \mathbb C^{k,k}$ such that $BV_0 =V_0K_0$. 
+
+Moreover, because of $\ker E \cap \ker A = \{0\}$, the matrix $K_0$ has no zero eigenvalues. In fact $K_0$ has the same eigenvalues as $B':=B\bigr|_{V_0}\colon V_0 \to V_0$, and if $B'$ had a zero eigenvalue this would mean that the associated eigenvector would be in $V_0$ and, thus, in the kernel of $A$. 
+
+Moreover, since $ABV_\perp=BAV_\perp=BVL_\perp$ meaning that $BV_\perp$ is in the $A$-invariant subspace related to the nonzero eigenvalues of $A$, i.e., $BV_\perp \subset V_\perp$, it follows that $V_\perp$ is a $B$-invariant subspace and, thus, $BV_\perp = V_\perp K_\perp$ for some matrix $K_\perp \in \mathbb C^{n-k,n-k}$.
+
+With $V:=[V_0 |V_\perp]$ and the observation that $V$ is invertible, since its columns span all of $\mathbb C^n = \spann V_0 \oplus \spann V_\perp$, it follows that 
+\begin{equation*}
+\begin{split}
+\lambda E - A & = (\lambda E - A)VV^{-1} = (\lambda E [V_0 |V_\perp]- A[V_0 |V_\perp])V^{-1}  \\
+& = ([V_0 K_0 |V_\perp K_\perp]\lambda  - [0 |V_\perp L_\perp])V^{-1} \\
+& = [V_0 |V_\perp ]
+\begin{bmatrix}
+ \lambda K_0 & \\ & \lambda K_\perp - L_\perp
+\end{bmatrix}
+V^{-1}
+\end{split}
+\end{equation*}
+and that 
+$$
+\det (\lambda E - A) = \det (\lambda K_0) \det(\lambda K_\perp - L_\perp) 
+$$
+is not identically zero, since $K_0$ and $L_\perp$ are invertible. 

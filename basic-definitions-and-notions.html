@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>2 Basic Definitions and Notions | DAEs</title>
+  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+
+  <meta property="og:title" content="2 Basic Definitions and Notions | DAEs" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://janheiland.de/script-daes/" />
+  
+  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="github-repo" content="highlando/script-daes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="2 Basic Definitions and Notions | DAEs" />
+  
+  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  
+
+<meta name="author" content="Jan Heiland" />
+
+
+<meta name="date" content="2019-03-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html">
+<link rel="next" href="linear-daes-with-constant-coefficients.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DAEs</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
+<li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
+<li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
+<li class="chapter" data-level="6.2" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#collocation-rkm-for-implicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.2</b> Collocation RKM for Implicit Strangeness-free DAEs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples-1.html"><a href="examples-1.html"><i class="fa fa-check"></i><b>7</b> Examples</a><ul>
+<li class="chapter" data-level="7.1" data-path="examples-1.html"><a href="examples-1.html#semi-discrete-navier-stokes-equations"><i class="fa fa-check"></i><b>7.1</b> Semi-discrete Navier-Stokes equations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>8</b> Exercises</a><ul>
+<li class="chapter" data-level="8.1" data-path="exercises.html"><a href="exercises.html#ii.c.1"><i class="fa fa-check"></i><b>8.1</b> II.C.1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html"><i class="fa fa-check"></i><b>9</b> Numerical Analysis and Software Overview</a><ul>
+<li class="chapter" data-level="9.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#theory-rkms-and-bdf-for-daes"><i class="fa fa-check"></i><b>9.1</b> Theory: RKMs and BDF for DAEs</a></li>
+<li class="chapter" data-level="9.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#solvers"><i class="fa fa-check"></i><b>9.2</b> Solvers</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#multi-purpose"><i class="fa fa-check"></i><b>9.2.1</b> Multi purpose</a></li>
+<li class="chapter" data-level="9.2.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#application-specific"><i class="fa fa-check"></i><b>9.2.2</b> Application specific</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#software"><i class="fa fa-check"></i><b>9.3</b> Software</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DAEs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="basic-definitions-and-notions" class="section level1">
+<h1><span class="header-section-number">2</span> Basic Definitions and Notions</h1>
+<p>We consider DAEs in the general form</p>
+<p><span class="math display" id="eq:gendae">\[\begin{equation}
+    F(t, x, \dot x) = 0
+    \tag{2.1}
+\end{equation}\]</span></p>
+<p>with <span class="math inline">\(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\)</span> and with a time interval <span class="math inline">\(I=[t_0,t_e] \subset \mathbb R\)</span> and state spaces <span class="math inline">\(D_x\)</span>, <span class="math inline">\(D_{\dot x} \subset \mathbb R^{n}\)</span> and the task to find a function</p>
+<p><span class="math display">\[\begin{equation*}
+    x \colon I \to \mathbb R^{n}
+\end{equation*}\]</span></p>
+<p>with time derivative <span class="math inline">\(\dot x \colon I \to \mathbb R^{n}\)</span> such that <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> is fulfilled for all <span class="math inline">\(t\in I\)</span>.</p>
+<p>A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed</p>
+<p><span class="math display" id="eq:gendaeiniv">\[\begin{equation}
+    x(t_0) = x_0 \in \mathbb R^{n}. \tag{2.2} 
+\end{equation}\]</span></p>
+<div id="solution-concept" class="section level2">
+<h2><span class="header-section-number">2.1</span> Solution Concept</h2>
+<p>In order to talk of solutions, we need to define what we understand as a solution.</p>
+
+<div class="definition">
+<p><span id="def:dae-solution" class="definition"><strong>Definition 2.1  </strong></span> 1. A function <span class="math inline">\(x \in \mathcal C^1(I, \mathbb R^{n})\)</span> is called a <em>solution to the DAE</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a>, if <span class="math inline">\(F(t, x(t), \dot x(t)) = 0\)</span> holds for all <span class="math inline">\(t\in I\)</span>.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>A function <span class="math inline">\(x \in \mathcal C^1(I, \mathbb R^{n})\)</span> is called a <em>solution to the initial value problem</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> and <a href="basic-definitions-and-notions.html#eq:gendaeiniv">(2.2)</a>, if, furthermore, <span class="math inline">\(x(t_0)= x_0\)</span> holds.</p></li>
+<li>An initial condition <a href="basic-definitions-and-notions.html#eq:gendaeiniv">(2.2)</a> is called consistent for the DAE <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a>, if there exists at least one solution as defined in 2.</li>
+</ol>
+</div>
+
+<p>Some remarks</p>
+<ul>
+<li>The requirement that <span class="math inline">\(x \in \mathcal C^1\)</span> could be relaxed. Compare Example <a href="introduction.html#exm:nonsmooth-sols">1.3</a>, where certain components of the solution where smoother than others.</li>
+<li>Consistency of initial values is a major issue in the treatment of DAEs. See the pendulum…</li>
+</ul>
+</div>
+<div id="initial-conditions-and-consistency" class="section level2">
+<h2><span class="header-section-number">2.2</span> Initial Conditions and Consistency</h2>
+<p>We consider again the equations of motions of the pendulum (Example <a href="introduction.html#exm:the-pendulum">1.1</a>)</p>
+<p><span class="math display">\[\begin{align*}
+    \dot x(t) &amp;= u(t) \\
+    \dot y(t) &amp;= v(t) \\
+    \dot u(t) &amp;= - 2 \lambda(t) (x(t) - c_x) \\ 
+    \dot v(t) &amp;= - 2 \lambda(t) (y(t) - c_y) - mgy
+\end{align*}\]</span></p>
+<p>with the constraint</p>
+<p><span class="math display" id="eq:pendulum-rvst-cnstrt">\[\begin{equation}
+    0=(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2. \tag{2.3}
+\end{equation}\]</span></p>
+<p>To use this model to predict the time evolution of the system, a starting point needs to be known, say for <span class="math inline">\(t=0\)</span>. This means initial positions and initial velocities:</p>
+<p><span class="math display">\[
+\begin{bmatrix} 
+x(0) \\ y(0)
+\end{bmatrix}
+=
+\begin{bmatrix} 
+    x_0 \\ y_0
+\end{bmatrix}
+\quad\text{and}\quad
+\begin{bmatrix} 
+u(0) \\ v(0)
+\end{bmatrix}
+=
+\begin{bmatrix} 
+    u_0 \\ v_0.
+\end{bmatrix}
+\]</span></p>
+<p>The constraint <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt">(2.3)</a> needs to be fulfilled at all times and also at <span class="math inline">\(t=0\)</span>, which gives the constraint for the initial positions:</p>
+<p><span class="math display">\[\begin{equation*}
+    (x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
+\end{equation*}\]</span></p>
+<p>Moreover, if a constraint <span class="math inline">\(g(x(t), y(t))=0\)</span> holds for all <span class="math inline">\(t\)</span>, then, necessarily, <span class="math inline">\(\frac{d}{dt}g=0\)</span> for all <span class="math inline">\(t\)</span>. For the pendulum this means that</p>
+<p><span class="math display" id="eq:pendulum-rvst-cnstrt-ddt">\[\begin{equation}
+    2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 \tag{2.4}
+\end{equation}\]</span></p>
+<p>must hold for all <span class="math inline">\(t\)</span> and in particular at <span class="math inline">\(t=0\)</span> which gives constraints on the initial velocities <span class="math inline">\(u_0\)</span> and <span class="math inline">\(v_0\)</span>:</p>
+<p><span class="math display">\[\begin{equation*}
+    2(x_0 - c_x)u_0 + 2(y_0 - c_y)v_0 = 0.
+\end{equation*}\]</span></p>
+<p>Some remarks on consistency, constraints, and derivations:</p>
+<ul>
+<li>The so-called <em>consistency conditions</em> on <span class="math inline">\((x_0, y_0, u_0, v_0)\)</span> have the physical interpretation that the initial positions lie on the prescribed circle and that the velocities are tangent to this circle.</li>
+<li>One can show that the variable <span class="math inline">\(\lambda\)</span> is completely defined in terms of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and their derivatives. Thus, in the formulation <a href="introduction.html#eq:pendulum">(1.1)</a>, both in the analysis and in the numerical treatment, there is no need for an initial value for <span class="math inline">\(\lambda\)</span>. However, as we will see, DAEs can be reformulated as ODEs through differentiation and substitutions. In such an ODE formulation, a necessary initial condition for <span class="math inline">\(\lambda\)</span> will have to fulfill similar consistency conditions as <span class="math inline">\((x_0, y_0, u_0, v_0)\)</span>.</li>
+</ul>
+<p>Condition <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt-ddt">(2.4)</a> is an example for a <em>hidden-constraint</em> – an algebraic constraint to the system that is not explicit in the original formulation. In theory, condition <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt">(2.3)</a> can be replaced by <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt-ddt">(2.4)</a>. Moreover, through differentiation and elimination of constraints, a DAE can be brought into the form of an ODE: in the case of the circuit of Example <a href="introduction.html#exm:the-circuit">1.2</a> one only needs to replace the constraints by their derivatives:</p>
+<p><span class="math display" id="eq:circuit-ddt">\[\begin{equation}
+\begin{split}
+C(\dot x_3 - \dot x_2) &amp;= - \frac{x_1 - x_2}{R} \\
+\dot x_1 - \dot x_3 &amp;= \dot U \\
+\dot x_3 &amp;= 0. 
+\end{split}
+\tag{2.5}
+\end{equation}\]</span></p>
+<p>Note that <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> can be written as <span class="math inline">\(B\dot x = Ax + f\)</span> with an invertible matrix <span class="math inline">\(B\)</span> and, thus, is an ODE.</p>
+<p>For an ODE there is no constraint on the initial values. However, a solution to <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> only solves the original DAE <a href="introduction.html#eq:circuit">(1.2)</a>, if the initial values are consistent with the DAE. In this case, this means <span class="math inline">\(x_3(t_0)=0\)</span> and <span class="math inline">\(x_1(t_0) - x_3(t_0) = U(t_0)\)</span>.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="linear-daes-with-constant-coefficients.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["DAEs.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

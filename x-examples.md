@@ -1,0 +1,44 @@
+# Examples 
+
+## Semi-discrete Navier-Stokes equations
+
+By scalings and state transforms, we find that the coefficients of the spatially discretized Navier-Stokes equations are equivalent to:
+\begin{align*}
+(\mathcal E, \mathcal A) &=
+\left(
+\begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} A & B^H \\ B & 0 \end{bmatrix}
+\right) \\
+& \backsim 
+\left(
+\begin{bmatrix} M^{-1/2} & 0 \\ 0 & I \end{bmatrix}
+\begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} A & B^H \\ B & 0 \end{bmatrix}
+\begin{bmatrix} M^{-1/2} & 0 \\ 0 & I \end{bmatrix}
+\right) \\
+& \backsim 
+\left(
+\begin{bmatrix} Q^H & 0 \\ 0 & I \end{bmatrix}
+\begin{bmatrix} I & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} M^{-1/2}AM^{-1/2} &  M^{-1/2}B^H \\ B M^{-1/2} & 0 \end{bmatrix}
+\begin{bmatrix} Q & 0 \\ 0 & I \end{bmatrix}
+\right) \\
+& \backsim 
+\left(
+\begin{bmatrix} I & 0 \\ 0 & R^{-H} \end{bmatrix}
+\begin{bmatrix} I & 0 \\ 0 & 0 \end{bmatrix}
+,
+\begin{bmatrix} M^{-1/2}AM^{-1/2} &  \begin{bmatrix} R \\ 0 \end{bmatrix} \\ \begin{bmatrix}R^H & 0\end{bmatrix} & 0 \end{bmatrix}
+  \begin{bmatrix} I & 0 \\ 0 & R^{-1} \end{bmatrix}
+\right) \\
+& \quad =
+\left(
+\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}
+,
+\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}
+\right).
+\end{align*}
+where we have used a *QR*-decomposition: $$M^{-1/2}B^H=Q\begin{bmatrix}R \\ 0\end{bmatrix}$$ with unitary $Q$ and invertible $R$ in the third step.

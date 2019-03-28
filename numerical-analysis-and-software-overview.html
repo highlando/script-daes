@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9 Numerical Analysis and Software Overview | DAEs</title>
+  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9 Numerical Analysis and Software Overview | DAEs" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://janheiland.de/script-daes/" />
+  
+  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="github-repo" content="highlando/script-daes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9 Numerical Analysis and Software Overview | DAEs" />
+  
+  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  
+
+<meta name="author" content="Jan Heiland" />
+
+
+<meta name="date" content="2019-03-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exercises.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DAEs</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
+<li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
+<li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
+<li class="chapter" data-level="6.2" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#collocation-rkm-for-implicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.2</b> Collocation RKM for Implicit Strangeness-free DAEs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples-1.html"><a href="examples-1.html"><i class="fa fa-check"></i><b>7</b> Examples</a><ul>
+<li class="chapter" data-level="7.1" data-path="examples-1.html"><a href="examples-1.html#semi-discrete-navier-stokes-equations"><i class="fa fa-check"></i><b>7.1</b> Semi-discrete Navier-Stokes equations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>8</b> Exercises</a><ul>
+<li class="chapter" data-level="8.1" data-path="exercises.html"><a href="exercises.html#ii.c.1"><i class="fa fa-check"></i><b>8.1</b> II.C.1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html"><i class="fa fa-check"></i><b>9</b> Numerical Analysis and Software Overview</a><ul>
+<li class="chapter" data-level="9.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#theory-rkms-and-bdf-for-daes"><i class="fa fa-check"></i><b>9.1</b> Theory: RKMs and BDF for DAEs</a></li>
+<li class="chapter" data-level="9.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#solvers"><i class="fa fa-check"></i><b>9.2</b> Solvers</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#multi-purpose"><i class="fa fa-check"></i><b>9.2.1</b> Multi purpose</a></li>
+<li class="chapter" data-level="9.2.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#application-specific"><i class="fa fa-check"></i><b>9.2.2</b> Application specific</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#software"><i class="fa fa-check"></i><b>9.3</b> Software</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DAEs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="numerical-analysis-and-software-overview" class="section level1">
+<h1><span class="header-section-number">9</span> Numerical Analysis and Software Overview</h1>
+<div id="theory-rkms-and-bdf-for-daes" class="section level2">
+<h2><span class="header-section-number">9.1</span> Theory: RKMs and BDF for DAEs</h2>
+<table>
+<caption><span id="tab:RKMs-DAEs-results">Table 9.1: </span> Overview of convergence results of RKM/BDF schemes for DAEs</caption>
+<colgroup>
+<col width="61%" />
+<col width="38%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">DAEs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">unstructured, linear</td>
+<td align="left"><span class="math inline">\(E(t)\dot x = A(t)x + f(t)\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">semi-linear</td>
+<td align="left"><span class="math inline">\(E(t)\dot x = f(t,x)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">unstructured</td>
+<td align="left"><span class="math inline">\(F(t,\dot x, x)=0\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">unstructured, strangeness-free/index-1</td>
+<td align="left"><span class="math inline">\(\begin{cases}\hat F_1(t,\dot x, x)=0 \\ \hat F_2(t,x)=0 \end{cases}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">semi-explicit, strangeness-free/index-1</td>
+<td align="left"><span class="math inline">\(\begin{cases}\dot x= f(t, x, y) \\ 0=g(t,x,y) \end{cases}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">semi-explicit, index-2</td>
+<td align="left"><span class="math inline">\(\begin{cases}\dot x= f(t, x, y) \\ 0=g(t,y) \end{cases}\)</span></td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 9.2: </span>Overview of convergence results of BDF/RKM schemes for DAEs of various index and, possibly, semi-explicit structure. Here, we equate <em>index-1</em> and <em>strangeness-free</em>. A <span class="math inline">\(\cdot\)</span> indicates that this case is included in a result for a more general case  left or above in the table.
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+RKM
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+BDF
+</div>
+</th>
+</tr>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+unstructured
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+semi-explicit
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+unstructured
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+semi-explicit
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Problem / Index
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(*\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(*\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(*\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(*\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(2\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(1\)</span>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+nonlinear
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+c
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+g,i
+</td>
+<td style="text-align:left;">
+b
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+f
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+h
+</td>
+<td style="text-align:left;">
+e
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+linear TV
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+linear CC
+</td>
+<td style="text-align:left;">
+a
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+d
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\cdot\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="49%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="left">Description</th>
+<th align="left">Reference</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">a</td>
+<td align="left">RKM, linear constant coefficients</td>
+<td align="left">KM Thm. 5.12</td>
+</tr>
+<tr class="even">
+<td align="center">b</td>
+<td align="left">RKM, nonlinear, strangeness-free/index-1, semi-explicit</td>
+<td align="left">KM Thm 5.16 / HW Thm. VI.1.1</td>
+</tr>
+<tr class="odd">
+<td align="center">c</td>
+<td align="left">RKM, nonlinear, strangeness-free</td>
+<td align="left">KM Thm. 5.18</td>
+</tr>
+<tr class="even">
+<td align="center">d</td>
+<td align="left">BDF, linear constant coefficients</td>
+<td align="left">KM Thm. 5.24</td>
+</tr>
+<tr class="odd">
+<td align="center">e</td>
+<td align="left">BDF(<span class="math inline">\(\subset\)</span> MSM), nonlinear, strangeness-free/index-1, semi-explicit</td>
+<td align="left">KM Thm. 5.26 (<span class="math inline">\(\subset\)</span> HW Thm. VI.2.1)</td>
+</tr>
+<tr class="even">
+<td align="center">f</td>
+<td align="left">BDF, nonlinear, strangeness-free/index-1</td>
+<td align="left">KM Thm. 5.27</td>
+</tr>
+<tr class="odd">
+<td align="center">g</td>
+<td align="left">RKM, nonlinear, index-2, semi-explicit</td>
+<td align="left">HW Ch. VII.4</td>
+</tr>
+<tr class="even">
+<td align="center">h</td>
+<td align="left">BDF, nonlinear, index-2, semi-explicit</td>
+<td align="left">HW Thm. VII.3.5</td>
+</tr>
+<tr class="odd">
+<td align="center">i</td>
+<td align="left">half-explicit RKM, nonlinear, index-2, semi-explicit</td>
+<td align="left">HW Thm. VII.6.2</td>
+</tr>
+<tr class="even">
+<td align="center">HW</td>
+<td align="left">Ernst Hairer, Gerhard Wanner (1996)</td>
+<td align="left"><em>Solving ordinary differential equations. II: Stiff and differential-algebraic problems</em></td>
+</tr>
+<tr class="odd">
+<td align="center">KM</td>
+<td align="left">Peter Kunkel, Volker Mehrmann (2006)</td>
+<td align="left"><em>Differential-Algebraic Equations. Analysis and Numerical Solution</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="solvers" class="section level2">
+<h2><span class="header-section-number">9.2</span> Solvers</h2>
+<p>As can be seen from the table above, generally usable discretization methods for unstructured DAEs are only there for index-1 problems. However, the solvers GELDA/GENDA include an automated reduction to the strangeness-free form so that they apply for any index; see Lecture Chapter 4++.</p>
+<div id="multi-purpose" class="section level3">
+<h3><span class="header-section-number">9.2.1</span> Multi purpose</h3>
+<table>
+<colgroup>
+<col width="7%" />
+<col width="7%" />
+<col width="12%" />
+<col width="6%" />
+<col width="7%" />
+<col width="50%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">DAEs</th>
+<th align="left">Methods</th>
+<th align="left">h/p</th>
+<th align="left">Language</th>
+<th align="left">Remark</th>
+<th align="center">Avail</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="https://doi.org/10.1137/S1064827595286347">GELDA</a></td>
+<td align="left">l-<span class="math inline">\(\mu\)</span>-<span class="math inline">\(*\)</span></td>
+<td align="left">BDF/RKM</td>
+<td align="left"><span class="math inline">\(*\)</span>/<span class="math inline">\(*\)</span></td>
+<td align="left">F-77</td>
+<td align="left"></td>
+<td align="center"><span class="math inline">\(*\)</span>/<span class="math inline">\(\cdot\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://www3.math.tu-berlin.de/cgi-bin/IfM/show_abstract.cgi?Report-730-2002.rdf.html">GENDA</a></td>
+<td align="left">n-<span class="math inline">\(\mu\)</span>-<span class="math inline">\(*\)</span></td>
+<td align="left">BDF</td>
+<td align="left"><span class="math inline">\(*\)</span>/<span class="math inline">\(*\)</span></td>
+<td align="left">F-77</td>
+<td align="left"></td>
+<td align="center"><span class="math inline">\(\phantom{*}\)</span>/<span class="math inline">\(\cdot\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="http://www.netlib.org/ode/ddassl.f">DASSL</a></td>
+<td align="left">n-<span class="math inline">\(\nu\)</span>-<span class="math inline">\(1\)</span></td>
+<td align="left">BDF</td>
+<td align="left"><span class="math inline">\(*\)</span>/<span class="math inline">\(*\)</span></td>
+<td align="left">F-77</td>
+<td align="left">base for <em>Sundials IDA</em> – the base of many DAE solvers</td>
+<td align="center"><span class="math inline">\(*\)</span>/<span class="math inline">\(\phantom{\cdot}\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="https://doi.org/10.1007/BF01400352">LIMEX</a></td>
+<td align="left">sl-<span class="math inline">\(\nu\)</span>-<span class="math inline">\(1\)</span></td>
+<td align="left">x-SE-Eul</td>
+<td align="left"><span class="math inline">\(*\)</span>/<span class="math inline">\(*\)</span></td>
+<td align="left">F-77</td>
+<td align="left"></td>
+<td align="center"><span class="math inline">\(\phantom{*}\)</span>/<span class="math inline">\(\phantom{\cdot}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="http://www.unige.ch/~hairer/prog/stiff/radau.f">RADAU</a></td>
+<td align="left">sl-<span class="math inline">\(\nu\)</span>-<span class="math inline">\(1\)</span></td>
+<td align="left">RKM</td>
+<td align="left"><span class="math inline">\(*\)</span>/<span class="math inline">\(*\)</span></td>
+<td align="left">F-77</td>
+<td align="left"></td>
+<td align="center"><span class="math inline">\(*\)</span>/<span class="math inline">\(\phantom{\cdot}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<table>
+<colgroup>
+<col width="12%" />
+<col width="87%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">DAEs</td>
+<td>l-linear, sl-semilinear, nl-nonlinear</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td>classification: <span class="math inline">\(\mu\)</span>-strangeness index, <span class="math inline">\(\nu\)</span>-differentiation index</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td><span class="math inline">\(*\)</span>-includes index reduction</td>
+</tr>
+<tr class="even">
+<td align="left">h/p</td>
+<td>time step control / order control</td>
+</tr>
+<tr class="odd">
+<td align="left">availability</td>
+<td>code for download / licence provided(<span class="math inline">\(*\)</span>) or other statement(<span class="math inline">\(\cdot\)</span>)</td>
+</tr>
+<tr class="even">
+<td align="left">methods</td>
+<td>x-SE-Eul: extrapolation based on semiexplicit Euler</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="application-specific" class="section level3">
+<h3><span class="header-section-number">9.2.2</span> Application specific</h3>
+<p>Furthermore, there are solvers for particularly structured DAEs.</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="65%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">DAEs</th>
+<th align="left">Resources</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Navier-Stokes (nl-se-<span class="math inline">\(2\)</span>)</td>
+<td align="left">See, e.g., Sec. 4.3 of our <a href="https://arxiv.org/abs/1901.04002">preprint</a> on definitions of different schemes</td>
+</tr>
+<tr class="even">
+<td align="left">Multi-Body (nl-se-<span class="math inline">\(3\)</span>)</td>
+<td align="left">See, e.g., the code on <a href="https://www.unige.ch/~hairer/software.html">Hairer’s homepage</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="software" class="section level2">
+<h2><span class="header-section-number">9.3</span> Software</h2>
+<p>Many software suits actually wrap <a href="https://computation.llnl.gov/projects/sundials/ida">SUNDIALS IDA</a>.</p>
+<table>
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="34%" />
+<col width="6%" />
+<col width="46%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">DAEs</th>
+<th align="left">Routines</th>
+<th align="left">Method</th>
+<th align="left">Remark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Matlab</td>
+<td align="left">ind-<span class="math inline">\(1\)</span></td>
+<td align="left"><code>ode15{i,s}</code></td>
+<td align="left">BDF</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Python</td>
+<td align="left">—</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">no built-in functionality, DASSL/IDA wrapped in the modules <a href="https://jmodelica.org/assimulo/index.html#"><code>assimulo</code></a>, <a href="https://github.com/jwallen/PyDAS"><code>pyDAS</code></a>, <a href="http://daetools.com/docs/index.html"><code>DAEtools</code></a></td>
+</tr>
+<tr class="odd">
+<td align="left">Julia</td>
+<td align="left">ind-<span class="math inline">\(1\)</span></td>
+<td align="left"><a href="https://docs.juliadiffeq.org/latest/index.html"><code>DifferentialEquations.jl</code></a></td>
+<td align="left">BDF</td>
+<td align="left">calls SUNDIALS IDA</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exercises.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["DAEs.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

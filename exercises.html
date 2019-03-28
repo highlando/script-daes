@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8 Exercises | DAEs</title>
+  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8 Exercises | DAEs" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://janheiland.de/script-daes/" />
+  
+  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="github-repo" content="highlando/script-daes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8 Exercises | DAEs" />
+  
+  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  
+
+<meta name="author" content="Jan Heiland" />
+
+
+<meta name="date" content="2019-03-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="examples-1.html">
+<link rel="next" href="numerical-analysis-and-software-overview.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DAEs</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
+<li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
+<li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
+<li class="chapter" data-level="6.2" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#collocation-rkm-for-implicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.2</b> Collocation RKM for Implicit Strangeness-free DAEs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples-1.html"><a href="examples-1.html"><i class="fa fa-check"></i><b>7</b> Examples</a><ul>
+<li class="chapter" data-level="7.1" data-path="examples-1.html"><a href="examples-1.html#semi-discrete-navier-stokes-equations"><i class="fa fa-check"></i><b>7.1</b> Semi-discrete Navier-Stokes equations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>8</b> Exercises</a><ul>
+<li class="chapter" data-level="8.1" data-path="exercises.html"><a href="exercises.html#ii.c.1"><i class="fa fa-check"></i><b>8.1</b> II.C.1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html"><i class="fa fa-check"></i><b>9</b> Numerical Analysis and Software Overview</a><ul>
+<li class="chapter" data-level="9.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#theory-rkms-and-bdf-for-daes"><i class="fa fa-check"></i><b>9.1</b> Theory: RKMs and BDF for DAEs</a></li>
+<li class="chapter" data-level="9.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#solvers"><i class="fa fa-check"></i><b>9.2</b> Solvers</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#multi-purpose"><i class="fa fa-check"></i><b>9.2.1</b> Multi purpose</a></li>
+<li class="chapter" data-level="9.2.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#application-specific"><i class="fa fa-check"></i><b>9.2.2</b> Application specific</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#software"><i class="fa fa-check"></i><b>9.3</b> Software</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DAEs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exercises" class="section level1">
+<h1><span class="header-section-number">8</span> Exercises</h1>
+<div id="ii.c.1" class="section level2">
+<h2><span class="header-section-number">8.1</span> II.C.1</h2>
+<p>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span> satisfy <span class="math inline">\(EA=AE\)</span>. Then <span class="math inline">\(\ker E \cap \ker A = \{0\}\)</span> implies that <span class="math inline">\((E, A)\)</span> is regular.</p>
+<p>Assume that <span class="math inline">\(\ker A \neq \{0\}\)</span> is of dimension <span class="math inline">\(k\geq 1\)</span>. The case that <span class="math inline">\(k=0\)</span> is trivial, since <span class="math inline">\(\lambda E - A\)</span> is regular for <span class="math inline">\(\lambda = 0\)</span>. Let <span class="math inline">\(V_0\)</span> be the matrix whose columns span <span class="math inline">\(\ker A\)</span> and let <span class="math inline">\(V_\perp\)</span> be the matrix that consists of all eigenvectors of <span class="math inline">\(A\)</span> that are associated with the nonzero eigenvalues.</p>
+<p>It holds that,</p>
+<p><span class="math display">\[AV_0 = 0 \quad \text{and} \quad AV_\perp = V_\perp L_\perp\]</span></p>
+<p>with an <span class="math inline">\(L_\perp \in C^{n-k,n-k}\)</span> which is invertible. This a consequence of <span class="math inline">\(V_\perp\)</span> spanning the <span class="math inline">\(A\)</span>-invariant subspaces with respect to the nonzero eigenvalues.</p>
+<p>Because of <span class="math inline">\(ABV_0=BAV_0=0\)</span>, it follows that <span class="math inline">\(\operatorname{span}BV_0 \subset \ker A = \operatorname{span}V_0\)</span>, i.e., <span class="math inline">\(V_0\)</span> is a <span class="math inline">\(B\)</span>-invariant subspace which means that there is a <span class="math inline">\(K_0\in \mathbb C^{k,k}\)</span> such that <span class="math inline">\(BV_0 =V_0K_0\)</span>.</p>
+<p>Moreover, because of <span class="math inline">\(\ker E \cap \ker A = \{0\}\)</span>, the matrix <span class="math inline">\(K_0\)</span> has no zero eigenvalues. In fact <span class="math inline">\(K_0\)</span> has the same eigenvalues as <span class="math inline">\(B&#39;:=B\bigr|_{V_0}\colon V_0 \to V_0\)</span>, and if <span class="math inline">\(B&#39;\)</span> had a zero eigenvalue this would mean that the associated eigenvector would be in <span class="math inline">\(V_0\)</span> and, thus, in the kernel of <span class="math inline">\(A\)</span>.</p>
+<p>Moreover, since <span class="math inline">\(ABV_\perp=BAV_\perp=BVL_\perp\)</span> meaning that <span class="math inline">\(BV_\perp\)</span> is in the <span class="math inline">\(A\)</span>-invariant subspace related to the nonzero eigenvalues of <span class="math inline">\(A\)</span>, i.e., <span class="math inline">\(BV_\perp \subset V_\perp\)</span>, it follows that <span class="math inline">\(V_\perp\)</span> is a <span class="math inline">\(B\)</span>-invariant subspace and, thus, <span class="math inline">\(BV_\perp = V_\perp K_\perp\)</span> for some matrix <span class="math inline">\(K_\perp \in \mathbb C^{n-k,n-k}\)</span>.</p>
+<p>With <span class="math inline">\(V:=[V_0 |V_\perp]\)</span> and the observation that <span class="math inline">\(V\)</span> is invertible, since its columns span all of <span class="math inline">\(\mathbb C^n = \operatorname{span}V_0 \oplus \operatorname{span}V_\perp\)</span>, it follows that
+<span class="math display">\[\begin{equation*}
+\begin{split}
+\lambda E - A &amp; = (\lambda E - A)VV^{-1} = (\lambda E [V_0 |V_\perp]- A[V_0 |V_\perp])V^{-1}  \\
+&amp; = ([V_0 K_0 |V_\perp K_\perp]\lambda  - [0 |V_\perp L_\perp])V^{-1} \\
+&amp; = [V_0 |V_\perp ]
+\begin{bmatrix}
+ \lambda K_0 &amp; \\ &amp; \lambda K_\perp - L_\perp
+\end{bmatrix}
+V^{-1}
+\end{split}
+\end{equation*}\]</span>
+and that
+<span class="math display">\[
+\det (\lambda E - A) = \det (\lambda K_0) \det(\lambda K_\perp - L_\perp) 
+\]</span>
+is not identically zero, since <span class="math inline">\(K_0\)</span> and <span class="math inline">\(L_\perp\)</span> are invertible.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="examples-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="numerical-analysis-and-software-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["DAEs.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

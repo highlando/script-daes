@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Introduction | DAEs</title>
+  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Introduction | DAEs" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="http://janheiland.de/script-daes/" />
+  
+  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="github-repo" content="highlando/script-daes" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Introduction | DAEs" />
+  
+  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  
+
+<meta name="author" content="Jan Heiland" />
+
+
+<meta name="date" content="2019-03-28" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="basic-definitions-and-notions.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">DAEs</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
+<li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
+<li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
+<li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
+<li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
+<li class="chapter" data-level="6.2" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#collocation-rkm-for-implicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.2</b> Collocation RKM for Implicit Strangeness-free DAEs</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="examples-1.html"><a href="examples-1.html"><i class="fa fa-check"></i><b>7</b> Examples</a><ul>
+<li class="chapter" data-level="7.1" data-path="examples-1.html"><a href="examples-1.html#semi-discrete-navier-stokes-equations"><i class="fa fa-check"></i><b>7.1</b> Semi-discrete Navier-Stokes equations</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="exercises.html"><a href="exercises.html"><i class="fa fa-check"></i><b>8</b> Exercises</a><ul>
+<li class="chapter" data-level="8.1" data-path="exercises.html"><a href="exercises.html#ii.c.1"><i class="fa fa-check"></i><b>8.1</b> II.C.1</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html"><i class="fa fa-check"></i><b>9</b> Numerical Analysis and Software Overview</a><ul>
+<li class="chapter" data-level="9.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#theory-rkms-and-bdf-for-daes"><i class="fa fa-check"></i><b>9.1</b> Theory: RKMs and BDF for DAEs</a></li>
+<li class="chapter" data-level="9.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#solvers"><i class="fa fa-check"></i><b>9.2</b> Solvers</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#multi-purpose"><i class="fa fa-check"></i><b>9.2.1</b> Multi purpose</a></li>
+<li class="chapter" data-level="9.2.2" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#application-specific"><i class="fa fa-check"></i><b>9.2.2</b> Application specific</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="numerical-analysis-and-software-overview.html"><a href="numerical-analysis-and-software-overview.html#software"><i class="fa fa-check"></i><b>9.3</b> Software</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">DAEs</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">1</span> Introduction</h1>
+<p>Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes – here are the differential equations – that are subject to constraints: the algebraic equations.</p>
+<p>Throughout this lecture, the free variable will be the time <span class="math inline">\(t\)</span> and differentiation will always be considered with respect to <span class="math inline">\(t\)</span>.</p>
+<div id="examples" class="section level2">
+<h2><span class="header-section-number">1.1</span> Examples</h2>
+<p><strong>Free fall vs. the pendulum</strong></p>
+<div class="figure" style="text-align: center"><span id="fig:free-fall"></span>
+<img src="pics/freefall.png" alt="Free fall of a point mass." width="40%" />
+<p class="caption">
+Figure 1.1: Free fall of a point mass.
+</p>
+</div>
+<p>Free fall: Newton’s second law applies:</p>
+<blockquote>
+<p><code>force = mass*acceleration</code></p>
+</blockquote>
+<p>In 2D, the <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> coordinates of a point of mass <span class="math inline">\(m\)</span>:</p>
+<p><span class="math display">\[\begin{align*}
+m\ddot x &amp;= 0 \\
+m\ddot y &amp;= -mg
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(g\)</span> is the gravity; see Figure <a href="introduction.html#fig:free-fall">1.1</a>.</p>
+<p>Now <strong>the pendulum</strong>:</p>
+<p><em>The same point mass attached to a string</em>.</p>
+<div class="figure" style="text-align: center"><span id="fig:pendulum"></span>
+<img src="pics/pendulum.png" alt="A pendulum." width="40%" />
+<p class="caption">
+Figure 1.2: A pendulum.
+</p>
+</div>
+<p>Again, we have <code>force = mass*acceleration</code> but also the conditions that the mass moves on a circle:</p>
+<p><span class="math display">\[
+ (x(t) - c_x)^2 + (y(t) - c_y)^2 = l^2,
+\]</span>
+where <span class="math inline">\((c_x, c_y)\)</span> are the coordinates of the center and <span class="math inline">\(l\)</span> is the length of the string; see Figure <a href="introduction.html#fig:pendulum">1.2</a>.</p>
+<p>We use the Langrangian function to derive the equations of motion. For the pendulum, we have the kinetic energy <span class="math inline">\(T\)</span>, the potential <span class="math inline">\(U\)</span>, and the constraint <span class="math inline">\(h\)</span> as</p>
+<p><span class="math display">\[
+  T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), \quad U = mgy, \quad \text{and} \quad h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
+\]</span></p>
+<p>Thus, from the principle that</p>
+<p><span class="math display">\[
+\frac{d}{dt}(\frac{\partial L}{\partial \dot q}) - \frac{\partial L}{\partial q} = 0, \quad\text{for}\quad L = U -T - \lambda h \quad\text{and}\quad q=x, y ,\lambda
+\]</span></p>
+<p>one obtains:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">generalized coordinate</th>
+<th align="right">equation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><span class="math inline">\(q \leftarrow x\)</span></td>
+<td align="right"><span class="math inline">\(m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0\)</span></td>
+</tr>
+<tr class="even">
+<td align="left"><span class="math inline">\(q \leftarrow y\)</span></td>
+<td align="right"><span class="math inline">\(m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left"><span class="math inline">\(q \leftarrow \lambda\)</span></td>
+<td align="right"><span class="math inline">\((x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0\)</span></td>
+</tr>
+</tbody>
+</table>
+
+<div class="example">
+<p><span id="exm:the-pendulum" class="example"><strong>Example 1.1  (The Pendulum)  </strong></span>
+After an order reduction via the new variables <span class="math inline">\(u:=\dot x\)</span> and <span class="math inline">\(v=\dot y\)</span> the overall system reads</p>
+<p><span class="math display" id="eq:pendulum">\[\begin{equation}
+\begin{split}
+\dot x &amp;= u \\
+\dot y &amp;= v \\
+\dot u &amp;= - 2 \lambda (x - c_x) \\ 
+\dot v &amp;= - 2 \lambda (y - c_y) - mgy \\
+0&amp;=(x - c_x)^2 + (y - c_y)^2 - l^2, 
+\end{split}
+\tag{1.1}
+\end{equation}\]</span></p>
+where we have omitted the time dependence.
+</div>
+
+<p>Equation <a href="introduction.html#eq:pendulum">(1.1)</a> is a canonical example for a DAE with combined differential and algebraic equations.</p>
+<p><strong>Electrical Circuits</strong></p>
+<p>Another class of DAEs arises from the modelling electrical circuits. We consider the example of <em>charging a conductor through a resistor</em> as illustrated in Figure <a href="introduction.html#fig:circuit">1.3</a>.</p>
+<!-- ![A simple electrical circuit](pics/circuit.png) -->
+<div class="figure" style="text-align: center"><span id="fig:circuit"></span>
+<img src="pics/circuit.png" alt="Electrical circuit with a source, a resistor, and a conductor." width="40%" />
+<p class="caption">
+Figure 1.3: Electrical circuit with a source, a resistor, and a conductor.
+</p>
+</div>
+<p>We formulate the problem in terms of the potentials <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, <span class="math inline">\(x_3\)</span>, that are assumed to reside in the wires between a source <span class="math inline">\(U\)</span> and a resistor <span class="math inline">\(R\)</span>, the resistor <span class="math inline">\(R\)</span> and the capacitor <span class="math inline">\(C\)</span>, and the capacitor and the source.</p>
+<p>A model for the circuit is given through the following principles and considerations.</p>
+<ul>
+<li>the source defines the difference in the neighboring potentials: <span class="math inline">\(x_1 - x_3 - U = 0\)</span></li>
+<li>the current <span class="math inline">\(I_R\)</span> that is induced by the potentials neighboring the resistor is is defined through <em>Ohm’s law</em>: <span class="math inline">\(I_R = \frac{x_1 - x_2}{R}\)</span></li>
+<li>the current <span class="math inline">\(I_C\)</span> that is induced by the potentials neighboring the capacitor is described through: <span class="math inline">\(I_C = C(\dot x_3 - \dot x_2)\)</span></li>
+<li> states that everywhere in the circuit the currents sum up to zero: <span class="math inline">\(I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0\)</span></li>
+<li>finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set <span class="math inline">\(x_3 = 0\)</span>.</li>
+</ul>
+
+<div class="example">
+<span id="exm:the-circuit" class="example"><strong>Example 1.2  </strong></span>Summing all up, the equations that model the circuit are given as
+<span class="math display" id="eq:circuit">\[\begin{equation}
+\begin{split}
+C(\dot x_3 - \dot x_2) &amp;= - \frac{x_1 - x_2}{R} \\
+0  &amp;= x_1 - x_3 - U \\
+0 &amp;= x_3. 
+\end{split}
+\tag{1.2}
+\end{equation}\]</span>
+</div>
+
+<p><strong>Navier-Stokes Equations</strong></p>
+<p>The Navier-Stokes equations (NSE) are commonly used to model all kind of flows. They describe the evolution of the velocity <span class="math inline">\(v\)</span> of the fluid and the pressure <span class="math inline">\(p\)</span> in the fluid. Note that the flow occupies a spatial domain, say in <span class="math inline">\(\mathbb R^{3}\)</span> so that <span class="math inline">\(v\)</span> and <span class="math inline">\(p\)</span> are functions both of the time variable <span class="math inline">\(t\)</span> and a space variable <span class="math inline">\(\xi\)</span>:</p>
+<p><span class="math display">\[
+v\colon (t, \xi) \mapsto v(t,\xi)\in \mathbb R^{3} \quad\text{and}\quad  p\colon (t, \xi) \mapsto p(t,\xi)\in \mathbb R.
+\]</span></p>
+<p>The NSE:</p>
+<p><span class="math display">\[\begin{align*}
+  \frac{\partial v}{\partial t} + (v\otimes \nabla_\xi)v - \Delta_\xi v + \nabla_\xi p &amp;= 0, \\
+  \nabla_\xi \cdot v &amp;= 0,
+\end{align*}\]</span></p>
+<p>with <span class="math inline">\(\otimes\)</span> denoting the outer product and <span class="math inline">\(\nabla_\xi\)</span> and <span class="math inline">\(\Delta_\xi\)</span> denoting the gradient and the <em>Laplace</em> operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE.</p>
+<p><strong>Automatic Modelling or <em>Engineers vs. Mathematicians</em></strong></p>
+<p>If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.</p>
+<p>This coupling is done through equating quantities so that the overall model will consist of dynamical equations of the subprocesses and algebraic relations at the interfaces – which makes it a DAE.</p>
+<p>In fact, tools like <a href="https://www.modelica.org/"><code>modelica</code></a> for automatic modelling of complex processes do exactly this.</p>
+<p>The approach of <em>automatic modelling</em> is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.</p>
+</div>
+<div id="why-are-daes-difficult-to-treat" class="section level2">
+<h2><span class="header-section-number">1.2</span> Why are DAEs difficult to treat</h2>
+<p>Firstly, DAEs do not have the smoothing properties of ODEs, where the solution is one degree smoother than the right hand side. Secondly, the algebraic constraints are essential for the validity of the model. Thus, a numerical approximation may render the model infeasible.</p>
+<p><strong>Non-smooth Solutions</strong></p>
+
+<div class="example">
+<p><span id="exm:nonsmooth-sols" class="example"><strong>Example 1.3  </strong></span>Consider the equation</p>
+<p><span class="math display">\[\begin{align*}
+    \dot x_1(t) &amp;= x_2(t) \\
+        0 &amp; = x_2(t) -g(t)
+\end{align*}\]</span></p>
+<p>where <span class="math inline">\(g\)</span> can be a nonsmooth function like</p>
+<p><span class="math display">\[
+    g(t) = 
+    \begin{cases} 
+        0, \quad\text{if}\quad t &lt; 1 \\
+        1, \quad\text{if}\quad t \geq 1 \\
+    \end{cases}
+\]</span></p>
+In this case the solution part <span class="math inline">\(x_1=const. + \int_0^tg(s)ds\)</span> will be a smooth function and the solution part <span class="math inline">\(x_2=g\)</span> will have jumps.
+</div>
+
+<p>Even worse</p>
+<blockquote>
+<p><em>the solution of a DAE may depend on derivatives of the right hand sides.</em></p>
+</blockquote>
+<p>This observation indicates that certain difficulties will arise since</p>
+<ul>
+<li>numerical approximation schemes require smoothness of the solutions</li>
+<li>differentiation is numerically ill-posed unlike numerical integration</li>
+</ul>
+<p><strong>Numerical Solution Means Approximation</strong></p>
+<p>Imagine the equations <a href="introduction.html#eq:pendulum">(1.1)</a> that describe the pendulum are solved approximately. Then, the algebraic constraint will be violated, i.e. the point mass will leave the circle and the obtained numerical solution becomes infeasible.</p>
+<p>Thus, special care has to be taken of the algebraic constraints when the equations of motions are numerically integrated.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="basic-definitions-and-notions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["DAEs.pdf"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
