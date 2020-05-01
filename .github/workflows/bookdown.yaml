@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
 
       - name: Setup R
         uses: r-lib/actions/setup-r@master
@@ -33,10 +35,17 @@ jobs:
 
       - name: Install packages
         run: |
-          R -e 'install.packages("bookdown")'
+          R -e 'install.packages("rvest")'
           R -e 'install.packages("kableExtra")'
+          R -e 'install.packages("bookdown")'
 
       - name: Build site
         run: |
           Rscript -e 'bookdown::render_book("index.rmd", "bookdown::pdf_book", quiet=TRUE)'
           Rscript -e 'bookdown::render_book("index.rmd", "bookdown::gitbook", quiet=TRUE)'
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs # The folder the action should deploy.
