@@ -14,8 +14,8 @@ jobs:
 
       - name: Install pandoc and pandoc citeproc
         run: |
-          apt install pandoc
-          apt install pandoc-citeproc
+          sudo apt install pandoc
+          sudo apt install pandoc-citeproc
       - name: Cache Renv packages
         uses: actions/cache@v1
         with:
