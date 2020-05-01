@@ -16,6 +16,7 @@ jobs:
 
       - name: Install pandoc and pandoc citeproc
         run: |
+          sudo apt install libcurl4-openssl-dev
           sudo apt install pandoc
           sudo apt install pandoc-citeproc
           sudo apt install texlive-xetex
@@ -36,10 +37,10 @@ jobs:
       - name: Install packages
         run: |
           R -e 'install.packages("curl")'
-          R -e 'install.packages("hittr")'
-          R -e 'install.packages("rvest")'
-          R -e 'install.packages("kableExtra")'
-          R -e 'install.packages("bookdown")'
+          # R -e 'install.packages("hittr")'
+          # R -e 'install.packages("rvest")'
+          # R -e 'install.packages("kableExtra")'
+          # R -e 'install.packages("bookdown")'
 
       - name: Build site
         run: |
