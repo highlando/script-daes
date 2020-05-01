@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Construction and Analysis of RKM for nonlinear DAEs | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Construction and Analysis of RKM for nonlinear DAEs | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2019-03-28" />
+<meta name="date" content="2020-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="numerical-approximation-of-daes.html">
-<link rel="next" href="examples-1.html">
+<link rel="prev" href="numerical-approximation-of-daes.html"/>
+<link rel="next" href="examples-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -122,45 +125,39 @@
 <p>Now we consider RKM for nonlinear DAEs. We start with a DAE in <em>semi explicit</em> strangeness-free form and give general results on how to write down a general RKM for it and how to analyse the global error. Then, we consider general strangeness-free nonlinear DAEs and show that a certain class of RKM applies well – namely those that can be constructed by collocation with Lagrange polynomials over the <em>Radau</em>, <em>Lobatto</em>, or <em>Gauss</em> quadrature points.</p>
 <div id="general-rkm-for-semi-explicit-strangeness-free-daes" class="section level2">
 <h2><span class="header-section-number">6.1</span> General RKM for Semi-Explicit Strangeness-free DAEs</h2>
-<p>A semi explicit strangeness-free DAE is of the form
+A semi explicit strangeness-free DAE is of the form
 <span class="math display" id="eq:semexp-dae-alg" id="eq:semexp-dae-diff">\[\begin{align}
 \dot x &amp;= f(t, x, y) \tag{6.1} \\
 0 &amp;= g(t, x, y) \tag{6.2}
 \end{align}\]</span>
-with the Jacobian of <span class="math inline">\(g\)</span> with respect to <span class="math inline">\(y\)</span>, i.e.
-<span class="math display">\[
+<p>with the Jacobian of <span class="math inline">\(g\)</span> with respect to <span class="math inline">\(y\)</span>, i.e. <span class="math display">\[
 \partial_y\otimes g(t, x(t), y(t)) =: g_y(t, x(t), y(t)),
-\]</span>
-being invertible for all <span class="math inline">\(t\)</span> along the solution <span class="math inline">\((x,y)\)</span>.</p>
+\]</span> being invertible for all <span class="math inline">\(t\)</span> along the solution <span class="math inline">\((x,y)\)</span>.</p>
 <p>Some observations:</p>
 <ul>
 <li>this system is strangeness-free</li>
 <li>under certain assumptions, any DAE can be brought into this form</li>
-<li>in the linear case <span class="math inline">\(E\dot z = Az +f\)</span>, with <span class="math inline">\(z=(x,y)\)</span>, the assumptions basically mean that
-<span class="math display">\[
+<li>in the linear case <span class="math inline">\(E\dot z = Az +f\)</span>, with <span class="math inline">\(z=(x,y)\)</span>, the assumptions basically mean that <span class="math display">\[
  E = \begin{bmatrix} I &amp; 0 \\ 0 &amp; 0 \end{bmatrix} \quad\text{and}\quad 
  A = \begin{bmatrix} * &amp; * \\ * &amp; A_{22} \end{bmatrix},
-\]</span>
-with <span class="math inline">\(A_{22}(t)\)</span> invertible for all <span class="math inline">\(t\)</span>.</li>
-<li>The condition <span class="math inline">\(g_y\)</span> invertible means that, locally, one could consider
-<span class="math display">\[
+\]</span> with <span class="math inline">\(A_{22}(t)\)</span> invertible for all <span class="math inline">\(t\)</span>.</li>
+<li>The condition <span class="math inline">\(g_y\)</span> invertible means that, locally, one could consider <span class="math display">\[
  \dot x = f(t, x, R(t,x)), \quad\text{with $R$ such that}\quad y=R(t,x).
-\]</span>
-However, this is not practical for numerical purposes.</li>
+\]</span> However, this is not practical for numerical purposes.</li>
 </ul>
-<p>The general strategy to get a suitable formulation of a time discretization of system <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:semexp-dae-diff">(6.1)</a>-<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:semexp-dae-alg">(6.2)</a> by any RKM is to consider the perturbed version
+The general strategy to get a suitable formulation of a time discretization of system <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:semexp-dae-diff">(6.1)</a>-<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:semexp-dae-alg">(6.2)</a> by any RKM is to consider the perturbed version
 <span class="math display">\[\begin{align*}
 \dot x = f(t, x, y),  \\
 \varepsilon \dot y = g(t, x, y),
 \end{align*}\]</span>
-which is an ODE, formulate the RKM, and then let <span class="math inline">\(\varepsilon \to 0\)</span>. In the Hairer/Wanner Book, this approach is called *<span class="math inline">\(\varepsilon\)</span>-embedding.</p>
+<p>which is an ODE, formulate the RKM, and then let <span class="math inline">\(\varepsilon \to 0\)</span>. In the Hairer/Wanner Book, this approach is called *<span class="math inline">\(\varepsilon\)</span>-embedding.</p>
 <p>This is, consider</p>
-<table>
+<table style="width:81%;">
 <caption><span id="tab:RKM-semiexp-DAE">Table 6.1: </span> RKM applied to semi-explicit DAEs</caption>
 <colgroup>
-<col width="34%" />
-<col width="34%" />
-<col width="30%" />
+<col width="27%" />
+<col width="27%" />
+<col width="25%" />
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -193,8 +190,7 @@ which is an ODE, formulate the RKM, and then let <span class="math inline">\(\va
 <li>that is convergent of order <span class="math inline">\(p\)</span> for ODEs</li>
 <li>and fulfills the <em>Butcher condition</em> <span class="math inline">\(C(q)\)</span> with <span class="math inline">\(q\geq p+1\)</span></li>
 </ul>
-<p>leads to an global error that behaves like
-<span class="math display">\[
+<p>leads to an global error that behaves like <span class="math display">\[
 \|\mathfrak X(t_N) - \mathfrak X_N\| = \mathcal O(h^k),
 \]</span></p>
 <p>where</p>
@@ -209,29 +205,26 @@ which is an ODE, formulate the RKM, and then let <span class="math inline">\(\va
 <p>Some words on the conditions on <span class="math inline">\(p\)</span>, <span class="math inline">\(q\)</span>, and <span class="math inline">\(\rho\)</span>:</p>
 <ul>
 <li>For <em>stiffly accurate</em> methods, <span class="math inline">\(\beta^T \mathcal A^{-1}e=1\)</span> and, thus, <span class="math inline">\(\rho=0\)</span> <span class="math inline">\(\rightarrow\)</span> no order reduction for <em>strangeness free</em> or <em>index-1</em> systems</li>
-<li><p>For the <em>implicit midpoint rule</em> also known as the <em>1-stage Gauss method</em>:
-<span class="math display">\[
+<li><p>For the <em>implicit midpoint rule</em> also known as the <em>1-stage Gauss method</em>: <span class="math display">\[
 \begin{array}{c|c}
 \frac 12 &amp; \frac 12 \\
 \hline
  &amp; 1  
 \end{array}
-\]</span></p>
+   \]</span></p>
 <ul>
 <li>the convergence order for ODEs is <span class="math inline">\(p=2\)</span></li>
 <li>but <span class="math inline">\(1-\beta^T \mathcal A^{-1}e = 1- 1\cdot {\bigl(\frac 12\bigr)}^{-1} 1 = -1\)</span>, so that <span class="math inline">\(\min\{p-1, q\} = k \leq 1\)</span>, depending on <span class="math inline">\(q\)</span>.</li>
-<li>in fact <span class="math inline">\(k=1\)</span> as
-<span class="math display">\[
-C(q): \quad \sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{\bar k-1}=\frac{1}{\bar k} \gamma_j^{\bar k}, \quad {\bar k}=1,\cdots,q, \quad j=1,\cdots,s
-\]</span>
-in the present case of <span class="math inline">\(s=1\)</span>, <span class="math inline">\(\alpha_{11}=\gamma_1=\frac 12\)</span> is fulfilled for <span class="math inline">\({\bar k}=1: \quad \frac 12 = \frac 12\)</span></li>
+<li>in fact <span class="math inline">\(k=1\)</span> as <span class="math display">\[
+  C(q): \quad \sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{\bar k-1}=\frac{1}{\bar k} \gamma_j^{\bar k}, \quad {\bar k}=1,\cdots,q, \quad j=1,\cdots,s
+  \]</span> in the present case of <span class="math inline">\(s=1\)</span>, <span class="math inline">\(\alpha_{11}=\gamma_1=\frac 12\)</span> is fulfilled for <span class="math inline">\({\bar k}=1: \quad \frac 12 = \frac 12\)</span></li>
 <li>it is not relevant here, but for <span class="math inline">\({\bar k}=2:\quad \frac 12 \cdot \frac 12 \neq \frac 12 \cdot \frac 14\)</span></li>
 </ul></li>
 </ul>
 </div>
 <div id="collocation-rkm-for-implicit-strangeness-free-daes" class="section level2">
 <h2><span class="header-section-number">6.2</span> Collocation RKM for Implicit Strangeness-free DAEs</h2>
-<p>The general form of a <em>strangeness-free</em> DAE is given as
+The general form of a <em>strangeness-free</em> DAE is given as
 <span class="math display" id="eq:impl-sf-dae-ftwo" id="eq:impl-sf-dae-fone">\[\begin{align}
 \hat F_1(t,x,\dot x) &amp;= 0 \tag{6.3}\\
 \hat F_2(t,x) &amp;= 0 \tag{6.4}
@@ -240,94 +233,71 @@ where the <em>strangeness-free</em> or <em>index-1</em> assumption is encoded in
 <span class="math display">\[\begin{align*}
   \dot x_1  &amp;= \mathcal L(t,x_1,x_2) \\
    0 &amp;= \mathcal R(t,x_1) -x_2
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>In what follows we show that a <em>collocation</em> approach coincides with certain RKM discretizations so that the convergence analysis of the RKM can be done via approximation theory.</p>
 <blockquote>
 <p>Regression (Collocation): – If one looks for a function <span class="math inline">\(x\colon [0,1] \to \mathbb R^{}\)</span> that fulfills <span class="math inline">\(F(x(t))=0\)</span> for all <span class="math inline">\(t\in[0,1]\)</span>, one may interpolate <span class="math inline">\(x\)</span> by, say, a polynomial <span class="math inline">\(x_p(t) = \sum_{\ell=0}^kx_\ell t^\ell\)</span> and determine the <span class="math inline">\(k+1\)</span> coefficients <span class="math inline">\(x_\ell\)</span> via the solution of the system of (nonlinear) equations <span class="math inline">\(F(x_p(t_\ell))=0\)</span>, <span class="math inline">\(\ell=0,1,\dotsc,k\)</span>, where the <span class="math inline">\(t_\ell\in[0,1]\)</span> are the <span class="math inline">\(k+1\)</span> <em>collocation points</em>.</p>
 </blockquote>
-<p>Concretely, we parametrize <span class="math inline">\(s\)</span> collocation points via
+Concretely, we parametrize <span class="math inline">\(s\)</span> collocation points via
 <span class="math display" id="eq:rkm-collo-gamma">\[\begin{equation}
 0&lt; \gamma_1 &lt;\gamma_2&lt; \dotsc &lt; \gamma_s=1 \tag{6.5}
 \end{equation}\]</span>
-and define two sets of <em>Lagrange polynomials</em>
-<span class="math display">\[
+<p>and define two sets of <em>Lagrange polynomials</em> <span class="math display">\[
 L_\ell(\xi) = \prod_{j=0,j\neq \ell}^s \frac{\xi-\gamma_j}{\gamma_\ell-\gamma_j}
 \quad\text{and}\quad
 \tilde L_\ell(\xi) = \prod_{m=1,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m},
-\]</span>
-with <span class="math inline">\(\ell\in\{0,1,\dotsc,s\}\)</span>.</p>
-<p>Let <span class="math inline">\(\mathbb P_k\)</span> be the space of polynomials of degree <span class="math inline">\(\leq k-1\)</span>. We define the <em>collocation polynomial</em> <span class="math inline">\(x_\pi \in \mathbb P_{s+1}\)</span> via
+\]</span> with <span class="math inline">\(\ell\in\{0,1,\dotsc,s\}\)</span>.</p>
+Let <span class="math inline">\(\mathbb P_k\)</span> be the space of polynomials of degree <span class="math inline">\(\leq k-1\)</span>. We define the <em>collocation polynomial</em> <span class="math inline">\(x_\pi \in \mathbb P_{s+1}\)</span> via
 <span class="math display" id="eq:rkm-coll-collpol">\[\begin{equation}
 x_\pi (t) = \sum_{\ell=0}^s X_{i\ell}L_\ell\bigl(\frac{t-t_i}{h}\bigr)
 \tag{6.6}
 \end{equation}\]</span>
-designed to compute the <em>stage values</em> <span class="math inline">\(X_{i\ell}\)</span>, where <span class="math inline">\(X_{i0}=x_i\)</span> is already given.</p>
-<p>The stage derivatives are then defined as
+<p>designed to compute the <em>stage values</em> <span class="math inline">\(X_{i\ell}\)</span>, where <span class="math inline">\(X_{i0}=x_i\)</span> is already given.</p>
+The stage derivatives are then defined as
 <span class="math display" id="eq:rkm-coll-staged">\[\begin{equation}
 \dot X_{ij} = \dot x_\pi(t_i+\gamma_jh) = \frac 1h \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_j). \tag{6.7}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>To obtain <span class="math inline">\(x_{i+1}=x_\pi(t_{i+1})=X_{is}\)</span>, we require the polynomial to satisfy the DAE <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a>–<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-ftwo">(6.4)</a> at the collocation points <span class="math inline">\(t_{ij}=t_i+\gamma_jh\)</span>, that is</p>
-<p><span class="math display" id="eq:impl-sf-dae-collo">\[\begin{equation}
+<span class="math display" id="eq:impl-sf-dae-collo">\[\begin{equation}
 \hat F_1(t_i+\gamma_jh,X_{ij},\dot X_{ij}) = 0, \quad \hat F_2(t_i+\gamma_jh,X_{ij}) = 0, \quad j=1,\dotsc,s. \phantom{F_1} \tag{6.8}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>Now we show that this collocation defines a RKM discretization of <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a>–<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-ftwo">(6.4)</a>.</p>
-<p>Since <span class="math inline">\(\tilde L \in \mathbb P_s\)</span>, it holds that
-<span class="math display">\[
+<p>Since <span class="math inline">\(\tilde L \in \mathbb P_s\)</span>, it holds that <span class="math display">\[
 P_\ell(\sigma):=\int_0^\sigma \tilde L_\ell (\xi)d\xi \in \mathbb P_{s+1}
-\]</span>
-that is, by <em>Lagrange</em> interpolation, it can be written as
-<span class="math display">\[
+\]</span> that is, by <em>Lagrange</em> interpolation, it can be written as <span class="math display">\[
 P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)L_j(\sigma).
 \]</span></p>
-<p>If we differentiate <span class="math inline">\(P_l\)</span>, we get
-<span class="math display">\[
+<p>If we differentiate <span class="math inline">\(P_l\)</span>, we get <span class="math display">\[
 \dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
-\]</span>
-where define simply define
-<span class="math display">\[
+\]</span> where define simply define <span class="math display">\[
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
-\]</span>
-Moreover, by definition of <span class="math inline">\(P_\ell\)</span> (and the <em>fundamental theorem of calculus</em>), it holds that
-<span class="math display">\[
+\]</span> Moreover, by definition of <span class="math inline">\(P_\ell\)</span> (and the <em>fundamental theorem of calculus</em>), it holds that <span class="math display">\[
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
-\]</span>
-which gives that <span class="math inline">\(\dot P_\ell(\gamma_m) = \delta_{\ell m}\)</span> that is
-<span class="math display">\[
+\]</span> which gives that <span class="math inline">\(\dot P_\ell(\gamma_m) = \delta_{\ell m}\)</span> that is <span class="math display">\[
 \dot P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma_m) = 
 \begin{cases}
 1, &amp;\quad \text{if }\ell =m \\
 0, &amp;\quad \text{otherwise} 
 \end{cases}.
-\]</span>
-for <span class="math inline">\(\ell, m=1,\dotsc,s\)</span>.</p>
-<p>Accordingly, if we define <span class="math inline">\(\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}\)</span> and
-<span class="math display">\[
+\]</span> for <span class="math inline">\(\ell, m=1,\dotsc,s\)</span>.</p>
+<p>Accordingly, if we define <span class="math inline">\(\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}\)</span> and <span class="math display">\[
 V:=\bigl[v_{mj}\bigr]_{m,j=1,\dotsc,s} = \bigl[ \dot L_j(\gamma_m) \bigr]_{m,j=1,\dotsc,s} \in \mathbb R^{s,s} ,
-\]</span>
-it follows that <span class="math inline">\(V=\mathcal A^{-1}\)</span>.</p>
-<p>Moreover, since,
-<span class="math display">\[
+\]</span> it follows that <span class="math inline">\(V=\mathcal A^{-1}\)</span>.</p>
+Moreover, since, <span class="math display">\[
 \sum_{j=0}^s L_j(\sigma) \equiv 1, \quad\text{so that }\quad\sum_{j=0}^s \dot L_j(\sigma) \equiv 0,
-\]</span>
-we have that
-<span class="math display">\[
+\]</span> we have that <span class="math display">\[
 \sum_{j=0}^s \dot L_j(\gamma_m) =0= \sum_{j=0}^s v_{mj}
-\]</span>
-and, thus,
-<span class="math display">\[
+\]</span> and, thus, <span class="math display">\[
 v_{m0} = -\sum_{j=1}^s \dot L_j(\gamma_m) = -e_m^TVe.
-\]</span>
-With these relations we rewrite <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:rkm-coll-staged">(6.7)</a> as
-<span class="math display">\[
+\]</span> With these relations we rewrite <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:rkm-coll-staged">(6.7)</a> as <span class="math display">\[
 h\dot X_{im} = \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_m) = v_{m0}x_i + \sum_{\ell=1}^sv_{m\ell}X_{i\ell}.
-\]</span>
-and <span class="math inline">\(h\sum_{m=1}^s\alpha_{\ell m} \dot X_{im}\)</span> as
+\]</span> and <span class="math inline">\(h\sum_{m=1}^s\alpha_{\ell m} \dot X_{im}\)</span> as
 <span class="math display" id="eq:collo-is-RKM-formula">\[\begin{align}
   h\sum_{m=1}^s \alpha_{\ell m}\dot X_{im} &amp;= \sum_{m=1}^s \alpha_{\ell m}v_{m0}x_i + \sum_{j,m=1}^s \alpha_{\ell m}v_{mj}X_{ij} \notag \\
   &amp;= -e_\ell^T \mathcal AV e x_i + \sum_{j=1}^se_\ell^T \mathcal AVe_jX_{ij} \tag{6.9}\\
   &amp;= -x_i + X_{i\ell}, \notag
 \end{align}\]</span>
-which, together with <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a>, indeed defines a RKM.</p>
+<p>which, together with <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a>, indeed defines a RKM.</p>
 <p>Some remarks:</p>
 <ul>
 <li>the preceding derivation shows that the collocation <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:rkm-coll-collpol">(6.6)</a> and <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a> is equivalent to the RKM scheme <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:collo-is-RKM-formula">(6.9)</a> and <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a></li>
@@ -350,11 +320,13 @@ which, together with <a href="construction-and-analysis-of-rkm-for-nonlinear-dae
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -362,12 +334,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -379,6 +350,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -395,10 +370,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

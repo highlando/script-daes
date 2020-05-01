@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Introduction | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Introduction | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2019-03-28" />
+<meta name="date" content="2020-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="basic-definitions-and-notions.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="basic-definitions-and-notions.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -135,10 +138,10 @@ Figure 1.1: Free fall of a point mass.
 <p><code>force = mass*acceleration</code></p>
 </blockquote>
 <p>In 2D, the <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span> coordinates of a point of mass <span class="math inline">\(m\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
 m\ddot x &amp;= 0 \\
 m\ddot y &amp;= -mg
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>where <span class="math inline">\(g\)</span> is the gravity; see Figure <a href="introduction.html#fig:free-fall">1.1</a>.</p>
 <p>Now <strong>the pendulum</strong>:</p>
 <p><em>The same point mass attached to a string</em>.</p>
@@ -151,8 +154,7 @@ Figure 1.2: A pendulum.
 <p>Again, we have <code>force = mass*acceleration</code> but also the conditions that the mass moves on a circle:</p>
 <p><span class="math display">\[
  (x(t) - c_x)^2 + (y(t) - c_y)^2 = l^2,
-\]</span>
-where <span class="math inline">\((c_x, c_y)\)</span> are the coordinates of the center and <span class="math inline">\(l\)</span> is the length of the string; see Figure <a href="introduction.html#fig:pendulum">1.2</a>.</p>
+\]</span> where <span class="math inline">\((c_x, c_y)\)</span> are the coordinates of the center and <span class="math inline">\(l\)</span> is the length of the string; see Figure <a href="introduction.html#fig:pendulum">1.2</a>.</p>
 <p>We use the Langrangian function to derive the equations of motion. For the pendulum, we have the kinetic energy <span class="math inline">\(T\)</span>, the potential <span class="math inline">\(U\)</span>, and the constraint <span class="math inline">\(h\)</span> as</p>
 <p><span class="math display">\[
   T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), \quad U = mgy, \quad \text{and} \quad h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
@@ -186,9 +188,8 @@ where <span class="math inline">\((c_x, c_y)\)</span> are the coordinates of the
 </table>
 
 <div class="example">
-<p><span id="exm:the-pendulum" class="example"><strong>Example 1.1  (The Pendulum)  </strong></span>
-After an order reduction via the new variables <span class="math inline">\(u:=\dot x\)</span> and <span class="math inline">\(v=\dot y\)</span> the overall system reads</p>
-<p><span class="math display" id="eq:pendulum">\[\begin{equation}
+<p><span id="exm:the-pendulum" class="example"><strong>Example 1.1  (The Pendulum)  </strong></span> After an order reduction via the new variables <span class="math inline">\(u:=\dot x\)</span> and <span class="math inline">\(v=\dot y\)</span> the overall system reads</p>
+<span class="math display" id="eq:pendulum">\[\begin{equation}
 \begin{split}
 \dot x &amp;= u \\
 \dot y &amp;= v \\
@@ -197,7 +198,7 @@ After an order reduction via the new variables <span class="math inline">\(u:=\d
 0&amp;=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 \tag{1.1}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 where we have omitted the time dependence.
 </div>
 
@@ -239,10 +240,10 @@ C(\dot x_3 - \dot x_2) &amp;= - \frac{x_1 - x_2}{R} \\
 v\colon (t, \xi) \mapsto v(t,\xi)\in \mathbb R^{3} \quad\text{and}\quad  p\colon (t, \xi) \mapsto p(t,\xi)\in \mathbb R.
 \]</span></p>
 <p>The NSE:</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
   \frac{\partial v}{\partial t} + (v\otimes \nabla_\xi)v - \Delta_\xi v + \nabla_\xi p &amp;= 0, \\
   \nabla_\xi \cdot v &amp;= 0,
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>with <span class="math inline">\(\otimes\)</span> denoting the outer product and <span class="math inline">\(\nabla_\xi\)</span> and <span class="math inline">\(\Delta_\xi\)</span> denoting the gradient and the <em>Laplace</em> operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE.</p>
 <p><strong>Automatic Modelling or <em>Engineers vs. Mathematicians</em></strong></p>
 <p>If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.</p>
@@ -257,10 +258,10 @@ v\colon (t, \xi) \mapsto v(t,\xi)\in \mathbb R^{3} \quad\text{and}\quad  p\colon
 
 <div class="example">
 <p><span id="exm:nonsmooth-sols" class="example"><strong>Example 1.3  </strong></span>Consider the equation</p>
-<p><span class="math display">\[\begin{align*}
+<span class="math display">\[\begin{align*}
     \dot x_1(t) &amp;= x_2(t) \\
         0 &amp; = x_2(t) -g(t)
-\end{align*}\]</span></p>
+\end{align*}\]</span>
 <p>where <span class="math inline">\(g\)</span> can be a nonsmooth function like</p>
 <p><span class="math display">\[
     g(t) = 
@@ -298,11 +299,13 @@ In this case the solution part <span class="math inline">\(x_1=const. + \int_0^t
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -310,12 +313,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -327,6 +329,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -343,10 +349,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

@@ -2,7 +2,7 @@
 title: "DAEs"
 author: "Jan Heiland"
 institute: OVGU/MPI
-date: "2019-03-28"
+date: "2020-05-01"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib]

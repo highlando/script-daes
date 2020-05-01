@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<html lang="" xml:lang="">
 <head>
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Linear DAEs with Time-varying Coefficients | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown  and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Linear DAEs with Time-varying Coefficients | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,15 +24,15 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2019-03-28" />
+<meta name="date" content="2020-05-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linear-daes-with-constant-coefficients.html">
-<link rel="next" href="numerical-approximation-of-daes.html">
+<link rel="prev" href="linear-daes-with-constant-coefficients.html"/>
+<link rel="next" href="numerical-approximation-of-daes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -40,6 +40,9 @@
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -121,11 +124,11 @@
 <h1><span class="header-section-number">4</span> Linear DAEs with Time-varying Coefficients</h1>
 
 <div class="theorem">
-<p><span id="thm:local-canonical-form" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(E, A \in \mathbb C^{m,n}\)</span> and let
+<span id="thm:local-canonical-form" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(E, A \in \mathbb C^{m,n}\)</span> and let
 <span class="math display" id="eq:lcf-subspaces">\[\begin{equation}
 T,~Z,~T&#39;,~V \tag{4.1}
 \end{equation}\]</span>
-be</p>
+<p>be</p>
 <table>
 <thead>
 <tr class="header">
@@ -136,27 +139,27 @@ be</p>
 <tbody>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{kernel}E\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{kernel}}E\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}E = \operatorname{kernel}E^H\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}E = {\operatorname{kernel}}E^H\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T&#39;\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{cokernel}E = \operatorname{range}E^H\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{cokernel}}E = {\operatorname{range}}E^H\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(V\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT)\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}(Z^HAT)\)</span></td>
 </tr>
 </tbody>
 </table>
-<p>then the quantities
+then the quantities
 <span class="math display" id="eq:lcf-quantities">\[\begin{equation}
 r,~a,~s,~d,~u,~v \tag{4.2}
 \end{equation}\]</span>
-defined as</p>
+<p>defined as</p>
 <table>
 <thead>
 <tr class="header">
@@ -168,17 +171,17 @@ defined as</p>
 <tbody>
 <tr class="odd">
 <td align="left"><span class="math inline">\(r\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{rank}E\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{rank}}E\)</span></td>
 <td align="left"><em>rank</em></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(a\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{rank}(Z^HAT)\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{rank}}(Z^HAT)\)</span></td>
 <td align="left"><em>algebraic part</em></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(s\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{rank}(V^HZ^HAT&#39;)\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{rank}}(V^HZ^HAT&#39;)\)</span></td>
 <td align="left"><em>strangeness</em></td>
 </tr>
 <tr class="even">
@@ -218,10 +221,8 @@ I_s &amp; 0 &amp; 0 &amp; 0 \\
 \end{equation}\]</span>
 where all diagonal blocks are square, except maybe the last one.
 </div>
-
-<p>Some remarks on the spaces and how the names are derived for the case <span class="math inline">\(E\dot x = Ax +f\)</span> with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients.</p>
-<p>Let
-<span class="math display">\[x(t) = Ty(t) + T&#39;y&#39;(t),\]</span></p>
+<p> Some remarks on the spaces and how the names are derived for the case <span class="math inline">\(E\dot x = Ax +f\)</span> with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients.</p>
+<p>Let <span class="math display">\[x(t) = Ty(t) + T&#39;y&#39;(t),\]</span></p>
 <p>where <span class="math inline">\(y\)</span> denotes the components of <span class="math inline">\(x\)</span> that evolve in the range of <span class="math inline">\(T\)</span> and <span class="math inline">\(y&#39;\)</span> the respective complement. (Since <span class="math inline">\([T|T&#39;]\)</span> is a basis of <span class="math inline">\(\mathbb C^{n}\)</span>, there exist such <span class="math inline">\(y\)</span> and <span class="math inline">\(y&#39;\)</span> that uniquely define <span class="math inline">\(x\)</span> and vice versa). With <span class="math inline">\(T\)</span> spanning <span class="math inline">\(\ker E\)</span> we find that</p>
 <p><span class="math display">\[E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t)\]</span></p>
 <p>so that the DAE basically reads</p>
@@ -230,17 +231,16 @@ where all diagonal blocks are square, except maybe the last one.
 <p><span class="math display">\[Z^HET&#39;\dot y&#39;(t) = 0 = Z^HATy(t) + Z^HAT&#39;y&#39;(t)+Z^Hf,\]</span></p>
 <p>or</p>
 <p><span class="math display">\[Z^HATy(t) = -Z^HAT&#39;y&#39;(t)-Z^Hf,\]</span></p>
-<p>so that <span class="math inline">\(\operatorname{rank}Z^HAT\)</span> indeed describes the number of purely algebraic equations and variables in the sense that it defines parts of <span class="math inline">\(y\)</span> (which is never going to be differentiated) in terms of algebraic relations (no time derivatives are involved).</p>
-<p>With the same arguments and with <span class="math inline">\(V=\operatorname{corange}Z^HAT\)</span>, it follows that</p>
+<p>so that <span class="math inline">\({\operatorname{rank}}Z^HAT\)</span> indeed describes the number of purely algebraic equations and variables in the sense that it defines parts of <span class="math inline">\(y\)</span> (which is never going to be differentiated) in terms of algebraic relations (no time derivatives are involved).</p>
+<p>With the same arguments and with <span class="math inline">\(V={\operatorname{corange}}Z^HAT\)</span>, it follows that</p>
 <p><span class="math display">\[V^HZ^HAT&#39;y&#39;(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,\]</span></p>
-<p>is the part of <span class="math inline">\(E\dot x = Ax + f\)</span> in which those components <span class="math inline">\(y&#39;\)</span> that are also differentiated are algebraically equated to a right-hand side. This is the <em>strangeness</em> (rather in the sense of <em>skewness</em>) of DAEs that variables can be both differential and algebraic. Accordingly, <span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39;\)</span> describes the size of the skewness component.</p>
+<p>is the part of <span class="math inline">\(E\dot x = Ax + f\)</span> in which those components <span class="math inline">\(y&#39;\)</span> that are also differentiated are algebraically equated to a right-hand side. This is the <em>strangeness</em> (rather in the sense of <em>skewness</em>) of DAEs that variables can be both differential and algebraic. Accordingly, <span class="math inline">\({\operatorname{rank}}V^HZ^HAT&#39;\)</span> describes the size of the skewness component.</p>
 <blockquote>
 <p><strong>Outlook</strong>: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size <span class="math inline">\(s\)</span> of the <em>strange</em> block here) will define the strangeness index.</p>
 </blockquote>
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.1  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
-<span class="math display">\[
+<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.1  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that: <span class="math display">\[
 (E, A) \backsim 
 \left(
 \begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
@@ -249,10 +249,10 @@ where all diagonal blocks are square, except maybe the last one.
 \right).
 \]</span></p>
 <p>We compute the subspaces as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-subspaces">(4.1)</a>:</p>
-<table>
+<table style="width:53%;">
 <colgroup>
-<col width="30%" />
-<col width="69%" />
+<col width="16%" />
+<col width="36%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -263,15 +263,15 @@ where all diagonal blocks are square, except maybe the last one.
 <tbody>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{kernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{kernel}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}={\operatorname{kernel}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T&#39;=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{cokernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}=\operatorname{range}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{cokernel}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}={\operatorname{range}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z^HAT=I_1\)</span></td>
@@ -279,7 +279,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(V=0\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}(Z^HAT) = {\operatorname{kernel}}I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z^HAT&#39;=0_{2\times 1}\)</span></td>
@@ -288,11 +288,11 @@ where all diagonal blocks are square, except maybe the last one.
 </tbody>
 </table>
 <p>and derive the quantities as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-quantities">(4.2)</a>:</p>
-<table>
+<table style="width:42%;">
 <colgroup>
-<col width="22%" />
-<col width="25%" />
-<col width="51%" />
+<col width="9%" />
+<col width="11%" />
+<col width="20%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -305,17 +305,17 @@ where all diagonal blocks are square, except maybe the last one.
 <tr class="odd">
 <td align="left">rank</td>
 <td align="left"><span class="math inline">\(r=2\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}E = {\operatorname{rank}}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">algebraic part</td>
 <td align="left"><span class="math inline">\(a=1\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}Z^HAT = \operatorname{rank}I_1\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}Z^HAT = {\operatorname{rank}}I_1\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">strangeness</td>
 <td align="left"><span class="math inline">\(s=0\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39; = \operatorname{rank}0_{2\times 1}\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}V^HZ^HAT&#39; = {\operatorname{rank}}0_{2\times 1}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">differential part</td>
@@ -338,8 +338,7 @@ where all diagonal blocks are square, except maybe the last one.
 
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.2  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
-<span class="math display">\[
+<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.2  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that: <span class="math display">\[
 (\mathcal E, \mathcal A) =
 \left(
 \begin{bmatrix} M &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
@@ -354,10 +353,10 @@ where all diagonal blocks are square, except maybe the last one.
 \right).
 \]</span></p>
 <p>We compute the subspaces as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-subspaces">(4.1)</a>:</p>
-<table>
+<table style="width:57%;">
 <colgroup>
-<col width="30%" />
-<col width="69%" />
+<col width="18%" />
+<col width="38%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -368,15 +367,15 @@ where all diagonal blocks are square, except maybe the last one.
 <tbody>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{kernel}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{kernel}}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(T&#39;=\begin{bmatrix} I_{n_1} &amp; 0 \\ 0 &amp; I_{n_2} \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{cokernel}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{cokernel}}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z^HAT=0_{n_1}\)</span></td>
@@ -384,7 +383,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 <tr class="odd">
 <td align="left"><span class="math inline">\(V=I_{n_1}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
+<td align="left"><span class="math inline">\({\operatorname{corange}}(Z^HAT) = {\operatorname{kernel}}0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left"><span class="math inline">\(Z^HAT&#39;=\begin{bmatrix} I_{n_1} &amp; 0_{n_1\times n_2}\end{bmatrix}\)</span></td>
@@ -393,11 +392,11 @@ where all diagonal blocks are square, except maybe the last one.
 </tbody>
 </table>
 <p>and derive the quantities as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-quantities">(4.2)</a>:</p>
-<table>
+<table style="width:78%;">
 <colgroup>
-<col width="33%" />
-<col width="13%" />
-<col width="52%" />
+<col width="26%" />
+<col width="11%" />
+<col width="40%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -410,17 +409,17 @@ where all diagonal blocks are square, except maybe the last one.
 <tr class="odd">
 <td align="left">rank</td>
 <td align="left"><span class="math inline">\(r=n_1+n_2\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}E = {\operatorname{rank}}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">algebraic part</td>
 <td align="left"><span class="math inline">\(a=0\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}Z^HAT = \operatorname{rank}0_{n_1}\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}Z^HAT = {\operatorname{rank}}0_{n_1}\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">strangeness</td>
 <td align="left"><span class="math inline">\(s=n_1\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39; = \operatorname{rank}\begin{bmatrix} I_{n_1} &amp; 0_{n_1\times n_2}\end{bmatrix}\)</span></td>
+<td><span class="math inline">\({\operatorname{rank}}V^HZ^HAT&#39; = {\operatorname{rank}}\begin{bmatrix} I_{n_1} &amp; 0_{n_1\times n_2}\end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">differential part</td>
@@ -443,26 +442,23 @@ where all diagonal blocks are square, except maybe the last one.
 
 
 <div class="theorem">
-<p><span id="thm:continuous-svd" class="theorem"><strong>Theorem 4.2  (see Kunkel/Mehrmann, Thm. 3.9)  </strong></span>
-Let <span class="math inline">\(E\in \mathcal C^l(I, \mathbb C^{m,n})\)</span> with <span class="math inline">\(\operatorname{rank}E(t)=r\)</span> for all <span class="math inline">\(t\in I\)</span>. Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, such that</p>
+<p><span id="thm:continuous-svd" class="theorem"><strong>Theorem 4.2  (see Kunkel/Mehrmann, Thm. 3.9)  </strong></span> Let <span class="math inline">\(E\in \mathcal C^l(I, \mathbb C^{m,n})\)</span> with <span class="math inline">\({\operatorname{rank}}E(t)=r\)</span> for all <span class="math inline">\(t\in I\)</span>. Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span>, such that</p>
 <span class="math display">\[
  U^HEV =
  \begin{bmatrix}
  \Sigma &amp; 0 \\
  0 &amp; 0
  \end{bmatrix}
-\]</span>
-with pointwise nonsingular <span class="math inline">\(\Sigma \in \mathcal C^l(I, \mathbb C^{r,r})\)</span>.
+\]</span> with pointwise nonsingular <span class="math inline">\(\Sigma \in \mathcal C^l(I, \mathbb C^{r,r})\)</span>.
 </div>
 
 
 <div class="theorem">
-<p><span id="thm:global-canonical-form" class="theorem"><strong>Theorem 4.3  </strong></span>
-Let <span class="math inline">\(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\)</span> be sufficiently smooth and suppose that
+<span id="thm:global-canonical-form" class="theorem"><strong>Theorem 4.3  </strong></span> Let <span class="math inline">\(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\)</span> be sufficiently smooth and suppose that
 <span class="math display" id="eq:glob-local-char-vals">\[\begin{equation}
     r(t) = r, \quad a(t)=a, \quad s(t)=s \tag{4.4}
-\end{equation}\]</span></p>
-<p>for the local characteristic values of <span class="math inline">\((E(t), A(t))\)</span>. Then <span class="math inline">\((E, A)\)</span> is globally equivalent to the canonical form
+\end{equation}\]</span>
+for the local characteristic values of <span class="math inline">\((E(t), A(t))\)</span>. Then <span class="math inline">\((E, A)\)</span> is globally equivalent to the canonical form
 <span class="math display" id="eq:glob-can-form">\[\begin{equation}
 \left(
 \begin{bmatrix}
@@ -481,14 +477,13 @@ I_s &amp;   0   &amp;  0  &amp; 0 \\
 \end{bmatrix}
 \right ).
 \tag{4.5}
-\end{equation}\]</span></p>
+\end{equation}\]</span>
 <p>All entries are again matrix functions on <span class="math inline">\(I\)</span> and the last block column in both matrix functions of <a href="linear-daes-with-time-varying-coefficients.html#eq:glob-can-form">(4.5)</a> has size <span class="math inline">\(u=n-s-d-a\)</span>.</p>
 </div>
 
 
 <div class="proof">
- <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="linear-daes-with-time-varying-coefficients.html#thm:global-canonical-form">4.3</a>.
-<!-- \begin{ofalltheseblockmats} -->
+ <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="linear-daes-with-time-varying-coefficients.html#thm:global-canonical-form">4.3</a>. <!-- \begin{ofalltheseblockmats} -->
 <span class="math display">\[\begin{align*}
 (E,A) &amp; 
 \sim   
@@ -664,11 +659,9 @@ I_s &amp; 0 &amp; 0 &amp; 0 \\
 \end{bmatrix}\right),
 \end{align*}\]</span>
 <!-- \end{ofalltheseblockmats} -->
-where the final equivalence holds, if <span class="math inline">\(Q_2\)</span> is chosen as the (unique and pointwise invertible) solution of the linear matrix valued ODE
-<span class="math display">\[
+where the final equivalence holds, if <span class="math inline">\(Q_2\)</span> is chosen as the (unique and pointwise invertible) solution of the linear matrix valued ODE <span class="math display">\[
 \dot Q_2 = A_{22}(t)Q_2 ,  \quad Q_2 (t_0 ) = I_d.
-\]</span>
-Then, <span class="math inline">\(A_{22}\)</span> vanishes because of the special choice of <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(E_{22}\)</span> becomes <span class="math inline">\(I_d\)</span> after scaling the second block line by <span class="math inline">\(Q_2^{-1}\)</span>.
+\]</span> Then, <span class="math inline">\(A_{22}\)</span> vanishes because of the special choice of <span class="math inline">\(Q_2\)</span> and <span class="math inline">\(E_{22}\)</span> becomes <span class="math inline">\(I_d\)</span> after scaling the second block line by <span class="math inline">\(Q_2^{-1}\)</span>.
 </div>
 
 
@@ -684,11 +677,13 @@ Then, <span class="math inline">\(A_{22}\)</span> vanishes because of the specia
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -696,12 +691,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -713,6 +707,10 @@ gitbook.start({
 "text": null
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
@@ -729,10 +727,11 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "true";
+    var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

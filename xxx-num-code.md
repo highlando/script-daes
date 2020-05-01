@@ -153,7 +153,7 @@ Many software suits actually wrap [SUNDIALS IDA](https://computation.llnl.gov/pr
 || DAEs | Routines | Method | Remark |
 |:---|:---|:---------------------|:---|:-----------------------------|
 |Matlab| ind-$1$ | `ode15{i,s}` | BDF ||
-|Python| --- |  | | no built-in functionality, DASSL/IDA wrapped in the modules [`assimulo`](https://jmodelica.org/assimulo/index.html#), [`pyDAS`](https://github.com/jwallen/PyDAS), [`DAEtools`](http://daetools.com/docs/index.html) |
+|Python| --- |  | | no built-in functionality, DASSL/IDA wrapped in the modules [`scikit-odes`](https://github.com/bmcage/odes/tree/master), [`assimulo`](https://jmodelica.org/assimulo/index.html#), [`pyDAS`](https://github.com/jwallen/PyDAS), [`DAEtools`](http://daetools.com/docs/index.html) |
 |Julia| ind-$1$ | [`DifferentialEquations.jl`](https://docs.juliadiffeq.org/latest/index.html) | BDF | calls SUNDIALS IDA |
 
 
