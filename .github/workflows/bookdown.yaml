@@ -4,7 +4,7 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
@@ -14,8 +14,9 @@ jobs:
 
       - name: Install pandoc and pandoc citeproc
         run: |
-          brew install pandoc
-          brew install pandoc-citeproc
+          sudo apt install pandoc
+          sudo apt install pandoc-citeproc
+          sudo apt install texlive-xetex
       - name: Cache Renv packages
         uses: actions/cache@v1
         with:
