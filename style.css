@@ -12,3 +12,16 @@ pre {
 pre code {
   white-space: inherit;
 }
+
+div.JHSAYS {
+	color: #008cff;
+	text-decoration: none;
+	margin: 0 0 .85em;
+	padding: 0 15px;
+	opacity: 0.75;
+	border-left: 4px solid #dcdcdc;
+}
+
+.math {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
