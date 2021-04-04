@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Basic Definitions and Notions | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Basic Definitions and Notions | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2020-05-01" />
+<meta name="date" content="2021-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -72,7 +73,9 @@
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#electrical-circuits"><i class="fa fa-check"></i><b>1.1.1</b> Electrical Circuits</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
@@ -123,19 +126,19 @@
 <div id="basic-definitions-and-notions" class="section level1">
 <h1><span class="header-section-number">2</span> Basic Definitions and Notions</h1>
 <p>We consider DAEs in the general form</p>
-<span class="math display" id="eq:gendae">\[\begin{equation}
+<p><span class="math display" id="eq:gendae">\[\begin{equation}
     F(t, x, \dot x) = 0
     \tag{2.1}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>with <span class="math inline">\(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\)</span> and with a time interval <span class="math inline">\(I=[t_0,t_e] \subset \mathbb R\)</span> and state spaces <span class="math inline">\(D_x\)</span>, <span class="math inline">\(D_{\dot x} \subset \mathbb R^{n}\)</span> and the task to find a function</p>
-<span class="math display">\[\begin{equation*}
+<p><span class="math display">\[\begin{equation*}
     x \colon I \to \mathbb R^{n}
-\end{equation*}\]</span>
+\end{equation*}\]</span></p>
 <p>with time derivative <span class="math inline">\(\dot x \colon I \to \mathbb R^{n}\)</span> such that <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> is fulfilled for all <span class="math inline">\(t\in I\)</span>.</p>
 <p>A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed</p>
-<span class="math display" id="eq:gendaeiniv">\[\begin{equation}
+<p><span class="math display" id="eq:gendaeiniv">\[\begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. \tag{2.2} 
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <div id="solution-concept" class="section level2">
 <h2><span class="header-section-number">2.1</span> Solution Concept</h2>
 <p>In order to talk of solutions, we need to define what we understand as a solution.</p>
@@ -157,16 +160,16 @@
 <div id="initial-conditions-and-consistency" class="section level2">
 <h2><span class="header-section-number">2.2</span> Initial Conditions and Consistency</h2>
 <p>We consider again the equations of motions of the pendulum (Example <a href="introduction.html#exm:the-pendulum">1.1</a>)</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
     \dot x(t) &amp;= u(t) \\
     \dot y(t) &amp;= v(t) \\
     \dot u(t) &amp;= - 2 \lambda(t) (x(t) - c_x) \\ 
     \dot v(t) &amp;= - 2 \lambda(t) (y(t) - c_y) - mgy
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>with the constraint</p>
-<span class="math display" id="eq:pendulum-rvst-cnstrt">\[\begin{equation}
+<p><span class="math display" id="eq:pendulum-rvst-cnstrt">\[\begin{equation}
     0=(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2. \tag{2.3}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>To use this model to predict the time evolution of the system, a starting point needs to be known, say for <span class="math inline">\(t=0\)</span>. This means initial positions and initial velocities:</p>
 <p><span class="math display">\[
 \begin{bmatrix} 
@@ -186,31 +189,31 @@ u(0) \\ v(0)
 \end{bmatrix}
 \]</span></p>
 <p>The constraint <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt">(2.3)</a> needs to be fulfilled at all times and also at <span class="math inline">\(t=0\)</span>, which gives the constraint for the initial positions:</p>
-<span class="math display">\[\begin{equation*}
+<p><span class="math display">\[\begin{equation*}
     (x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
-\end{equation*}\]</span>
+\end{equation*}\]</span></p>
 <p>Moreover, if a constraint <span class="math inline">\(g(x(t), y(t))=0\)</span> holds for all <span class="math inline">\(t\)</span>, then, necessarily, <span class="math inline">\(\frac{d}{dt}g=0\)</span> for all <span class="math inline">\(t\)</span>. For the pendulum this means that</p>
-<span class="math display" id="eq:pendulum-rvst-cnstrt-ddt">\[\begin{equation}
+<p><span class="math display" id="eq:pendulum-rvst-cnstrt-ddt">\[\begin{equation}
     2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 \tag{2.4}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>must hold for all <span class="math inline">\(t\)</span> and in particular at <span class="math inline">\(t=0\)</span> which gives constraints on the initial velocities <span class="math inline">\(u_0\)</span> and <span class="math inline">\(v_0\)</span>:</p>
-<span class="math display">\[\begin{equation*}
+<p><span class="math display">\[\begin{equation*}
     2(x_0 - c_x)u_0 + 2(y_0 - c_y)v_0 = 0.
-\end{equation*}\]</span>
+\end{equation*}\]</span></p>
 <p>Some remarks on consistency, constraints, and derivations:</p>
 <ul>
 <li>The so-called <em>consistency conditions</em> on <span class="math inline">\((x_0, y_0, u_0, v_0)\)</span> have the physical interpretation that the initial positions lie on the prescribed circle and that the velocities are tangent to this circle.</li>
 <li>One can show that the variable <span class="math inline">\(\lambda\)</span> is completely defined in terms of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> and their derivatives. Thus, in the formulation <a href="introduction.html#eq:pendulum">(1.1)</a>, both in the analysis and in the numerical treatment, there is no need for an initial value for <span class="math inline">\(\lambda\)</span>. However, as we will see, DAEs can be reformulated as ODEs through differentiation and substitutions. In such an ODE formulation, a necessary initial condition for <span class="math inline">\(\lambda\)</span> will have to fulfill similar consistency conditions as <span class="math inline">\((x_0, y_0, u_0, v_0)\)</span>.</li>
 </ul>
 <p>Condition <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt-ddt">(2.4)</a> is an example for a <em>hidden-constraint</em> – an algebraic constraint to the system that is not explicit in the original formulation. In theory, condition <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt">(2.3)</a> can be replaced by <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt-ddt">(2.4)</a>. Moreover, through differentiation and elimination of constraints, a DAE can be brought into the form of an ODE: in the case of the circuit of Example <a href="introduction.html#exm:the-circuit">1.2</a> one only needs to replace the constraints by their derivatives:</p>
-<span class="math display" id="eq:circuit-ddt">\[\begin{equation}
+<p><span class="math display" id="eq:circuit-ddt">\[\begin{equation}
 \begin{split}
 C(\dot x_3 - \dot x_2) &amp;= - \frac{x_1 - x_2}{R} \\
 \dot x_1 - \dot x_3 &amp;= \dot U \\
 \dot x_3 &amp;= 0. 
 \end{split}
 \tag{2.5}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>Note that <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> can be written as <span class="math inline">\(B\dot x = Ax + f\)</span> with an invertible matrix <span class="math inline">\(B\)</span> and, thus, is an ODE.</p>
 <p>For an ODE there is no constraint on the initial values. However, a solution to <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> only solves the original DAE <a href="introduction.html#eq:circuit">(1.2)</a>, if the initial values are consistent with the DAE. In this case, this means <span class="math inline">\(x_3(t_0)=0\)</span> and <span class="math inline">\(x_1(t_0) - x_3(t_0) = U(t_0)\)</span>.</p>
 
@@ -277,7 +280,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

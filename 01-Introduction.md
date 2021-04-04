@@ -4,7 +4,14 @@
 
 Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the differential equations -- that are subject to constraints: the algebraic equations.
 
-Throughout this lecture, the free variable will be the time $t$ and differentiation will always be considered with respect to $t$.
+<!--
+<div class="JHSAYS">
+<p>Throughout this lecture, the free variable will be the time <span class="math inline">\(t\)</span> and differentiation will always be considered with respect to <span class="math inline">\(t\)</span>.</p>
+</div>
+-->
+<div class="JHSAYS">
+<p>Let’s start with a few examples.</p>
+</div>
 
 ## Examples
 
@@ -15,9 +22,12 @@ Throughout this lecture, the free variable will be the time $t$ and differentiat
 <p class="caption">(\#fig:free-fall)Free fall of a point mass.</p>
 </div>
 
-Free fall: Newton's second law applies: 
+Here, the laws of the free fall -- a special case of Newton's second law -- applies: 
 
-> `force = mass*acceleration`
+
+<div class="JHSAYS">
+<p>force equals mass times acceleration</p>
+</div>
 
 In 2D, the $x$, $y$ coordinates of a point of mass $m$:
 
@@ -30,7 +40,9 @@ where $g$ is the gravity; see Figure \@ref(fig:free-fall).
 
 Now **the pendulum**: 
 
-*The same point mass attached to a string*.
+<div class="JHSAYS">
+<p>The same point mass attached to a string.</p>
+</div>
 
 <div class="figure" style="text-align: center">
 <img src="pics/pendulum.png" alt="A pendulum." width="40%" />
@@ -44,21 +56,27 @@ $$
 $$
 where $(c_x, c_y)$ are the coordinates of the center and $l$ is the length of the string; see Figure \@ref(fig:pendulum).
 
-We use the Langrangian function to derive the equations of motion. For the pendulum, we have the kinetic energy $T$, the potential $U$, and the constraint $h$ as
-
+We use the Lagrangian function to derive the [*Euler-Lagrange equations*](https://en.wikipedia.org/wiki/Lagrangian_mechanics#Euler%E2%80%93Lagrange_equations_and_Hamilton's_principle) of motion. For the pendulum, we have the kinetic energy 
 $$
-  T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), \quad U = mgy, \quad \text{and} \quad h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
+  T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), 
+$$
+the potential 
+$$
+U = mgy,
+$$ 
+and the constraint 
+$$
+h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
 $$
 
-Thus, from the principle that 
-
+Thus, with $$L:=U-T- \lambda h$$ and the requirement that 
 $$
-\frac{d}{dt}(\frac{\partial L}{\partial \dot q}) - \frac{\partial L}{\partial q} = 0, \quad\text{for}\quad L = U -T - \lambda h \quad\text{and}\quad q=x, y ,\lambda
+\frac{d}{dt}(\frac{\partial L}{\partial \dot q}) - \frac{\partial L}{\partial q} = 0
 $$
+for all of the *generalized coordinates* $q=x$, $y$, $\lambda$, 
+one obtains a system of equations:
 
-one obtains:
-
-| generalized coordinate | equation |
+| Generalized coordinate | Equation |
 |:-----------------------|---------:|
 |$q \leftarrow x$ | $m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0$ |
 |$q \leftarrow y$ | $m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0$ |
@@ -82,7 +100,7 @@ where we have omitted the time dependence. </div>\EndKnitrBlock{example}
 
 Equation \@ref(eq:pendulum) is a canonical example for a DAE with combined differential and algebraic equations.
 
-**Electrical Circuits**
+### Electrical Circuits
 
 Another class of DAEs arises from the modelling electrical circuits. We consider the example of *charging a conductor through a resistor* as illustrated in Figure \@ref(fig:circuit).
 

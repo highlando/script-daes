@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Numerical Approximation of DAEs | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Numerical Approximation of DAEs | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2020-05-01" />
+<meta name="date" content="2021-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -72,7 +73,9 @@
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#electrical-circuits"><i class="fa fa-check"></i><b>1.1.1</b> Electrical Circuits</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
@@ -133,7 +136,7 @@
 <li><span class="math inline">\(E=N=N_\nu\)</span> consists of a single Jordan block <span class="math inline">\(\leftarrow\)</span> otherwise consider each Jordan block separately</li>
 </ul>
 <p>Thus, we can consider the special DAE</p>
-<span class="math display" id="eq:spec-dae-rkm-cc">\[\begin{equation}
+<p><span class="math display" id="eq:spec-dae-rkm-cc">\[\begin{equation}
 \begin{bmatrix}
 0 &amp; 1 &amp;        &amp;         &amp;    \\
   &amp; 0 &amp; 1      &amp;         &amp;    \\
@@ -143,7 +146,7 @@
 \end{bmatrix}
 \dot x = x + f(t),
 \tag{5.1}
-\end{equation}\]</span>
+\end{equation}\]</span></p>
 <p>where</p>
 <p><span class="math display">\[
  x(t) = \begin{bmatrix} x_1(t) \\ x_2(t) \\ \vdots \\ x_\nu(t) \end{bmatrix}
@@ -157,11 +160,11 @@
 x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
 \]</span></p>
 <p>where <span class="math inline">\(\kappa_j\)</span> is the maximum number such that</p>
-<table style="width:74%;">
+<table>
 <colgroup>
-<col width="6%" />
-<col width="41%" />
-<col width="25%" />
+<col width="8%" />
+<col width="57%" />
+<col width="34%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -188,17 +191,19 @@ x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} -
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Since we consider the pure consistency error, we can assume that <span class="math inline">\(x_i=x(t_i)\)</span>. With that and with the definition of the RKM, the error is given as <span class="math display">\[
+<p> <span class="proof"><em>Proof. </em></span> Since we consider the pure consistency error, we can assume that <span class="math inline">\(x_i=x(t_i)\)</span>. With that and with the definition of the RKM, the error is given as
+<span class="math display">\[
 \tau = x(t_{i+1}) - x_{i+1} = -h\sum_{j=1}^s \beta_j \dot X_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x^{(k)}(t_i).
 \]</span></p>
 <p>Because of the special structure of the DAE, we can concentrate on the first error component <span class="math inline">\(\tau_1\)</span> <span class="math inline">\(\leftarrow\)</span> the error component <span class="math inline">\(\tau_2\)</span> is the <em>first</em> component of the problem of index <span class="math inline">\(\nu-1\)</span>. For <span class="math inline">\(\tau_1\)</span> we have the formula</p>
 <p><span class="math display">\[
 \tau_1 = x_1(t_{i+1}) - x_{i+1,1} = h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i).
 \]</span></p>
-<p>One may confirm directly, or by means of the solution formula for <span class="math inline">\(N\dot x = x + f\)</span>, that the <span class="math inline">\(\ell\)</span>-th component of <span class="math inline">\(x\)</span> is defined as <span class="math display">\[
+<p>One may confirm directly, or by means of the solution formula for <span class="math inline">\(N\dot x = x + f\)</span>, that the <span class="math inline">\(\ell\)</span>-th component of <span class="math inline">\(x\)</span> is defined as
+<span class="math display">\[
 x_\ell(t) = - \sum_{j=\ell}^{\nu}f_j^{(j-\ell)}(t).
 \]</span></p>
-The componentwise Taylor expansion of <span class="math inline">\(Z_{i,\ell}\)</span> reads
+<p>The componentwise Taylor expansion of <span class="math inline">\(Z_{i,\ell}\)</span> reads
 <span class="math display">\[\begin{align*}
 Z_{i\ell} 
 &amp;= 
@@ -217,24 +222,24 @@ x_{i,\ell} + f_\ell(t_i+\gamma_s h)
 \end{bmatrix} \\
 &amp;=
 x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
-\end{align*}\]</span>
-With that and with <span class="math inline">\(x_i=x(t_i)\)</span>, we expand the error <span class="math inline">\(\tau_1\)</span> as follows:
+\end{align*}\]</span></p>
+<p>With that and with <span class="math inline">\(x_i=x(t_i)\)</span>, we expand the error <span class="math inline">\(\tau_1\)</span> as follows:
 <span class="math display">\[\begin{align*}
 \tau_1 &amp;= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
 &amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&amp;\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
 &amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
 &amp;= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>which, with <span class="math inline">\(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)\)</span>, becomes</p>
-<span class="math display">\[\begin{align*}
+<p><span class="math display">\[\begin{align*}
 \tau_1 &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&amp;\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
  &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\
  &amp;\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
-\end{align*}\]</span>
-A shift of indices, <span class="math inline">\(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\)</span> and <span class="math inline">\(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\)</span>, then gives:
+\end{align*}\]</span></p>
+<p>A shift of indices, <span class="math inline">\(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\)</span> and <span class="math inline">\(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\)</span>, then gives:
 <span class="math display">\[\begin{align*}
     \tau_1 &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &amp;\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 </div>
 
 
@@ -300,7 +305,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))

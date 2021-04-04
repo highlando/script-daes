@@ -1,3 +1,6 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
 \documentclass[]{book}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,12 +9,9 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
 % use upquote if available, for straight quotes in verbatim environments
@@ -21,19 +21,22 @@
 \usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
-\usepackage[unicode=true]{hyperref}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
 \hypersetup{
             pdftitle={DAEs},
             pdfauthor={Jan Heiland},
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{natbib}
-\bibliographystyle{apalike}
 \usepackage{longtable,booktabs}
 % Fix footnotes in tables (requires footnote package)
-\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{long table}}{}
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -43,12 +46,6 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -69,6 +66,7 @@
 \makeatother
 
 \usepackage{booktabs}
+\newenvironment {JHSAYS} [0] {\begin{quote}} {\end{quote}}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -83,12 +81,14 @@
 \usepackage[normalem]{ulem}
 \usepackage{makecell}
 \usepackage{xcolor}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
 
 \title{DAEs}
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2020-05-01}
+\date{2021-04-04}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -105,7 +105,6 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{solution}{Solution}
-\let\BeginKnitrBlock\begin \let\EndKnitrBlock\end
 \begin{document}
 \maketitle
 
@@ -113,28 +112,27 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\chapter*{Preface}\label{preface}
+\hypertarget{preface}{%
+\chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
 
-This is a writeup of the introduction and, maybe, some other aspects of
-my lectures on DAEs at the OVGU Magdeburg.
+This is a writeup of the introduction and, maybe, some other aspects of my lectures on DAEs at the OVGU Magdeburg.
 
-Fixes and feature requests can be submitted to the
-\href{https://github.com/highlando/script-daes}{github-repo}.
+Fixes and feature requests can be submitted to the \href{https://github.com/highlando/script-daes}{github-repo}.
 
 \newcommand{\ind}{\operatorname{ind}}
 
-\chapter{Introduction}\label{introduction}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-Differential-algebraic equations (DAEs) are coupled differential- and
-algebraic equations. DAEs often describe dynamical processes -- here are
-the differential equations -- that are subject to constraints: the
-algebraic equations.
+Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the differential equations -- that are subject to constraints: the algebraic equations.
 
-Throughout this lecture, the free variable will be the time \(t\) and
-differentiation will always be considered with respect to \(t\).
+\begin{JHSAYS}
+Let's start with a few examples.
+\end{JHSAYS}
 
-\section{Examples}\label{examples}
+\hypertarget{examples}{%
+\section{Examples}\label{examples}}
 
 \textbf{Free fall vs.~the pendulum}
 
@@ -147,11 +145,11 @@ differentiation will always be considered with respect to \(t\).
 \caption{Free fall of a point mass.}\label{fig:free-fall}
 \end{figure}
 
-Free fall: Newton's second law applies:
+Here, the laws of the free fall -- a special case of Newton's second law -- applies:
 
-\begin{quote}
-\texttt{force\ =\ mass*acceleration}
-\end{quote}
+\begin{JHSAYS}
+force equals mass times acceleration
+\end{JHSAYS}
 
 In 2D, the \(x\), \(y\) coordinates of a point of mass \(m\):
 
@@ -164,7 +162,9 @@ where \(g\) is the gravity; see Figure \ref{fig:free-fall}.
 
 Now \textbf{the pendulum}:
 
-\emph{The same point mass attached to a string}.
+\begin{JHSAYS}
+The same point mass attached to a string.
+\end{JHSAYS}
 
 \begin{figure}
 
@@ -175,48 +175,47 @@ Now \textbf{the pendulum}:
 \caption{A pendulum.}\label{fig:pendulum}
 \end{figure}
 
-Again, we have \texttt{force\ =\ mass*acceleration} but also the
-conditions that the mass moves on a circle:
+Again, we have \texttt{force\ =\ mass*acceleration} but also the conditions that the mass moves on a circle:
 
 \[
  (x(t) - c_x)^2 + (y(t) - c_y)^2 = l^2,
-\] where \((c_x, c_y)\) are the coordinates of the center and \(l\) is
-the length of the string; see Figure \ref{fig:pendulum}.
+\]
+where \((c_x, c_y)\) are the coordinates of the center and \(l\) is the length of the string; see Figure \ref{fig:pendulum}.
 
-We use the Langrangian function to derive the equations of motion. For
-the pendulum, we have the kinetic energy \(T\), the potential \(U\), and
-the constraint \(h\) as
-
+We use the Lagrangian function to derive the \href{https://en.wikipedia.org/wiki/Lagrangian_mechanics\#Euler\%E2\%80\%93Lagrange_equations_and_Hamilton's_principle}{\emph{Euler-Lagrange equations}} of motion. For the pendulum, we have the kinetic energy
 \[
-  T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), \quad U = mgy, \quad \text{and} \quad h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
+  T = \frac 12 m (\dot x(t)^2 + \dot y(t)^2), 
+\]
+the potential
+\[
+U = mgy,
+\]
+and the constraint
+\[
+h = (x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 .
 \]
 
-Thus, from the principle that
-
+Thus, with \[L:=U-T- \lambda h\] and the requirement that
 \[
-\frac{d}{dt}(\frac{\partial L}{\partial \dot q}) - \frac{\partial L}{\partial q} = 0, \quad\text{for}\quad L = U -T - \lambda h \quad\text{and}\quad q=x, y ,\lambda
+\frac{d}{dt}(\frac{\partial L}{\partial \dot q}) - \frac{\partial L}{\partial q} = 0
 \]
-
-one obtains:
+for all of the \emph{generalized coordinates} \(q=x\), \(y\), \(\lambda\),
+one obtains a system of equations:
 
 \begin{longtable}[]{@{}lr@{}}
 \toprule
-generalized coordinate & equation\tabularnewline
+Generalized coordinate & Equation\tabularnewline
 \midrule
 \endhead
-\(q \leftarrow x\) &
-\(m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0\)\tabularnewline
-\(q \leftarrow y\) &
-\(m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0\)\tabularnewline
-\(q \leftarrow \lambda\) &
-\((x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0\)\tabularnewline
+\(q \leftarrow x\) & \(m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0\)\tabularnewline
+\(q \leftarrow y\) & \(m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0\)\tabularnewline
+\(q \leftarrow \lambda\) & \((x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0\)\tabularnewline
 \bottomrule
 \end{longtable}
 
-\BeginKnitrBlock{example}[The Pendulum]
-\protect\hypertarget{exm:the-pendulum}{}{\label{exm:the-pendulum}
-\iffalse (The Pendulum) \fi{} } After an order reduction via the new
-variables \(u:=\dot x\) and \(v=\dot y\) the overall system reads
+\begin{example}[The Pendulum]
+\protect\hypertarget{exm:the-pendulum}{}{\label{exm:the-pendulum} \iffalse (The Pendulum) \fi{} }
+After an order reduction via the new variables \(u:=\dot x\) and \(v=\dot y\) the overall system reads
 
 \begin{equation}
 \begin{split}
@@ -230,16 +229,14 @@ variables \(u:=\dot x\) and \(v=\dot y\) the overall system reads
 \end{equation}
 
 where we have omitted the time dependence.
-\EndKnitrBlock{example}
+\end{example}
 
-Equation \eqref{eq:pendulum} is a canonical example for a DAE with
-combined differential and algebraic equations.
+Equation \eqref{eq:pendulum} is a canonical example for a DAE with combined differential and algebraic equations.
 
-\textbf{Electrical Circuits}
+\hypertarget{electrical-circuits}{%
+\subsection{Electrical Circuits}\label{electrical-circuits}}
 
-Another class of DAEs arises from the modelling electrical circuits. We
-consider the example of \emph{charging a conductor through a resistor}
-as illustrated in Figure \ref{fig:circuit}.
+Another class of DAEs arises from the modelling electrical circuits. We consider the example of \emph{charging a conductor through a resistor} as illustrated in Figure \ref{fig:circuit}.
 
 \begin{figure}
 
@@ -250,39 +247,26 @@ as illustrated in Figure \ref{fig:circuit}.
 \caption{Electrical circuit with a source, a resistor, and a conductor.}\label{fig:circuit}
 \end{figure}
 
-We formulate the problem in terms of the potentials \(x_1\), \(x_2\),
-\(x_3\), that are assumed to reside in the wires between a source \(U\)
-and a resistor \(R\), the resistor \(R\) and the capacitor \(C\), and
-the capacitor and the source.
+We formulate the problem in terms of the potentials \(x_1\), \(x_2\), \(x_3\), that are assumed to reside in the wires between a source \(U\) and a resistor \(R\), the resistor \(R\) and the capacitor \(C\), and the capacitor and the source.
 
-A model for the circuit is given through the following principles and
-considerations.
+A model for the circuit is given through the following principles and considerations.
 
 \begin{itemize}
 \tightlist
 \item
-  the source defines the difference in the neighboring potentials:
-  \(x_1 - x_3 - U = 0\)
+  the source defines the difference in the neighboring potentials: \(x_1 - x_3 - U = 0\)
 \item
-  the current \(I_R\) that is induced by the potentials neighboring the
-  resistor is is defined through \emph{Ohm's law}:
-  \(I_R = \frac{x_1 - x_2}{R}\)
+  the current \(I_R\) that is induced by the potentials neighboring the resistor is is defined through \emph{Ohm's law}: \(I_R = \frac{x_1 - x_2}{R}\)
 \item
-  the current \(I_C\) that is induced by the potentials neighboring the
-  capacitor is described through: \(I_C = C(\dot x_3 - \dot x_2)\)
+  the current \(I_C\) that is induced by the potentials neighboring the capacitor is described through: \(I_C = C(\dot x_3 - \dot x_2)\)
 \item
-  \emph{Kirchhoff's law} states that everywhere in the circuit the
-  currents sum up to zero:
-  \(I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0\)
+  \emph{Kirchhoff's law} states that everywhere in the circuit the currents sum up to zero: \(I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0\)
 \item
-  finally, we can set a ground potential (note that so far all equations
-  only consider differences in the potential) and we set \(x_3 = 0\).
+  finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set \(x_3 = 0\).
 \end{itemize}
 
-\BeginKnitrBlock{example}
-\protect\hypertarget{exm:the-circuit}{}{\label{exm:the-circuit} }Summing all
-up, the equations that model the circuit are given as
-
+\begin{example}
+\protect\hypertarget{exm:the-circuit}{}{\label{exm:the-circuit} }Summing all up, the equations that model the circuit are given as
 \begin{equation}
 \begin{split}
 C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
@@ -291,15 +275,11 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 \end{split}
 \label{eq:circuit}
 \end{equation}
-\EndKnitrBlock{example}
+\end{example}
 
 \textbf{Navier-Stokes Equations}
 
-The Navier-Stokes equations (NSE) are commonly used to model all kind of
-flows. They describe the evolution of the velocity \(v\) of the fluid
-and the pressure \(p\) in the fluid. Note that the flow occupies a
-spatial domain, say in \(\mathbb R^{3}\) so that \(v\) and \(p\) are
-functions both of the time variable \(t\) and a space variable \(\xi\):
+The Navier-Stokes equations (NSE) are commonly used to model all kind of flows. They describe the evolution of the velocity \(v\) of the fluid and the pressure \(p\) in the fluid. Note that the flow occupies a spatial domain, say in \(\mathbb R^{3}\) so that \(v\) and \(p\) are functions both of the time variable \(t\) and a space variable \(\xi\):
 
 \[
 v\colon (t, \xi) \mapsto v(t,\xi)\in \mathbb R^{3} \quad\text{and}\quad  p\colon (t, \xi) \mapsto p(t,\xi)\in \mathbb R.
@@ -312,43 +292,27 @@ The NSE:
   \nabla_\xi \cdot v &= 0,
 \end{align*}
 
-with \(\otimes\) denoting the outer product and \(\nabla_\xi\) and
-\(\Delta_\xi\) denoting the gradient and the \emph{Laplace} operator. If
-we only count the derivatives with respect to time, as postulated in the
-introduction, the NSE can be seen as an (abstract) DAE.
+with \(\otimes\) denoting the outer product and \(\nabla_\xi\) and \(\Delta_\xi\) denoting the gradient and the \emph{Laplace} operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE.
 
 \textbf{Automatic Modelling or \emph{Engineers vs.~Mathematicians}}
 
-If a system, say an engine, consists of many interacting processes, it
-is convenient and common practice to model the dynamics of each
-particular process and to couple the subprocesses through interface
-conditions.
+If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.
 
-This coupling is done through equating quantities so that the overall
-model will consist of dynamical equations of the subprocesses and
-algebraic relations at the interfaces -- which makes it a DAE.
+This coupling is done through equating quantities so that the overall model will consist of dynamical equations of the subprocesses and algebraic relations at the interfaces -- which makes it a DAE.
 
-In fact, tools like \href{https://www.modelica.org/}{\texttt{modelica}}
-for automatic modelling of complex processes do exactly this.
+In fact, tools like \href{https://www.modelica.org/}{\texttt{modelica}} for automatic modelling of complex processes do exactly this.
 
-The approach of \emph{automatic modelling} is universal and convenient
-for engineers. However, the resulting model equations will be DAEs
-which, as we will see, pose particular problems in their analytical and
-numerical treatment.
+The approach of \emph{automatic modelling} is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.
 
-\section{Why are DAEs difficult to
-treat}\label{why-are-daes-difficult-to-treat}
+\hypertarget{why-are-daes-difficult-to-treat}{%
+\section{Why are DAEs difficult to treat}\label{why-are-daes-difficult-to-treat}}
 
-Firstly, DAEs do not have the smoothing properties of ODEs, where the
-solution is one degree smoother than the right hand side. Secondly, the
-algebraic constraints are essential for the validity of the model. Thus,
-a numerical approximation may render the model infeasible.
+Firstly, DAEs do not have the smoothing properties of ODEs, where the solution is one degree smoother than the right hand side. Secondly, the algebraic constraints are essential for the validity of the model. Thus, a numerical approximation may render the model infeasible.
 
 \textbf{Non-smooth Solutions}
 
-\BeginKnitrBlock{example}
-\protect\hypertarget{exm:nonsmooth-sols}{}{\label{exm:nonsmooth-sols}
-}Consider the equation
+\begin{example}
+\protect\hypertarget{exm:nonsmooth-sols}{}{\label{exm:nonsmooth-sols} }Consider the equation
 
 \begin{align*}
     \dot x_1(t) &= x_2(t) \\
@@ -365,15 +329,13 @@ where \(g\) can be a nonsmooth function like
     \end{cases}
 \]
 
-In this case the solution part \(x_1=const. + \int_0^tg(s)ds\) will be a
-smooth function and the solution part \(x_2=g\) will have jumps.
-\EndKnitrBlock{example}
+In this case the solution part \(x_1=const. + \int_0^tg(s)ds\) will be a smooth function and the solution part \(x_2=g\) will have jumps.
+\end{example}
 
 Even worse
 
 \begin{quote}
-\emph{the solution of a DAE may depend on derivatives of the right hand
-sides.}
+\emph{the solution of a DAE may depend on derivatives of the right hand sides.}
 \end{quote}
 
 This observation indicates that certain difficulties will arise since
@@ -388,16 +350,12 @@ This observation indicates that certain difficulties will arise since
 
 \textbf{Numerical Solution Means Approximation}
 
-Imagine the equations \eqref{eq:pendulum} that describe the pendulum are
-solved approximately. Then, the algebraic constraint will be violated,
-i.e.~the point mass will leave the circle and the obtained numerical
-solution becomes infeasible.
+Imagine the equations \eqref{eq:pendulum} that describe the pendulum are solved approximately. Then, the algebraic constraint will be violated, i.e.~the point mass will leave the circle and the obtained numerical solution becomes infeasible.
 
-Thus, special care has to be taken of the algebraic constraints when the
-equations of motions are numerically integrated.
+Thus, special care has to be taken of the algebraic constraints when the equations of motions are numerically integrated.
 
-\chapter{Basic Definitions and
-Notions}\label{basic-definitions-and-notions}
+\hypertarget{basic-definitions-and-notions}{%
+\chapter{Basic Definitions and Notions}\label{basic-definitions-and-notions}}
 
 We consider DAEs in the general form
 
@@ -406,69 +364,52 @@ We consider DAEs in the general form
     \label{eq:gendae}
 \end{equation}
 
-with \(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with
-a time interval \(I=[t_0,t_e] \subset \mathbb R\) and state spaces
-\(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a
-function
+with \(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with a time interval \(I=[t_0,t_e] \subset \mathbb R\) and state spaces \(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a function
 
 \begin{equation*}
     x \colon I \to \mathbb R^{n}
 \end{equation*}
 
-with time derivative \(\dot x \colon I \to \mathbb R^{n}\) such that
-\eqref{eq:gendae} is fulfilled for all \(t\in I\).
+with time derivative \(\dot x \colon I \to \mathbb R^{n}\) such that \eqref{eq:gendae} is fulfilled for all \(t\in I\).
 
-A dynamical process that evolves in time needs an initial state. Thus,
-one can expect a unique solution to the DAEs only if an initial value is
-prescribed
+A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed
 
 \begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. \label{eq:gendaeiniv} 
 \end{equation}
 
-\section{Solution Concept}\label{solution-concept}
+\hypertarget{solution-concept}{%
+\section{Solution Concept}\label{solution-concept}}
 
-In order to talk of solutions, we need to define what we understand as a
-solution.
+In order to talk of solutions, we need to define what we understand as a solution.
 
-\BeginKnitrBlock{definition}
-\protect\hypertarget{def:dae-solution}{}{\label{def:dae-solution} } 1. A
-function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a
-\emph{solution to the DAE} \eqref{eq:gendae}, if
-\(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in I\).
+\begin{definition}
+\protect\hypertarget{def:dae-solution}{}{\label{def:dae-solution} } 1. A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in I\).
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
 \item
-  A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a
-  \emph{solution to the initial value problem} \eqref{eq:gendae} and
-  \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
+  A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
 \item
-  An initial condition \eqref{eq:gendaeiniv} is called consistent for the
-  DAE \eqref{eq:gendae}, if there exists at least one solution as defined
-  in 2.
+  An initial condition \eqref{eq:gendaeiniv} is called consistent for the DAE \eqref{eq:gendae}, if there exists at least one solution as defined in 2.
 \end{enumerate}
-\EndKnitrBlock{definition}
+\end{definition}
 
 Some remarks
 
 \begin{itemize}
 \tightlist
 \item
-  The requirement that \(x \in \mathcal C^1\) could be relaxed. Compare
-  Example \ref{exm:nonsmooth-sols}, where certain components of the
-  solution where smoother than others.
+  The requirement that \(x \in \mathcal C^1\) could be relaxed. Compare Example \ref{exm:nonsmooth-sols}, where certain components of the solution where smoother than others.
 \item
-  Consistency of initial values is a major issue in the treatment of
-  DAEs. See the pendulum\ldots{}
+  Consistency of initial values is a major issue in the treatment of DAEs. See the pendulum\ldots{}
 \end{itemize}
 
-\section{Initial Conditions and
-Consistency}\label{initial-conditions-and-consistency}
+\hypertarget{initial-conditions-and-consistency}{%
+\section{Initial Conditions and Consistency}\label{initial-conditions-and-consistency}}
 
-We consider again the equations of motions of the pendulum (Example
-\ref{exm:the-pendulum})
+We consider again the equations of motions of the pendulum (Example \ref{exm:the-pendulum})
 
 \begin{align*}
     \dot x(t) &= u(t) \\
@@ -483,9 +424,7 @@ with the constraint
     0=(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2. \label{eq:pendulum-rvst-cnstrt}
 \end{equation}
 
-To use this model to predict the time evolution of the system, a
-starting point needs to be known, say for \(t=0\). This means initial
-positions and initial velocities:
+To use this model to predict the time evolution of the system, a starting point needs to be known, say for \(t=0\). This means initial positions and initial velocities:
 
 \[
 \begin{bmatrix} 
@@ -505,24 +444,19 @@ u(0) \\ v(0)
 \end{bmatrix}
 \]
 
-The constraint \eqref{eq:pendulum-rvst-cnstrt} needs to be fulfilled at
-all times and also at \(t=0\), which gives the constraint for the
-initial positions:
+The constraint \eqref{eq:pendulum-rvst-cnstrt} needs to be fulfilled at all times and also at \(t=0\), which gives the constraint for the initial positions:
 
 \begin{equation*}
     (x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
 \end{equation*}
 
-Moreover, if a constraint \(g(x(t), y(t))=0\) holds for all \(t\), then,
-necessarily, \(\frac{d}{dt}g=0\) for all \(t\). For the pendulum this
-means that
+Moreover, if a constraint \(g(x(t), y(t))=0\) holds for all \(t\), then, necessarily, \(\frac{d}{dt}g=0\) for all \(t\). For the pendulum this means that
 
 \begin{equation}
     2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 \label{eq:pendulum-rvst-cnstrt-ddt}
 \end{equation}
 
-must hold for all \(t\) and in particular at \(t=0\) which gives
-constraints on the initial velocities \(u_0\) and \(v_0\):
+must hold for all \(t\) and in particular at \(t=0\) which gives constraints on the initial velocities \(u_0\) and \(v_0\):
 
 \begin{equation*}
     2(x_0 - c_x)u_0 + 2(y_0 - c_y)v_0 = 0.
@@ -533,29 +467,12 @@ Some remarks on consistency, constraints, and derivations:
 \begin{itemize}
 \tightlist
 \item
-  The so-called \emph{consistency conditions} on
-  \((x_0, y_0, u_0, v_0)\) have the physical interpretation that the
-  initial positions lie on the prescribed circle and that the velocities
-  are tangent to this circle.
+  The so-called \emph{consistency conditions} on \((x_0, y_0, u_0, v_0)\) have the physical interpretation that the initial positions lie on the prescribed circle and that the velocities are tangent to this circle.
 \item
-  One can show that the variable \(\lambda\) is completely defined in
-  terms of \(x\) and \(y\) and their derivatives. Thus, in the
-  formulation \eqref{eq:pendulum}, both in the analysis and in the
-  numerical treatment, there is no need for an initial value for
-  \(\lambda\). However, as we will see, DAEs can be reformulated as ODEs
-  through differentiation and substitutions. In such an ODE formulation,
-  a necessary initial condition for \(\lambda\) will have to fulfill
-  similar consistency conditions as \((x_0, y_0, u_0, v_0)\).
+  One can show that the variable \(\lambda\) is completely defined in terms of \(x\) and \(y\) and their derivatives. Thus, in the formulation \eqref{eq:pendulum}, both in the analysis and in the numerical treatment, there is no need for an initial value for \(\lambda\). However, as we will see, DAEs can be reformulated as ODEs through differentiation and substitutions. In such an ODE formulation, a necessary initial condition for \(\lambda\) will have to fulfill similar consistency conditions as \((x_0, y_0, u_0, v_0)\).
 \end{itemize}
 
-Condition \eqref{eq:pendulum-rvst-cnstrt-ddt} is an example for a
-\emph{hidden-constraint} -- an algebraic constraint to the system that
-is not explicit in the original formulation. In theory, condition
-\eqref{eq:pendulum-rvst-cnstrt} can be replaced by
-\eqref{eq:pendulum-rvst-cnstrt-ddt}. Moreover, through differentiation and
-elimination of constraints, a DAE can be brought into the form of an
-ODE: in the case of the circuit of Example \ref{exm:the-circuit} one
-only needs to replace the constraints by their derivatives:
+Condition \eqref{eq:pendulum-rvst-cnstrt-ddt} is an example for a \emph{hidden-constraint} -- an algebraic constraint to the system that is not explicit in the original formulation. In theory, condition \eqref{eq:pendulum-rvst-cnstrt} can be replaced by \eqref{eq:pendulum-rvst-cnstrt-ddt}. Moreover, through differentiation and elimination of constraints, a DAE can be brought into the form of an ODE: in the case of the circuit of Example \ref{exm:the-circuit} one only needs to replace the constraints by their derivatives:
 
 \begin{equation}
 \begin{split}
@@ -566,22 +483,16 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 \label{eq:circuit-ddt}
 \end{equation}
 
-Note that \eqref{eq:circuit-ddt} can be written as \(B\dot x = Ax + f\)
-with an invertible matrix \(B\) and, thus, is an ODE.
+Note that \eqref{eq:circuit-ddt} can be written as \(B\dot x = Ax + f\) with an invertible matrix \(B\) and, thus, is an ODE.
 
-For an ODE there is no constraint on the initial values. However, a
-solution to \eqref{eq:circuit-ddt} only solves the original DAE
-\eqref{eq:circuit}, if the initial values are consistent with the DAE. In
-this case, this means \(x_3(t_0)=0\) and
-\(x_1(t_0) - x_3(t_0) = U(t_0)\).
+For an ODE there is no constraint on the initial values. However, a solution to \eqref{eq:circuit-ddt} only solves the original DAE \eqref{eq:circuit}, if the initial values are consistent with the DAE. In this case, this means \(x_3(t_0)=0\) and \(x_1(t_0) - x_3(t_0) = U(t_0)\).
 
-\chapter{Linear DAEs with Constant
-Coefficients}\label{linear-daes-with-constant-coefficients}
+\hypertarget{linear-daes-with-constant-coefficients}{%
+\chapter{Linear DAEs with Constant Coefficients}\label{linear-daes-with-constant-coefficients}}
 
-\BeginKnitrBlock{definition}
-\protect\hypertarget{def:drazin-inverse}{}{\label{def:drazin-inverse} } Let
-\(E\in \mathbb C^{n,n}\) and \(\nu = \ind(E)\). A matrix
-\(X\in \mathbb C^{n,n}\) that fulfills
+\begin{definition}
+\protect\hypertarget{def:drazin-inverse}{}{\label{def:drazin-inverse} }
+Let \(E\in \mathbb C^{n,n}\) and \(\nu = \operatorname{ind}(E)\). A matrix \(X\in \mathbb C^{n,n}\) that fulfills
 
 \begin{align}
     EX & = XE, \label{eq:def-drazin-a} \\
@@ -590,21 +501,17 @@ Coefficients}\label{linear-daes-with-constant-coefficients}
 \end{align}
 
 is called a \emph{Drazin inverse} of \(E\).
-\EndKnitrBlock{definition}
+\end{definition}
 
-With the following theorem we confirm that a Drazin inverse to a matrix
-\(E\) is unique so that we can write \(E^D\) for it.
+With the following theorem we confirm that a Drazin inverse to a matrix \(E\) is unique so that we can write \(E^D\) for it.
 
-\BeginKnitrBlock{theorem}
-\protect\hypertarget{thm:drazin-inverse-unique}{}{\label{thm:drazin-inverse-unique}
-} Every matrix \(E\in\mathbb{C}^{n,n}\) has one, and only one, Drazin
-inverse.
-\EndKnitrBlock{theorem}
+\begin{theorem}
+\protect\hypertarget{thm:drazin-inverse-unique}{}{\label{thm:drazin-inverse-unique} }
+Every matrix \(E\in\mathbb{C}^{n,n}\) has one, and only one, Drazin inverse.
+\end{theorem}
 
-\BeginKnitrBlock{proof}
-\iffalse{} {Proof. } \fi{}Uniqueness: Let \(X_1\) and \(X_2\) be two
-Drazin inverses of \(E\). Then by repeated application of the identities
-in \eqref{eq:def-drazin-a}--\eqref{eq:def-drazin-c} one derives that
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Uniqueness: Let \(X_1\) and \(X_2\) be two Drazin inverses of \(E\). Then by repeated application of the identities in \eqref{eq:def-drazin-a}--\eqref{eq:def-drazin-c} one derives that
 
 \begin{align*}
 X_1 EX_1 E X_2 =   &X_1EX_2 = X_1EX_2EX_2  \\
@@ -619,7 +526,7 @@ where in the second last step we used the identities
 \[
     E^{\nu+1}X_1=X_1E^{\nu+1}=E^{\nu}=X_2E^{\nu+1}=E^{\nu+1}X_2.
 \]
-\EndKnitrBlock{proof}
+\end{proof}
 
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\kernel}{\operatorname{kernel}}
@@ -627,17 +534,14 @@ where in the second last step we used the identities
 \newcommand{\range}{\operatorname{range}}
 \newcommand{\cokernel}{\operatorname{cokernel}}
 
-\chapter{Linear DAEs with Time-varying
-Coefficients}\label{linear-daes-with-time-varying-coefficients}
+\hypertarget{linear-daes-with-time-varying-coefficients}{%
+\chapter{Linear DAEs with Time-varying Coefficients}\label{linear-daes-with-time-varying-coefficients}}
 
-\BeginKnitrBlock{theorem}
-\protect\hypertarget{thm:local-canonical-form}{}{\label{thm:local-canonical-form}
-}Let \(E, A \in \mathbb C^{m,n}\) and let
-
+\begin{theorem}
+\protect\hypertarget{thm:local-canonical-form}{}{\label{thm:local-canonical-form} }Let \(E, A \in \mathbb C^{m,n}\) and let
 \begin{equation}
 T,~Z,~T',~V \label{eq:lcf-subspaces}
 \end{equation}
-
 be
 
 \begin{longtable}[]{@{}ll@{}}
@@ -645,19 +549,17 @@ be
 Matrix & as the basis of\tabularnewline
 \midrule
 \endhead
-\(T\) & \(\kernel E\)\tabularnewline
-\(Z\) & \(\corange E = \kernel E^H\)\tabularnewline
-\(T'\) & \(\cokernel E = \range E^H\)\tabularnewline
-\(V\) & \(\corange (Z^HAT)\)\tabularnewline
+\(T\) & \(\operatorname{kernel}E\)\tabularnewline
+\(Z\) & \(\operatorname{corange}E = \operatorname{kernel}E^H\)\tabularnewline
+\(T'\) & \(\operatorname{cokernel}E = \operatorname{range}E^H\)\tabularnewline
+\(V\) & \(\operatorname{corange}(Z^HAT)\)\tabularnewline
 \bottomrule
 \end{longtable}
 
 then the quantities
-
 \begin{equation}
 r,~a,~s,~d,~u,~v \label{eq:lcf-quantities}
 \end{equation}
-
 defined as
 
 \begin{longtable}[]{@{}lll@{}}
@@ -665,17 +567,16 @@ defined as
 Quantity & Definition & Name\tabularnewline
 \midrule
 \endhead
-\(r\) & \(\rank E\) & \emph{rank}\tabularnewline
-\(a\) & \(\rank (Z^HAT)\) & \emph{algebraic part}\tabularnewline
-\(s\) & \(\rank (V^HZ^HAT')\) & \emph{strangeness}\tabularnewline
+\(r\) & \(\operatorname{rank}E\) & \emph{rank}\tabularnewline
+\(a\) & \(\operatorname{rank}(Z^HAT)\) & \emph{algebraic part}\tabularnewline
+\(s\) & \(\operatorname{rank}(V^HZ^HAT')\) & \emph{strangeness}\tabularnewline
 \(d\) & \(r-s\) & \emph{differential part}\tabularnewline
 \(u\) & \(n-r-a\) & \emph{undetermined variables}\tabularnewline
 \(v\) & \(m-r-a-s\) & \emph{vanishing equations}\tabularnewline
 \bottomrule
 \end{longtable}
 
-are invariant under local equivalence transformations and \((E, A)\) is
-locally equivalent to the canonical form
+are invariant under local equivalence transformations and \((E, A)\) is locally equivalent to the canonical form
 
 \begin{equation}
 \left(\begin{bmatrix}
@@ -694,20 +595,14 @@ I_s & 0 & 0 & 0 \\
 \end{bmatrix}\right),
 \label{eq:local-canonical-form}
 \end{equation}
-
 where all diagonal blocks are square, except maybe the last one.
-\EndKnitrBlock{theorem} Some remarks on the spaces and how the names are
-derived for the case \(E\dot x = Ax +f\) with constant coefficients. The
-ideas are readily transferred to the case with time-varying
-coefficients.
+\end{theorem}
+Some remarks on the spaces and how the names are derived for the case \(E\dot x = Ax +f\) with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients.
 
-Let \[x(t) = Ty(t) + T'y'(t),\]
+Let
+\[x(t) = Ty(t) + T'y'(t),\]
 
-where \(y\) denotes the components of \(x\) that evolve in the range of
-\(T\) and \(y'\) the respective complement. (Since \([T|T']\) is a basis
-of \(\mathbb C^{n}\), there exist such \(y\) and \(y'\) that uniquely
-define \(x\) and vice versa). With \(T\) spanning \(\ker E\) we find
-that
+where \(y\) denotes the components of \(x\) that evolve in the range of \(T\) and \(y'\) the respective complement. (Since \([T|T']\) is a basis of \(\mathbb C^{n}\), there exist such \(y\) and \(y'\) that uniquely define \(x\) and vice versa). With \(T\) spanning \(\ker E\) we find that
 
 \[E \dot x(t) = ET\dot y(t) + ET'\dot y'(t)\]
 
@@ -715,9 +610,7 @@ so that the DAE basically reads
 
 \[ET'\dot y'(t) = ATy(t) + AT'y'(t)+f,\]
 
-i.e.~the components of \(x\) defined through \(y\) are, effectively, not
-differentiated. With \(Z\) containing exactly those \(v\), for which
-\(v^HE=0\), it follows that
+i.e.~the components of \(x\) defined through \(y\) are, effectively, not differentiated. With \(Z\) containing exactly those \(v\), for which \(v^HE=0\), it follows that
 
 \[Z^HET'\dot y'(t) = 0 = Z^HATy(t) + Z^HAT'y'(t)+Z^Hf,\]
 
@@ -725,34 +618,21 @@ or
 
 \[Z^HATy(t) = -Z^HAT'y'(t)-Z^Hf,\]
 
-so that \(\rank Z^HAT\) indeed describes the number of purely algebraic
-equations and variables in the sense that it defines parts of \(y\)
-(which is never going to be differentiated) in terms of algebraic
-relations (no time derivatives are involved).
+so that \(\operatorname{rank}Z^HAT\) indeed describes the number of purely algebraic equations and variables in the sense that it defines parts of \(y\) (which is never going to be differentiated) in terms of algebraic relations (no time derivatives are involved).
 
-With the same arguments and with \(V=\corange Z^HAT\), it follows that
+With the same arguments and with \(V=\operatorname{corange}Z^HAT\), it follows that
 
 \[V^HZ^HAT'y'(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,\]
 
-is the part of \(E\dot x = Ax + f\) in which those components \(y'\)
-that are also differentiated are algebraically equated to a right-hand
-side. This is the \emph{strangeness} (rather in the sense of
-\emph{skewness}) of DAEs that variables can be both differential and
-algebraic. Accordingly, \(\rank V^HZ^HAT'\) describes the size of the
-skewness component.
+is the part of \(E\dot x = Ax + f\) in which those components \(y'\) that are also differentiated are algebraically equated to a right-hand side. This is the \emph{strangeness} (rather in the sense of \emph{skewness}) of DAEs that variables can be both differential and algebraic. Accordingly, \(\operatorname{rank}V^HZ^HAT'\) describes the size of the skewness component.
 
 \begin{quote}
-\textbf{Outlook}: If there is no strangeness, the DAE is called
-strangeness-free. Strangeness can be eliminated through iterated
-differentiation and substitution. The needed number of such iterations
-(that is independent of the the size \(s\) of the \emph{strange} block
-here) will define the strangeness index.
+\textbf{Outlook}: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size \(s\) of the \emph{strange} block here) will define the strangeness index.
 \end{quote}
 
-\BeginKnitrBlock{example}
-\protect\hypertarget{exm:strangeness-in-the-circuit}{}{\label{exm:strangeness-in-the-circuit}
-}With basic scalings and state transforms, one finds for the
-coefficients of Example \ref{exm:the-circuit} that: \[
+\begin{example}
+\protect\hypertarget{exm:strangeness-in-the-circuit}{}{\label{exm:strangeness-in-the-circuit} }With basic scalings and state transforms, one finds for the coefficients of Example \ref{exm:the-circuit} that:
+\[
 (E, A) \backsim 
 \left(
 \begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}
@@ -765,41 +645,41 @@ We compute the subspaces as defined in \eqref{eq:lcf-subspaces}:
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-\begin{minipage}[b]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.29\columnwidth}\raggedright
 Matrix\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.65\columnwidth}\raggedright
 as the basis of/computed as\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-\(\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{kernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-\(\corange\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{corange}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(T'=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-\(\cokernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\range\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{cokernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\operatorname{range}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z^HAT=I_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
 \(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(V=0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-\(\corange (Z^HAT) = \kernel I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.16\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z^HAT'=0_{2\times 1}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
 \(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -809,26 +689,64 @@ and derive the quantities as defined in \eqref{eq:lcf-quantities}:
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-Name & Value & Derived from\tabularnewline
+\begin{minipage}[b]{0.20\columnwidth}\raggedright
+Name\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+Value\strut
+\end{minipage} & \begin{minipage}[b]{0.47\columnwidth}\raggedright
+Derived from\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
-rank & \(r=2\) &
-\(\rank E = \rank \begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\tabularnewline
-algebraic part & \(a=1\) & \(\rank Z^HAT = \rank I_1\)\tabularnewline
-strangeness & \(s=0\) &
-\(\rank V^HZ^HAT' = \rank 0_{2\times 1}\)\tabularnewline
-differential part & \(d=2\) & \(d=r-s=2-0\)\tabularnewline
-undetermined variables & \(u=0\) & \(u=n-r-a=3-2-1\)\tabularnewline
-vanishing equations & \(v=0\) & \(v=m-r-a-s=3-2-1-0\)\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+rank\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(r=2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+algebraic part\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(a=1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(\operatorname{rank}Z^HAT = \operatorname{rank}I_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+strangeness\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(s=0\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(\operatorname{rank}V^HZ^HAT' = \operatorname{rank}0_{2\times 1}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+differential part\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(d=2\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(d=r-s=2-0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+undetermined variables\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(u=0\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(u=n-r-a=3-2-1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.20\columnwidth}\raggedright
+vanishing equations\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\(v=0\)\strut
+\end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
+\(v=m-r-a-s=3-2-1-0\)\strut
+\end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
-\EndKnitrBlock{example}
+\end{example}
 
-\BeginKnitrBlock{example}
-\protect\hypertarget{exm:strangeness-in-the-nse}{}{\label{exm:strangeness-in-the-nse}
-}With more involved scalings and state transforms, one finds for the
-coefficients of the linearized and spatially discretized Navier-Stokes
-equations (see Exercise I) that: \[
+\begin{example}
+\protect\hypertarget{exm:strangeness-in-the-nse}{}{\label{exm:strangeness-in-the-nse} }With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
+\[
 (\mathcal E, \mathcal A) =
 \left(
 \begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
@@ -847,41 +765,41 @@ We compute the subspaces as defined in \eqref{eq:lcf-subspaces}:
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-\begin{minipage}[b]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.29\columnwidth}\raggedright
 Matrix\strut
-\end{minipage} & \begin{minipage}[b]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.65\columnwidth}\raggedright
 as the basis of/computed as\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(T=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\kernel \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{kernel}\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\corange \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{corange}\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(T'=\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\cokernel\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{cokernel}\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z^HAT=0_{n_1}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
 \(\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(V=I_{n_1}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\corange (Z^HAT) = \kernel 0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
+\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.17\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.29\columnwidth}\raggedright
 \(Z^HAT'=\begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
 \(\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -891,67 +809,64 @@ and derive the quantities as defined in \eqref{eq:lcf-quantities}:
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-\begin{minipage}[b]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.31\columnwidth}\raggedright
 Name\strut
-\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\raggedright
 Value\strut
-\end{minipage} & \begin{minipage}[b]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.48\columnwidth}\raggedright
 Derived from\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 rank\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(r=n_1+n_2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\rank E = \rank \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 algebraic part\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(a=0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\rank Z^HAT = \rank 0_{n_1}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\operatorname{rank}Z^HAT = \operatorname{rank}0_{n_1}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 strangeness\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(s=n_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\(\rank V^HZ^HAT' = \rank \begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\operatorname{rank}V^HZ^HAT' = \operatorname{rank}\begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 differential part\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(d=n_2\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
 \(d=r-s=(n_1 + n_2) - n_1\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 undetermined variables\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(u=n_1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
 \(u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.24\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.31\columnwidth}\raggedright
 vanishing equations\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\raggedright
 \(v=0\)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
 \(v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
-\EndKnitrBlock{example}
+\end{example}
 
-\BeginKnitrBlock{theorem}[see Kunkel/Mehrmann, Thm. 3.9]
-\protect\hypertarget{thm:continuous-svd}{}{\label{thm:continuous-svd}
-\iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} } Let
-\(E\in \mathcal C^l(I, \mathbb C^{m,n})\) with \(\rank E(t)=r\) for all
-\(t\in I\). Then there exist smooth and pointwise unitary (and, thus,
-nonsingular) matrix functions \(U\) and \(V\), such that
+\begin{theorem}[see Kunkel/Mehrmann, Thm. 3.9]
+\protect\hypertarget{thm:continuous-svd}{}{\label{thm:continuous-svd} \iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} }
+Let \(E\in \mathcal C^l(I, \mathbb C^{m,n})\) with \(\operatorname{rank}E(t)=r\) for all \(t\in I\). Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions \(U\) and \(V\), such that
 
 \[
  U^HEV =
@@ -959,22 +874,18 @@ nonsingular) matrix functions \(U\) and \(V\), such that
  \Sigma & 0 \\
  0 & 0
  \end{bmatrix}
-\] with pointwise nonsingular
-\(\Sigma \in \mathcal C^l(I, \mathbb C^{r,r})\).
-\EndKnitrBlock{theorem}
+\]
+with pointwise nonsingular \(\Sigma \in \mathcal C^l(I, \mathbb C^{r,r})\).
+\end{theorem}
 
-\BeginKnitrBlock{theorem}
-\protect\hypertarget{thm:global-canonical-form}{}{\label{thm:global-canonical-form}
-} Let \(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\) be sufficiently
-smooth and suppose that
-
+\begin{theorem}
+\protect\hypertarget{thm:global-canonical-form}{}{\label{thm:global-canonical-form} }
+Let \(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\) be sufficiently smooth and suppose that
 \begin{equation}
     r(t) = r, \quad a(t)=a, \quad s(t)=s \label{eq:glob-local-char-vals}
 \end{equation}
 
-for the local characteristic values of \((E(t), A(t))\). Then \((E, A)\)
-is globally equivalent to the canonical form
-
+for the local characteristic values of \((E(t), A(t))\). Then \((E, A)\) is globally equivalent to the canonical form
 \begin{equation}
 \left(
 \begin{bmatrix}
@@ -995,17 +906,11 @@ I_s &   0   &  0  & 0 \\
 \label{eq:glob-can-form}
 \end{equation}
 
-All entries are again matrix functions on \(I\) and the last block
-column in both matrix functions of \eqref{eq:glob-can-form} has size
-\(u=n-s-d-a\).
-\EndKnitrBlock{theorem}
+All entries are again matrix functions on \(I\) and the last block column in both matrix functions of \eqref{eq:glob-can-form} has size \(u=n-s-d-a\).
+\end{theorem}
 
-\BeginKnitrBlock{proof}
-\iffalse{} {Proof. } \fi{}In what follows, we will tacitly redefine the
-block matrix entries that appear after the global equivalence
-transformations. The first step is the continous SVD of \(E\); see
-Theorem \ref{thm:global-canonical-form}.
-
+\begin{proof}
+\iffalse{} {Proof. } \fi{}In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of \(E\); see Theorem \ref{thm:global-canonical-form}.
 \begin{align*}
 (E,A) & 
 \sim   
@@ -1180,21 +1085,17 @@ I_s & 0 & 0 & 0 \\
 0 & 0 & 0 & 0
 \end{bmatrix}\right),
 \end{align*}
-
-where the final equivalence holds, if \(Q_2\) is chosen as the (unique
-and pointwise invertible) solution of the linear matrix valued ODE \[
+where the final equivalence holds, if \(Q_2\) is chosen as the (unique and pointwise invertible) solution of the linear matrix valued ODE
+\[
 \dot Q_2 = A_{22}(t)Q_2 ,  \quad Q_2 (t_0 ) = I_d.
-\] Then, \(A_{22}\) vanishes because of the special choice of \(Q_2\)
-and \(E_{22}\) becomes \(I_d\) after scaling the second block line by
-\(Q_2^{-1}\).
-\EndKnitrBlock{proof}
+\]
+Then, \(A_{22}\) vanishes because of the special choice of \(Q_2\) and \(E_{22}\) becomes \(I_d\) after scaling the second block line by \(Q_2^{-1}\).
+\end{proof}
 
-\chapter{Numerical Approximation of
-DAEs}\label{numerical-approximation-of-daes}
+\hypertarget{numerical-approximation-of-daes}{%
+\chapter{Numerical Approximation of DAEs}\label{numerical-approximation-of-daes}}
 
-In order to analyse the approximation error of the RKM
-\((\mathcal A, \beta, \gamma)\) applied to a regular linear DAE with
-constant coefficients
+In order to analyse the approximation error of the RKM \((\mathcal A, \beta, \gamma)\) applied to a regular linear DAE with constant coefficients
 
 \[
  E\dot x = Ax+f(t).
@@ -1205,14 +1106,11 @@ Without loss of generality, we can assume that
 \begin{itemize}
 \tightlist
 \item
-  \((E,A)\) is in Kronecker Canonical Form \(\leftarrow\) RKM are
-  invariant under equivalence transformation
+  \((E,A)\) is in Kronecker Canonical Form \(\leftarrow\) RKM are invariant under equivalence transformation
 \item
-  \((E,A)=(N,I)\) \(\leftarrow\) the \emph{regular part} can be treated
-  by ODE theory
+  \((E,A)=(N,I)\) \(\leftarrow\) the \emph{regular part} can be treated by ODE theory
 \item
-  \(E=N=N_\nu\) consists of a single Jordan block \(\leftarrow\)
-  otherwise consider each Jordan block separately
+  \(E=N=N_\nu\) consists of a single Jordan block \(\leftarrow\) otherwise consider each Jordan block separately
 \end{itemize}
 
 Thus, we can consider the special DAE
@@ -1237,10 +1135,8 @@ where
  f(t) = \begin{bmatrix} f_1(t) \\ f_2(t) \\ \vdots \\ f_\nu(t) \end{bmatrix}
  \]
 
-\BeginKnitrBlock{theorem}
-\protect\hypertarget{thm:local-consistency-error-rkm-lcc}{}{\label{thm:local-consistency-error-rkm-lcc}
-}The local error of an RKM with \(\mathcal A\) invertible applied to
-\eqref{eq:spec-dae-rkm-cc} behaves like
+\begin{theorem}
+\protect\hypertarget{thm:local-consistency-error-rkm-lcc}{}{\label{thm:local-consistency-error-rkm-lcc} }The local error of an RKM with \(\mathcal A\) invertible applied to \eqref{eq:spec-dae-rkm-cc} behaves like
 
 \[
 x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
@@ -1250,59 +1146,53 @@ where \(\kappa_j\) is the maximum number such that
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule
-\begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.07\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.38\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.53\columnwidth}\raggedright
 Condition\strut
-\end{minipage} & \begin{minipage}[b]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.31\columnwidth}\raggedright
 range of \(k\)\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
 a.)\strut
-\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
 \(\beta^T\mathcal A^{-k}e = \beta^T\mathcal A^{-j}\gamma^{j-k} / (j-k)!\)\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
 \(k=1,2,\cdots,j-1\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.07\columnwidth}\raggedright
 b.)\strut
-\end{minipage} & \begin{minipage}[t]{0.38\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.53\columnwidth}\raggedright
 \(\beta^T\mathcal A^{-j}\gamma^k = k! / (k-j+1)!\)\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.31\columnwidth}\raggedright
 \(k=j,j+1,\cdots\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
 for all \(k\leq \kappa_j\) and for \(j=1, \cdots, \nu\).
-\EndKnitrBlock{theorem}
+\end{theorem}
 
-\BeginKnitrBlock{proof}
-\iffalse{} {Proof. } \fi{}Since we consider the pure consistency error,
-we can assume that \(x_i=x(t_i)\). With that and with the definition of
-the RKM, the error is given as \[
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Since we consider the pure consistency error, we can assume that \(x_i=x(t_i)\). With that and with the definition of the RKM, the error is given as
+\[
 \tau = x(t_{i+1}) - x_{i+1} = -h\sum_{j=1}^s \beta_j \dot X_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x^{(k)}(t_i).
 \]
 
-Because of the special structure of the DAE, we can concentrate on the
-first error component \(\tau_1\) \(\leftarrow\) the error component
-\(\tau_2\) is the \emph{first} component of the problem of index
-\(\nu-1\). For \(\tau_1\) we have the formula
+Because of the special structure of the DAE, we can concentrate on the first error component \(\tau_1\) \(\leftarrow\) the error component \(\tau_2\) is the \emph{first} component of the problem of index \(\nu-1\). For \(\tau_1\) we have the formula
 
 \[
 \tau_1 = x_1(t_{i+1}) - x_{i+1,1} = h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i).
 \]
 
-One may confirm directly, or by means of the solution formula for
-\(N\dot x = x + f\), that the \(\ell\)-th component of \(x\) is defined
-as \[
+One may confirm directly, or by means of the solution formula for \(N\dot x = x + f\), that the \(\ell\)-th component of \(x\) is defined as
+\[
 x_\ell(t) = - \sum_{j=\ell}^{\nu}f_j^{(j-\ell)}(t).
 \]
 
 The componentwise Taylor expansion of \(Z_{i,\ell}\) reads
-
 \begin{align*}
 Z_{i\ell} 
 &= 
@@ -1323,9 +1213,7 @@ x_{i,\ell} + f_\ell(t_i+\gamma_s h)
 x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 \end{align*}
 
-With that and with \(x_i=x(t_i)\), we expand the error \(\tau_1\) as
-follows:
-
+With that and with \(x_i=x(t_i)\), we expand the error \(\tau_1\) as follows:
 \begin{align*}
 \tau_1 &= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
 &= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
@@ -1333,9 +1221,7 @@ follows:
 &= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
 \end{align*}
 
-which, with
-\(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)\),
-becomes
+which, with \(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)\), becomes
 
 \begin{align*}
 \tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
@@ -1343,38 +1229,30 @@ becomes
  &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
 \end{align*}
 
-A shift of indices, \(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\) and
-\(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\), then gives:
-
+A shift of indices, \(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\) and \(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\), then gives:
 \begin{align*}
     \tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
 \end{align*}
-\EndKnitrBlock{proof}
+\end{proof}
 
-\chapter{Construction and Analysis of RKM for nonlinear
-DAEs}\label{construction-and-analysis-of-rkm-for-nonlinear-daes}
+\hypertarget{construction-and-analysis-of-rkm-for-nonlinear-daes}{%
+\chapter{Construction and Analysis of RKM for nonlinear DAEs}\label{construction-and-analysis-of-rkm-for-nonlinear-daes}}
 
-Now we consider RKM for nonlinear DAEs. We start with a DAE in
-\emph{semi explicit} strangeness-free form and give general results on
-how to write down a general RKM for it and how to analyse the global
-error. Then, we consider general strangeness-free nonlinear DAEs and
-show that a certain class of RKM applies well -- namely those that can
-be constructed by collocation with Lagrange polynomials over the
-\emph{Radau}, \emph{Lobatto}, or \emph{Gauss} quadrature points.
+Now we consider RKM for nonlinear DAEs. We start with a DAE in \emph{semi explicit} strangeness-free form and give general results on how to write down a general RKM for it and how to analyse the global error. Then, we consider general strangeness-free nonlinear DAEs and show that a certain class of RKM applies well -- namely those that can be constructed by collocation with Lagrange polynomials over the \emph{Radau}, \emph{Lobatto}, or \emph{Gauss} quadrature points.
 
-\section{General RKM for Semi-Explicit Strangeness-free
-DAEs}\label{general-rkm-for-semi-explicit-strangeness-free-daes}
+\hypertarget{general-rkm-for-semi-explicit-strangeness-free-daes}{%
+\section{General RKM for Semi-Explicit Strangeness-free DAEs}\label{general-rkm-for-semi-explicit-strangeness-free-daes}}
 
 A semi explicit strangeness-free DAE is of the form
-
 \begin{align}
 \dot x &= f(t, x, y) \label{eq:semexp-dae-diff} \\
 0 &= g(t, x, y) \label{eq:semexp-dae-alg}
 \end{align}
-
-with the Jacobian of \(g\) with respect to \(y\), i.e. \[
+with the Jacobian of \(g\) with respect to \(y\), i.e.
+\[
 \partial_y\otimes g(t, x(t), y(t)) =: g_y(t, x(t), y(t)),
-\] being invertible for all \(t\) along the solution \((x,y)\).
+\]
+being invertible for all \(t\) along the solution \((x,y)\).
 
 Some observations:
 
@@ -1385,81 +1263,70 @@ Some observations:
 \item
   under certain assumptions, any DAE can be brought into this form
 \item
-  in the linear case \(E\dot z = Az +f\), with \(z=(x,y)\), the
-  assumptions basically mean that \[
+  in the linear case \(E\dot z = Az +f\), with \(z=(x,y)\), the assumptions basically mean that
+  \[
    E = \begin{bmatrix} I & 0 \\ 0 & 0 \end{bmatrix} \quad\text{and}\quad 
    A = \begin{bmatrix} * & * \\ * & A_{22} \end{bmatrix},
-  \] with \(A_{22}(t)\) invertible for all \(t\).
+  \]
+  with \(A_{22}(t)\) invertible for all \(t\).
 \item
-  The condition \(g_y\) invertible means that, locally, one could
-  consider \[
+  The condition \(g_y\) invertible means that, locally, one could consider
+  \[
    \dot x = f(t, x, R(t,x)), \quad\text{with $R$ such that}\quad y=R(t,x).
-  \] However, this is not practical for numerical purposes.
+  \]
+  However, this is not practical for numerical purposes.
 \end{itemize}
 
-The general strategy to get a suitable formulation of a time
-discretization of system
-\eqref{eq:semexp-dae-diff}-\eqref{eq:semexp-dae-alg} by any RKM is to
-consider the perturbed version
-
+The general strategy to get a suitable formulation of a time discretization of system \eqref{eq:semexp-dae-diff}-\eqref{eq:semexp-dae-alg} by any RKM is to consider the perturbed version
 \begin{align*}
 \dot x = f(t, x, y),  \\
 \varepsilon \dot y = g(t, x, y),
 \end{align*}
-
-which is an ODE, formulate the RKM, and then let \(\varepsilon \to 0\).
-In the Hairer/Wanner Book, this approach is called
-*\(\varepsilon\)-embedding.
+which is an ODE, formulate the RKM, and then let \(\varepsilon \to 0\). In the Hairer/Wanner Book, this approach is called *\(\varepsilon\)-embedding.
 
 This is, consider
 
 \begin{longtable}[]{@{}lll@{}}
-\caption{\label{tab:RKM-semiexp-DAE} RKM applied to semi-explicit
-DAEs}\tabularnewline
+\caption{\label{tab:RKM-semiexp-DAE} RKM applied to semi-explicit DAEs}\tabularnewline
 \toprule
-\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\endhead
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(x_{i+1} = x_i + h\sum_{j=1}^s\beta_j \dot X_{ij}\),\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(y_{i+1} = y_i + h\sum_{j=1}^s\beta_j \dot Y_{ij}\),\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright
 \strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(\dot X_{ij} = f(t_i+\gamma_jh, X_{ij}, Y_{ij})\),\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(\varepsilon \dot Y_{ij} = g(t_i+\gamma_j h, X_{ij}, Y_{ij})\),\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright
 \(j=1,2,\cdots,s, \quad \quad (*)\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(X_{ij} = x_i + h\sum_{\ell=1}^s\alpha_{j\ell}\dot X_{i\ell}\),\strut
-\end{minipage} & \begin{minipage}[t]{0.25\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.32\columnwidth}\raggedright
 \(\phantom{\varepsilon}Y_{ij} = y_i + h\sum_{\ell=1}^s\alpha_{j\ell}\dot Y_{i\ell}\),\strut
-\end{minipage} & \begin{minipage}[t]{0.23\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedright
 \(j=1,2,\cdots,s,\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-i.e., the RKM applied to an ODE in the variables \((x,y)\), and replace
-\((*)\) by
+i.e., the RKM applied to an ODE in the variables \((x,y)\), and replace \((*)\) by
 
 \[
 \dot X_{ij} = f(t_i+\gamma_jh, X_{ij}, Y_{ij}),\quad 0 = g(t_i+\gamma_j h, X_{ij}, Y_{ij}), \quad j=1,2,\cdots,s.
 \]
 
-\BeginKnitrBlock{theorem}[Kunkel/Mehrmann Thm. 5.16]
-\protect\hypertarget{thm:unnamed-chunk-1}{}{\label{thm:unnamed-chunk-1}
-\iffalse (Kunkel/Mehrmann Thm. 5.16) \fi{} }Consider a semi-explicit,
-strangeness-free DAE as in
-\eqref{eq:semexp-dae-diff}-\eqref{eq:semexp-dae-alg} with a consistent
-initial value \((x_0, y_0)\). The time-discretization by a RKM,
+\begin{theorem}[Kunkel/Mehrmann Thm. 5.16]
+\protect\hypertarget{thm:unnamed-chunk-1}{}{\label{thm:unnamed-chunk-1} \iffalse (Kunkel/Mehrmann Thm. 5.16) \fi{} }Consider a semi-explicit, strangeness-free DAE as in \eqref{eq:semexp-dae-diff}-\eqref{eq:semexp-dae-alg} with a consistent initial value \((x_0, y_0)\). The time-discretization by a RKM,
 
 \begin{itemize}
 \tightlist
 \item
-  with \(\mathcal A\) invertible and
-  \(\rho:=1-\beta^T\mathcal A^{-1}e\),
+  with \(\mathcal A\) invertible and \(\rho:=1-\beta^T\mathcal A^{-1}e\),
 \item
   applied as in Table \ref{tab:RKM-semiexp-DAE} with \(\varepsilon=0\),
 \item
@@ -1468,7 +1335,8 @@ initial value \((x_0, y_0)\). The time-discretization by a RKM,
   and fulfills the \emph{Butcher condition} \(C(q)\) with \(q\geq p+1\)
 \end{itemize}
 
-leads to an global error that behaves like \[
+leads to an global error that behaves like
+\[
 \|\mathfrak X(t_N) - \mathfrak X_N\| = \mathcal O(h^k),
 \]
 
@@ -1484,167 +1352,152 @@ where
   \(k=\min\{p, q-1\}\), if \(\rho =1\).
 \end{itemize}
 
-If \(|\rho|>1\), then the RKM -- applied to
-\eqref{eq:semexp-dae-diff}--\eqref{eq:semexp-dae-alg} -- does not converge.
-\EndKnitrBlock{theorem}
+If \(|\rho|>1\), then the RKM -- applied to \eqref{eq:semexp-dae-diff}--\eqref{eq:semexp-dae-alg} -- does not converge.
+\end{theorem}
 
 Some words on the conditions on \(p\), \(q\), and \(\rho\):
 
 \begin{itemize}
 \item
-  For \emph{stiffly accurate} methods, \(\beta^T \mathcal A^{-1}e=1\)
-  and, thus, \(\rho=0\) \(\rightarrow\) no order reduction for
-  \emph{strangeness free} or \emph{index-1} systems
+  For \emph{stiffly accurate} methods, \(\beta^T \mathcal A^{-1}e=1\) and, thus, \(\rho=0\) \(\rightarrow\) no order reduction for \emph{strangeness free} or \emph{index-1} systems
 \item
-  For the \emph{implicit midpoint rule} also known as the \emph{1-stage
-  Gauss method}: \[
+  For the \emph{implicit midpoint rule} also known as the \emph{1-stage Gauss method}:
+  \[
   \begin{array}{c|c}
   \frac 12 & \frac 12 \\
   \hline
    & 1  
   \end{array}
-     \]
+  \]
 
   \begin{itemize}
   \tightlist
   \item
     the convergence order for ODEs is \(p=2\)
   \item
-    but
-    \(1-\beta^T \mathcal A^{-1}e = 1- 1\cdot {\bigl(\frac 12\bigr)}^{-1} 1 = -1\),
-    so that \(\min\{p-1, q\} = k \leq 1\), depending on \(q\).
+    but \(1-\beta^T \mathcal A^{-1}e = 1- 1\cdot {\bigl(\frac 12\bigr)}^{-1} 1 = -1\), so that \(\min\{p-1, q\} = k \leq 1\), depending on \(q\).
   \item
-    in fact \(k=1\) as \[
-      C(q): \quad \sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{\bar k-1}=\frac{1}{\bar k} \gamma_j^{\bar k}, \quad {\bar k}=1,\cdots,q, \quad j=1,\cdots,s
-      \] in the present case of \(s=1\),
-    \(\alpha_{11}=\gamma_1=\frac 12\) is fulfilled for
-    \({\bar k}=1: \quad \frac 12 = \frac 12\)
+    in fact \(k=1\) as
+    \[
+    C(q): \quad \sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{\bar k-1}=\frac{1}{\bar k} \gamma_j^{\bar k}, \quad {\bar k}=1,\cdots,q, \quad j=1,\cdots,s
+    \]
+    in the present case of \(s=1\), \(\alpha_{11}=\gamma_1=\frac 12\) is fulfilled for \({\bar k}=1: \quad \frac 12 = \frac 12\)
   \item
-    it is not relevant here, but for
-    \({\bar k}=2:\quad \frac 12 \cdot \frac 12 \neq \frac 12 \cdot \frac 14\)
+    it is not relevant here, but for \({\bar k}=2:\quad \frac 12 \cdot \frac 12 \neq \frac 12 \cdot \frac 14\)
   \end{itemize}
 \end{itemize}
 
-\section{Collocation RKM for Implicit Strangeness-free
-DAEs}\label{collocation-rkm-for-implicit-strangeness-free-daes}
+\hypertarget{collocation-rkm-for-implicit-strangeness-free-daes}{%
+\section{Collocation RKM for Implicit Strangeness-free DAEs}\label{collocation-rkm-for-implicit-strangeness-free-daes}}
 
 The general form of a \emph{strangeness-free} DAE is given as
-
 \begin{align}
 \hat F_1(t,x,\dot x) &= 0 \label{eq:impl-sf-dae-fone}\\
 \hat F_2(t,x) &= 0 \label{eq:impl-sf-dae-ftwo}
 \end{align}
-
-where the \emph{strangeness-free} or \emph{index-1} assumption is
-encoded in the existence of \emph{implicit functions} \(\mathcal L\),
-\(\mathcal R\) such that, with \(x=(x_1,x_2)\), the implicit DAE
-\eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo} is equivalent to
-the semi-explicit DAE
-
+where the \emph{strangeness-free} or \emph{index-1} assumption is encoded in the existence of \emph{implicit functions} \(\mathcal L\), \(\mathcal R\) such that, with \(x=(x_1,x_2)\), the implicit DAE \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo} is equivalent to the semi-explicit DAE
 \begin{align*}
   \dot x_1  &= \mathcal L(t,x_1,x_2) \\
    0 &= \mathcal R(t,x_1) -x_2
 \end{align*}
 
-In what follows we show that a \emph{collocation} approach coincides
-with certain RKM discretizations so that the convergence analysis of the
-RKM can be done via approximation theory.
+In what follows we show that a \emph{collocation} approach coincides with certain RKM discretizations so that the convergence analysis of the RKM can be done via approximation theory.
 
 \begin{quote}
-Regression (Collocation): -- If one looks for a function
-\(x\colon [0,1] \to \mathbb R^{}\) that fulfills \(F(x(t))=0\) for all
-\(t\in[0,1]\), one may interpolate \(x\) by, say, a polynomial
-\(x_p(t) = \sum_{\ell=0}^kx_\ell t^\ell\) and determine the \(k+1\)
-coefficients \(x_\ell\) via the solution of the system of (nonlinear)
-equations \(F(x_p(t_\ell))=0\), \(\ell=0,1,\dotsc,k\), where the
-\(t_\ell\in[0,1]\) are the \(k+1\) \emph{collocation points}.
+Regression (Collocation): -- If one looks for a function \(x\colon [0,1] \to \mathbb R^{}\) that fulfills \(F(x(t))=0\) for all \(t\in[0,1]\), one may interpolate \(x\) by, say, a polynomial \(x_p(t) = \sum_{\ell=0}^kx_\ell t^\ell\) and determine the \(k+1\) coefficients \(x_\ell\) via the solution of the system of (nonlinear) equations \(F(x_p(t_\ell))=0\), \(\ell=0,1,\dotsc,k\), where the \(t_\ell\in[0,1]\) are the \(k+1\) \emph{collocation points}.
 \end{quote}
 
 Concretely, we parametrize \(s\) collocation points via
-
 \begin{equation}
 0< \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 \label{eq:rkm-collo-gamma}
 \end{equation}
-
-and define two sets of \emph{Lagrange polynomials} \[
+and define two sets of \emph{Lagrange polynomials}
+\[
 L_\ell(\xi) = \prod_{j=0,j\neq \ell}^s \frac{\xi-\gamma_j}{\gamma_\ell-\gamma_j}
 \quad\text{and}\quad
 \tilde L_\ell(\xi) = \prod_{m=1,m\neq \ell}^s \frac{\xi-\gamma_m}{\gamma_\ell-\gamma_m},
-\] with \(\ell\in\{0,1,\dotsc,s\}\).
+\]
+with \(\ell\in\{0,1,\dotsc,s\}\).
 
-Let \(\mathbb P_k\) be the space of polynomials of degree \(\leq k-1\).
-We define the \emph{collocation polynomial}
-\(x_\pi \in \mathbb P_{s+1}\) via
-
+Let \(\mathbb P_k\) be the space of polynomials of degree \(\leq k-1\). We define the \emph{collocation polynomial} \(x_\pi \in \mathbb P_{s+1}\) via
 \begin{equation}
 x_\pi (t) = \sum_{\ell=0}^s X_{i\ell}L_\ell\bigl(\frac{t-t_i}{h}\bigr)
 \label{eq:rkm-coll-collpol}
 \end{equation}
-
-designed to compute the \emph{stage values} \(X_{i\ell}\), where
-\(X_{i0}=x_i\) is already given.
+designed to compute the \emph{stage values} \(X_{i\ell}\), where \(X_{i0}=x_i\) is already given.
 
 The stage derivatives are then defined as
-
 \begin{equation}
 \dot X_{ij} = \dot x_\pi(t_i+\gamma_jh) = \frac 1h \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_j). \label{eq:rkm-coll-staged}
 \end{equation}
 
-To obtain \(x_{i+1}=x_\pi(t_{i+1})=X_{is}\), we require the polynomial
-to satisfy the DAE \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo}
-at the collocation points \(t_{ij}=t_i+\gamma_jh\), that is
+To obtain \(x_{i+1}=x_\pi(t_{i+1})=X_{is}\), we require the polynomial to satisfy the DAE \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo} at the collocation points \(t_{ij}=t_i+\gamma_jh\), that is
 
 \begin{equation}
 \hat F_1(t_i+\gamma_jh,X_{ij},\dot X_{ij}) = 0, \quad \hat F_2(t_i+\gamma_jh,X_{ij}) = 0, \quad j=1,\dotsc,s. \phantom{F_1} \label{eq:impl-sf-dae-collo}
 \end{equation}
 
-Now we show that this collocation defines a RKM discretization of
-\eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo}.
+Now we show that this collocation defines a RKM discretization of \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo}.
 
-Since \(\tilde L \in \mathbb P_s\), it holds that \[
+Since \(\tilde L \in \mathbb P_s\), it holds that
+\[
 P_\ell(\sigma):=\int_0^\sigma \tilde L_\ell (\xi)d\xi \in \mathbb P_{s+1}
-\] that is, by \emph{Lagrange} interpolation, it can be written as \[
+\]
+that is, by \emph{Lagrange} interpolation, it can be written as
+\[
 P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)L_j(\sigma).
 \]
 
-If we differentiate \(P_l\), we get \[
+If we differentiate \(P_l\), we get
+\[
 \dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
-\] where define simply define \[
+\]
+where define simply define
+\[
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
-\] Moreover, by definition of \(P_\ell\) (and the \emph{fundamental
-theorem of calculus}), it holds that \[
+\]
+Moreover, by definition of \(P_\ell\) (and the \emph{fundamental theorem of calculus}), it holds that
+\[
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
-\] which gives that \(\dot P_\ell(\gamma_m) = \delta_{\ell m}\) that is
+\]
+which gives that \(\dot P_\ell(\gamma_m) = \delta_{\ell m}\) that is
 \[
 \dot P_\ell(\gamma_m) = \sum_{j=1}^s\alpha_{j\ell}\dot L_j(\gamma_m) = 
 \begin{cases}
 1, &\quad \text{if }\ell =m \\
 0, &\quad \text{otherwise} 
 \end{cases}.
-\] for \(\ell, m=1,\dotsc,s\).
+\]
+for \(\ell, m=1,\dotsc,s\).
 
-Accordingly, if we define
-\(\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}\)
-and \[
+Accordingly, if we define \(\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}\) and
+\[
 V:=\bigl[v_{mj}\bigr]_{m,j=1,\dotsc,s} = \bigl[ \dot L_j(\gamma_m) \bigr]_{m,j=1,\dotsc,s} \in \mathbb R^{s,s} ,
-\] it follows that \(V=\mathcal A^{-1}\).
+\]
+it follows that \(V=\mathcal A^{-1}\).
 
-Moreover, since, \[
+Moreover, since,
+\[
 \sum_{j=0}^s L_j(\sigma) \equiv 1, \quad\text{so that }\quad\sum_{j=0}^s \dot L_j(\sigma) \equiv 0,
-\] we have that \[
+\]
+we have that
+\[
 \sum_{j=0}^s \dot L_j(\gamma_m) =0= \sum_{j=0}^s v_{mj}
-\] and, thus, \[
+\]
+and, thus,
+\[
 v_{m0} = -\sum_{j=1}^s \dot L_j(\gamma_m) = -e_m^TVe.
-\] With these relations we rewrite \eqref{eq:rkm-coll-staged} as \[
+\]
+With these relations we rewrite \eqref{eq:rkm-coll-staged} as
+\[
 h\dot X_{im} = \sum_{\ell=0}^sX_{i\ell}\dot L_\ell(\gamma_m) = v_{m0}x_i + \sum_{\ell=1}^sv_{m\ell}X_{i\ell}.
-\] and \(h\sum_{m=1}^s\alpha_{\ell m} \dot X_{im}\) as
-
+\]
+and \(h\sum_{m=1}^s\alpha_{\ell m} \dot X_{im}\) as
 \begin{align}
   h\sum_{m=1}^s \alpha_{\ell m}\dot X_{im} &= \sum_{m=1}^s \alpha_{\ell m}v_{m0}x_i + \sum_{j,m=1}^s \alpha_{\ell m}v_{mj}X_{ij} \notag \\
   &= -e_\ell^T \mathcal AV e x_i + \sum_{j=1}^se_\ell^T \mathcal AVe_jX_{ij} \label{eq:collo-is-RKM-formula}\\
   &= -x_i + X_{i\ell}, \notag
 \end{align}
-
 which, together with \eqref{eq:impl-sf-dae-collo}, indeed defines a RKM.
 
 Some remarks:
@@ -1652,33 +1505,24 @@ Some remarks:
 \begin{itemize}
 \tightlist
 \item
-  the preceding derivation shows that the collocation
-  \eqref{eq:rkm-coll-collpol} and \eqref{eq:impl-sf-dae-collo} is equivalent
-  to the RKM scheme \eqref{eq:collo-is-RKM-formula} and
-  \eqref{eq:impl-sf-dae-collo}
+  the preceding derivation shows that the collocation \eqref{eq:rkm-coll-collpol} and \eqref{eq:impl-sf-dae-collo} is equivalent to the RKM scheme \eqref{eq:collo-is-RKM-formula} and \eqref{eq:impl-sf-dae-collo}
 \item
-  convergence of these schemes applied to
-  \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-fone} is proven in
-  Kunkel/Mehrmann Theorem 5.17
+  convergence of these schemes applied to \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-fone} is proven in Kunkel/Mehrmann Theorem 5.17
 \item
-  with fixing \(\gamma_s=1\), the obtained RKM is \emph{stiffly
-  accurate}
+  with fixing \(\gamma_s=1\), the obtained RKM is \emph{stiffly accurate}
 \item
-  the remaining \(s-1\) \(\gamma\)s can be chosen to get optimal
-  convergence rates \(\rightarrow\) RadauIIa schemes
+  the remaining \(s-1\) \(\gamma\)s can be chosen to get optimal convergence rates \(\rightarrow\) RadauIIa schemes
 \item
-  if also \(\gamma_s\) is chosen optimal in terms of convergence, the
-  Gauss schemes are obtained
+  if also \(\gamma_s\) is chosen optimal in terms of convergence, the Gauss schemes are obtained
 \end{itemize}
 
-\chapter{Examples}\label{examples-1}
+\hypertarget{examples-1}{%
+\chapter{Examples}\label{examples-1}}
 
-\section{Semi-discrete Navier-Stokes
-equations}\label{semi-discrete-navier-stokes-equations}
+\hypertarget{semi-discrete-navier-stokes-equations}{%
+\section{Semi-discrete Navier-Stokes equations}\label{semi-discrete-navier-stokes-equations}}
 
-By scalings and state transforms, we find that the coefficients of the
-spatially discretized Navier-Stokes equations are equivalent to:
-
+By scalings and state transforms, we find that the coefficients of the spatially discretized Navier-Stokes equations are equivalent to:
 \begin{align*}
 (\mathcal E, \mathcal A) &=
 \left(
@@ -1717,56 +1561,33 @@ spatially discretized Navier-Stokes equations are equivalent to:
 \begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}
 \right).
 \end{align*}
-
-where we have used a \emph{QR}-decomposition:
-\[M^{-1/2}B^H=Q\begin{bmatrix}R \\ 0\end{bmatrix}\] with unitary \(Q\)
-and invertible \(R\) in the third step.
+where we have used a \emph{QR}-decomposition: \[M^{-1/2}B^H=Q\begin{bmatrix}R \\ 0\end{bmatrix}\] with unitary \(Q\) and invertible \(R\) in the third step.
 
 \newcommand{\spann}{\operatorname{span}}
 
-\chapter{Exercises}\label{exercises}
+\hypertarget{exercises}{%
+\chapter{Exercises}\label{exercises}}
 
-\section{II.C.1}\label{ii.c.1}
+\hypertarget{ii.c.1}{%
+\section{II.C.1}\label{ii.c.1}}
 
-Let \(E\), \(A \in \mathbb C^{n,n}\) satisfy \(EA=AE\). Then
-\(\ker E \cap \ker A = \{0\}\) implies that \((E, A)\) is regular.
+Let \(E\), \(A \in \mathbb C^{n,n}\) satisfy \(EA=AE\). Then \(\ker E \cap \ker A = \{0\}\) implies that \((E, A)\) is regular.
 
-Assume that \(\ker A \neq \{0\}\) is of dimension \(k\geq 1\). The case
-that \(k=0\) is trivial, since \(\lambda E - A\) is regular for
-\(\lambda = 0\). Let \(V_0\) be the matrix whose columns span \(\ker A\)
-and let \(V_\perp\) be the matrix that consists of all eigenvectors of
-\(A\) that are associated with the nonzero eigenvalues.
+Assume that \(\ker A \neq \{0\}\) is of dimension \(k\geq 1\). The case that \(k=0\) is trivial, since \(\lambda E - A\) is regular for \(\lambda = 0\). Let \(V_0\) be the matrix whose columns span \(\ker A\) and let \(V_\perp\) be the matrix that consists of all eigenvectors of \(A\) that are associated with the nonzero eigenvalues.
 
 It holds that,
 
 \[AV_0 = 0 \quad \text{and} \quad AV_\perp = V_\perp L_\perp\]
 
-with an \(L_\perp \in C^{n-k,n-k}\) which is invertible. This a
-consequence of \(V_\perp\) spanning the \(A\)-invariant subspaces with
-respect to the nonzero eigenvalues.
+with an \(L_\perp \in C^{n-k,n-k}\) which is invertible. This a consequence of \(V_\perp\) spanning the \(A\)-invariant subspaces with respect to the nonzero eigenvalues.
 
-Because of \(ABV_0=BAV_0=0\), it follows that
-\(\spann BV_0 \subset \ker A = \spann V_0\), i.e., \(V_0\) is a
-\(B\)-invariant subspace which means that there is a
-\(K_0\in \mathbb C^{k,k}\) such that \(BV_0 =V_0K_0\).
+Because of \(ABV_0=BAV_0=0\), it follows that \(\operatorname{span}BV_0 \subset \ker A = \operatorname{span}V_0\), i.e., \(V_0\) is a \(B\)-invariant subspace which means that there is a \(K_0\in \mathbb C^{k,k}\) such that \(BV_0 =V_0K_0\).
 
-Moreover, because of \(\ker E \cap \ker A = \{0\}\), the matrix \(K_0\)
-has no zero eigenvalues. In fact \(K_0\) has the same eigenvalues as
-\(B':=B\bigr|_{V_0}\colon V_0 \to V_0\), and if \(B'\) had a zero
-eigenvalue this would mean that the associated eigenvector would be in
-\(V_0\) and, thus, in the kernel of \(A\).
+Moreover, because of \(\ker E \cap \ker A = \{0\}\), the matrix \(K_0\) has no zero eigenvalues. In fact \(K_0\) has the same eigenvalues as \(B':=B\bigr|_{V_0}\colon V_0 \to V_0\), and if \(B'\) had a zero eigenvalue this would mean that the associated eigenvector would be in \(V_0\) and, thus, in the kernel of \(A\).
 
-Moreover, since \(ABV_\perp=BAV_\perp=BVL_\perp\) meaning that
-\(BV_\perp\) is in the \(A\)-invariant subspace related to the nonzero
-eigenvalues of \(A\), i.e., \(BV_\perp \subset V_\perp\), it follows
-that \(V_\perp\) is a \(B\)-invariant subspace and, thus,
-\(BV_\perp = V_\perp K_\perp\) for some matrix
-\(K_\perp \in \mathbb C^{n-k,n-k}\).
+Moreover, since \(ABV_\perp=BAV_\perp=BVL_\perp\) meaning that \(BV_\perp\) is in the \(A\)-invariant subspace related to the nonzero eigenvalues of \(A\), i.e., \(BV_\perp \subset V_\perp\), it follows that \(V_\perp\) is a \(B\)-invariant subspace and, thus, \(BV_\perp = V_\perp K_\perp\) for some matrix \(K_\perp \in \mathbb C^{n-k,n-k}\).
 
-With \(V:=[V_0 |V_\perp]\) and the observation that \(V\) is invertible,
-since its columns span all of
-\(\mathbb C^n = \spann V_0 \oplus \spann V_\perp\), it follows that
-
+With \(V:=[V_0 |V_\perp]\) and the observation that \(V\) is invertible, since its columns span all of \(\mathbb C^n = \operatorname{span}V_0 \oplus \operatorname{span}V_\perp\), it follows that
 \begin{equation*}
 \begin{split}
 \lambda E - A & = (\lambda E - A)VV^{-1} = (\lambda E [V_0 |V_\perp]- A[V_0 |V_\perp])V^{-1}  \\
@@ -1778,65 +1599,64 @@ since its columns span all of
 V^{-1}
 \end{split}
 \end{equation*}
-
-and that \[
+and that
+\[
 \det (\lambda E - A) = \det (\lambda K_0) \det(\lambda K_\perp - L_\perp) 
-\] is not identically zero, since \(K_0\) and \(L_\perp\) are
-invertible.
+\]
+is not identically zero, since \(K_0\) and \(L_\perp\) are invertible.
 
-\chapter{Numerical Analysis and Software
-Overview}\label{numerical-analysis-and-software-overview}
+\hypertarget{numerical-analysis-and-software-overview}{%
+\chapter{Numerical Analysis and Software Overview}\label{numerical-analysis-and-software-overview}}
 
-\section{Theory: RKMs and BDF for
-DAEs}\label{theory-rkms-and-bdf-for-daes}
+\hypertarget{theory-rkms-and-bdf-for-daes}{%
+\section{Theory: RKMs and BDF for DAEs}\label{theory-rkms-and-bdf-for-daes}}
 
 \begin{longtable}[]{@{}ll@{}}
-\caption{\label{tab:RKMs-DAEs-results} Overview of convergence results of
-RKM/BDF schemes for DAEs}\tabularnewline
+\caption{\label{tab:RKMs-DAEs-results} Overview of convergence results of RKM/BDF schemes for DAEs}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.58\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.36\columnwidth}\raggedright
 DAEs\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.58\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.36\columnwidth}\raggedright
 DAEs\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 unstructured, linear\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(E(t)\dot x = A(t)x + f(t)\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 semi-linear\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(E(t)\dot x = f(t,x)\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 unstructured\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(F(t,\dot x, x)=0\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 unstructured, strangeness-free/index-1\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(\begin{cases}\hat F_1(t,\dot x, x)=0 \\ \hat F_2(t,x)=0 \end{cases}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 semi-explicit, strangeness-free/index-1\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(\begin{cases}\dot x= f(t, x, y) \\ 0=g(t,x,y) \end{cases}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.41\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.58\columnwidth}\raggedright
 semi-explicit, index-2\strut
-\end{minipage} & \begin{minipage}[t]{0.26\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.36\columnwidth}\raggedright
 \(\begin{cases}\dot x= f(t, x, y) \\ 0=g(t,y) \end{cases}\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -1854,209 +1674,204 @@ semi-explicit, index-2\strut
 \cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10} \cmidrule(l{3pt}r{3pt}){11-13}
 Problem / Index & $*$ & $2$ & $1$ & $*$ & $2$ & $1$ & $*$ & $2$ & $1$ & $*$ & $2$ & $1$\\
 \midrule
-\rowcolor{gray!6}  nonlinear &  &  & c &  & g,i & b &  &  & f &  & h & e\\
+\cellcolor{gray!6}{nonlinear} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{c} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{g,i} & \cellcolor{gray!6}{b} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{f} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{h} & \cellcolor{gray!6}{e}\\
 linear TV &  &  & $\cdot$ &  & $\cdot$ & $\cdot$ &  &  & $\cdot$ &  & $\cdot$ & $\cdot$\\
-\rowcolor{gray!6}  linear CC & a & $\cdot$ & $\cdot$ & $\cdot$ & $\cdot$ & $\cdot$ & d & $\cdot$ & $\cdot$ & $\cdot$ & $\cdot$ & $\cdot$\\
+\cellcolor{gray!6}{linear CC} & \cellcolor{gray!6}{a} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{d} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$}\\
 \bottomrule
 \end{tabular}
 \end{table}
 
 \begin{longtable}[]{@{}cll@{}}
 \toprule
-\begin{minipage}[b]{0.05\columnwidth}\centering\strut
+\begin{minipage}[b]{0.04\columnwidth}\centering
 \strut
-\end{minipage} & \begin{minipage}[b]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.45\columnwidth}\raggedright
 Description\strut
-\end{minipage} & \begin{minipage}[b]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.42\columnwidth}\raggedright
 Reference\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 a\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 RKM, linear constant coefficients\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm. 5.12\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 b\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 RKM, nonlinear, strangeness-free/index-1, semi-explicit\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm 5.16 / HW Thm. VI.1.1\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 c\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 RKM, nonlinear, strangeness-free\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm. 5.18\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 d\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 BDF, linear constant coefficients\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm. 5.24\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 e\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
-BDF(\(\subset\) MSM), nonlinear, strangeness-free/index-1,
-semi-explicit\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
+BDF(\(\subset\) MSM), nonlinear, strangeness-free/index-1, semi-explicit\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm. 5.26 (\(\subset\) HW Thm. VI.2.1)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 f\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 BDF, nonlinear, strangeness-free/index-1\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 KM Thm. 5.27\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 g\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 RKM, nonlinear, index-2, semi-explicit\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 HW Ch. VII.4\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 h\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 BDF, nonlinear, index-2, semi-explicit\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 HW Thm. VII.3.5\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 i\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 half-explicit RKM, nonlinear, index-2, semi-explicit\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
 HW Thm. VII.6.2\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 HW\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 Ernst Hairer, Gerhard Wanner (1996)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\emph{Solving ordinary differential equations. II: Stiff and
-differential-algebraic problems}\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
+\emph{Solving ordinary differential equations. II: Stiff and differential-algebraic problems}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.05\columnwidth}\centering\strut
+\begin{minipage}[t]{0.04\columnwidth}\centering
 KM\strut
-\end{minipage} & \begin{minipage}[t]{0.39\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.45\columnwidth}\raggedright
 Peter Kunkel, Volker Mehrmann (2006)\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-\emph{Differential-Algebraic Equations. Analysis and Numerical
-Solution}\strut
+\end{minipage} & \begin{minipage}[t]{0.42\columnwidth}\raggedright
+\emph{Differential-Algebraic Equations. Analysis and Numerical Solution}\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-\section{Solvers}\label{solvers}
+\hypertarget{solvers}{%
+\section{Solvers}\label{solvers}}
 
-As can be seen from the table above, generally usable discretization
-methods for unstructured DAEs are only there for index-1 problems.
-However, the solvers GELDA/GENDA include an automated reduction to the
-strangeness-free form so that they apply for any index; see Lecture
-Chapter 4++.
+As can be seen from the table above, generally usable discretization methods for unstructured DAEs are only there for index-1 problems. However, the solvers GELDA/GENDA include an automated reduction to the strangeness-free form so that they apply for any index; see Lecture Chapter 4++.
 
-\subsection{Multi purpose}\label{multi-purpose}
+\hypertarget{multi-purpose}{%
+\subsection{Multi purpose}\label{multi-purpose}}
 
 \begin{longtable}[]{@{}llllllc@{}}
 \toprule
-\begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.06\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright
 DAEs\strut
-\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.10\columnwidth}\raggedright
 Methods\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
 h/p\strut
-\end{minipage} & \begin{minipage}[b]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright
 Language\strut
-\end{minipage} & \begin{minipage}[b]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.41\columnwidth}\raggedright
 Remark\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\centering
 Avail\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.06\columnwidth}\raggedright
 \href{https://doi.org/10.1137/S1064827595286347}{GELDA}\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 l-\(\mu\)-\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 BDF/RKM\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \(*\)/\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 F-77\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\centering
 \(*\)/\(\cdot\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.06\columnwidth}\raggedright
 \href{https://www3.math.tu-berlin.de/cgi-bin/IfM/show_abstract.cgi?Report-730-2002.rdf.html}{GENDA}\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 n-\(\mu\)-\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 BDF\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \(*\)/\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 F-77\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\centering
 \(\phantom{*}\)/\(\cdot\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.06\columnwidth}\raggedright
 \href{http://www.netlib.org/ode/ddassl.f}{DASSL}\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 n-\(\nu\)-\(1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 BDF\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \(*\)/\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 F-77\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
 base for \emph{Sundials IDA} -- the base of many DAE solvers\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\centering
 \(*\)/\(\phantom{\cdot}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.06\columnwidth}\raggedright
 \href{https://doi.org/10.1007/BF01400352}{LIMEX}\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 sl-\(\nu\)-\(1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 x-SE-Eul\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \(*\)/\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 F-77\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\centering
 \(\phantom{*}\)/\(\phantom{\cdot}\)\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.06\columnwidth}\raggedright
 \href{http://www.unige.ch/~hairer/prog/stiff/radau.f}{RADAU}\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 sl-\(\nu\)-\(1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.10\columnwidth}\raggedright
 RKM\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \(*\)/\(*\)\strut
-\end{minipage} & \begin{minipage}[t]{0.07\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright
 F-77\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.41\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\centering\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\centering
 \(*\)/\(\phantom{\cdot}\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -2066,133 +1881,124 @@ Notes:
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-\begin{minipage}[b]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.11\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.68\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.83\columnwidth}\raggedright
 Explanation\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 DAEs\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
 l-linear, sl-semilinear, nl-nonlinear\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
-classification: \(\mu\)-strangeness index, \(\nu\)-differentiation
-index\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+classification: \(\mu\)-strangeness index, \(\nu\)-differentiation index\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
 \(*\)-includes index reduction\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 h/p\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
 time step control / order control\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 availability\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
-code for download / licence provided(\(*\)) or other
-statement(\(\cdot\))\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
+code for download / licence provided(\(*\)) or other statement(\(\cdot\))\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.10\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.11\columnwidth}\raggedright
 methods\strut
-\end{minipage} & \begin{minipage}[t]{0.68\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.83\columnwidth}\raggedright
 x-SE-Eul: extrapolation based on semiexplicit Euler\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-\subsection{Application specific}\label{application-specific}
+\hypertarget{application-specific}{%
+\subsection{Application specific}\label{application-specific}}
 
 Furthermore, there are solvers for particularly structured DAEs.
 
 \begin{longtable}[]{@{}ll@{}}
 \toprule
-\begin{minipage}[b]{0.18\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.32\columnwidth}\raggedright
 DAEs\strut
-\end{minipage} & \begin{minipage}[b]{0.34\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.62\columnwidth}\raggedright
 Resources\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
 Navier-Stokes (nl-se-\(2\))\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-See, e.g., Sec. 4.3 of our
-\href{https://arxiv.org/abs/1901.04002}{preprint} on definitions of
-different schemes\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+See, e.g., Sec. 4.3 of our \href{https://arxiv.org/abs/1901.04002}{preprint} on definitions of different schemes\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.18\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.32\columnwidth}\raggedright
 Multi-Body (nl-se-\(3\))\strut
-\end{minipage} & \begin{minipage}[t]{0.34\columnwidth}\raggedright\strut
-See, e.g., the code on
-\href{https://www.unige.ch/~hairer/software.html}{Hairer's
-homepage}\strut
+\end{minipage} & \begin{minipage}[t]{0.62\columnwidth}\raggedright
+See, e.g., the code on \href{https://www.unige.ch/~hairer/software.html}{Hairer's homepage}\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
 
-\section{Software}\label{software}
+\hypertarget{software}{%
+\section{Software}\label{software}}
 
-Many software suits actually wrap
-\href{https://computation.llnl.gov/projects/sundials/ida}{SUNDIALS IDA}.
+Many software suits actually wrap \href{https://computation.llnl.gov/projects/sundials/ida}{SUNDIALS IDA}.
 
 \begin{longtable}[]{@{}lllll@{}}
 \toprule
-\begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[b]{0.05\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
 DAEs\strut
-\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.30\columnwidth}\raggedright
 Routines\strut
-\end{minipage} & \begin{minipage}[b]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.05\columnwidth}\raggedright
 Method\strut
-\end{minipage} & \begin{minipage}[b]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[b]{0.40\columnwidth}\raggedright
 Remark\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
 Matlab\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 ind-\(1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
 \texttt{ode15\{i,s\}}\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 BDF\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.40\columnwidth}\raggedright
 \strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
 Python\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 ---\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 \strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
-no built-in functionality, DASSL/IDA wrapped in the modules
-\href{https://github.com/bmcage/odes/tree/master}{\texttt{scikit-odes}},
-\href{https://jmodelica.org/assimulo/index.html\#}{\texttt{assimulo}},
-\href{https://github.com/jwallen/PyDAS}{\texttt{pyDAS}},
-\href{http://daetools.com/docs/index.html}{\texttt{DAEtools}}\strut
+\end{minipage} & \begin{minipage}[t]{0.40\columnwidth}\raggedright
+no built-in functionality, DASSL/IDA wrapped in the modules \href{https://github.com/bmcage/odes/tree/master}{\texttt{scikit-odes}}, \href{https://jmodelica.org/assimulo/index.html\#}{\texttt{assimulo}}, \href{https://github.com/jwallen/PyDAS}{\texttt{pyDAS}}, \href{http://daetools.com/docs/index.html}{\texttt{DAEtools}}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\begin{minipage}[t]{0.05\columnwidth}\raggedright
 Julia\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 ind-\(1\)\strut
-\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.30\columnwidth}\raggedright
 \href{https://docs.juliadiffeq.org/latest/index.html}{\texttt{DifferentialEquations.jl}}\strut
-\end{minipage} & \begin{minipage}[t]{0.06\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.05\columnwidth}\raggedright
 BDF\strut
-\end{minipage} & \begin{minipage}[t]{0.37\columnwidth}\raggedright\strut
+\end{minipage} & \begin{minipage}[t]{0.40\columnwidth}\raggedright
 calls SUNDIALS IDA\strut
 \end{minipage}\tabularnewline
 \bottomrule

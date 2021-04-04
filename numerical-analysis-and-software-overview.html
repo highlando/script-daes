@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>9 Numerical Analysis and Software Overview | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
-  <meta name="generator" content="bookdown 0.18 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="9 Numerical Analysis and Software Overview | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2020-05-01" />
+<meta name="date" content="2021-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,7 @@
 
 
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -72,7 +73,9 @@
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a></li>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#examples"><i class="fa fa-check"></i><b>1.1</b> Examples</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="introduction.html"><a href="introduction.html#electrical-circuits"><i class="fa fa-check"></i><b>1.1.1</b> Electrical Circuits</a></li>
+</ul></li>
 <li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#why-are-daes-difficult-to-treat"><i class="fa fa-check"></i><b>1.2</b> Why are DAEs difficult to treat</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
@@ -124,11 +127,11 @@
 <h1><span class="header-section-number">9</span> Numerical Analysis and Software Overview</h1>
 <div id="theory-rkms-and-bdf-for-daes" class="section level2">
 <h2><span class="header-section-number">9.1</span> Theory: RKMs and BDF for DAEs</h2>
-<table style="width:71%;">
+<table>
 <caption><span id="tab:RKMs-DAEs-results">Table 9.1: </span> Overview of convergence results of RKM/BDF schemes for DAEs</caption>
 <colgroup>
-<col width="43%" />
-<col width="27%" />
+<col width="61%" />
+<col width="38%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -169,38 +172,38 @@
 </caption>
 <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="1">
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 RKM
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="6">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 BDF
 </div>
 </th>
 </tr>
 <tr>
-<th style="border-bottom:hidden" colspan="1">
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 unstructured
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 semi-explicit
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 unstructured
 </div>
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 semi-explicit
 </div>
@@ -362,11 +365,11 @@ d
 </tr>
 </tbody>
 </table>
-<table style="width:89%;">
+<table>
 <colgroup>
-<col width="5%" />
-<col width="43%" />
-<col width="40%" />
+<col width="4%" />
+<col width="49%" />
+<col width="45%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -439,14 +442,14 @@ d
 <p>As can be seen from the table above, generally usable discretization methods for unstructured DAEs are only there for index-1 problems. However, the solvers GELDA/GENDA include an automated reduction to the strangeness-free form so that they apply for any index; see Lecture Chapter 4++.</p>
 <div id="multi-purpose" class="section level3">
 <h3><span class="header-section-number">9.2.1</span> Multi purpose</h3>
-<table style="width:97%;">
+<table>
 <colgroup>
-<col width="8%" />
-<col width="8%" />
+<col width="7%" />
+<col width="7%" />
 <col width="12%" />
 <col width="6%" />
-<col width="8%" />
-<col width="45%" />
+<col width="7%" />
+<col width="50%" />
 <col width="6%" />
 </colgroup>
 <thead>
@@ -509,10 +512,10 @@ d
 </tbody>
 </table>
 <p>Notes:</p>
-<table style="width:83%;">
+<table>
 <colgroup>
-<col width="11%" />
-<col width="72%" />
+<col width="12%" />
+<col width="87%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -551,10 +554,10 @@ d
 <div id="application-specific" class="section level3">
 <h3><span class="header-section-number">9.2.2</span> Application specific</h3>
 <p>Furthermore, there are solvers for particularly structured DAEs.</p>
-<table style="width:56%;">
+<table>
 <colgroup>
-<col width="19%" />
-<col width="36%" />
+<col width="34%" />
+<col width="65%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -578,13 +581,13 @@ d
 <div id="software" class="section level2">
 <h2><span class="header-section-number">9.3</span> Software</h2>
 <p>Many software suits actually wrap <a href="https://computation.llnl.gov/projects/sundials/ida">SUNDIALS IDA</a>.</p>
-<table style="width:96%;">
+<table>
 <colgroup>
 <col width="6%" />
 <col width="6%" />
-<col width="31%" />
+<col width="34%" />
 <col width="6%" />
-<col width="43%" />
+<col width="46%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -683,7 +686,7 @@ gitbook.start({
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    var src = "";
+    var src = "true";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
