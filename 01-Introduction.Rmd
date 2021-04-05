@@ -15,7 +15,7 @@ Let's start with a few examples.
 
 ## Examples
 
-**Free fall vs. the pendulum**
+### Free fall vs. the pendulum {-}
 
 ```{r free-fall, echo=FALSE, fig.cap='Free fall of a point mass.', out.width='40%', fig.asp=.75, fig.align='center'}
 knitr::include_graphics("pics/freefall.png")
@@ -37,7 +37,7 @@ m\ddot y &= -mg
 
 where $g$ is the gravity; see Figure \@ref(fig:free-fall).
 
-Now **the pendulum**: 
+### The Pendulum {-}
 
 ```{block, type='JHSAYS'}
 The same point mass attached to a string.
@@ -88,8 +88,8 @@ After an order reduction via the new variables $u:=\dot x$ and $v=\dot y$ the ov
 \begin{split}
 \dot x &= u \\
 \dot y &= v \\
-\dot u &= - 2 \lambda (x - c_x) \\ 
-\dot v &= - 2 \lambda (y - c_y) - mgy \\
+m \dot u &= - 2 \lambda (x - c_x) \\ 
+m \dot v &= - 2 \lambda (y - c_y) - mgy \\
 0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 (\#eq:pendulum)
@@ -100,7 +100,7 @@ where we have omitted the time dependence.
 
 Equation \@ref(eq:pendulum) is a canonical example for a DAE with combined differential and algebraic equations.
 
-### Electrical Circuits
+### Electrical Circuits {-}
 
 Another class of DAEs arises from the modelling electrical circuits. We consider the example of *charging a conductor through a resistor* as illustrated in Figure \@ref(fig:circuit).
 
@@ -114,11 +114,13 @@ We formulate the problem in terms of the potentials $x_1$, $x_2$, $x_3$, that ar
 
 A model for the circuit is given through the following principles and considerations.
 
- * the source defines the difference in the neighboring potentials: $x_1 - x_3 - U = 0$
- * the current $I_R$ that is induced by the potentials neighboring the resistor is is defined through *Ohm's law*: $I_R = \frac{x_1 - x_2}{R}$
- * the current $I_C$ that is induced by the potentials neighboring the capacitor is described through: $I_C = C(\dot x_3 - \dot x_2)$
- * \emph{Kirchhoff's law} states that everywhere in the circuit the currents sum up to zero: $I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0$
- * finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set $x_3 = 0$.
+| Model principle | Equation |
+|:-----------------------|---------:|
+| The source defines the difference in the neighboring potentials: | $x_1 - x_3 - U = 0$ |
+| The current $I_R$ that is induced by the potentials neighboring the resistor is is defined through *Ohm's law*: | $I_R = \frac{x_1 - x_2}{R}$ |
+| The current $I_C$ that is induced by the potentials neighboring the capacitor is described through: | $I_C = C(\dot x_3 - \dot x_2)$ |
+| Everywhere in the circuit the currents sum up to zero. (This is *Kirchhoff's law*): | $I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0$ |
+| To fix the potential, one can set a ground potential -- here we choose $x_3$. (note that so far all equations only consider differences in the potential). | $x_3 = 0$ |
 
 ```{example, label="the-circuit"}
 Summing all up, the equations that model the circuit are given as 
@@ -132,9 +134,7 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 \end{equation}
 ```
 
-
-
-**Navier-Stokes Equations**
+### Navier-Stokes Equations {-}
 
 The Navier-Stokes equations (NSE) are commonly used to model all kind of flows. They describe the evolution of the velocity $v$ of the fluid and the pressure $p$ in the fluid. Note that the flow occupies a spatial domain, say in $\mathbb R^{3}$ so that $v$ and $p$ are functions both of the time variable $t$ and a space variable $\xi$:
 
@@ -151,7 +151,11 @@ The NSE:
 
 with $\otimes$ denoting the outer product and $\nabla_\xi$ and $\Delta_\xi$ denoting the gradient and the *Laplace* operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE. 
 
-**Automatic Modelling or _Engineers vs. Mathematicians_**
+```{block, type='JHSAYS'}
+With *dynamical systems*, we focus on the evolution of time. That's why the time derivative is relevant for defining DAEs.
+```
+
+### Automatic Modelling or _Engineers vs. Mathematicians_ {-}
 
 If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.
 
@@ -159,13 +163,15 @@ This coupling is done through equating quantities so that the overall model will
 
 In fact, tools like [`modelica`](https://www.modelica.org/) for automatic modelling of complex processes do exactly this. 
 
+```{block, type='JHSAYS'}
 The approach of *automatic modelling* is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.  
+```
 
 ## Why are DAEs difficult to treat
 
 Firstly, DAEs do not have the smoothing properties of ODEs, where the solution is one degree smoother than the right hand side. Secondly, the algebraic constraints are essential for the validity of the model. Thus, a numerical approximation may render the model infeasible.
 
-**Non-smooth Solutions**
+### Non-smooth Solutions {-}
 
 ```{example, label="nonsmooth-sols"}
 Consider the equation
@@ -188,16 +194,16 @@ $$
 In this case the solution part $x_1=const. + \int_0^tg(s)ds$ will be a smooth function and the solution part $x_2=g$ will have jumps.
 ```
 
-Even worse
-
-> *the solution of a DAE may depend on derivatives of the right hand sides.*
+```{block, type='JHSAYS'}
+Even worse, the solution of a DAE may depend on derivatives of the right hand sides.
+```
 
 This observation indicates that certain difficulties will arise since
 
  * numerical approximation schemes require smoothness of the solutions
  * differentiation is numerically ill-posed unlike numerical integration
 
-**Numerical Solution Means Approximation**
+### Numerical Solution Means Approximation {-}
 
 Imagine the equations \@ref(eq:pendulum) that describe the pendulum are solved approximately. Then, the algebraic constraint will be violated, i.e. the point mass will leave the circle and the obtained numerical solution becomes infeasible.
 

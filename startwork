@@ -1,0 +1,6 @@
+#!/bin/bash
+
+git pull
+FILETOEDIT=01-Introduction.Rmd
+echo $FILETOEDIT
+nvim $FILETOEDIT -S locmappis.vim
