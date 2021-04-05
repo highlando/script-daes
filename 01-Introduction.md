@@ -15,7 +15,7 @@ Differential-algebraic equations (DAEs) are coupled differential- and algebraic 
 
 ## Examples
 
-**Free fall vs. the pendulum**
+### Free fall vs. the pendulum {-}
 
 <div class="figure" style="text-align: center">
 <img src="pics/freefall.png" alt="Free fall of a point mass." width="40%" />
@@ -38,7 +38,7 @@ m\ddot y &= -mg
 
 where $g$ is the gravity; see Figure \@ref(fig:free-fall).
 
-Now **the pendulum**: 
+### The Pendulum {-}
 
 <div class="JHSAYS">
 <p>The same point mass attached to a string.</p>
@@ -89,8 +89,8 @@ After an order reduction via the new variables $u:=\dot x$ and $v=\dot y$ the ov
 \begin{split}
 \dot x &= u \\
 \dot y &= v \\
-\dot u &= - 2 \lambda (x - c_x) \\ 
-\dot v &= - 2 \lambda (y - c_y) - mgy \\
+m \dot u &= - 2 \lambda (x - c_x) \\ 
+m \dot v &= - 2 \lambda (y - c_y) - mgy \\
 0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 (\#eq:pendulum)
@@ -100,7 +100,7 @@ where we have omitted the time dependence. </div>\EndKnitrBlock{example}
 
 Equation \@ref(eq:pendulum) is a canonical example for a DAE with combined differential and algebraic equations.
 
-### Electrical Circuits
+### Electrical Circuits {-}
 
 Another class of DAEs arises from the modelling electrical circuits. We consider the example of *charging a conductor through a resistor* as illustrated in Figure \@ref(fig:circuit).
 
@@ -115,11 +115,13 @@ We formulate the problem in terms of the potentials $x_1$, $x_2$, $x_3$, that ar
 
 A model for the circuit is given through the following principles and considerations.
 
- * the source defines the difference in the neighboring potentials: $x_1 - x_3 - U = 0$
- * the current $I_R$ that is induced by the potentials neighboring the resistor is is defined through *Ohm's law*: $I_R = \frac{x_1 - x_2}{R}$
- * the current $I_C$ that is induced by the potentials neighboring the capacitor is described through: $I_C = C(\dot x_3 - \dot x_2)$
- * \emph{Kirchhoff's law} states that everywhere in the circuit the currents sum up to zero: $I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0$
- * finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set $x_3 = 0$.
+| Model principle | Equation |
+|:-----------------------|---------:|
+| The source defines the difference in the neighboring potentials: | $x_1 - x_3 - U = 0$ |
+| The current $I_R$ that is induced by the potentials neighboring the resistor is is defined through *Ohm's law*: | $I_R = \frac{x_1 - x_2}{R}$ |
+| The current $I_C$ that is induced by the potentials neighboring the capacitor is described through: | $I_C = C(\dot x_3 - \dot x_2)$ |
+| Everywhere in the circuit the currents sum up to zero. (This is *Kirchhoff's law*): | $I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0$ |
+| To fix the potential, one can set a ground potential -- here we choose $x_3$. (note that so far all equations only consider differences in the potential). | $x_3 = 0$ |
 
 \BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:the-circuit"><strong>(\#exm:the-circuit) </strong></span>Summing all up, the equations that model the circuit are given as 
 \begin{equation}
@@ -131,9 +133,7 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 (\#eq:circuit)
 \end{equation}</div>\EndKnitrBlock{example}
 
-
-
-**Navier-Stokes Equations**
+### Navier-Stokes Equations {-}
 
 The Navier-Stokes equations (NSE) are commonly used to model all kind of flows. They describe the evolution of the velocity $v$ of the fluid and the pressure $p$ in the fluid. Note that the flow occupies a spatial domain, say in $\mathbb R^{3}$ so that $v$ and $p$ are functions both of the time variable $t$ and a space variable $\xi$:
 
@@ -150,7 +150,11 @@ The NSE:
 
 with $\otimes$ denoting the outer product and $\nabla_\xi$ and $\Delta_\xi$ denoting the gradient and the *Laplace* operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE. 
 
-**Automatic Modelling or _Engineers vs. Mathematicians_**
+<div class="JHSAYS">
+<p>With <em>dynamical systems</em>, we focus on the evolution of time. That’s why the time derivative is relevant for defining DAEs.</p>
+</div>
+
+### Automatic Modelling or _Engineers vs. Mathematicians_ {-}
 
 If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.
 
@@ -158,13 +162,15 @@ This coupling is done through equating quantities so that the overall model will
 
 In fact, tools like [`modelica`](https://www.modelica.org/) for automatic modelling of complex processes do exactly this. 
 
-The approach of *automatic modelling* is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.  
+<div class="JHSAYS">
+<p>The approach of <em>automatic modelling</em> is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.</p>
+</div>
 
 ## Why are DAEs difficult to treat
 
 Firstly, DAEs do not have the smoothing properties of ODEs, where the solution is one degree smoother than the right hand side. Secondly, the algebraic constraints are essential for the validity of the model. Thus, a numerical approximation may render the model infeasible.
 
-**Non-smooth Solutions**
+### Non-smooth Solutions {-}
 
 \BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:nonsmooth-sols"><strong>(\#exm:nonsmooth-sols) </strong></span>Consider the equation
 
@@ -185,16 +191,16 @@ $$
 
 In this case the solution part $x_1=const. + \int_0^tg(s)ds$ will be a smooth function and the solution part $x_2=g$ will have jumps.</div>\EndKnitrBlock{example}
 
-Even worse
-
-> *the solution of a DAE may depend on derivatives of the right hand sides.*
+<div class="JHSAYS">
+<p>Even worse, the solution of a DAE may depend on derivatives of the right hand sides.</p>
+</div>
 
 This observation indicates that certain difficulties will arise since
 
  * numerical approximation schemes require smoothness of the solutions
  * differentiation is numerically ill-posed unlike numerical integration
 
-**Numerical Solution Means Approximation**
+### Numerical Solution Means Approximation {-}
 
 Imagine the equations \@ref(eq:pendulum) that describe the pendulum are solved approximately. Then, the algebraic constraint will be violated, i.e. the point mass will leave the circle and the obtained numerical solution becomes infeasible.
 

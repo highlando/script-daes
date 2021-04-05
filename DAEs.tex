@@ -88,7 +88,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-04}
+\date{2021-04-05}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -134,7 +134,9 @@ Let's start with a few examples.
 \hypertarget{examples}{%
 \section{Examples}\label{examples}}
 
-\textbf{Free fall vs.~the pendulum}
+\hypertarget{free-fall-vs.-the-pendulum}{%
+\subsection*{Free fall vs.~the pendulum}\label{free-fall-vs.-the-pendulum}}
+\addcontentsline{toc}{subsection}{Free fall vs.~the pendulum}
 
 \begin{figure}
 
@@ -160,7 +162,9 @@ m\ddot y &= -mg
 
 where \(g\) is the gravity; see Figure \ref{fig:free-fall}.
 
-Now \textbf{the pendulum}:
+\hypertarget{the-pendulum}{%
+\subsection*{The Pendulum}\label{the-pendulum}}
+\addcontentsline{toc}{subsection}{The Pendulum}
 
 \begin{JHSAYS}
 The same point mass attached to a string.
@@ -221,8 +225,8 @@ After an order reduction via the new variables \(u:=\dot x\) and \(v=\dot y\) th
 \begin{split}
 \dot x &= u \\
 \dot y &= v \\
-\dot u &= - 2 \lambda (x - c_x) \\ 
-\dot v &= - 2 \lambda (y - c_y) - mgy \\
+m \dot u &= - 2 \lambda (x - c_x) \\ 
+m \dot v &= - 2 \lambda (y - c_y) - mgy \\
 0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 \label{eq:pendulum}
@@ -234,7 +238,8 @@ where we have omitted the time dependence.
 Equation \eqref{eq:pendulum} is a canonical example for a DAE with combined differential and algebraic equations.
 
 \hypertarget{electrical-circuits}{%
-\subsection{Electrical Circuits}\label{electrical-circuits}}
+\subsection*{Electrical Circuits}\label{electrical-circuits}}
+\addcontentsline{toc}{subsection}{Electrical Circuits}
 
 Another class of DAEs arises from the modelling electrical circuits. We consider the example of \emph{charging a conductor through a resistor} as illustrated in Figure \ref{fig:circuit}.
 
@@ -251,19 +256,42 @@ We formulate the problem in terms of the potentials \(x_1\), \(x_2\), \(x_3\), t
 
 A model for the circuit is given through the following principles and considerations.
 
-\begin{itemize}
-\tightlist
-\item
-  the source defines the difference in the neighboring potentials: \(x_1 - x_3 - U = 0\)
-\item
-  the current \(I_R\) that is induced by the potentials neighboring the resistor is is defined through \emph{Ohm's law}: \(I_R = \frac{x_1 - x_2}{R}\)
-\item
-  the current \(I_C\) that is induced by the potentials neighboring the capacitor is described through: \(I_C = C(\dot x_3 - \dot x_2)\)
-\item
-  \emph{Kirchhoff's law} states that everywhere in the circuit the currents sum up to zero: \(I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0\)
-\item
-  finally, we can set a ground potential (note that so far all equations only consider differences in the potential) and we set \(x_3 = 0\).
-\end{itemize}
+\begin{longtable}[]{@{}lr@{}}
+\toprule
+\begin{minipage}[b]{0.66\columnwidth}\raggedright
+Model principle\strut
+\end{minipage} & \begin{minipage}[b]{0.28\columnwidth}\raggedleft
+Equation\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.66\columnwidth}\raggedright
+The source defines the difference in the neighboring potentials:\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedleft
+\(x_1 - x_3 - U = 0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.66\columnwidth}\raggedright
+The current \(I_R\) that is induced by the potentials neighboring the resistor is is defined through \emph{Ohm's law}:\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedleft
+\(I_R = \frac{x_1 - x_2}{R}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.66\columnwidth}\raggedright
+The current \(I_C\) that is induced by the potentials neighboring the capacitor is described through:\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedleft
+\(I_C = C(\dot x_3 - \dot x_2)\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.66\columnwidth}\raggedright
+Everywhere in the circuit the currents sum up to zero. (This is \emph{Kirchhoff's law}):\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedleft
+\(I_C + I_R = C(\dot x_3 - \dot x_2)+ \frac{x_1 - x_2}{R}=0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.66\columnwidth}\raggedright
+To fix the potential, one can set a ground potential -- here we choose \(x_3\). (note that so far all equations only consider differences in the potential).\strut
+\end{minipage} & \begin{minipage}[t]{0.28\columnwidth}\raggedleft
+\(x_3 = 0\)\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \begin{example}
 \protect\hypertarget{exm:the-circuit}{}{\label{exm:the-circuit} }Summing all up, the equations that model the circuit are given as
@@ -277,7 +305,9 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 \end{equation}
 \end{example}
 
-\textbf{Navier-Stokes Equations}
+\hypertarget{navier-stokes-equations}{%
+\subsection*{Navier-Stokes Equations}\label{navier-stokes-equations}}
+\addcontentsline{toc}{subsection}{Navier-Stokes Equations}
 
 The Navier-Stokes equations (NSE) are commonly used to model all kind of flows. They describe the evolution of the velocity \(v\) of the fluid and the pressure \(p\) in the fluid. Note that the flow occupies a spatial domain, say in \(\mathbb R^{3}\) so that \(v\) and \(p\) are functions both of the time variable \(t\) and a space variable \(\xi\):
 
@@ -294,7 +324,14 @@ The NSE:
 
 with \(\otimes\) denoting the outer product and \(\nabla_\xi\) and \(\Delta_\xi\) denoting the gradient and the \emph{Laplace} operator. If we only count the derivatives with respect to time, as postulated in the introduction, the NSE can be seen as an (abstract) DAE.
 
-\textbf{Automatic Modelling or \emph{Engineers vs.~Mathematicians}}
+\begin{JHSAYS}
+With \emph{dynamical systems}, we focus on the evolution of time. That's
+why the time derivative is relevant for defining DAEs.
+\end{JHSAYS}
+
+\hypertarget{automatic-modelling-or-engineers-vs.-mathematicians}{%
+\subsection*{\texorpdfstring{Automatic Modelling or \emph{Engineers vs.~Mathematicians}}{Automatic Modelling or Engineers vs.~Mathematicians}}\label{automatic-modelling-or-engineers-vs.-mathematicians}}
+\addcontentsline{toc}{subsection}{Automatic Modelling or \emph{Engineers vs.~Mathematicians}}
 
 If a system, say an engine, consists of many interacting processes, it is convenient and common practice to model the dynamics of each particular process and to couple the subprocesses through interface conditions.
 
@@ -302,14 +339,21 @@ This coupling is done through equating quantities so that the overall model will
 
 In fact, tools like \href{https://www.modelica.org/}{\texttt{modelica}} for automatic modelling of complex processes do exactly this.
 
-The approach of \emph{automatic modelling} is universal and convenient for engineers. However, the resulting model equations will be DAEs which, as we will see, pose particular problems in their analytical and numerical treatment.
+\begin{JHSAYS}
+The approach of \emph{automatic modelling} is universal and convenient
+for engineers. However, the resulting model equations will be DAEs
+which, as we will see, pose particular problems in their analytical and
+numerical treatment.
+\end{JHSAYS}
 
 \hypertarget{why-are-daes-difficult-to-treat}{%
 \section{Why are DAEs difficult to treat}\label{why-are-daes-difficult-to-treat}}
 
 Firstly, DAEs do not have the smoothing properties of ODEs, where the solution is one degree smoother than the right hand side. Secondly, the algebraic constraints are essential for the validity of the model. Thus, a numerical approximation may render the model infeasible.
 
-\textbf{Non-smooth Solutions}
+\hypertarget{non-smooth-solutions}{%
+\subsection*{Non-smooth Solutions}\label{non-smooth-solutions}}
+\addcontentsline{toc}{subsection}{Non-smooth Solutions}
 
 \begin{example}
 \protect\hypertarget{exm:nonsmooth-sols}{}{\label{exm:nonsmooth-sols} }Consider the equation
@@ -332,11 +376,10 @@ where \(g\) can be a nonsmooth function like
 In this case the solution part \(x_1=const. + \int_0^tg(s)ds\) will be a smooth function and the solution part \(x_2=g\) will have jumps.
 \end{example}
 
-Even worse
-
-\begin{quote}
-\emph{the solution of a DAE may depend on derivatives of the right hand sides.}
-\end{quote}
+\begin{JHSAYS}
+Even worse, the solution of a DAE may depend on derivatives of the right
+hand sides.
+\end{JHSAYS}
 
 This observation indicates that certain difficulties will arise since
 
@@ -348,7 +391,9 @@ This observation indicates that certain difficulties will arise since
   differentiation is numerically ill-posed unlike numerical integration
 \end{itemize}
 
-\textbf{Numerical Solution Means Approximation}
+\hypertarget{numerical-solution-means-approximation}{%
+\subsection*{Numerical Solution Means Approximation}\label{numerical-solution-means-approximation}}
+\addcontentsline{toc}{subsection}{Numerical Solution Means Approximation}
 
 Imagine the equations \eqref{eq:pendulum} that describe the pendulum are solved approximately. Then, the algebraic constraint will be violated, i.e.~the point mass will leave the circle and the obtained numerical solution becomes infeasible.
 

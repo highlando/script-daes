@@ -44,7 +44,6 @@ tab:RKMs-DAEs-results
 tab:unnamed-chunk-1
 introduction
 examples
-electrical-circuits
 why-are-daes-difficult-to-treat
 basic-definitions-and-notions
 solution-concept
