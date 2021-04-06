@@ -1,15 +1,17 @@
 set expandtab
 "set filetype=rmd
-"set iskeyword+=:
-"set iskeyword+=-
-imap ,le (\#eqx)<++><esc>Fxs
-imap ,re \@ref(eq<c-x><c-]>
+set iskeyword+=:
+set iskeyword+=-
+imap ,le (\#eq:
+imap ,re \@ref(eq:<c-x><c-]>
 nmap ,io o<esc>C * 
 imap ,io <CR><esc>C * 
 imap ,bg \begin{
+imap ,eq \begin{equation}<CR>\end{equation}<esc>O
 
 imap xil X_{i\ell}
 imap dxil \dot X_{i\ell}
+imap ,rr \mathbb R^{
 
 map ,m <esc>:!source mkdc.sh<CR>
 imap ,jhs ```{block, type='JHSAYS'}<CR>```<esc>O

@@ -1,6 +1,6 @@
 #!/bin/bash
 
 git pull
-FILETOEDIT=01-Introduction.Rmd
+FILETOEDIT=03-Linear-Const-Coeffs.Rmd
 echo $FILETOEDIT
 nvim $FILETOEDIT -S locmappis.vim
