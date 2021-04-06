@@ -2,7 +2,7 @@
 
 # Introduction
 
-Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the differential equations -- that are subject to constraints: the algebraic equations.
+Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the *differential equations* -- that are subject to constraints: the *algebraic equations*.
 
 <!--
 <div class="JHSAYS">

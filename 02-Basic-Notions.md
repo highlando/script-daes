@@ -1,9 +1,9 @@
 # Basic Definitions and Notions
 
-We consider DAEs in the general form 
+In a very general form, a DAE can be written as
 
 \begin{equation}
-    F(t, x, \dot x) = 0
+    F(t, x(t), \dot x(t)) = 0
    	(\#eq:gendae)
 \end{equation}
 
@@ -20,6 +20,10 @@ A dynamical process that evolves in time needs an initial state. Thus, one can e
 \begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. (\#eq:gendaeiniv) 
 \end{equation}
+
+<div class="JHSAYS">
+<p>The form of <span class="math inline">\(F(t, x(t), \dot x(t))\)</span> is a very formal way to write down a system of differential and algebraic equations. <strong>X</strong>: Write down the equations of the previous examples in this form – i.e. define suitable functions <span class="math inline">\(F\)</span>, <span class="math inline">\(x\)</span>, and <span class="math inline">\(\dot x\)</span>.</p>
+</div>
 
 ## Solution Concept
 
@@ -45,8 +49,8 @@ We consider again the equations of motions of the pendulum (Example \@ref(exm:th
 \begin{align*}
 	\dot x(t) &= u(t) \\
 	\dot y(t) &= v(t) \\
-	\dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
-	\dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy
+	m \dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
+	m \dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy(t)
 \end{align*}
 
 with the constraint 
@@ -71,8 +75,8 @@ u(0) \\ v(0)
 \end{bmatrix}
 =
 \begin{bmatrix} 
-	u_0 \\ v_0.
-\end{bmatrix}
+	u_0 \\ v_0
+\end{bmatrix}.
 $$
 
 The constraint \@ref(eq:pendulum-rvst-cnstrt) needs to be fulfilled at all times and also at $t=0$, which gives the constraint for the initial positions:
@@ -81,7 +85,7 @@ The constraint \@ref(eq:pendulum-rvst-cnstrt) needs to be fulfilled at all times
 	(x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
 \end{equation*}
 
-Moreover, if a constraint $g(x(t), y(t))=0$ holds for all $t$, then, necessarily, $\frac{d}{dt}g=0$ for all $t$. For the pendulum this means that 
+Moreover, if a constraint $h(x(t), y(t))=0$ holds for all $t$, then, necessarily, $\frac{d}{dt}h=0$. For the pendulum this means that 
 
 \begin{equation}
 	2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 (\#eq:pendulum-rvst-cnstrt-ddt)
@@ -112,3 +116,17 @@ C(\dot x_3 - \dot x_2) &= - \frac{x_1 - x_2}{R} \\
 Note that \@ref(eq:circuit-ddt) can be written as $B\dot x = Ax + f$ with an invertible matrix $B$ and, thus, is an ODE. 
 
 For an ODE there is no constraint on the initial values. However, a solution to \@ref(eq:circuit-ddt) only solves the original DAE \@ref(eq:circuit), if the initial values are consistent with the DAE. In this case, this means $x_3(t_0)=0$ and $x_1(t_0) - x_3(t_0) = U(t_0)$.
+
+## Additional Remarks
+
+ * It just took a single derivation to turn the circuit model into an ODE \@ref(eq:circuit-ddt). For the *pendulum* this wouldn't be that easy.
+
+ * The extend of how much algebraic and differential parts are intertwined is measured by *indices* which is **the classifier** for DAEs. 
+
+ * There are many indices. We will learn about some of the concepts. But first we will introduce some more theory.
+
+<div class="JHSAYS">
+<p>A low index means that differential and algebraic parts are relatively well separated. (The circuit example is of <em>index 1</em>). A high index means that the structure is more involved. (The pendulum is of <em>index 3</em>).</p>
+</div>
+
+

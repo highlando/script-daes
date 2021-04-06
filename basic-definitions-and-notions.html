@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-04-05" />
+<meta name="date" content="2021-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -79,8 +79,11 @@
 <li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
 <li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
 <li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+<li class="chapter" data-level="2.3" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#additional-remarks"><i class="fa fa-check"></i><b>2.3</b> Additional Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
@@ -120,9 +123,9 @@
             <section class="normal" id="section-">
 <div id="basic-definitions-and-notions" class="section level1">
 <h1><span class="header-section-number">2</span> Basic Definitions and Notions</h1>
-<p>We consider DAEs in the general form</p>
+<p>In a very general form, a DAE can be written as</p>
 <p><span class="math display" id="eq:gendae">\[\begin{equation}
-    F(t, x, \dot x) = 0
+    F(t, x(t), \dot x(t)) = 0
     \tag{2.1}
 \end{equation}\]</span></p>
 <p>with <span class="math inline">\(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\)</span> and with a time interval <span class="math inline">\(I=[t_0,t_e] \subset \mathbb R\)</span> and state spaces <span class="math inline">\(D_x\)</span>, <span class="math inline">\(D_{\dot x} \subset \mathbb R^{n}\)</span> and the task to find a function</p>
@@ -134,6 +137,11 @@
 <p><span class="math display" id="eq:gendaeiniv">\[\begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. \tag{2.2} 
 \end{equation}\]</span></p>
+<div class="JHSAYS">
+<p>
+The form of <span class="math inline"><span class="math inline">\(F(t, x(t), \dot x(t))\)</span></span> is a very formal way to write down a system of differential and algebraic equations. <strong>X</strong>: Write down the equations of the previous examples in this form – i.e. define suitable functions <span class="math inline"><span class="math inline">\(F\)</span></span>, <span class="math inline"><span class="math inline">\(x\)</span></span>, and <span class="math inline"><span class="math inline">\(\dot x\)</span></span>.
+</p>
+</div>
 <div id="solution-concept" class="section level2">
 <h2><span class="header-section-number">2.1</span> Solution Concept</h2>
 <p>In order to talk of solutions, we need to define what we understand as a solution.</p>
@@ -158,8 +166,8 @@
 <p><span class="math display">\[\begin{align*}
     \dot x(t) &amp;= u(t) \\
     \dot y(t) &amp;= v(t) \\
-    \dot u(t) &amp;= - 2 \lambda(t) (x(t) - c_x) \\ 
-    \dot v(t) &amp;= - 2 \lambda(t) (y(t) - c_y) - mgy
+    m \dot u(t) &amp;= - 2 \lambda(t) (x(t) - c_x) \\ 
+    m \dot v(t) &amp;= - 2 \lambda(t) (y(t) - c_y) - mgy(t)
 \end{align*}\]</span></p>
 <p>with the constraint</p>
 <p><span class="math display" id="eq:pendulum-rvst-cnstrt">\[\begin{equation}
@@ -180,14 +188,14 @@ u(0) \\ v(0)
 \end{bmatrix}
 =
 \begin{bmatrix} 
-    u_0 \\ v_0.
-\end{bmatrix}
+    u_0 \\ v_0
+\end{bmatrix}.
 \]</span></p>
 <p>The constraint <a href="basic-definitions-and-notions.html#eq:pendulum-rvst-cnstrt">(2.3)</a> needs to be fulfilled at all times and also at <span class="math inline">\(t=0\)</span>, which gives the constraint for the initial positions:</p>
 <p><span class="math display">\[\begin{equation*}
     (x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
 \end{equation*}\]</span></p>
-<p>Moreover, if a constraint <span class="math inline">\(g(x(t), y(t))=0\)</span> holds for all <span class="math inline">\(t\)</span>, then, necessarily, <span class="math inline">\(\frac{d}{dt}g=0\)</span> for all <span class="math inline">\(t\)</span>. For the pendulum this means that</p>
+<p>Moreover, if a constraint <span class="math inline">\(h(x(t), y(t))=0\)</span> holds for all <span class="math inline">\(t\)</span>, then, necessarily, <span class="math inline">\(\frac{d}{dt}h=0\)</span>. For the pendulum this means that</p>
 <p><span class="math display" id="eq:pendulum-rvst-cnstrt-ddt">\[\begin{equation}
     2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 \tag{2.4}
 \end{equation}\]</span></p>
@@ -211,6 +219,19 @@ C(\dot x_3 - \dot x_2) &amp;= - \frac{x_1 - x_2}{R} \\
 \end{equation}\]</span></p>
 <p>Note that <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> can be written as <span class="math inline">\(B\dot x = Ax + f\)</span> with an invertible matrix <span class="math inline">\(B\)</span> and, thus, is an ODE.</p>
 <p>For an ODE there is no constraint on the initial values. However, a solution to <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a> only solves the original DAE <a href="introduction.html#eq:circuit">(1.2)</a>, if the initial values are consistent with the DAE. In this case, this means <span class="math inline">\(x_3(t_0)=0\)</span> and <span class="math inline">\(x_1(t_0) - x_3(t_0) = U(t_0)\)</span>.</p>
+</div>
+<div id="additional-remarks" class="section level2">
+<h2><span class="header-section-number">2.3</span> Additional Remarks</h2>
+<ul>
+<li><p>It just took a single derivation to turn the circuit model into an ODE <a href="basic-definitions-and-notions.html#eq:circuit-ddt">(2.5)</a>. For the <em>pendulum</em> this wouldn’t be that easy.</p></li>
+<li><p>The extend of how much algebraic and differential parts are intertwined is measured by <em>indices</em> which is <strong>the classifier</strong> for DAEs.</p></li>
+<li><p>There are many indices. We will learn about some of the concepts. But first we will introduce some more theory.</p></li>
+</ul>
+<div class="JHSAYS">
+<p>
+A low index means that differential and algebraic parts are relatively well separated. (The circuit example is of <em>index 1</em>). A high index means that the structure is more involved. (The pendulum is of <em>index 3</em>).
+</p>
+</div>
 
 </div>
 </div>

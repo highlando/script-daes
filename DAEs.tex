@@ -88,7 +88,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-05}
+\date{2021-04-06}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -125,7 +125,7 @@ Fixes and feature requests can be submitted to the \href{https://github.com/high
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
 
-Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the differential equations -- that are subject to constraints: the algebraic equations.
+Differential-algebraic equations (DAEs) are coupled differential- and algebraic equations. DAEs often describe dynamical processes -- here are the \emph{differential equations} -- that are subject to constraints: the \emph{algebraic equations}.
 
 \begin{JHSAYS}
 Let's start with a few examples.
@@ -402,10 +402,10 @@ Thus, special care has to be taken of the algebraic constraints when the equatio
 \hypertarget{basic-definitions-and-notions}{%
 \chapter{Basic Definitions and Notions}\label{basic-definitions-and-notions}}
 
-We consider DAEs in the general form
+In a very general form, a DAE can be written as
 
 \begin{equation}
-    F(t, x, \dot x) = 0
+    F(t, x(t), \dot x(t)) = 0
     \label{eq:gendae}
 \end{equation}
 
@@ -422,6 +422,13 @@ A dynamical process that evolves in time needs an initial state. Thus, one can e
 \begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. \label{eq:gendaeiniv} 
 \end{equation}
+
+\begin{JHSAYS}
+The form of \(F(t, x(t), \dot x(t))\) is a very formal way to write down
+a system of differential and algebraic equations. \textbf{X}: Write down
+the equations of the previous examples in this form -- i.e.~define
+suitable functions \(F\), \(x\), and \(\dot x\).
+\end{JHSAYS}
 
 \hypertarget{solution-concept}{%
 \section{Solution Concept}\label{solution-concept}}
@@ -459,8 +466,8 @@ We consider again the equations of motions of the pendulum (Example \ref{exm:the
 \begin{align*}
     \dot x(t) &= u(t) \\
     \dot y(t) &= v(t) \\
-    \dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
-    \dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy
+    m \dot u(t) &= - 2 \lambda(t) (x(t) - c_x) \\ 
+    m \dot v(t) &= - 2 \lambda(t) (y(t) - c_y) - mgy(t)
 \end{align*}
 
 with the constraint
@@ -485,8 +492,8 @@ u(0) \\ v(0)
 \end{bmatrix}
 =
 \begin{bmatrix} 
-    u_0 \\ v_0.
-\end{bmatrix}
+    u_0 \\ v_0
+\end{bmatrix}.
 \]
 
 The constraint \eqref{eq:pendulum-rvst-cnstrt} needs to be fulfilled at all times and also at \(t=0\), which gives the constraint for the initial positions:
@@ -495,7 +502,7 @@ The constraint \eqref{eq:pendulum-rvst-cnstrt} needs to be fulfilled at all time
     (x_0 - c_x)^2 + (y_0 - c_y)^2 - l^2=0.
 \end{equation*}
 
-Moreover, if a constraint \(g(x(t), y(t))=0\) holds for all \(t\), then, necessarily, \(\frac{d}{dt}g=0\) for all \(t\). For the pendulum this means that
+Moreover, if a constraint \(h(x(t), y(t))=0\) holds for all \(t\), then, necessarily, \(\frac{d}{dt}h=0\). For the pendulum this means that
 
 \begin{equation}
     2(x(t) - c_x)u(t) + 2(y(t) - c_y)v(t) = 0 \label{eq:pendulum-rvst-cnstrt-ddt}
@@ -532,8 +539,91 @@ Note that \eqref{eq:circuit-ddt} can be written as \(B\dot x = Ax + f\) with an 
 
 For an ODE there is no constraint on the initial values. However, a solution to \eqref{eq:circuit-ddt} only solves the original DAE \eqref{eq:circuit}, if the initial values are consistent with the DAE. In this case, this means \(x_3(t_0)=0\) and \(x_1(t_0) - x_3(t_0) = U(t_0)\).
 
+\hypertarget{additional-remarks}{%
+\section{Additional Remarks}\label{additional-remarks}}
+
+\begin{itemize}
+\item
+  It just took a single derivation to turn the circuit model into an ODE \eqref{eq:circuit-ddt}. For the \emph{pendulum} this wouldn't be that easy.
+\item
+  The extend of how much algebraic and differential parts are intertwined is measured by \emph{indices} which is \textbf{the classifier} for DAEs.
+\item
+  There are many indices. We will learn about some of the concepts. But first we will introduce some more theory.
+\end{itemize}
+
+\begin{JHSAYS}
+A low index means that differential and algebraic parts are relatively
+well separated. (The circuit example is of \emph{index 1}). A high index
+means that the structure is more involved. (The pendulum is of
+\emph{index 3}).
+\end{JHSAYS}
+
 \hypertarget{linear-daes-with-constant-coefficients}{%
 \chapter{Linear DAEs with Constant Coefficients}\label{linear-daes-with-constant-coefficients}}
+
+\hypertarget{basic-notions-and-definitions}{%
+\section{Basic Notions and Definitions}\label{basic-notions-and-definitions}}
+
+Consider the DAE in the form
+\begin{equation}
+E \dot x (t) = Ax(t) + f(t), \label{eq:gen-lin-cc-dae}
+\end{equation}
+where \(E\), \(A\in \mathbb R^{m,n}\) and \(f\in \mathcal C(\mathbb I, \mathbb R^m)\) with, possibly, an initial condition
+\begin{equation}
+x(t_0) = x_0 \in \mathbb R^{n}. \label{eq:gen-lin-cc-dae-inic}
+\end{equation}
+
+\begin{JHSAYS}
+For utmost generality, we consider the case that \(m\neq n\), i.e.~the
+number of equations does not meet the number of unknowns, but we will
+turn to the square case of \(m=n\) soon.
+\end{JHSAYS}
+
+\hypertarget{scalings-and-state-transformations}{%
+\subsection{Scalings and State Transformations}\label{scalings-and-state-transformations}}
+
+One can confirm that if \(x\) is a solution to \eqref{eq:gen-lin-cc-dae} and \(P\in \mathbb R^{n,n}\) is invertible, then \(x\) is a solution to
+\begin{equation*}
+PE \dot x (t) = PAx(t) + Pf(t).
+\end{equation*}
+
+\begin{JHSAYS}
+This is a scaling of the equations.
+\end{JHSAYS}
+
+Similarly, if \(Q\in \mathbb R^{n,n}\) is invertible, then \(\tilde x := Qx\) solves
+
+\begin{equation*}
+E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
+\end{equation*}
+
+\begin{JHSAYS}
+This is a state transformation of the system.
+\end{JHSAYS}
+
+Thus, when talking of solvability of \eqref{eq:gen-lin-cc-dae}, one may equivalently consider any regular \(Q\in \mathbb R^{m,m}\), \(P\in \mathbb R^{m,m}\) and the scaled and transformed system
+\begin{equation}
+\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Qx_0,
+\end{equation}
+where \(\tilde E = PEQ\), \(\tilde A = PAQ\), \(\tilde f = Pf\), and \(x=Q^{-1}\tilde x\).
+
+To characterize all scalings and state transformations, we define these operations as relations of matrix pairs:
+
+\begin{definition}
+\protect\hypertarget{def:matrix-pair-equivalent}{}{\label{def:matrix-pair-equivalent} }Two pairs of matrices \((E_1, A_1)\) and \((E_2, A_2\), \(E_1\), \(A_1\), \(E_2\), \(A_2 \in \mathbb R^{m,n}\) are called \emph{strongly equivalent}, if there exist regular matrices \(P\in \mathbb R^{m,m}\), \(Q\in \mathbb R^{n,n}\) such that
+\begin{equation*}
+E_2 = PE_1Q, \quad A_2 = PA_1Q.
+\end{equation*}
+In this case, we write
+\[(E_1, A_1) \sim (E_2, A_2).\]
+\end{definition}
+
+\begin{lemma}
+\protect\hypertarget{lem:strong-equivalence-RSI}{}{\label{lem:strong-equivalence-RSI} }The relation \(\sim\) defined in Definition \ref{def:matrix-pair-equivalent} defines an equivalence relation\footnote{Equivalence relation -- \textbf{RST}. \textbf{R}eflexive: \(A\sim A\). \textbf{S}ymmetric: \(A\sim B\), then \(B\sim A\). \textbf{T}ransitive: \(A\sim B\) and \(B\sim C\), then \(A\sim C\).}.
+\end{lemma}
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Exercise.
+\end{proof}
 
 \begin{definition}
 \protect\hypertarget{def:drazin-inverse}{}{\label{def:drazin-inverse} }

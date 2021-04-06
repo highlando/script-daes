@@ -12,6 +12,10 @@ def:dae-solution
 eq:pendulum-rvst-cnstrt
 eq:pendulum-rvst-cnstrt-ddt
 eq:circuit-ddt
+eq:gen-lin-cc-dae
+eq:gen-lin-cc-dae-inic
+def:matrix-pair-equivalent
+lem:strong-equivalence-RSI
 def:drazin-inverse
 eq:def-drazin-a
 eq:def-drazin-b
@@ -48,7 +52,10 @@ why-are-daes-difficult-to-treat
 basic-definitions-and-notions
 solution-concept
 initial-conditions-and-consistency
+additional-remarks
 linear-daes-with-constant-coefficients
+basic-notions-and-definitions
+scalings-and-state-transformations
 linear-daes-with-time-varying-coefficients
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes

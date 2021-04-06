@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-04-05" />
+<meta name="date" content="2021-04-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -79,8 +79,11 @@
 <li class="chapter" data-level="2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html"><i class="fa fa-check"></i><b>2</b> Basic Definitions and Notions</a><ul>
 <li class="chapter" data-level="2.1" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#solution-concept"><i class="fa fa-check"></i><b>2.1</b> Solution Concept</a></li>
 <li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
+<li class="chapter" data-level="2.3" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#additional-remarks"><i class="fa fa-check"></i><b>2.3</b> Additional Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
+<li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
@@ -120,14 +123,75 @@
             <section class="normal" id="section-">
 <div id="linear-daes-with-constant-coefficients" class="section level1">
 <h1><span class="header-section-number">3</span> Linear DAEs with Constant Coefficients</h1>
+<div id="basic-notions-and-definitions" class="section level2">
+<h2><span class="header-section-number">3.1</span> Basic Notions and Definitions</h2>
+<p>Consider the DAE in the form
+<span class="math display" id="eq:gen-lin-cc-dae">\[\begin{equation}
+E \dot x (t) = Ax(t) + f(t), \tag{3.1}
+\end{equation}\]</span>
+where <span class="math inline">\(E\)</span>, <span class="math inline">\(A\in \mathbb R^{m,n}\)</span> and <span class="math inline">\(f\in \mathcal C(\mathbb I, \mathbb R^m)\)</span> with, possibly, an initial condition
+<span class="math display" id="eq:gen-lin-cc-dae-inic">\[\begin{equation}
+x(t_0) = x_0 \in \mathbb R^{n}. \tag{3.2}
+\end{equation}\]</span></p>
+<div class="JHSAYS">
+<p>
+For utmost generality, we consider the case that <span class="math inline"><span class="math inline">\(m\neq n\)</span></span>, i.e. the number of equations does not meet the number of unknowns, but we will turn to the square case of <span class="math inline"><span class="math inline">\(m=n\)</span></span> soon.
+</p>
+</div>
+<div id="scalings-and-state-transformations" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Scalings and State Transformations</h3>
+<p>One can confirm that if <span class="math inline">\(x\)</span> is a solution to <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> and <span class="math inline">\(P\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(x\)</span> is a solution to
+<span class="math display">\[\begin{equation*}
+PE \dot x (t) = PAx(t) + Pf(t).
+\end{equation*}\]</span></p>
+<div class="JHSAYS">
+<p>
+This is a scaling of the equations.
+</p>
+</div>
+<p>Similarly, if <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(\tilde x := Qx\)</span> solves</p>
+<p><span class="math display">\[\begin{equation*}
+E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
+\end{equation*}\]</span></p>
+<div class="JHSAYS">
+<p>
+This is a state transformation of the system.
+</p>
+</div>
+<p>Thus, when talking of solvability of <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>, one may equivalently consider any regular <span class="math inline">\(Q\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(P\in \mathbb R^{m,m}\)</span> and the scaled and transformed system
+<span class="math display">\[\begin{equation}
+\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Qx_0,
+\end{equation}\]</span>
+where <span class="math inline">\(\tilde E = PEQ\)</span>, <span class="math inline">\(\tilde A = PAQ\)</span>, <span class="math inline">\(\tilde f = Pf\)</span>, and <span class="math inline">\(x=Q^{-1}\tilde x\)</span>.</p>
+<p>To characterize all scalings and state transformations, we define these operations as relations of matrix pairs:</p>
 
 <div class="definition">
-<p><span id="def:drazin-inverse" class="definition"><strong>Definition 3.1  </strong></span>
+<span id="def:matrix-pair-equivalent" class="definition"><strong>Definition 3.1  </strong></span>Two pairs of matrices <span class="math inline">\((E_1, A_1)\)</span> and <span class="math inline">\((E_2, A_2\)</span>, <span class="math inline">\(E_1\)</span>, <span class="math inline">\(A_1\)</span>, <span class="math inline">\(E_2\)</span>, <span class="math inline">\(A_2 \in \mathbb R^{m,n}\)</span> are called <em>strongly equivalent</em>, if there exist regular matrices <span class="math inline">\(P\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> such that
+<span class="math display">\[\begin{equation*}
+E_2 = PE_1Q, \quad A_2 = PA_1Q.
+\end{equation*}\]</span>
+In this case, we write
+<span class="math display">\[(E_1, A_1) \sim (E_2, A_2).\]</span>
+</div>
+
+
+<div class="lemma">
+<span id="lem:strong-equivalence-RSI" class="lemma"><strong>Lemma 3.1  </strong></span>The relation <span class="math inline">\(\sim\)</span> defined in Definition <a href="linear-daes-with-constant-coefficients.html#def:matrix-pair-equivalent">3.1</a> defines an equivalence relation<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> Exercise.
+</div>
+
+
+<div class="definition">
+<p><span id="def:drazin-inverse" class="definition"><strong>Definition 3.2  </strong></span>
 Let <span class="math inline">\(E\in \mathbb C^{n,n}\)</span> and <span class="math inline">\(\nu = \operatorname{ind}(E)\)</span>. A matrix <span class="math inline">\(X\in \mathbb C^{n,n}\)</span> that fulfills</p>
 <p><span class="math display" id="eq:def-drazin-c" id="eq:def-drazin-b" id="eq:def-drazin-a">\[\begin{align}
-    EX &amp; = XE, \tag{3.1} \\
-    XEX &amp; = X, \tag{3.2} \\
-    XE^{\nu+1} &amp; = E^{\nu}, \tag{3.3}
+    EX &amp; = XE, \tag{3.3} \\
+    XEX &amp; = X, \tag{3.4} \\
+    XE^{\nu+1} &amp; = E^{\nu}, \tag{3.5}
 \end{align}\]</span></p>
 is called a <em>Drazin inverse</em> of <span class="math inline">\(E\)</span>.
 </div>
@@ -141,7 +205,7 @@ Every matrix <span class="math inline">\(E\in\mathbb{C}^{n,n}\)</span> has one, 
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Uniqueness: Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be two Drazin inverses of <span class="math inline">\(E\)</span>. Then by repeated application of the identities in <a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-a">(3.1)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-c">(3.3)</a> one derives that</p>
+<p> <span class="proof"><em>Proof. </em></span> Uniqueness: Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be two Drazin inverses of <span class="math inline">\(E\)</span>. Then by repeated application of the identities in <a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-a">(3.3)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-c">(3.5)</a> one derives that</p>
 <p><span class="math display">\[\begin{align*}
 X_1 EX_1 E X_2 =   &amp;X_1EX_2 = X_1EX_2EX_2  \\
 X_1^2 E^2 X_2 = \dotsm=   &amp;X_1EX_2 = \dotsm= X_1E^2X_2^2  \\
@@ -157,6 +221,14 @@ X_1 =\dotsm=\dotsm=\dotsm=\dotsm=   &amp;X_1EX_2 =\dotsm=\dotsm=\dotsm=\dotsm= X
 
 
 
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Equivalence relation – <strong>RST</strong>. <strong>R</strong>eflexive: <span class="math inline">\(A\sim A\)</span>. <strong>S</strong>ymmetric: <span class="math inline">\(A\sim B\)</span>, then <span class="math inline">\(B\sim A\)</span>. <strong>T</strong>ransitive: <span class="math inline">\(A\sim B\)</span> and <span class="math inline">\(B\sim C\)</span>, then <span class="math inline">\(A\sim C\)</span>.<a href="linear-daes-with-constant-coefficients.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
