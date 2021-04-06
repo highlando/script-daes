@@ -31,6 +31,8 @@ In order to talk of solutions, we need to define what we understand as a solutio
 
 
 ```{definition, label="dae-solution"}
+$\quad$
+
  1. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in I$.
 
  2. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the initial value problem* \@ref(eq:gendae) and \@ref(eq:gendaeiniv), if, furthermore,  $x(t_0)= x_0$ holds.
