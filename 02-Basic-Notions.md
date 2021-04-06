@@ -30,7 +30,9 @@ A dynamical process that evolves in time needs an initial state. Thus, one can e
 In order to talk of solutions, we need to define what we understand as a solution.  
 
 
-\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:dae-solution"><strong>(\#def:dae-solution) </strong></span> 1. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in I$.
+\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:dae-solution"><strong>(\#def:dae-solution) </strong></span>$\quad$
+
+ 1. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in I$.
 
  2. A function $x \in \mathcal C^1(I, \mathbb R^{n})$ is called a *solution to the initial value problem* \@ref(eq:gendae) and \@ref(eq:gendaeiniv), if, furthermore,  $x(t_0)= x_0$ holds.
 

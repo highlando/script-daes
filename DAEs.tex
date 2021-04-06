@@ -66,7 +66,9 @@
 \makeatother
 
 \usepackage{booktabs}
-\newenvironment {JHSAYS} [0] {\begin{quote}} {\end{quote}}
+\usepackage{xcolor}
+\definecolor{jhsc}{HTML}{1f57c7}
+\newenvironment {JHSAYS} [0] {\begin{quote}\color{jhsc}} {\end{quote}}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -436,11 +438,12 @@ suitable functions \(F\), \(x\), and \(\dot x\).
 In order to talk of solutions, we need to define what we understand as a solution.
 
 \begin{definition}
-\protect\hypertarget{def:dae-solution}{}{\label{def:dae-solution} } 1. A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in I\).
+\protect\hypertarget{def:dae-solution}{}{\label{def:dae-solution} }\(\quad\)
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
+\item
+  A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in I\).
 \item
   A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
 \item
