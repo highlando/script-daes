@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-04-06" />
+<meta name="date" content="2021-04-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -149,7 +149,7 @@ PE \dot x (t) = PAx(t) + Pf(t).
 This is a scaling of the equations.
 </p>
 </div>
-<p>Similarly, if <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(\tilde x := Qx\)</span> solves</p>
+<p>Similarly, if <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(\tilde x := Q^{-1}x\)</span> solves</p>
 <p><span class="math display">\[\begin{equation*}
 E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
 \end{equation*}\]</span></p>
@@ -160,9 +160,9 @@ This is a state transformation of the system.
 </div>
 <p>Thus, when talking of solvability of <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>, one may equivalently consider any regular <span class="math inline">\(Q\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(P\in \mathbb R^{m,m}\)</span> and the scaled and transformed system
 <span class="math display">\[\begin{equation}
-\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Qx_0,
+\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}\]</span>
-where <span class="math inline">\(\tilde E = PEQ\)</span>, <span class="math inline">\(\tilde A = PAQ\)</span>, <span class="math inline">\(\tilde f = Pf\)</span>, and <span class="math inline">\(x=Q^{-1}\tilde x\)</span>.</p>
+where <span class="math inline">\(\tilde E = PEQ\)</span>, <span class="math inline">\(\tilde A = PAQ\)</span>, <span class="math inline">\(\tilde f = Pf\)</span>, and <span class="math inline">\(x=Q\tilde x\)</span>.</p>
 <p>To characterize all scalings and state transformations, we define these operations as relations of matrix pairs:</p>
 
 <div class="definition">
