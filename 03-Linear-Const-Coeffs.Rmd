@@ -26,7 +26,7 @@ PE \dot x (t) = PAx(t) + Pf(t).
 This is a scaling of the equations.
 ```
 
-Similarly, if $Q\in \mathbb R^{n,n}$ is invertible, then $\tilde x := Qx$ solves
+Similarly, if $Q\in \mathbb R^{n,n}$ is invertible, then $\tilde x := Q^{-1}x$ solves
 
 \begin{equation*}
 E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
@@ -37,9 +37,9 @@ This is a state transformation of the system.
 ```
 Thus, when talking of solvability of \@ref(eq:gen-lin-cc-dae), one may equivalently consider any regular $Q\in \mathbb R^{m,m}$, $P\in \mathbb R^{m,m}$ and the scaled and transformed system
 \begin{equation}
-\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Qx_0,
+\tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}
-where $\tilde E = PEQ$, $\tilde A = PAQ$, $\tilde f = Pf$, and $x=Q^{-1}\tilde x$.
+where $\tilde E = PEQ$, $\tilde A = PAQ$, $\tilde f = Pf$, and $x=Q\tilde x$.
 
 To characterize all scalings and state transformations, we define these operations as relations of matrix pairs:
 
