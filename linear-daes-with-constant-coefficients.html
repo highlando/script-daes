@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-04-07" />
+<meta name="date" content="2021-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -184,6 +184,115 @@ In this case, we write
  <span class="proof"><em>Proof. </em></span> Exercise.
 </div>
 
+<p>For a given equivalence relation on a set, one can define <em>equivalence classes</em> by considering all members that are equivalent to each other as basically the same. And for each class one may choose a representative, preferably in <em>canonical form</em>, i.e. a form that, e.g.,</p>
+<ol style="list-style-type: decimal">
+<li>comes with an simple or characteristic representation and</li>
+<li>that allows for easy determination or analysis of quantities of interest.</li>
+</ol>
+<div class="JHSAYS">
+<p>
+There can be infinitely many canonical forms. For our purposes and for the <em>strong equivalence</em> of matrix pairs, we will use the <em>Kronecker Canonical Form</em>.
+</p>
+</div>
+
+<div class="theorem">
+<p><span id="thm:kcf" class="theorem"><strong>Theorem 3.1  </strong></span>
+Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{m,n}\)</span>. Then there exist nonsingular matrices <span class="math inline">\(P\in \mathbb C^{m,m}\)</span>, <span class="math inline">\(Q\in \mathbb C^{n,n}\)</span> such that for all <span class="math inline">\(\lambda \in \mathbb C\)</span>
+<span class="math display">\[\begin{equation*}
+P(\lambda E -A)Q = 
+\begin{bmatrix}
+\mathcal L_{\epsilon_1} \\
+&amp; \ddots \\
+&amp;&amp; \mathcal L_{\epsilon_p} \\
+&amp;&amp;&amp; \mathcal M_{\eta_1} \\
+&amp;&amp;&amp;&amp; \ddots \\
+&amp;&amp;&amp;&amp;&amp; \mathcal M_{\eta_q} \\
+&amp;&amp;&amp;&amp;&amp;&amp; \mathcal J_{\rho_1} \\
+&amp;&amp;&amp;&amp;&amp;&amp;&amp; \ddots \\
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; \mathcal J_{\rho_r} \\
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; \mathcal N_{\sigma_1} \\
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; \ddots \\
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp; \mathcal N_{\sigma_s}
+\end{bmatrix}
+\end{equation*}\]</span>
+Where the block entries are as follows:</p>
+<ol style="list-style-type: decimal">
+<li>Every entry <span class="math inline">\(\mathcal L_{\epsilon_j}\)</span> is bidiagonal of size <span class="math inline">\(\epsilon_j\times (\epsilon_j +1)\)</span>, <span class="math inline">\(\epsilon_j \in \mathbb N \cup \{0\}\)</span> of the form
+<span class="math display">\[\begin{equation*}
+\lambda 
+\begin{bmatrix}
+0 &amp; 1  \\
+&amp; \ddots &amp; \ddots \\
+&amp;&amp; 0 &amp; 1
+\end{bmatrix}
+-
+\begin{bmatrix}
+1 &amp; 0  \\
+&amp; \ddots &amp; \ddots \\
+&amp;&amp; 1 &amp; 0
+\end{bmatrix}
+\end{equation*}\]</span></li>
+<li>Every entry <span class="math inline">\(\mathcal M_{\eta_j}\)</span> is bidiagonal of size <span class="math inline">\((\eta_j+1)\times \eta_j)\)</span>, <span class="math inline">\(\eta_j \in \mathbb N \cup \{0\}\)</span> of the form
+<span class="math display">\[\begin{equation*}
+\lambda 
+\begin{bmatrix}
+1  \\
+0 &amp; \ddots \\
+&amp; \ddots &amp; 1 \\
+&amp;&amp; 0 
+\end{bmatrix}
+-
+\begin{bmatrix}
+0  \\
+1 &amp; \ddots \\
+&amp; \ddots &amp; 0 \\
+&amp;&amp; 1 
+\end{bmatrix}
+\end{equation*}\]</span></li>
+<li>Every entry <span class="math inline">\(\mathcal J_{\rho_j}\)</span> is a Jordan block of size <span class="math inline">\((\rho_j)\times \rho_j)\)</span>, <span class="math inline">\(\rho_j \in \mathbb N \setminus \{0\}\)</span>, <span class="math inline">\(\lambda_j \in \mathbb C\)</span> of the form
+<span class="math display">\[\begin{equation*}
+\lambda 
+\begin{bmatrix}
+1  \\
+&amp; \ddots \\
+&amp;&amp;\ddots  \\
+&amp;&amp;&amp; 1 
+\end{bmatrix}
+-
+\begin{bmatrix}
+\lambda_j &amp; 1 \\
+&amp; \ddots &amp; \ddots \\
+&amp;&amp;&amp; 1 \\
+&amp;&amp;&amp; \lambda_j 
+\end{bmatrix}
+\end{equation*}\]</span></li>
+<li>Every entry <span class="math inline">\(\mathcal N_{\rho_j}\)</span> is a nilpotent block of size <span class="math inline">\((\sigma_j)\times \sigma_j)\)</span>, <span class="math inline">\(\sigma_j \in \mathbb N \setminus \{0\}\)</span>, of the form
+<span class="math display">\[\begin{equation*}
+\lambda 
+\begin{bmatrix}
+0 &amp;1\\
+&amp; \ddots &amp; \ddots \\
+&amp;&amp;&amp; 1  \\
+&amp;&amp;&amp; 0 
+\end{bmatrix}
+-
+\begin{bmatrix}
+1 \\
+&amp; \ddots  \\
+&amp;&amp;&amp;  \\
+&amp;&amp;&amp;&amp; 1 
+\end{bmatrix}
+\end{equation*}\]</span></li>
+</ol>
+The <em>Kronecker Canonical Form</em> is uniquely defined up to permutations of the blocks.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> Very technical. Can be found, e.g., in the book: Gantmacher (1959) <em>The Theory of Matrices II</em>.
+</div>
+
+<p>Algorithm for computations<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
 
 <div class="definition">
 <p><span id="def:drazin-inverse" class="definition"><strong>Definition 3.2  </strong></span>
@@ -199,7 +308,7 @@ is called a <em>Drazin inverse</em> of <span class="math inline">\(E\)</span>.
 <p>With the following theorem we confirm that a Drazin inverse to a matrix <span class="math inline">\(E\)</span> is unique so that we can write <span class="math inline">\(E^D\)</span> for it.</p>
 
 <div class="theorem">
-<p><span id="thm:drazin-inverse-unique" class="theorem"><strong>Theorem 3.1  </strong></span>
+<p><span id="thm:drazin-inverse-unique" class="theorem"><strong>Theorem 3.2  </strong></span>
 Every matrix <span class="math inline">\(E\in\mathbb{C}^{n,n}\)</span> has one, and only one, Drazin inverse.</p>
 </div>
 
@@ -228,6 +337,7 @@ X_1 =\dotsm=\dotsm=\dotsm=\dotsm=   &amp;X_1EX_2 =\dotsm=\dotsm=\dotsm=\dotsm= X
 <hr />
 <ol start="1">
 <li id="fn1"><p>Equivalence relation – <strong>RST</strong>. <strong>R</strong>eflexive: <span class="math inline">\(A\sim A\)</span>. <strong>S</strong>ymmetric: <span class="math inline">\(A\sim B\)</span>, then <span class="math inline">\(B\sim A\)</span>. <strong>T</strong>ransitive: <span class="math inline">\(A\sim B\)</span> and <span class="math inline">\(B\sim C\)</span>, then <span class="math inline">\(A\sim C\)</span>.<a href="linear-daes-with-constant-coefficients.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Paul v. Dooren <a href="https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf">The Computation of Kronecker’s Canonical Form of a Singular Pencil</a><a href="linear-daes-with-constant-coefficients.html#fnref2" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>

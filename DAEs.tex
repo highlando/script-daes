@@ -69,6 +69,7 @@
 \usepackage{xcolor}
 \definecolor{jhsc}{HTML}{1f57c7}
 \newenvironment {JHSAYS} [0] {\begin{quote}\color{jhsc}} {\end{quote}}
+\setcounter{MaxMatrixCols}{20}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -90,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-07}
+\date{2021-04-08}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -627,6 +628,129 @@ In this case, we write
 \begin{proof}
 \iffalse{} {Proof. } \fi{}Exercise.
 \end{proof}
+
+For a given equivalence relation on a set, one can define \emph{equivalence classes} by considering all members that are equivalent to each other as basically the same. And for each class one may choose a representative, preferably in \emph{canonical form}, i.e.~a form that, e.g.,
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  comes with an simple or characteristic representation and
+\item
+  that allows for easy determination or analysis of quantities of interest.
+\end{enumerate}
+
+\begin{JHSAYS}
+There can be infinitely many canonical forms. For our purposes and for
+the \emph{strong equivalence} of matrix pairs, we will use the
+\emph{Kronecker Canonical Form}.
+\end{JHSAYS}
+
+\begin{theorem}
+\protect\hypertarget{thm:kcf}{}{\label{thm:kcf} }
+Let \(E\), \(A \in \mathbb C^{m,n}\). Then there exist nonsingular matrices \(P\in \mathbb C^{m,m}\), \(Q\in \mathbb C^{n,n}\) such that for all \(\lambda \in \mathbb C\)
+\begin{equation*}
+P(\lambda E -A)Q = 
+\begin{bmatrix}
+\mathcal L_{\epsilon_1} \\
+& \ddots \\
+&& \mathcal L_{\epsilon_p} \\
+&&& \mathcal M_{\eta_1} \\
+&&&& \ddots \\
+&&&&& \mathcal M_{\eta_q} \\
+&&&&&& \mathcal J_{\rho_1} \\
+&&&&&&& \ddots \\
+&&&&&&&& \mathcal J_{\rho_r} \\
+&&&&&&&&& \mathcal N_{\sigma_1} \\
+&&&&&&&&&& \ddots \\
+&&&&&&&&&&& \mathcal N_{\sigma_s}
+\end{bmatrix}
+\end{equation*}
+Where the block entries are as follows:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Every entry \(\mathcal L_{\epsilon_j}\) is bidiagonal of size \(\epsilon_j\times (\epsilon_j +1)\), \(\epsilon_j \in \mathbb N \cup \{0\}\) of the form
+  \begin{equation*}
+  \lambda 
+  \begin{bmatrix}
+  0 & 1  \\
+  & \ddots & \ddots \\
+  && 0 & 1
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+  1 & 0  \\
+  & \ddots & \ddots \\
+  && 1 & 0
+  \end{bmatrix}
+  \end{equation*}
+\item
+  Every entry \(\mathcal M_{\eta_j}\) is bidiagonal of size \((\eta_j+1)\times \eta_j)\), \(\eta_j \in \mathbb N \cup \{0\}\) of the form
+  \begin{equation*}
+  \lambda 
+  \begin{bmatrix}
+  1  \\
+  0 & \ddots \\
+  & \ddots & 1 \\
+  && 0 
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+  0  \\
+  1 & \ddots \\
+  & \ddots & 0 \\
+  && 1 
+  \end{bmatrix}
+  \end{equation*}
+\item
+  Every entry \(\mathcal J_{\rho_j}\) is a Jordan block of size \((\rho_j)\times \rho_j)\), \(\rho_j \in \mathbb N \setminus \{0\}\), \(\lambda_j \in \mathbb C\) of the form
+  \begin{equation*}
+  \lambda 
+  \begin{bmatrix}
+  1  \\
+  & \ddots \\
+  &&\ddots  \\
+  &&& 1 
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+  \lambda_j & 1 \\
+  & \ddots & \ddots \\
+  &&& 1 \\
+  &&& \lambda_j 
+  \end{bmatrix}
+  \end{equation*}
+\item
+  Every entry \(\mathcal N_{\rho_j}\) is a nilpotent block of size \((\sigma_j)\times \sigma_j)\), \(\sigma_j \in \mathbb N \setminus \{0\}\), of the form
+  \begin{equation*}
+  \lambda 
+  \begin{bmatrix}
+  0 &1\\
+  & \ddots & \ddots \\
+  &&& 1  \\
+  &&& 0 
+  \end{bmatrix}
+  -
+  \begin{bmatrix}
+  1 \\
+  & \ddots  \\
+  &&&  \\
+  &&&& 1 
+  \end{bmatrix}
+  \end{equation*}
+\end{enumerate}
+
+The \emph{Kronecker Canonical Form} is uniquely defined up to permutations of the blocks.
+\end{theorem}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Very technical. Can be found, e.g., in the book: Gantmacher (1959) \emph{The Theory of Matrices II}.
+\end{proof}
+
+Algorithm for computations\footnote{Paul v. Dooren \href{https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf}{The Computation of Kronecker's Canonical Form of a Singular Pencil}}.
 
 \begin{definition}
 \protect\hypertarget{def:drazin-inverse}{}{\label{def:drazin-inverse} }

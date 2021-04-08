@@ -56,6 +56,111 @@ $$(E_1, A_1) \sim (E_2, A_2).$$</div>\EndKnitrBlock{definition}
 
 [^1]: Equivalence relation -- **RST**. **R**eflexive: $A\sim A$. **S**ymmetric: $A\sim B$, then $B\sim A$. **T**ransitive: $A\sim B$ and $B\sim C$, then $A\sim C$.
 
+For a given equivalence relation on a set, one can define *equivalence classes* by considering all members that are equivalent to each other as basically the same. And for each class one may choose a representative, preferably in *canonical form*, i.e. a form that, e.g.,
+
+1. comes with an simple or characteristic representation and
+2. that allows for easy determination or analysis of quantities of interest.
+
+<div class="JHSAYS">
+<p>There can be infinitely many canonical forms. For our purposes and for the <em>strong equivalence</em> of matrix pairs, we will use the <em>Kronecker Canonical Form</em>.</p>
+</div>
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:kcf"><strong>(\#thm:kcf) </strong></span>
+Let $E$, $A \in \mathbb C^{m,n}$. Then there exist nonsingular matrices $P\in \mathbb C^{m,m}$, $Q\in \mathbb C^{n,n}$ such that for all $\lambda \in \mathbb C$
+\begin{equation*}
+P(\lambda E -A)Q = 
+\begin{bmatrix}
+\mathcal L_{\epsilon_1} \\
+& \ddots \\
+&& \mathcal L_{\epsilon_p} \\
+&&& \mathcal M_{\eta_1} \\
+&&&& \ddots \\
+&&&&& \mathcal M_{\eta_q} \\
+&&&&&& \mathcal J_{\rho_1} \\
+&&&&&&& \ddots \\
+&&&&&&&& \mathcal J_{\rho_r} \\
+&&&&&&&&& \mathcal N_{\sigma_1} \\
+&&&&&&&&&& \ddots \\
+&&&&&&&&&&& \mathcal N_{\sigma_s}
+\end{bmatrix}
+\end{equation*}
+Where the block entries are as follows:
+
+1. Every entry $\mathcal L_{\epsilon_j}$ is bidiagonal of size $\epsilon_j\times (\epsilon_j +1)$, $\epsilon_j \in \mathbb N \cup \{0\}$ of the form
+   \begin{equation*}
+   \lambda 
+   \begin{bmatrix}
+   0 & 1  \\
+   & \ddots & \ddots \\
+   && 0 & 1
+   \end{bmatrix}
+   -
+   \begin{bmatrix}
+   1 & 0  \\
+   & \ddots & \ddots \\
+   && 1 & 0
+   \end{bmatrix}
+   \end{equation*}
+2. Every entry $\mathcal M_{\eta_j}$ is bidiagonal of size $(\eta_j+1)\times \eta_j)$, $\eta_j \in \mathbb N \cup \{0\}$ of the form
+   \begin{equation*}
+   \lambda 
+   \begin{bmatrix}
+   1  \\
+   0 & \ddots \\
+   & \ddots & 1 \\
+   && 0 
+   \end{bmatrix}
+   -
+   \begin{bmatrix}
+   0  \\
+   1 & \ddots \\
+   & \ddots & 0 \\
+   && 1 
+   \end{bmatrix}
+   \end{equation*}
+3. Every entry $\mathcal J_{\rho_j}$ is a Jordan block of size $(\rho_j)\times \rho_j)$, $\rho_j \in \mathbb N \setminus \{0\}$, $\lambda_j \in \mathbb C$ of the form
+   \begin{equation*}
+   \lambda 
+   \begin{bmatrix}
+   1  \\
+   & \ddots \\
+   &&\ddots  \\
+   &&& 1 
+   \end{bmatrix}
+   -
+   \begin{bmatrix}
+   \lambda_j & 1 \\
+   & \ddots & \ddots \\
+   &&& 1 \\
+   &&& \lambda_j 
+   \end{bmatrix}
+   \end{equation*}
+4. Every entry $\mathcal N_{\rho_j}$ is a nilpotent block of size $(\sigma_j)\times \sigma_j)$, $\sigma_j \in \mathbb N \setminus \{0\}$, of the form
+   \begin{equation*}
+   \lambda 
+   \begin{bmatrix}
+   0 &1\\
+   & \ddots & \ddots \\
+   &&& 1  \\
+   &&& 0 
+   \end{bmatrix}
+   -
+   \begin{bmatrix}
+   1 \\
+   & \ddots  \\
+   &&&  \\
+   &&&& 1 
+   \end{bmatrix}
+   \end{equation*}
+
+The *Kronecker Canonical Form* is uniquely defined up to permutations of the blocks.</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}Very technical. Can be found, e.g., in the book: Gantmacher (1959) *The Theory of Matrices II*.</div>\EndKnitrBlock{proof}
+
+Algorithm for computations[^2].
+
+[^2]: Paul v. Dooren [The Computation of Kronecker’s Canonical Form of a Singular Pencil](https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf)
+
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>
 Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 
 

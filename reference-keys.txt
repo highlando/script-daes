@@ -16,6 +16,7 @@ eq:gen-lin-cc-dae
 eq:gen-lin-cc-dae-inic
 def:matrix-pair-equivalent
 lem:strong-equivalence-RSI
+thm:kcf
 def:drazin-inverse
 eq:def-drazin-a
 eq:def-drazin-b
