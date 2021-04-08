@@ -72,6 +72,7 @@ There can be infinitely many canonical forms. For our purposes and for the *stro
 ```
 
 ```{theorem, label="kcf"}
+
 Let $E$, $A \in \mathbb C^{m,n}$. Then there exist nonsingular matrices $P\in \mathbb C^{m,m}$, $Q\in \mathbb C^{n,n}$ such that for all $\lambda \in \mathbb C$
 \begin{equation*}
 P(\lambda E -A)Q = 
@@ -158,8 +159,10 @@ Where the block entries are as follows:
    &&&& 1 
    \end{bmatrix}
    \end{equation*}
+
 The *Kronecker Canonical Form* is uniquely defined up to permutations of the blocks.
 ```
+
 ```{proof}
 Very technical. Can be found, e.g., in the book: Gantmacher (1959) *The Theory of Matrices II*.
 ```
