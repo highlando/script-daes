@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-08}
+\date{2021-04-12}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -412,13 +412,13 @@ In a very general form, a DAE can be written as
     \label{eq:gendae}
 \end{equation}
 
-with \(F\colon I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with a time interval \(I=[t_0,t_e] \subset \mathbb R\) and state spaces \(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a function
+with \(F\colon \mathbb I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with a time interval \(\mathbb I=[t_0,t_e) \subset \mathbb R\) and state spaces \(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a function
 
 \begin{equation*}
-    x \colon I \to \mathbb R^{n}
+    x \colon \mathbb I \to \mathbb R^{n}
 \end{equation*}
 
-with time derivative \(\dot x \colon I \to \mathbb R^{n}\) such that \eqref{eq:gendae} is fulfilled for all \(t\in I\).
+with time derivative \(\dot x \colon \mathbb I \to \mathbb R^{n}\) such that \eqref{eq:gendae} is fulfilled for all \(t\in I\).
 
 A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed
 
@@ -444,9 +444,9 @@ In order to talk of solutions, we need to define what we understand as a solutio
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in I\).
+  A function \(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in \mathbb I\).
 \item
-  A function \(x \in \mathcal C^1(I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
+  A function \(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
 \item
   An initial condition \eqref{eq:gendaeiniv} is called consistent for the DAE \eqref{eq:gendae}, if there exists at least one solution as defined in 2.
 \end{enumerate}
@@ -724,7 +724,7 @@ Where the block entries are as follows:
   \end{bmatrix}
   \end{equation*}
 \item
-  Every entry \(\mathcal N_{\rho_j}\) is a nilpotent block of size \((\sigma_j)\times \sigma_j)\), \(\sigma_j \in \mathbb N \setminus \{0\}\), of the form
+  Every entry \(\mathcal N_{\sigma_j}\) is a nilpotent block of size \((\sigma_j)\times \sigma_j)\), \(\sigma_j \in \mathbb N \setminus \{0\}\), of the form
   \begin{equation*}
   \lambda 
   \begin{bmatrix}

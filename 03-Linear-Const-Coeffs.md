@@ -135,7 +135,7 @@ Where the block entries are as follows:
    &&& \lambda_j 
    \end{bmatrix}
    \end{equation*}
-4. Every entry $\mathcal N_{\rho_j}$ is a nilpotent block of size $(\sigma_j)\times \sigma_j)$, $\sigma_j \in \mathbb N \setminus \{0\}$, of the form
+4. Every entry $\mathcal N_{\sigma_j}$ is a nilpotent block of size $(\sigma_j)\times \sigma_j)$, $\sigma_j \in \mathbb N \setminus \{0\}$, of the form
    \begin{equation*}
    \lambda 
    \begin{bmatrix}
