@@ -45,7 +45,7 @@ To characterize all scalings and state transformations, we define these operatio
 
 
 ```{definition, label="matrix-pair-equivalent"}
-Two pairs of matrices $(E_1, A_1)$ and $(E_2, A_2$, $E_1$, $A_1$, $E_2$, $A_2 \in \mathbb R^{m,n}$ are called *strongly equivalent*, if there exist regular matrices $P\in \mathbb R^{m,m}$, $Q\in \mathbb R^{n,n}$ such that
+Two pairs of matrices $(E_1, A_1)$ and $(E_2, A_2)$, with $E_1$, $A_1$, $E_2$, $A_2 \in \mathbb R^{m,n}$, are called *strongly equivalent*, if there exist regular matrices $P\in \mathbb R^{m,m}$, $Q\in \mathbb R^{n,n}$ such that
 \begin{equation*}
 E_2 = PE_1Q, \quad A_2 = PA_1Q.
 \end{equation*}
