@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-04-12" />
+<meta name="date" content="2021-04-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -83,6 +83,7 @@
 </ul></li>
 <li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
 <li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
+<li class="chapter" data-level="3.2" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
@@ -164,9 +165,12 @@ This is a state transformation of the system.
 \end{equation}\]</span>
 where <span class="math inline">\(\tilde E = PEQ\)</span>, <span class="math inline">\(\tilde A = PAQ\)</span>, <span class="math inline">\(\tilde f = Pf\)</span>, and <span class="math inline">\(x=Q\tilde x\)</span>.</p>
 <p>To characterize all scalings and state transformations, we define these operations as relations of matrix pairs:</p>
+</div>
+<div id="strong-equivalence-and-canonical-forms" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Strong Equivalence and Canonical Forms</h3>
 
 <div class="definition">
-<span id="def:matrix-pair-equivalent" class="definition"><strong>Definition 3.1  </strong></span>Two pairs of matrices <span class="math inline">\((E_1, A_1)\)</span> and <span class="math inline">\((E_2, A_2\)</span>, <span class="math inline">\(E_1\)</span>, <span class="math inline">\(A_1\)</span>, <span class="math inline">\(E_2\)</span>, <span class="math inline">\(A_2 \in \mathbb R^{m,n}\)</span> are called <em>strongly equivalent</em>, if there exist regular matrices <span class="math inline">\(P\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> such that
+<span id="def:matrix-pair-equivalent" class="definition"><strong>Definition 3.1  </strong></span>Two pairs of matrices <span class="math inline">\((E_1, A_1)\)</span> and <span class="math inline">\((E_2, A_2)\)</span>, with <span class="math inline">\(E_1\)</span>, <span class="math inline">\(A_1\)</span>, <span class="math inline">\(E_2\)</span>, <span class="math inline">\(A_2 \in \mathbb R^{m,n}\)</span>, are called <em>strongly equivalent</em>, if there exist regular matrices <span class="math inline">\(P\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(Q\in \mathbb R^{n,n}\)</span> such that
 <span class="math display">\[\begin{equation*}
 E_2 = PE_1Q, \quad A_2 = PA_1Q.
 \end{equation*}\]</span>
@@ -232,7 +236,7 @@ Where the block entries are as follows:</p>
 &amp;&amp; 1 &amp; 0
 \end{bmatrix}
 \end{equation*}\]</span></li>
-<li>Every entry <span class="math inline">\(\mathcal M_{\eta_j}\)</span> is bidiagonal of size <span class="math inline">\((\eta_j+1)\times \eta_j)\)</span>, <span class="math inline">\(\eta_j \in \mathbb N \cup \{0\}\)</span> of the form
+<li>Every entry <span class="math inline">\(\mathcal M_{\eta_j}\)</span> is bidiagonal of size <span class="math inline">\((\eta_j+1)\times \eta_j\)</span>, <span class="math inline">\(\eta_j \in \mathbb N \cup \{0\}\)</span> of the form
 <span class="math display">\[\begin{equation*}
 \lambda 
 \begin{bmatrix}
@@ -249,7 +253,7 @@ Where the block entries are as follows:</p>
 &amp;&amp; 1 
 \end{bmatrix}
 \end{equation*}\]</span></li>
-<li>Every entry <span class="math inline">\(\mathcal J_{\rho_j}\)</span> is a Jordan block of size <span class="math inline">\((\rho_j)\times \rho_j)\)</span>, <span class="math inline">\(\rho_j \in \mathbb N \setminus \{0\}\)</span>, <span class="math inline">\(\lambda_j \in \mathbb C\)</span> of the form
+<li>Every entry <span class="math inline">\(\mathcal J_{\rho_j}\)</span> is a Jordan block of size <span class="math inline">\(\rho_j\times \rho_j\)</span>, <span class="math inline">\(\rho_j \in \mathbb N \setminus \{0\}\)</span>, <span class="math inline">\(\lambda_j \in \mathbb C\)</span> of the form
 <span class="math display">\[\begin{equation*}
 \lambda 
 \begin{bmatrix}
@@ -266,7 +270,7 @@ Where the block entries are as follows:</p>
 &amp;&amp;&amp; \lambda_j 
 \end{bmatrix}
 \end{equation*}\]</span></li>
-<li>Every entry <span class="math inline">\(\mathcal N_{\sigma_j}\)</span> is a nilpotent block of size <span class="math inline">\((\sigma_j)\times \sigma_j)\)</span>, <span class="math inline">\(\sigma_j \in \mathbb N \setminus \{0\}\)</span>, of the form
+<li>Every entry <span class="math inline">\(\mathcal N_{\sigma_j}\)</span> is a nilpotent block of size <span class="math inline">\(\sigma_j\times \sigma_j\)</span>, <span class="math inline">\(\sigma_j \in \mathbb N \setminus \{0\}\)</span>, of the form
 <span class="math display">\[\begin{equation*}
 \lambda 
 \begin{bmatrix}
@@ -292,45 +296,149 @@ The <em>Kronecker Canonical Form</em> is uniquely defined up to permutations of 
  <span class="proof"><em>Proof. </em></span> Very technical. Can be found, e.g., in the book: Gantmacher (1959) <em>The Theory of Matrices II</em>.
 </div>
 
-<p>Algorithm for computations<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-
-<div class="definition">
-<p><span id="def:drazin-inverse" class="definition"><strong>Definition 3.2  </strong></span>
-Let <span class="math inline">\(E\in \mathbb C^{n,n}\)</span> and <span class="math inline">\(\nu = \operatorname{ind}(E)\)</span>. A matrix <span class="math inline">\(X\in \mathbb C^{n,n}\)</span> that fulfills</p>
-<p><span class="math display" id="eq:def-drazin-c" id="eq:def-drazin-b" id="eq:def-drazin-a">\[\begin{align}
-    EX &amp; = XE, \tag{3.3} \\
-    XEX &amp; = X, \tag{3.4} \\
-    XE^{\nu+1} &amp; = E^{\nu}, \tag{3.5}
-\end{align}\]</span></p>
-is called a <em>Drazin inverse</em> of <span class="math inline">\(E\)</span>.
+<p>Algorithm for computations exist<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> but the computation is notoriously ill posed.</p>
+</div>
+</div>
+<div id="regularity-and-solvability" class="section level2">
+<h2><span class="header-section-number">3.2</span> Regularity and Solvability</h2>
+<p>In what follows we will consider the regular case with, among others, <span class="math inline">\(E\)</span> and <span class="math inline">\(A\)</span> as square matrices.</p>
+<div class="JHSAYS">
+<p>
+Like for solving general equation systems, one can expect well posedness for the case that the numbers of equations equals the number of unknowns. Here <em>squareness</em> of the system is a necessary condition. For sufficiency one further needs that there are no redundant equations or incompatible equations. This is encoded in the <em>regularity</em>.
+</p>
 </div>
 
-<p>With the following theorem we confirm that a Drazin inverse to a matrix <span class="math inline">\(E\)</span> is unique so that we can write <span class="math inline">\(E^D\)</span> for it.</p>
+<div class="definition">
+<span id="def:regularity" class="definition"><strong>Definition 3.2  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span>. The matrix pair <span class="math inline">\((E, A)\)</span> is called <em>regular</em>, if the <em>characteristic polynomial</em> <span class="math inline">\(p\)</span>, defined via
+<span class="math display">\[
+p(\lambda) = \det (\lambda E- A),
+\]</span>
+is not identically zero. If such a matrix pair is not regular, it is called <em>singular</em>.
+</div>
 
-<div class="theorem">
-<p><span id="thm:drazin-inverse-unique" class="theorem"><strong>Theorem 3.2  </strong></span>
-Every matrix <span class="math inline">\(E\in\mathbb{C}^{n,n}\)</span> has one, and only one, Drazin inverse.</p>
+<div class="JHSAYS">
+<p>
+<em>Is not identically zero</em> means that there exists a <span class="math inline"><span class="math inline">\(\lambda_0\)</span></span> such that <span class="math inline"><span class="math inline">\(p(\lambda_0)=\det (\lambda_0 E - A) \neq 0\)</span></span>, i.e. <span class="math inline"><span class="math inline">\(\lambda_0 E - A\)</span></span> is invertible.
+</p>
+</div>
+<div class="JHSAYS">
+<p>
+Since a characteristic polynomial has but a finite numbers of roots (unless it is the <em>zero polynomial</em>), <em>is not identically zero</em> means that <span class="math inline"><span class="math inline">\(p(\lambda) \neq 0\)</span></span> for all but a few <span class="math inline"><span class="math inline">\(\lambda\)</span></span>.
+</p>
+</div>
+<p>Next we show, that <em>regularity</em> is invariant under <em>strong equivalence</em>. This is needed, since we will translate regularity of <span class="math inline">\((E,A)\)</span> to regularity of the associated DAE and we need to ensure that regular scalings and state transformations do not affect regularity.</p>
+
+<div class="lemma">
+<span id="lem:invariance-regularity" class="lemma"><strong>Lemma 3.2  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span>. If <span class="math inline">\((E, A)\)</span> is strongly equivalent to a regular matrix pair, then <span class="math inline">\((E, A)\)</span> is regular.
 </div>
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Uniqueness: Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be two Drazin inverses of <span class="math inline">\(E\)</span>. Then by repeated application of the identities in <a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-a">(3.3)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-c">(3.5)</a> one derives that</p>
-<p><span class="math display">\[\begin{align*}
-X_1 EX_1 E X_2 =   &amp;X_1EX_2 = X_1EX_2EX_2  \\
-X_1^2 E^2 X_2 = \dotsm=   &amp;X_1EX_2 = \dotsm= X_1E^2X_2^2  \\
-X_1^{\nu+1}E^{\nu+1} X_2 =\dotsm=\dotsm=   &amp;X_1EX_2 =\dotsm=\dotsm= X_1E^{\nu+1}X_2^{\nu+1}  \\
-X_1^{\nu+1}E^{\nu+1} X_1 =\dotsm=\dotsm=\dotsm=   &amp;X_1EX_2 =\dotsm=\dotsm=\dotsm= X_2E^{\nu+1}X_2^{\nu+1}  \\
-X_1 =\dotsm=\dotsm=\dotsm=\dotsm=   &amp;X_1EX_2 =\dotsm=\dotsm=\dotsm=\dotsm= X_2, \\
-\end{align*}\]</span></p>
-<p>where in the second last step we used the identities</p>
+ <span class="proof"><em>Proof. </em></span> Let <span class="math inline">\(E_1\)</span>, <span class="math inline">\(A_1 \in \mathbb C^{n, n}\)</span> be similar to <span class="math inline">\((E, A)\)</span>. By definition, there exist invertible <span class="math inline">\(P\)</span>, <span class="math inline">\(Q\in \mathbb C^{n,n}\)</span> such that <span class="math inline">\(\lambda E - A = P(\lambda E_1 -A_1)Q\)</span> for all <span class="math inline">\(\lambda\)</span>. Thus,
 <span class="math display">\[
-    E^{\nu+1}X_1=X_1E^{\nu+1}=E^{\nu}=X_2E^{\nu+1}=E^{\nu+1}X_2.
+\det (\lambda E - A) = \det P \det (\lambda E_1 - A_1) \det Q
 \]</span>
+is not identically zero, since <span class="math inline">\(\det Q\)</span> and <span class="math inline">\(\det P\)</span> are not zero and <span class="math inline">\(\det (\lambda E_1 - A_1)\)</span> is not the zero polynomial.
 </div>
 
+<p>With that we can derive a <em>canonical form</em> for <em>strongly equivalent</em> matrix pairs.</p>
 
-
+<div class="theorem">
+<p><span id="thm:weierstrass-cf" class="theorem"><strong>Theorem 3.2  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span> and <span class="math inline">\((E,A)\)</span> be regular. Then
+<span class="math display" id="eq:weierstrass-cf">\[\begin{equation}
+(E, A) = 
+\left (
+\begin{bmatrix}
+I_{n_1} \\
+&amp; N
+\end{bmatrix}
+,
+\begin{bmatrix}
+J \\
+&amp; I_{n_2}
+\end{bmatrix}
+\right ),
+\tag{3.3}
+\end{equation}\]</span></p>
+<ul>
+<li>where <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2 \in \mathbb N\)</span> such that <span class="math inline">\(n=n_1+n_2\)</span>,</li>
+<li>where <span class="math inline">\(I_{n_1}\)</span> and <span class="math inline">\(I_{n_2}\)</span> denote the identity matrices of size <span class="math inline">\(n_1\times n_1\)</span> and <span class="math inline">\(n_2\times n_2\)</span>, respectively,</li>
+<li>where <span class="math inline">\(J\in \mathbb C^{n_1,n_1}\)</span> is in <em>Jordan canonical form</em>,</li>
+<li>and where <span class="math inline">\(N \in \mathbb C^{n_2,n_2}\)</span> is a <em>nilpotent</em> matrix.</li>
+<li>Moreover, it is allowed that the one or the other block is not present, i.e., <span class="math inline">\(n_1\)</span> or <span class="math inline">\(n_2\)</span> can be zero.</li>
+</ul>
 </div>
+
+<p>Recall that the <em>Jordan canonical form</em> can be achieved for any square matrix <span class="math inline">\(M\in \mathbb C\)</span> by a similarity transformation.</p>
+
+<div class="definition">
+<span id="def:unnamed-chunk-11" class="definition"><strong>Definition 3.3  </strong></span>A matrix <span class="math inline">\(M\in \mathbb C^{n,n}\)</span> is called <em>nilpotent</em>, if there is an <em>index</em> <span class="math inline">\(\nu \in \mathbb N\)</span> such that <span class="math inline">\(N^\nu=0\)</span> whereas <span class="math inline">\(N^{\nu-1} \neq 0\)</span>. In this case, the number <span class="math inline">\(\nu\)</span> is called the <em>index of nilpotency</em>.
+</div>
+
+<div class="JHSAYS">
+<p>
+With the convention that <span class="math inline"><span class="math inline">\(\mathbf 0^0=I\)</span></span>, the zero matrix <span class="math inline"><span class="math inline">\(\mathbf 0 \in \mathbb R^{n,n}\)</span></span> is of (nilpotency) index 1.
+</p>
+</div>
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> To be provided.
+</div>
+
+<p>The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:weierstrass-cf">3.2</a>. In fact, it states that through regular scalings and state transforms, any DAE
+<span class="math display">\[
+E\dot x(t) =  A x(t) + f(t)
+\]</span>
+can be equivalently transformed and split into
+<span class="math display" id="eq:reg-dae-wcf-diffpart">\[\begin{equation}
+\dot x_1(t) = x_1(t) + f_1(t) \tag{3.4}
+\end{equation}\]</span>
+and
+<span class="math display" id="eq:reg-dae-wcf-algpart">\[\begin{equation}
+N \dot x_2(t) = x_2(t) + f_2(t) \tag{3.5},
+\end{equation}\]</span></p>
+<p>i.e</p>
+<ul>
+<li>into an <strong>ODE</strong> <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-diffpart">(3.4)</a> that already is in <em>Jordan canonical form</em></li>
+<li>and a separated(!) <strong>DAE</strong> <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-diffpart">(3.4)</a> of a particular type.</li>
+</ul>
+<p>Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-diffpart">(3.4)</a>.</p>
+<!--
+\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>
+Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 
+
+\begin{align}
+    EX & = XE, (\#eq:def-drazin-a) \\
+    XEX & = X, (\#eq:def-drazin-b) \\
+    XE^{\nu+1} & = E^{\nu}, (\#eq:def-drazin-c)
+\end{align}
+
+is called a *Drazin inverse* of $E$.</div>\EndKnitrBlock{definition}
+
+With the following theorem we confirm that a Drazin inverse to a matrix $E$ is unique so that we can write $E^D$ for it.
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:drazin-inverse-unique"><strong>(\#thm:drazin-inverse-unique) </strong></span>
+Every matrix $E\in\mathbb{C}^{n,n}$ has one, and only one, Drazin inverse.
+</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}Uniqueness: Let $X_1$ and $X_2$ be two Drazin inverses of $E$. Then by repeated application of the identities in \@ref(eq:def-drazin-a)--\@ref(eq:def-drazin-c) one derives that 
+
+\begin{align*}
+X_1 EX_1 E X_2 =   &X_1EX_2 = X_1EX_2EX_2  \\
+X_1^2 E^2 X_2 = \dotsm=   &X_1EX_2 = \dotsm= X_1E^2X_2^2  \\
+X_1^{\nu+1}E^{\nu+1} X_2 =\dotsm=\dotsm=   &X_1EX_2 =\dotsm=\dotsm= X_1E^{\nu+1}X_2^{\nu+1}  \\
+X_1^{\nu+1}E^{\nu+1} X_1 =\dotsm=\dotsm=\dotsm=   &X_1EX_2 =\dotsm=\dotsm=\dotsm= X_2E^{\nu+1}X_2^{\nu+1}  \\
+X_1 =\dotsm=\dotsm=\dotsm=\dotsm=   &X_1EX_2 =\dotsm=\dotsm=\dotsm=\dotsm= X_2, \\
+\end{align*}
+
+where in the second last step we used the identities
+
+$$
+    E^{\nu+1}X_1=X_1E^{\nu+1}=E^{\nu}=X_2E^{\nu+1}=E^{\nu+1}X_2.
+$$</div>\EndKnitrBlock{proof}
+-->
+
+
 </div>
 </div>
 <div class="footnotes">

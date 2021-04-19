@@ -17,11 +17,13 @@ eq:gen-lin-cc-dae-inic
 def:matrix-pair-equivalent
 lem:strong-equivalence-RSI
 thm:kcf
-def:drazin-inverse
-eq:def-drazin-a
-eq:def-drazin-b
-eq:def-drazin-c
-thm:drazin-inverse-unique
+def:regularity
+lem:invariance-regularity
+thm:weierstrass-cf
+eq:weierstrass-cf
+def:unnamed-chunk-11
+eq:reg-dae-wcf-diffpart
+eq:reg-dae-wcf-algpart
 thm:local-canonical-form
 eq:lcf-subspaces
 eq:lcf-quantities
@@ -57,6 +59,8 @@ additional-remarks
 linear-daes-with-constant-coefficients
 basic-notions-and-definitions
 scalings-and-state-transformations
+strong-equivalence-and-canonical-forms
+regularity-and-solvability
 linear-daes-with-time-varying-coefficients
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes
