@@ -234,6 +234,7 @@ J \\
 * where $J\in \mathbb C^{n_1,n_1}$ is in *Jordan canonical form*,
 * and where $N \in \mathbb C^{n_2,n_2}$ is a *nilpotent* matrix.
 * Moreover, it is allowed that the one or the other block is not present, i.e., $n_1$ or $n_2$ can be zero.
+
 ```
 
 Recall that the *Jordan canonical form* can be achieved for any square matrix $M\in \mathbb C$ by a similarity transformation.
