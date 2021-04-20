@@ -229,11 +229,11 @@ Recall that the *Jordan canonical form* can be achieved for any square matrix $M
 
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}To be provided.</div>\EndKnitrBlock{proof}
 
-The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem \@ref(thm:weierstrass-cf). In fact, it states that through regular scalings and state transforms, any DAE 
+The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem \@ref(thm:weierstrass-cf). In fact, it states that through regular scalings and state transforms, any DAE with 
 $$
 E\dot x(t) =  A x(t) + f(t)
 $$
-can be equivalently transformed and split into
+with $(E,A)$ regular can be transformed and split into
 \begin{equation}
 \dot x_1(t) = x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
 \end{equation}
