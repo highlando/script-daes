@@ -245,9 +245,9 @@ N \dot x_2(t) = x_2(t) + f_2(t) (\#eq:reg-dae-wcf-algpart),
 i.e
 
 * into an **ODE** \@ref(eq:reg-dae-wcf-diffpart) that already is in *Jordan canonical form*
-* and a separated(!) **DAE** \@ref(eq:reg-dae-wcf-diffpart) of a particular type.
+* and a separated(!) **DAE** \@ref(eq:reg-dae-wcf-algpart) of a particular type.
 
-Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part \@ref(eq:reg-dae-wcf-diffpart).
+Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part \@ref(eq:reg-dae-wcf-algpart).
 
 
 <!--
