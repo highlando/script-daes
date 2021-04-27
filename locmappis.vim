@@ -9,6 +9,9 @@ imap ,io <CR><esc>C *
 imap ,bg \begin{
 imap ,eq \begin{equation}<CR>\end{equation}<esc>O
 imap ,bbm \begin{bmatrix}<CR>\end{bmatrix}<esc>O
+imap mc \mathcal 
+imap pmo ^{-1}
+imap idr ^{(i)}
 
 imap xil X_{i\ell}
 imap dxil \dot X_{i\ell}
