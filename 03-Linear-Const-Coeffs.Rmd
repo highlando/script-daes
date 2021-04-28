@@ -1,3 +1,7 @@
+<!--
+\newcommand{\ind}{\operatorname{ind}}
+-->
+
 # Linear DAEs with Constant Coefficients
 
 ## Basic Notions and Definitions
@@ -214,7 +218,7 @@ With that we can derive a *canonical form* for *strongly equivalent* matrix pair
 ```{theorem, label="weierstrass-cf"}
 Let $E$, $A \in \mathbb C^{n,n}$ and $(E,A)$ be regular. Then 
 \begin{equation}
-(E, A) = 
+(E, A) \sim 
 \left (
 \begin{bmatrix}
 I_{n_1} \\
@@ -331,9 +335,76 @@ $$
 x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
 $$
 
-2. The definition of the solution $x$ requires $f$ to be $\nu-1$-times differentiable. In order to be a solution according to Definition \@ref(def:dae-solution), $x$ itself has to be differentiable too. Hence the requirement $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$.
+2. The definition of the solution $x$ requires $f$ to be $\nu-1$-times differentiable. In order to be a solution according to Definition \@ref(def:dae-solution), the function $x$ itself has to be differentiable too. Hence the requirement $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$.
 
 3. The index of nilpotency of $N$ defines the necessary smoothness of the right hand side.
+
+```{block, type='JHSAYS'}
+The index of nilpotency in the $N$ part of the [Weierstrass canonical form](#eq:weierstrass-cf) is characteristic for a matrix pair and defines an *index* of the associated DAE.
+```
+
+```{definition, label="matrix-pair-index"}
+Consider a regular matrix pair $(E, A)$ and its Weierstrass canonical form, i.e.
+$$
+(E, A) \sim 
+\left (
+\begin{bmatrix}
+I_{n_1} \\
+& N
+\end{bmatrix}
+,
+\begin{bmatrix}
+J \\
+& I_{n_2}
+\end{bmatrix}
+\right ).
+$$
+The index $\nu$ of nilpotency of $N$ is called the index of the matrix pair $(E, A)$ and we write $\nu = \ind(E, A)$. If $N$ is not present, then we set $\ind(E,A)=0$. 
+```
+
+```{block, type='JHSAYS'}
+Furthermore, for a nilpotent matrix $N$, we will occasionally use the notion $\nu=\ind(N,I)$ to refer to its index of nilpotency. **X**: Is this OK, i.e. consistent? 
+```
+
+To be on the safe side and to learn how to handle block structured matrices in the analysis, we confirm that this definition of the index is well-posed, i.e. for any regular matrix $(E,A)$ there is a unique index $\nu$.
+
+```{block, type='JHSAYS'}
+If one considers the Weierstrass canonical form as a special case of the [Kronecker canonical form](#thm:kcf), then the statement that *the canonical form is well-posed up to permutations in the order of the blocks* already implies that the index is well defined (since it only depends on the size of the largest nilpotent block but not in which order it appears).
+```
+
+```{lemma, label="kronecker-index-well-defined"}
+Suppose that the regular matrix pair $(E, A)$, $E$, $A\in \mathbb R^{n,n}$ has the two canonical forms
+$$
+(E, A) \sim 
+\left (
+\begin{bmatrix}
+I_{d_1} \\
+& N_1
+\end{bmatrix}
+,
+\begin{bmatrix}
+J_1 \\
+& I_{n-d_1}
+\end{bmatrix}
+\right )
+\sim 
+\left (
+\begin{bmatrix}
+I_{d_2} \\
+& N_2
+\end{bmatrix}
+,
+\begin{bmatrix}
+J_2 \\
+& I_{n-d_2}
+\end{bmatrix}
+\right ),
+$$
+where $d_1$, $d_2$ are the size of the Jordan blocks $J_1$, $J_2$, respectively. Then $d_1=d_2=:d$ and the indices of nilpotency of the nilpotent blocks coincide, i.e. $\ind(N_1, I_{n-d}) = \ind(N_2, I_{n-d})$.
+```
+```{proof}
+to be provided.
+```
 
 <!--
 ```{definition, label="drazin-inverse"}

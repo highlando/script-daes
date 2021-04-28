@@ -9,8 +9,8 @@ bibliography: [book.bib]
 biblio-style: apalike
 link-citations: yes
 github-repo: highlando/script-daes
-url: 'http\://janheiland.de/script-daes/'
-description: "Script to my DAE course at the OVGU in Fall 2018"
+url: 'https\://www.janheiland.de/script-daes/'
+description: "Script to my DAE course at the OVGU in Fall 2018 / Spring 2021"
 ---
 
 # Preface {-}
