@@ -27,9 +27,8 @@ eq:reg-dae-wcf-algpart
 eq:ndae
 lem:ndae-explicit-solution
 eq:ndae-exp-solution
-eq:def-drazin-a
-eq:def-drazin-b
-eq:def-drazin-c
+def:matrix-pair-index
+lem:kronecker-index-well-defined
 thm:local-canonical-form
 eq:lcf-subspaces
 eq:lcf-quantities

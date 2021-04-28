@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Linear DAEs with Constant Coefficients | DAEs</title>
-  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
   <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Linear DAEs with Constant Coefficients | DAEs" />
   <meta property="og:type" content="book" />
-  <meta property="og:url" content="http://janheiland.de/script-daes/" />
+  <meta property="og:url" content="https://www.janheiland.de/script-daes/" />
   
-  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta property="og:description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
   <meta name="github-repo" content="highlando/script-daes" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="3 Linear DAEs with Constant Coefficients | DAEs" />
   
-  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018" />
+  <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
   
 
 <meta name="author" content="Jan Heiland" />
@@ -349,7 +349,7 @@ is not identically zero, since <span class="math inline">\(\det Q\)</span> and <
 <div class="theorem">
 <p><span id="thm:weierstrass-cf" class="theorem"><strong>Theorem 3.2  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span> and <span class="math inline">\((E,A)\)</span> be regular. Then
 <span class="math display" id="eq:weierstrass-cf">\[\begin{equation}
-(E, A) = 
+(E, A) \sim 
 \left (
 \begin{bmatrix}
 I_{n_1} \\
@@ -462,20 +462,93 @@ We make three important observations here.
 </div>
 <ol style="list-style-type: decimal">
 <li><p>The solution <span class="math inline">\(x\)</span> to <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> is uniquely defined without specifying a value at <span class="math inline">\(t_0\)</span>. Vice versa, an initial value <span class="math inline">\(x_0\)</span> is consistent if, and only if,
-<span class="math display" id="eq:def-drazin-c" id="eq:def-drazin-b" id="eq:def-drazin-a">\[
+<span class="math display">\[
 x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
 \]</span></p></li>
-<li><p>The definition of the solution <span class="math inline">\(x\)</span> requires <span class="math inline">\(f\)</span> to be <span class="math inline">\(\nu-1\)</span>-times differentiable. In order to be a solution according to Definition <a href="basic-definitions-and-notions.html#def:dae-solution">2.1</a>, <span class="math inline">\(x\)</span> itself has to be differentiable too. Hence the requirement <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>.</p></li>
+<li><p>The definition of the solution <span class="math inline">\(x\)</span> requires <span class="math inline">\(f\)</span> to be <span class="math inline">\(\nu-1\)</span>-times differentiable. In order to be a solution according to Definition <a href="basic-definitions-and-notions.html#def:dae-solution">2.1</a>, the function <span class="math inline">\(x\)</span> itself has to be differentiable too. Hence the requirement <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>.</p></li>
 <li><p>The index of nilpotency of <span class="math inline">\(N\)</span> defines the necessary smoothness of the right hand side.</p></li>
 </ol>
+<div class="JHSAYS">
+<p>
+The index of nilpotency in the <span class="math inline"><span class="math inline">\(N\)</span></span> part of the <a href="linear-daes-with-constant-coefficients.html#eq:weierstrass-cf">Weierstrass canonical form</a> is characteristic for a matrix pair and defines an <em>index</em> of the associated DAE.
+</p>
+</div>
+
+<div class="definition">
+<span id="def:matrix-pair-index" class="definition"><strong>Definition 3.4  </strong></span>Consider a regular matrix pair <span class="math inline">\((E, A)\)</span> and its Weierstrass canonical form, i.e.
+<span class="math display">\[
+(E, A) \sim 
+\left (
+\begin{bmatrix}
+I_{n_1} \\
+&amp; N
+\end{bmatrix}
+,
+\begin{bmatrix}
+J \\
+&amp; I_{n_2}
+\end{bmatrix}
+\right ).
+\]</span>
+The index <span class="math inline">\(\nu\)</span> of nilpotency of <span class="math inline">\(N\)</span> is called the index of the matrix pair <span class="math inline">\((E, A)\)</span> and we write <span class="math inline">\(\nu = \operatorname{ind}(E, A)\)</span>. If <span class="math inline">\(N\)</span> is not present, then we set <span class="math inline">\(\operatorname{ind}(E,A)=0\)</span>.
+</div>
+
+<div class="JHSAYS">
+<p>
+Furthermore, for a nilpotent matrix <span class="math inline"><span class="math inline">\(N\)</span></span>, we will occasionally use the notion <span class="math inline"><span class="math inline">\(\nu=\operatorname{ind}(N,I)\)</span></span> to refer to its index of nilpotency. <strong>X</strong>: Is this OK, i.e. consistent?
+</p>
+</div>
+<p>To be on the safe side and to learn how to handle block structured matrices in the analysis, we confirm that this definition of the index is well-posed, i.e. for any regular matrix <span class="math inline">\((E,A)\)</span> there is a unique index <span class="math inline">\(\nu\)</span>.</p>
+<div class="JHSAYS">
+<p>
+If one considers the Weierstrass canonical form as a special case of the <a href="linear-daes-with-constant-coefficients.html#thm:kcf">Kronecker canonical form</a>, then the statement that <em>the canonical form is well-posed up to permutations in the order of the blocks</em> already implies that the index is well defined (since it only depends on the size of the largest nilpotent block but not in which order it appears).
+</p>
+</div>
+
+<div class="lemma">
+<span id="lem:kronecker-index-well-defined" class="lemma"><strong>Lemma 3.4  </strong></span>Suppose that the regular matrix pair <span class="math inline">\((E, A)\)</span>, <span class="math inline">\(E\)</span>, <span class="math inline">\(A\in \mathbb R^{n,n}\)</span> has the two canonical forms
+<span class="math display">\[
+(E, A) \sim 
+\left (
+\begin{bmatrix}
+I_{d_1} \\
+&amp; N_1
+\end{bmatrix}
+,
+\begin{bmatrix}
+J_1 \\
+&amp; I_{n-d_1}
+\end{bmatrix}
+\right )
+\sim 
+\left (
+\begin{bmatrix}
+I_{d_2} \\
+&amp; N_2
+\end{bmatrix}
+,
+\begin{bmatrix}
+J_2 \\
+&amp; I_{n-d_2}
+\end{bmatrix}
+\right ),
+\]</span>
+where <span class="math inline">\(d_1\)</span>, <span class="math inline">\(d_2\)</span> are the size of the Jordan blocks <span class="math inline">\(J_1\)</span>, <span class="math inline">\(J_2\)</span>, respectively. Then <span class="math inline">\(d_1=d_2=:d\)</span> and the indices of nilpotency of the nilpotent blocks coincide, i.e. <span class="math inline">\(\operatorname{ind}(N_1, I_{n-d}) = \operatorname{ind}(N_2, I_{n-d})\)</span>.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> to be provided.
+</div>
+
 <!--
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>
 Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 
 
 \begin{align}
-    EX & = XE, \tag{3.8} \\
-    XEX & = X, \tag{3.9} \\
-    XE^{\nu+1} & = E^{\nu}, \tag{3.10}
+    EX & = XE, (\#eq:def-drazin-a) \\
+    XEX & = X, (\#eq:def-drazin-b) \\
+    XE^{\nu+1} & = E^{\nu}, (\#eq:def-drazin-c)
 \end{align}
 
 is called a *Drazin inverse* of $E$.</div>\EndKnitrBlock{definition}
