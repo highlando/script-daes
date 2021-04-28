@@ -21,9 +21,15 @@ def:regularity
 lem:invariance-regularity
 thm:weierstrass-cf
 eq:weierstrass-cf
-def:unnamed-chunk-11
+def:nilpotent-matrix
 eq:reg-dae-wcf-diffpart
 eq:reg-dae-wcf-algpart
+eq:ndae
+lem:ndae-explicit-solution
+eq:ndae-exp-solution
+eq:def-drazin-a
+eq:def-drazin-b
+eq:def-drazin-c
 thm:local-canonical-form
 eq:lcf-subspaces
 eq:lcf-quantities

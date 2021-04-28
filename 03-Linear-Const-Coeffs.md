@@ -215,19 +215,20 @@ J \\
 * where $n_1$, $n_2 \in \mathbb N$ such that $n=n_1+n_2$, 
 * where $I_{n_1}$ and $I_{n_2}$ denote the identity matrices of size $n_1\times n_1$ and $n_2\times n_2$, respectively, 
 * where $J\in \mathbb C^{n_1,n_1}$ is in *Jordan canonical form*,
-* and where $N \in \mathbb C^{n_2,n_2}$ is a *nilpotent* matrix.
+* and where $N \in \mathbb C^{n_2,n_2}$ is a [*nilpotent* matrix](#def:nilpotent-matrix).
 * Moreover, it is allowed that the one or the other block is not present, i.e., $n_1$ or $n_2$ can be zero.
 </div>\EndKnitrBlock{theorem}
 
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}To be provided.</div>\EndKnitrBlock{proof}
+
+
 Recall that the *Jordan canonical form* can be achieved for any square matrix $M\in \mathbb C$ by a similarity transformation.
 
-\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:unnamed-chunk-11"><strong>(\#def:unnamed-chunk-11) </strong></span>A matrix $M\in \mathbb C^{n,n}$ is called *nilpotent*, if there is an *index* $\nu \in \mathbb N$ such that $N^\nu=0$ whereas $N^{\nu-1} \neq 0$. In this case, the number $\nu$ is called the *index of nilpotency*.</div>\EndKnitrBlock{definition}
+\BeginKnitrBlock{definition}\iffalse{-91-78-105-108-112-111-116-101-110-116-32-77-97-116-114-105-120-93-}\fi{}<div class="definition"><span class="definition" id="def:nilpotent-matrix"><strong>(\#def:nilpotent-matrix)  \iffalse (Nilpotent Matrix) \fi{} </strong></span>A matrix $M\in \mathbb C^{n,n}$ is called *nilpotent*, if there is an integer $k$ such that $M^k=0$. The smallest such integer *index*, i.e. that $\nu \in \mathbb N$ such that $N^\nu=0$ whereas $N^{\nu-1} \neq 0$ is called the *index of nilpotency* of $M$.</div>\EndKnitrBlock{definition}
 
 <div class="JHSAYS">
 <p>With the convention that <span class="math inline">\(\mathbf 0^0=I\)</span>, the zero matrix <span class="math inline">\(\mathbf 0 \in \mathbb R^{n,n}\)</span> is of (nilpotency) index 1.</p>
 </div>
-
-\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}To be provided.</div>\EndKnitrBlock{proof}
 
 The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem \@ref(thm:weierstrass-cf). In fact, it states that through regular scalings and state transforms, any DAE with 
 $$
@@ -249,6 +250,64 @@ i.e
 
 Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part \@ref(eq:reg-dae-wcf-algpart).
 
+In what follows we will consider the special DAE
+\begin{equation}
+N \dot x(t) = x(t) + f(t) (\#eq:ndae)
+\end{equation}
+with $N \in \mathbb R^{n,n}$ nilpotent with $\nu$ being the [index of nilpotency](#def:nilpotent-matrix).
+For this DAE there is an explicit solution formula:
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:ndae-explicit-solution"><strong>(\#lem:ndae-explicit-solution) </strong></span>Consider \@ref(eq:ndae). If $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$, $n\geq 1$, where $\nu$ is the index of nilpotency of $N$, then \@ref(eq:ndae) has a unique solution given as
+\begin{equation}
+x(t) = - \sum_i^{\nu-1}N^if^{(i)}(t), (\#eq:ndae-exp-solution)
+\end{equation}
+where $f^{(i)}$ denotes the $i$-th derivative of $f$.</div>\EndKnitrBlock{lemma}
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}There are a few ways to prove the explicit form \@ref(eq:ndae-exp-solution)
+
+1. Bring $N$ into Jordan canonical form and prove the formula for the Jordan blocks of arbitrary size by induction.
+
+2. Write \@ref(eq:ndae) as $$(N\frac{d}{dt}-I)x = f$$ and show that^[See the proof of Lemma 2.8 in *Kunkel/Mehrmann*] $$(N\frac{d}{dt}-I)^{-1} = - \sum_i^{\nu-1}N^i\frac{d^i}{dt^i}$$.
+
+3. We take the direct approach as it can be found in the book by Dai^[Dai (1989): *Singular Control Systems*]:
+
+First, we observe that 
+$$
+x = N\dot x - f,
+$$
+that (having multiplied by $N$ and differentiated once)
+$$
+N\dot x = N^2 \ddot x - N \dot f,
+$$
+and that (having muliplied $k$-times by $N$ and differentiated $k$-times)
+$$
+N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
+$$
+<!--
+and that (since $N^\nu=0$)
+$$
+N^{\nu-1} \dot x^{(\nu-1)} = - N^\nu \dot f^{(\nu-1)}.
+$$
+-->
+If one successively replaces $N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}$, $k=1,2,...,\nu-1$ in 
+$$
+x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_i^{\nu-1} N^if^{(i)},
+$$
+with $N^\nu=0$, one arrives at formula \@ref(eq:ndae-exp-solution).
+
+Since this construction holds for any solution, uniqueness is guaranteed too.</div>\EndKnitrBlock{proof}
+
+<div class="JHSAYS">
+<p>We make three important observations here.</p>
+</div>
+
+1. The solution $x$ to \@ref(eq:ndae) is uniquely defined without specifying a value at $t_0$. Vice versa, an initial value $x_0$ is consistent if, and only if,
+$$
+x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
+$$
+
+2. The definition of the solution $x$ requires $f$ to be $\nu-1$-times differentiable. In order to be a solution according to Definition \@ref(def:dae-solution), $x$ itself has to be differentiable too. Hence the requirement $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$.
+
+3. The index of nilpotency of $N$ defines the necessary smoothness of the right hand side.
 
 <!--
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>

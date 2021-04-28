@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-20}
+\date{2021-04-28}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -105,6 +105,8 @@
 \newtheorem{example}{Example}[chapter]
 \theoremstyle{definition}
 \newtheorem{exercise}{Exercise}[chapter]
+\theoremstyle{definition}
+\newtheorem{hypothesis}{Hypothesis}[chapter]
 \theoremstyle{remark}
 \newtheorem*{remark}{Remark}
 \newtheorem*{solution}{Solution}
@@ -831,26 +833,26 @@ J \\
 \item
   where \(J\in \mathbb C^{n_1,n_1}\) is in \emph{Jordan canonical form},
 \item
-  and where \(N \in \mathbb C^{n_2,n_2}\) is a \emph{nilpotent} matrix.
+  and where \(N \in \mathbb C^{n_2,n_2}\) is a \protect\hyperlink{def:nilpotent-matrix}{\emph{nilpotent} matrix}.
 \item
   Moreover, it is allowed that the one or the other block is not present, i.e., \(n_1\) or \(n_2\) can be zero.
 \end{itemize}
 \end{theorem}
 
+\begin{proof}
+\iffalse{} {Proof. } \fi{}To be provided.
+\end{proof}
+
 Recall that the \emph{Jordan canonical form} can be achieved for any square matrix \(M\in \mathbb C\) by a similarity transformation.
 
-\begin{definition}
-\protect\hypertarget{def:unnamed-chunk-11}{}{\label{def:unnamed-chunk-11} }A matrix \(M\in \mathbb C^{n,n}\) is called \emph{nilpotent}, if there is an \emph{index} \(\nu \in \mathbb N\) such that \(N^\nu=0\) whereas \(N^{\nu-1} \neq 0\). In this case, the number \(\nu\) is called the \emph{index of nilpotency}.
+\begin{definition}[Nilpotent Matrix]
+\protect\hypertarget{def:nilpotent-matrix}{}{\label{def:nilpotent-matrix} \iffalse (Nilpotent Matrix) \fi{} }A matrix \(M\in \mathbb C^{n,n}\) is called \emph{nilpotent}, if there is an integer \(k\) such that \(M^k=0\). The smallest such integer \emph{index}, i.e.~that \(\nu \in \mathbb N\) such that \(N^\nu=0\) whereas \(N^{\nu-1} \neq 0\) is called the \emph{index of nilpotency} of \(M\).
 \end{definition}
 
 \begin{JHSAYS}
 With the convention that \(\mathbf 0^0=I\), the zero matrix
 \(\mathbf 0 \in \mathbb R^{n,n}\) is of (nilpotency) index 1.
 \end{JHSAYS}
-
-\begin{proof}
-\iffalse{} {Proof. } \fi{}To be provided.
-\end{proof}
 
 The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem \ref{thm:weierstrass-cf}. In fact, it states that through regular scalings and state transforms, any DAE with
 \[
@@ -876,6 +878,71 @@ i.e
 \end{itemize}
 
 Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part \eqref{eq:reg-dae-wcf-algpart}.
+
+In what follows we will consider the special DAE
+\begin{equation}
+N \dot x(t) = x(t) + f(t) \label{eq:ndae}
+\end{equation}
+with \(N \in \mathbb R^{n,n}\) nilpotent with \(\nu\) being the \protect\hyperlink{def:nilpotent-matrix}{index of nilpotency}.
+For this DAE there is an explicit solution formula:
+
+\begin{lemma}
+\protect\hypertarget{lem:ndae-explicit-solution}{}{\label{lem:ndae-explicit-solution} }Consider \eqref{eq:ndae}. If \(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\), \(n\geq 1\), where \(\nu\) is the index of nilpotency of \(N\), then \eqref{eq:ndae} has a unique solution given as
+\begin{equation}
+x(t) = - \sum_i^{\nu-1}N^if^{(i)}(t), \label{eq:ndae-exp-solution}
+\end{equation}
+where \(f^{(i)}\) denotes the \(i\)-th derivative of \(f\).
+\end{lemma}
+\begin{proof}
+\iffalse{} {Proof. } \fi{}There are a few ways to prove the explicit form \eqref{eq:ndae-exp-solution}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Bring \(N\) into Jordan canonical form and prove the formula for the Jordan blocks of arbitrary size by induction.
+\item
+  Write \eqref{eq:ndae} as \[(N\frac{d}{dt}-I)x = f\] and show that\footnote{See the proof of Lemma 2.8 in \emph{Kunkel/Mehrmann}} \[(N\frac{d}{dt}-I)^{-1} = - \sum_i^{\nu-1}N^i\frac{d^i}{dt^i}\].
+\item
+  We take the direct approach as it can be found in the book by Dai\footnote{Dai (1989): \emph{Singular Control Systems}}:
+\end{enumerate}
+
+First, we observe that
+\[
+x = N\dot x - f,
+\]
+that (having multiplied by \(N\) and differentiated once)
+\[
+N\dot x = N^2 \ddot x - N \dot f,
+\]
+and that (having muliplied \(k\)-times by \(N\) and differentiated \(k\)-times)
+\[
+N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
+\]
+If one successively replaces \(N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}\), \(k=1,2,...,\nu-1\) in
+\[
+x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_i^{\nu-1} N^if^{(i)},
+\]
+with \(N^\nu=0\), one arrives at formula \eqref{eq:ndae-exp-solution}.
+
+Since this construction holds for any solution, uniqueness is guaranteed too.
+\end{proof}
+
+\begin{JHSAYS}
+We make three important observations here.
+\end{JHSAYS}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The solution \(x\) to \eqref{eq:ndae} is uniquely defined without specifying a value at \(t_0\). Vice versa, an initial value \(x_0\) is consistent if, and only if,
+  \[
+  x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
+  \]
+\item
+  The definition of the solution \(x\) requires \(f\) to be \(\nu-1\)-times differentiable. In order to be a solution according to Definition \ref{def:dae-solution}, \(x\) itself has to be differentiable too. Hence the requirement \(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\).
+\item
+  The index of nilpotency of \(N\) defines the necessary smoothness of the right hand side.
+\end{enumerate}
 
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\kernel}{\operatorname{kernel}}
@@ -2020,13 +2087,13 @@ semi-explicit, index-2\strut
 \multicolumn{1}{c}{ } & \multicolumn{6}{c}{RKM} & \multicolumn{6}{c}{BDF} \\
 \cmidrule(l{3pt}r{3pt}){2-7} \cmidrule(l{3pt}r{3pt}){8-13}
 \multicolumn{1}{c}{ } & \multicolumn{3}{c}{unstructured} & \multicolumn{3}{c}{semi-explicit} & \multicolumn{3}{c}{unstructured} & \multicolumn{3}{c}{semi-explicit} \\
-\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10} \cmidrule(l{3pt}r{3pt}){11-13}{}
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7} \cmidrule(l{3pt}r{3pt}){8-10} \cmidrule(l{3pt}r{3pt}){11-13}
 Problem / Index & $*$ & $2$ & $1$ & $*$ & $2$ & $1$ & $*$ & $2$ & $1$ & $*$ & $2$ & $1$\\
-\midrule{}
+\midrule
 \cellcolor{gray!6}{nonlinear} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{c} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{g,i} & \cellcolor{gray!6}{b} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{f} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{h} & \cellcolor{gray!6}{e}\\
 linear TV &  &  & $\cdot$ &  & $\cdot$ & $\cdot$ &  &  & $\cdot$ &  & $\cdot$ & $\cdot$\\
 \cellcolor{gray!6}{linear CC} & \cellcolor{gray!6}{a} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{d} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$} & \cellcolor{gray!6}{$\cdot$}\\
-\bottomrule{}
+\bottomrule
 \end{tabular}
 \end{table}
 
