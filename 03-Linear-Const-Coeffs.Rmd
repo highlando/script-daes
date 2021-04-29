@@ -406,6 +406,72 @@ where $d_1$, $d_2$ are the size of the Jordan blocks $J_1$, $J_2$, respectively.
 to be provided.
 ```
 
+## We are here
+
+```{block, type='JHSAYS'}
+We can now summarize all results and considerations in a theorem.
+```
+
+```{theorem, label="regularity-means-solvability"}
+
+Consider the DAE \@ref(eq:gen-lin-cc-dae) with initial condition \@ref(eq:gen-lin-cc-dae-inic),
+$$
+E \dot x (t) = Ax(t) + f(t), \quad x(t_0) = x_0 \in \mathbb R^{n}.
+$$
+Let the pair $(E, A)$ be [regular](#lem:regularity) and consider the strongly equivalent DAE
+$$
+\tilde E \dot {\tilde x} (t) = \tilde A\tilde x(t) + \tilde f(t), \quad \tilde x(t_0) = \tilde x_0 \in \mathbb R^{n}.
+$$
+with $(\tilde E,\tilde A)$ in Weierstrass canonical form, i.e.
+$$
+\tilde E = 
+\begin{bmatrix}
+I & 0 \\  0 &N 
+\end{bmatrix}, 
+\quad 
+\tilde A = 
+\begin{bmatrix}
+J & 0 \\  0 &I 
+\end{bmatrix}, 
+$$
+and consider the conforming splitting of the transformed variables
+$$
+\tilde x = 
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2
+\end{bmatrix},
+\quad
+\tilde x_0 = 
+\begin{bmatrix}
+\tilde x_{0,1} \\ \tilde x_{0,2}
+\end{bmatrix}.
+$$
+Furthermore, let $\nu$ be the index of the matrix pair $(E,A)$.
+
+If $f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})$, then 
+
+1. The differential algebraic equation \@ref(eq:gen-lin-cc-dae) is solvable.
+
+2. The initial condition $x_0$ in \@ref(eq:gen-lin-cc-dae-inic) is consistent if, and only if, for the transformed initial condition $\tilde x_0$ it holds that
+   $$
+     \tilde x_{2,0} = - \sum_i^{\nu-1}N^i\tilde f^{(i)}(t_0)
+   $$
+   In particular, a consistent initial condition to \@ref(eq:gen-lin-cc-dae) exists.
+
+3. Every initial value problem \@ref(eq:gen-lin-cc-dae)--\@ref(eq:gen-lin-cc-dae-inic) with a consistent initial condition is uniquely solvable.
+
+```
+
+```{proof}
+A summary of the preceding results.
+```
+
+From theorem \@ref(thm:regularity-means-solvability) it follows that regularity of the matrix pairs $(E, A)$ implies the existence of a unique solution to the DAE \@ref(eq:gen-lin-cc-dae) with an initial condition \@ref(eq:gen-lin-cc-dae-inic) provided that the initial condition is consistent.
+
+```{block, type='JHSAYS'}
+The negation of this statement is a bit diffuse because there are several things that *can go wrong* if the DAE is not regular. Depending on the irregularity there might be infinite many solutions to the initial value problem or no solutions at all to the DAE (even without the initial condition). 
+```
+
 <!--
 ```{definition, label="drazin-inverse"}
 
