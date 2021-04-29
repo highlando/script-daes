@@ -29,6 +29,7 @@ lem:ndae-explicit-solution
 eq:ndae-exp-solution
 def:matrix-pair-index
 lem:kronecker-index-well-defined
+thm:regularity-means-solvability
 thm:local-canonical-form
 eq:lcf-subspaces
 eq:lcf-quantities
@@ -66,6 +67,7 @@ basic-notions-and-definitions
 scalings-and-state-transformations
 strong-equivalence-and-canonical-forms
 regularity-and-solvability
+we-are-here
 linear-daes-with-time-varying-coefficients
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes

@@ -374,6 +374,68 @@ $$
 where $d_1$, $d_2$ are the size of the Jordan blocks $J_1$, $J_2$, respectively. Then $d_1=d_2=:d$ and the indices of nilpotency of the nilpotent blocks coincide, i.e. $\ind(N_1, I_{n-d}) = \ind(N_2, I_{n-d})$.</div>\EndKnitrBlock{lemma}
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}to be provided.</div>\EndKnitrBlock{proof}
 
+## We are here
+
+<div class="JHSAYS">
+<p>We can now summarize all results and considerations in a theorem.</p>
+</div>
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:regularity-means-solvability"><strong>(\#thm:regularity-means-solvability) </strong></span>
+Consider the DAE \@ref(eq:gen-lin-cc-dae) with initial condition \@ref(eq:gen-lin-cc-dae-inic),
+$$
+E \dot x (t) = Ax(t) + f(t), \quad x(t_0) = x_0 \in \mathbb R^{n}.
+$$
+Let the pair $(E, A)$ be [regular](#lem:regularity) and consider the strongly equivalent DAE
+$$
+\tilde E \dot {\tilde x} (t) = \tilde A\tilde x(t) + \tilde f(t), \quad \tilde x(t_0) = \tilde x_0 \in \mathbb R^{n}.
+$$
+with $(\tilde E,\tilde A)$ in Weierstrass canonical form, i.e.
+$$
+\tilde E = 
+\begin{bmatrix}
+I & 0 \\  0 &N 
+\end{bmatrix}, 
+\quad 
+\tilde A = 
+\begin{bmatrix}
+J & 0 \\  0 &I 
+\end{bmatrix}, 
+$$
+and consider the conforming splitting of the transformed variables
+$$
+\tilde x = 
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2
+\end{bmatrix},
+\quad
+\tilde x_0 = 
+\begin{bmatrix}
+\tilde x_{0,1} \\ \tilde x_{0,2}
+\end{bmatrix}.
+$$
+Furthermore, let $\nu$ be the index of the matrix pair $(E,A)$.
+
+If $f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})$, then 
+
+1. The differential algebraic equation \@ref(eq:gen-lin-cc-dae) is solvable.
+
+2. The initial condition $x_0$ in \@ref(eq:gen-lin-cc-dae-inic) is consistent if, and only if, for the transformed initial condition $\tilde x_0$ it holds that
+   $$
+     \tilde x_{2,0} = - \sum_i^{\nu-1}N^i\tilde f^{(i)}(t_0)
+   $$
+   In particular, a consistent initial condition to \@ref(eq:gen-lin-cc-dae) exists.
+
+3. Every initial value problem \@ref(eq:gen-lin-cc-dae)--\@ref(eq:gen-lin-cc-dae-inic) with a consistent initial condition is uniquely solvable.
+</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}A summary of the preceding results.</div>\EndKnitrBlock{proof}
+
+From theorem \@ref(thm:regularity-means-solvability) it follows that regularity of the matrix pairs $(E, A)$ implies the existence of a unique solution to the DAE \@ref(eq:gen-lin-cc-dae) with an initial condition \@ref(eq:gen-lin-cc-dae-inic) provided that the initial condition is consistent.
+
+<div class="JHSAYS">
+<p>The negation of this statement is a bit diffuse because there are several things that <em>can go wrong</em> if the DAE is not regular. Depending on the irregularity there might be infinite many solutions to the initial value problem or no solutions at all to the DAE (even without the initial condition).</p>
+</div>
+
 <!--
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>
 Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 

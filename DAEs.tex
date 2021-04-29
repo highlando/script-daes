@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-04-28}
+\date{2021-04-29}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1020,6 +1020,80 @@ where \(d_1\), \(d_2\) are the size of the Jordan blocks \(J_1\), \(J_2\), respe
 \begin{proof}
 \iffalse{} {Proof. } \fi{}to be provided.
 \end{proof}
+
+\hypertarget{we-are-here}{%
+\section{We are here}\label{we-are-here}}
+
+\begin{JHSAYS}
+We can now summarize all results and considerations in a theorem.
+\end{JHSAYS}
+
+\begin{theorem}
+\protect\hypertarget{thm:regularity-means-solvability}{}{\label{thm:regularity-means-solvability} }
+Consider the DAE \eqref{eq:gen-lin-cc-dae} with initial condition \eqref{eq:gen-lin-cc-dae-inic},
+\[
+E \dot x (t) = Ax(t) + f(t), \quad x(t_0) = x_0 \in \mathbb R^{n}.
+\]
+Let the pair \((E, A)\) be \protect\hyperlink{lem:regularity}{regular} and consider the strongly equivalent DAE
+\[
+\tilde E \dot {\tilde x} (t) = \tilde A\tilde x(t) + \tilde f(t), \quad \tilde x(t_0) = \tilde x_0 \in \mathbb R^{n}.
+\]
+with \((\tilde E,\tilde A)\) in Weierstrass canonical form, i.e.
+\[
+\tilde E = 
+\begin{bmatrix}
+I & 0 \\  0 &N 
+\end{bmatrix}, 
+\quad 
+\tilde A = 
+\begin{bmatrix}
+J & 0 \\  0 &I 
+\end{bmatrix}, 
+\]
+and consider the conforming splitting of the transformed variables
+\[
+\tilde x = 
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2
+\end{bmatrix},
+\quad
+\tilde x_0 = 
+\begin{bmatrix}
+\tilde x_{0,1} \\ \tilde x_{0,2}
+\end{bmatrix}.
+\]
+Furthermore, let \(\nu\) be the index of the matrix pair \((E,A)\).
+
+If \(f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})\), then
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  The differential algebraic equation \eqref{eq:gen-lin-cc-dae} is solvable.
+\item
+  The initial condition \(x_0\) in \eqref{eq:gen-lin-cc-dae-inic} is consistent if, and only if, for the transformed initial condition \(\tilde x_0\) it holds that
+  \[
+    \tilde x_{2,0} = - \sum_i^{\nu-1}N^i\tilde f^{(i)}(t_0)
+  \]
+  In particular, a consistent initial condition to \eqref{eq:gen-lin-cc-dae} exists.
+\item
+  Every initial value problem \eqref{eq:gen-lin-cc-dae}--\eqref{eq:gen-lin-cc-dae-inic} with a consistent initial condition is uniquely solvable.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}A summary of the preceding results.
+\end{proof}
+
+From theorem \ref{thm:regularity-means-solvability} it follows that regularity of the matrix pairs \((E, A)\) implies the existence of a unique solution to the DAE \eqref{eq:gen-lin-cc-dae} with an initial condition \eqref{eq:gen-lin-cc-dae-inic} provided that the initial condition is consistent.
+
+\begin{JHSAYS}
+The negation of this statement is a bit diffuse because there are
+several things that \emph{can go wrong} if the DAE is not regular.
+Depending on the irregularity there might be infinite many solutions to
+the initial value problem or no solutions at all to the DAE (even
+without the initial condition).
+\end{JHSAYS}
 
 \newcommand{\rank}{\operatorname{rank}}
 \newcommand{\kernel}{\operatorname{kernel}}
