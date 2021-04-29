@@ -235,9 +235,11 @@ Recall that the *Jordan canonical form* can be achieved for any square matrix $M
 </div>
 
 The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem \@ref(thm:weierstrass-cf). In fact, it states that through regular scalings and state transforms, any DAE with 
+
 $$
 E\dot x(t) =  A x(t) + f(t)
 $$
+
 with $(E,A)$ regular can be transformed and split into
 \begin{equation}
 \dot x_1(t) = x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
@@ -254,6 +256,8 @@ i.e
 
 Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part \@ref(eq:reg-dae-wcf-algpart).
 
+## Solution to the *N-DAE*, Regularity, and Index of a Matrix Pair
+
 In what follows we will consider the special DAE
 \begin{equation}
 N \dot x(t) = x(t) + f(t) (\#eq:ndae)
@@ -263,26 +267,27 @@ For this DAE there is an explicit solution formula:
 
 \BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:ndae-explicit-solution"><strong>(\#lem:ndae-explicit-solution) </strong></span>Consider \@ref(eq:ndae). If $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$, $n\geq 1$, where $\nu$ is the index of nilpotency of $N$, then \@ref(eq:ndae) has a unique solution given as
 \begin{equation}
-x(t) = - \sum_i^{\nu-1}N^if^{(i)}(t), (\#eq:ndae-exp-solution)
+x(t) = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t), (\#eq:ndae-exp-solution)
 \end{equation}
 where $f^{(i)}$ denotes the $i$-th derivative of $f$.</div>\EndKnitrBlock{lemma}
+
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}There are a few ways to prove the explicit form \@ref(eq:ndae-exp-solution)
 
 1. Bring $N$ into Jordan canonical form and prove the formula for the Jordan blocks of arbitrary size by induction.
 
-2. Write \@ref(eq:ndae) as $$(N\frac{d}{dt}-I)x = f$$ and show that^[See the proof of Lemma 2.8 in *Kunkel/Mehrmann*] $$(N\frac{d}{dt}-I)^{-1} = - \sum_i^{\nu-1}N^i\frac{d^i}{dt^i}$$.
+2. Write \@ref(eq:ndae) as $$(N\frac{d}{dt}-I)x = f$$ and show that^[See the proof of Lemma 2.8 in *Kunkel/Mehrmann*] $$(N\frac{d}{dt}-I)^{-1} = - \sum_{i=0}^{\nu-1}N^i\frac{d^i}{dt^i}$$.
 
 3. We take the direct approach as it can be found in the book by Dai^[Dai (1989): *Singular Control Systems*]:
 
-First, we observe that 
+Firstly, we observe that 
 $$
-x = N\dot x - f,
+x = N\dot x - f.
 $$
-that (having multiplied by $N$ and differentiated once)
+Secondly, that (having multiplied by $N$ and differentiated once)
 $$
-N\dot x = N^2 \ddot x - N \dot f,
+N\dot x = N^2 \ddot x - N \dot f.
 $$
-and that (having muliplied $k$-times by $N$ and differentiated $k$-times)
+And, finally, that (having muliplied $k$-times by $N$ and differentiated $k$-times)
 $$
 N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
 $$
@@ -294,7 +299,7 @@ $$
 -->
 If one successively replaces $N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}$, $k=1,2,...,\nu-1$ in 
 $$
-x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_i^{\nu-1} N^if^{(i)},
+x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_{i=0}^{\nu-1} N^if^{(i)},
 $$
 with $N^\nu=0$, one arrives at formula \@ref(eq:ndae-exp-solution).
 
@@ -306,7 +311,7 @@ Since this construction holds for any solution, uniqueness is guaranteed too.</d
 
 1. The solution $x$ to \@ref(eq:ndae) is uniquely defined without specifying a value at $t_0$. Vice versa, an initial value $x_0$ is consistent if, and only if,
 $$
-x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
+x_0 = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t_0)
 $$
 
 2. The definition of the solution $x$ requires $f$ to be $\nu-1$-times differentiable. In order to be a solution according to Definition \@ref(def:dae-solution), the function $x$ itself has to be differentiable too. Hence the requirement $f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})$.
@@ -374,7 +379,7 @@ $$
 where $d_1$, $d_2$ are the size of the Jordan blocks $J_1$, $J_2$, respectively. Then $d_1=d_2=:d$ and the indices of nilpotency of the nilpotent blocks coincide, i.e. $\ind(N_1, I_{n-d}) = \ind(N_2, I_{n-d})$.</div>\EndKnitrBlock{lemma}
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}to be provided.</div>\EndKnitrBlock{proof}
 
-## We are here
+## Existence of Solutions
 
 <div class="JHSAYS">
 <p>We can now summarize all results and considerations in a theorem.</p>
@@ -421,7 +426,7 @@ If $f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})$, then
 
 2. The initial condition $x_0$ in \@ref(eq:gen-lin-cc-dae-inic) is consistent if, and only if, for the transformed initial condition $\tilde x_0$ it holds that
    $$
-     \tilde x_{2,0} = - \sum_i^{\nu-1}N^i\tilde f^{(i)}(t_0)
+     \tilde x_{2,0} = - \sum_{i=0}^{\nu-1}N^i\tilde f^{(i)}(t_0)
    $$
    In particular, a consistent initial condition to \@ref(eq:gen-lin-cc-dae) exists.
 
@@ -430,11 +435,76 @@ If $f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})$, then
 
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}A summary of the preceding results.</div>\EndKnitrBlock{proof}
 
-From theorem \@ref(thm:regularity-means-solvability) it follows that regularity of the matrix pairs $(E, A)$ implies the existence of a unique solution to the DAE \@ref(eq:gen-lin-cc-dae) with an initial condition \@ref(eq:gen-lin-cc-dae-inic) provided that the initial condition is consistent.
+From Theorem \@ref(thm:regularity-means-solvability) it follows that the regularity of the matrix pair $(E, A)$ implies the existence of a unique solution to the DAE \@ref(eq:gen-lin-cc-dae) with an initial condition \@ref(eq:gen-lin-cc-dae-inic) provided that the initial condition is consistent.
 
 <div class="JHSAYS">
 <p>The negation of this statement is a bit diffuse because there are several things that <em>can go wrong</em> if the DAE is not regular. Depending on the irregularity there might be infinite many solutions to the initial value problem or no solutions at all to the DAE (even without the initial condition).</p>
 </div>
+
+The following theorem covers the case of singular or non-square matrix pairs.
+
+\BeginKnitrBlock{theorem}\iffalse{-91-84-104-109-46-32-50-46-49-52-32-105-110-32-42-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-42-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:unnamed-chunk-22"><strong>(\#thm:unnamed-chunk-22)  \iffalse (Thm. 2.14 in *Kunkel/Mehrmann*) \fi{} </strong></span>Let $E$, $A\in \mathbb C^{m,n}$.
+
+1. If $\rank(\lambda E -A) < n$ for all $\lambda \in \mathbb C$, then the *homogeneous* initial value problem 
+   $$ 
+   E\dot x(t) = Ax(t), \quad x(t_0) = 0, 
+   $$
+   has a nontrivial solution.
+
+2. If $\rank(\lambda E -A) < m$ for all $\lambda\in \mathbb C$, then there exist arbitrarily smooth inhomogeneities $f$ for which the DAE \@ref(eq:gen-lin-cc-dae) 
+   $$ 
+   E\dot x(t) = Ax(t)+f(t),
+   $$
+   is not solvable.
+</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}The proof is given for Theorem 2.14 in *Kunkel/Mehrmann* with, however, the second claim being formulated slightly differently. To reduce our formulation to *theirs*, one may identify that columns of $\lambda E - A$ that achieve the maximal rank and split off the redundant columns, e.g., the parts of $x$ associated with them.</div>\EndKnitrBlock{proof}
+
+Note that a nontrivial solution to the *homogeneous* problem, means that existence of one implies infinitely many solutions to the initial value problem. In fact, if $x_h$ is the solution to the homogeneous problem and $x_p$ a solution^[A so-called particular solution. Btw., *all solutions = a particular plus all solutions to the homogeneous problem* is the superposition principle for general linear problems.] to the initial value problem, then $x = x_p + \alpha x_h$ solves the initial value problem for any $\alpha \in \mathbb R$.
+
+To illustrate the difficulties with singular or non-square DAEs, consider the example
+$$
+\begin{bmatrix}
+0 & 1 & \\
+&& 1  \\
+&& 0  \\
+\end{bmatrix}
+\frac{d}{dt}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 & \\
+&& 0  \\
+&& 1  \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\ f_2 \\ f_3
+\end{bmatrix}
+$$
+Here, the first part reads
+$$
+x_1 = \dot x_2
+$$
+which defines a solution $x_2=g$ for any $g \in \mathcal C^2$ and a nontrivial solution to the associated *homogeneous* initial value problem if only $g(t)\neq 0$ for some $t$ but $g(t_0)=\dot g(t_0) = 0$. 
+
+The second part reads
+\begin{align*}
+\dot x_3 &= f_2 \\
+-x_3 &= f_3
+\end{align*}
+which does **not** permit a solution, if $\dot f_3 \neq f_2$.
+
+
+<div class="JHSAYS">
+<p><strong>X</strong>: find such a <span class="math inline">\(g\)</span> for the first part.</p>
+</div>
+
 
 <!--
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>

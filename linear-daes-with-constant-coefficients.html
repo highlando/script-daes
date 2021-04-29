@@ -87,7 +87,8 @@
 <li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
 <li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
 <li class="chapter" data-level="3.2" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
-<li class="chapter" data-level="3.3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#we-are-here"><i class="fa fa-check"></i><b>3.3</b> We are here</a></li>
+<li class="chapter" data-level="3.3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair"><i class="fa fa-check"></i><b>3.3</b> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</a></li>
+<li class="chapter" data-level="3.4" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#existence-of-solutions"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
@@ -389,11 +390,11 @@ J \\
 With the convention that <span class="math inline"><span class="math inline">\(\mathbf 0^0=I\)</span></span>, the zero matrix <span class="math inline"><span class="math inline">\(\mathbf 0 \in \mathbb R^{n,n}\)</span></span> is of (nilpotency) index 1.
 </p>
 </div>
-<p>The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:weierstrass-cf">3.2</a>. In fact, it states that through regular scalings and state transforms, any DAE with
-<span class="math display">\[
+<p>The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:weierstrass-cf">3.2</a>. In fact, it states that through regular scalings and state transforms, any DAE with</p>
+<p><span class="math display">\[
 E\dot x(t) =  A x(t) + f(t)
-\]</span>
-with <span class="math inline">\((E,A)\)</span> regular can be transformed and split into
+\]</span></p>
+<p>with <span class="math inline">\((E,A)\)</span> regular can be transformed and split into
 <span class="math display" id="eq:reg-dae-wcf-diffpart">\[\begin{equation}
 \dot x_1(t) = x_1(t) + f_1(t) \tag{3.4}
 \end{equation}\]</span>
@@ -407,6 +408,9 @@ N \dot x_2(t) = x_2(t) + f_2(t) \tag{3.5},
 <li>and a separated(!) <strong>DAE</strong> <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-algpart">(3.5)</a> of a particular type.</li>
 </ul>
 <p>Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-algpart">(3.5)</a>.</p>
+</div>
+<div id="solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair" class="section level2">
+<h2><span class="header-section-number">3.3</span> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</h2>
 <p>In what follows we will consider the special DAE
 <span class="math display" id="eq:ndae">\[\begin{equation}
 N \dot x(t) = x(t) + f(t) \tag{3.6}
@@ -417,7 +421,7 @@ For this DAE there is an explicit solution formula:</p>
 <div class="lemma">
 <span id="lem:ndae-explicit-solution" class="lemma"><strong>Lemma 3.3  </strong></span>Consider <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a>. If <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>, <span class="math inline">\(n\geq 1\)</span>, where <span class="math inline">\(\nu\)</span> is the index of nilpotency of <span class="math inline">\(N\)</span>, then <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> has a unique solution given as
 <span class="math display" id="eq:ndae-exp-solution">\[\begin{equation}
-x(t) = - \sum_i^{\nu-1}N^if^{(i)}(t), \tag{3.7}
+x(t) = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t), \tag{3.7}
 \end{equation}\]</span>
 where <span class="math inline">\(f^{(i)}\)</span> denotes the <span class="math inline">\(i\)</span>-th derivative of <span class="math inline">\(f\)</span>.
 </div>
@@ -427,18 +431,18 @@ where <span class="math inline">\(f^{(i)}\)</span> denotes the <span class="math
 <p> <span class="proof"><em>Proof. </em></span> There are a few ways to prove the explicit form <a href="linear-daes-with-constant-coefficients.html#eq:ndae-exp-solution">(3.7)</a></p>
 <ol style="list-style-type: decimal">
 <li><p>Bring <span class="math inline">\(N\)</span> into Jordan canonical form and prove the formula for the Jordan blocks of arbitrary size by induction.</p></li>
-<li><p>Write <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> as <span class="math display">\[(N\frac{d}{dt}-I)x = f\]</span> and show that<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> <span class="math display">\[(N\frac{d}{dt}-I)^{-1} = - \sum_i^{\nu-1}N^i\frac{d^i}{dt^i}\]</span>.</p></li>
+<li><p>Write <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> as <span class="math display">\[(N\frac{d}{dt}-I)x = f\]</span> and show that<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> <span class="math display">\[(N\frac{d}{dt}-I)^{-1} = - \sum_{i=0}^{\nu-1}N^i\frac{d^i}{dt^i}\]</span>.</p></li>
 <li><p>We take the direct approach as it can be found in the book by Dai<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>:</p></li>
 </ol>
-<p>First, we observe that
+<p>Firstly, we observe that
 <span class="math display">\[
-x = N\dot x - f,
+x = N\dot x - f.
 \]</span>
-that (having multiplied by <span class="math inline">\(N\)</span> and differentiated once)
+Secondly, that (having multiplied by <span class="math inline">\(N\)</span> and differentiated once)
 <span class="math display">\[
-N\dot x = N^2 \ddot x - N \dot f,
+N\dot x = N^2 \ddot x - N \dot f.
 \]</span>
-and that (having muliplied <span class="math inline">\(k\)</span>-times by <span class="math inline">\(N\)</span> and differentiated <span class="math inline">\(k\)</span>-times)
+And, finally, that (having muliplied <span class="math inline">\(k\)</span>-times by <span class="math inline">\(N\)</span> and differentiated <span class="math inline">\(k\)</span>-times)
 <span class="math display">\[
 N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
 \]</span>
@@ -450,7 +454,7 @@ $$
 -->
 If one successively replaces <span class="math inline">\(N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}\)</span>, <span class="math inline">\(k=1,2,...,\nu-1\)</span> in
 <span class="math display">\[
-x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_i^{\nu-1} N^if^{(i)},
+x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_{i=0}^{\nu-1} N^if^{(i)},
 \]</span>
 with <span class="math inline">\(N^\nu=0\)</span>, one arrives at formula <a href="linear-daes-with-constant-coefficients.html#eq:ndae-exp-solution">(3.7)</a>.</p>
 Since this construction holds for any solution, uniqueness is guaranteed too.
@@ -464,7 +468,7 @@ We make three important observations here.
 <ol style="list-style-type: decimal">
 <li><p>The solution <span class="math inline">\(x\)</span> to <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> is uniquely defined without specifying a value at <span class="math inline">\(t_0\)</span>. Vice versa, an initial value <span class="math inline">\(x_0\)</span> is consistent if, and only if,
 <span class="math display">\[
-x_0 = - \sum_i^{\nu-1}N^if^{(i)}(t_0)
+x_0 = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t_0)
 \]</span></p></li>
 <li><p>The definition of the solution <span class="math inline">\(x\)</span> requires <span class="math inline">\(f\)</span> to be <span class="math inline">\(\nu-1\)</span>-times differentiable. In order to be a solution according to Definition <a href="basic-definitions-and-notions.html#def:dae-solution">2.1</a>, the function <span class="math inline">\(x\)</span> itself has to be differentiable too. Hence the requirement <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>.</p></li>
 <li><p>The index of nilpotency of <span class="math inline">\(N\)</span> defines the necessary smoothness of the right hand side.</p></li>
@@ -543,8 +547,8 @@ where <span class="math inline">\(d_1\)</span>, <span class="math inline">\(d_2\
 </div>
 
 </div>
-<div id="we-are-here" class="section level2">
-<h2><span class="header-section-number">3.3</span> We are here</h2>
+<div id="existence-of-solutions" class="section level2">
+<h2><span class="header-section-number">3.4</span> Existence of Solutions</h2>
 <div class="JHSAYS">
 <p>
 We can now summarize all results and considerations in a theorem.
@@ -591,7 +595,7 @@ Furthermore, let <span class="math inline">\(\nu\)</span> be the index of the ma
 <li><p>The differential algebraic equation <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> is solvable.</p></li>
 <li><p>The initial condition <span class="math inline">\(x_0\)</span> in <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> is consistent if, and only if, for the transformed initial condition <span class="math inline">\(\tilde x_0\)</span> it holds that
 <span class="math display">\[
-  \tilde x_{2,0} = - \sum_i^{\nu-1}N^i\tilde f^{(i)}(t_0)
+  \tilde x_{2,0} = - \sum_{i=0}^{\nu-1}N^i\tilde f^{(i)}(t_0)
 \]</span>
 In particular, a consistent initial condition to <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> exists.</p></li>
 <li>Every initial value problem <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> with a consistent initial condition is uniquely solvable.</li>
@@ -603,10 +607,75 @@ In particular, a consistent initial condition to <a href="linear-daes-with-const
  <span class="proof"><em>Proof. </em></span> A summary of the preceding results.
 </div>
 
-<p>From theorem <a href="linear-daes-with-constant-coefficients.html#thm:regularity-means-solvability">3.3</a> it follows that regularity of the matrix pairs <span class="math inline">\((E, A)\)</span> implies the existence of a unique solution to the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> with an initial condition <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> provided that the initial condition is consistent.</p>
+<p>From Theorem <a href="linear-daes-with-constant-coefficients.html#thm:regularity-means-solvability">3.3</a> it follows that the regularity of the matrix pair <span class="math inline">\((E, A)\)</span> implies the existence of a unique solution to the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> with an initial condition <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> provided that the initial condition is consistent.</p>
 <div class="JHSAYS">
 <p>
 The negation of this statement is a bit diffuse because there are several things that <em>can go wrong</em> if the DAE is not regular. Depending on the irregularity there might be infinite many solutions to the initial value problem or no solutions at all to the DAE (even without the initial condition).
+</p>
+</div>
+<p>The following theorem covers the case of singular or non-square matrix pairs.</p>
+
+<div class="theorem">
+<p><span id="thm:unnamed-chunk-22" class="theorem"><strong>Theorem 3.4  (Thm. 2.14 in <em>Kunkel/Mehrmann</em>)  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A\in \mathbb C^{m,n}\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>If <span class="math inline">\(\operatorname{rank}(\lambda E -A) &lt; n\)</span> for all <span class="math inline">\(\lambda \in \mathbb C\)</span>, then the <em>homogeneous</em> initial value problem
+<span class="math display">\[ 
+E\dot x(t) = Ax(t), \quad x(t_0) = 0, 
+\]</span>
+has a nontrivial solution.</p></li>
+<li>If <span class="math inline">\(\operatorname{rank}(\lambda E -A) &lt; m\)</span> for all <span class="math inline">\(\lambda\in \mathbb C\)</span>, then there exist arbitrarily smooth inhomogeneities <span class="math inline">\(f\)</span> for which the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>
+<span class="math display">\[ 
+E\dot x(t) = Ax(t)+f(t),
+\]</span>
+is not solvable.</li>
+</ol>
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> The proof is given for Theorem 2.14 in <em>Kunkel/Mehrmann</em> with, however, the second claim being formulated slightly differently. To reduce our formulation to <em>theirs</em>, one may identify that columns of <span class="math inline">\(\lambda E - A\)</span> that achieve the maximal rank and split off the redundant columns, e.g., the parts of <span class="math inline">\(x\)</span> associated with them.
+</div>
+
+<p>Note that a nontrivial solution to the <em>homogeneous</em> problem, means that existence of one implies infinitely many solutions to the initial value problem. In fact, if <span class="math inline">\(x_h\)</span> is the solution to the homogeneous problem and <span class="math inline">\(x_p\)</span> a solution<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> to the initial value problem, then <span class="math inline">\(x = x_p + \alpha x_h\)</span> solves the initial value problem for any <span class="math inline">\(\alpha \in \mathbb R\)</span>.</p>
+<p>To illustrate the difficulties with singular or non-square DAEs, consider the example
+<span class="math display">\[
+\begin{bmatrix}
+0 &amp; 1 &amp; \\
+&amp;&amp; 1  \\
+&amp;&amp; 0  \\
+\end{bmatrix}
+\frac{d}{dt}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; \\
+&amp;&amp; 0  \\
+&amp;&amp; 1  \\
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\ x_2 \\ x_3
+\end{bmatrix}
++
+\begin{bmatrix}
+0 \\ f_2 \\ f_3
+\end{bmatrix}
+\]</span>
+Here, the first part reads
+<span class="math display">\[
+x_1 = \dot x_2
+\]</span>
+which defines a solution <span class="math inline">\(x_2=g\)</span> for any <span class="math inline">\(g \in \mathcal C^2\)</span> and a nontrivial solution to the associated <em>homogeneous</em> initial value problem if only <span class="math inline">\(g(t)\neq 0\)</span> for some <span class="math inline">\(t\)</span> but <span class="math inline">\(g(t_0)=\dot g(t_0) = 0\)</span>.</p>
+<p>The second part reads
+<span class="math display">\[\begin{align*}
+\dot x_3 &amp;= f_2 \\
+-x_3 &amp;= f_3
+\end{align*}\]</span>
+which does <strong>not</strong> permit a solution, if <span class="math inline">\(\dot f_3 \neq f_2\)</span>.</p>
+<div class="JHSAYS">
+<p>
+<strong>X</strong>: find such a <span class="math inline"><span class="math inline">\(g\)</span></span> for the first part.
 </p>
 </div>
 <!--
@@ -654,6 +723,7 @@ $$</div>\EndKnitrBlock{proof}
 <li id="fn2"><p>Paul v. Dooren <a href="https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf">The Computation of Kronecker’s Canonical Form of a Singular Pencil</a><a href="linear-daes-with-constant-coefficients.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>See the proof of Lemma 2.8 in <em>Kunkel/Mehrmann</em><a href="linear-daes-with-constant-coefficients.html#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Dai (1989): <em>Singular Control Systems</em><a href="linear-daes-with-constant-coefficients.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>A so-called particular solution. Btw., <em>all solutions = a particular plus all solutions to the homogeneous problem</em> is the superposition principle for general linear problems.<a href="linear-daes-with-constant-coefficients.html#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
