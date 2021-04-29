@@ -377,7 +377,85 @@ J_2 \\
 \right ),
 $$
 where $d_1$, $d_2$ are the size of the Jordan blocks $J_1$, $J_2$, respectively. Then $d_1=d_2=:d$ and the indices of nilpotency of the nilpotent blocks coincide, i.e. $\ind(N_1, I_{n-d}) = \ind(N_2, I_{n-d})$.</div>\EndKnitrBlock{lemma}
-\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}to be provided.</div>\EndKnitrBlock{proof}
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}To show that $d_1=d_2$, without loss of generality, we can assume that $N_i$ are in Jordan form too. This, in particular, means that they are upper triangular with zeros on the diagonal. (If this was not the case, we can use $N_i = T^{-1}\tilde N_i T$ in the arguments below).
+
+Then, we have that the characteristic polynomials
+$$
+\det (\lambda E - A) = \det (\lambda N_i-I_{n-d_i})\det (\lambda I_{d_i} - J_i) = (-1)^{n-d_i}\det (\lambda I_{d_i} - J_i)
+$$
+are polynomials of degree $d_i$, $i=1,2$.
+
+Since the characteristic polynomials of strongly equivalent matrix pairs only differ by a constant factor (see the proof of Lemma \@ref(lem:invariance-regularity)), this implies that $d_1=d_2$.
+
+Now we show, that the indices of nilpotency of $N_1$ and $N_2$ coincide. If the $N$-blocks weren't present, there would be nothing to show. So let's assume that they are there.
+
+Let now be $P$, $Q \in \mathbb R^{n,n}$ that invertible matrices that realize the strong equivalence of the canonical forms, i.e.
+\begin{equation}
+(\#eq:equiv-wcf-i)
+\begin{bmatrix}
+P_{11} & P_{12} \\
+P_{21} & P_{22}
+\end{bmatrix}
+\begin{bmatrix}
+I \\
+& N_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+I \\
+& N_1 
+\end{bmatrix}
+\begin{bmatrix}
+Q_{11} & Q_{12} \\
+Q_{21} & Q_{22}
+\end{bmatrix}
+\end{equation}
+and
+\begin{equation}
+(\#eq:equiv-wcf-ii)
+\begin{bmatrix}
+P_{11} & P_{12} \\
+P_{21} & P_{22}
+\end{bmatrix}
+\begin{bmatrix}
+J_2 \\
+& I 
+\end{bmatrix}
+=
+\begin{bmatrix}
+J_1 \\
+& I 
+\end{bmatrix}
+\begin{bmatrix}
+Q_{11} & Q_{12} \\
+Q_{21} & Q_{22}
+\end{bmatrix},
+\end{equation}
+where $P$ and $Q$ have been partitioned in line with the canonical forms.
+
+Taking the blockwise matrix product and equating the blocks separately, the following relations are obtained:
+
+| Block: | (1,1) | (1,2) | (2,1) | (2,2)|
+| --- | :---: | :---: | :---: | :---: |
+| \@ref(eq:equiv-wcf-i): | $P_{11}=Q_{11}$ | $P_{12}N_2=Q_{12}$ | $P_{21}=N_1Q_{21}$ | $P_{22}N_2=N_1Q_{22}$|
+| \@ref(eq:equiv-wcf-ii): | $P_{11}J_2=J_1Q_{11}$ | $P_{12}=J_1Q_{12}$ | $P_{21}J_2=Q_{21}$ | $P_{22}=Q_{22}$|
+
+If we combine the **(2,1)** blocks, we obtain that
+$$
+P_{21}=N_1Q_{21}=N_1P_{21}J_2=N_1^2P_{21}J_2^2=N_1^3P_{21}J_2^3=\dotsc=0
+$$
+since $N_1$ is nilpotent.
+
+Since $P$ is invertible and, because of $P_{21}=0$, block upper triangular, the blocks on the diagonals $P_{11}$ and $P_{22}$ must be invertible. With $Q_{22}=P_{22}$ the **(2,2)** block of \@ref(eq:equiv-wcf-i) implies that 
+$$
+N_2 = P_{22}^{-1}N_1P_{22}
+$$
+and, further,
+$$
+N_2^k = P_{22}^{-1}N_1^kP_{22}
+$$
+for all $k\in\mathbb N$. So that a power $N_2^k=0$ if, and only if, $N_1^k=0$. Consequently, the indices of nilpotency of $N_1$ and $N_2$ coincide.</div>\EndKnitrBlock{proof}
+
 
 ## Existence of Solutions
 
@@ -460,7 +538,7 @@ The following theorem covers the case of singular or non-square matrix pairs.
 
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}The proof is given for Theorem 2.14 in *Kunkel/Mehrmann* with, however, the second claim being formulated slightly differently. To reduce our formulation to *theirs*, one may identify that columns of $\lambda E - A$ that achieve the maximal rank and split off the redundant columns, e.g., the parts of $x$ associated with them.</div>\EndKnitrBlock{proof}
 
-Note that a nontrivial solution to the *homogeneous* problem, means that existence of one implies infinitely many solutions to the initial value problem. In fact, if $x_h$ is the solution to the homogeneous problem and $x_p$ a solution^[A so-called particular solution. Btw., *all solutions = a particular plus all solutions to the homogeneous problem* is the superposition principle for general linear problems.] to the initial value problem, then $x = x_p + \alpha x_h$ solves the initial value problem for any $\alpha \in \mathbb R$.
+Note that a nontrivial solution to the *homogeneous* problem, means that existence of **a** solution implies **infinitely many** solutions to the initial value problem. In fact, if $x_h$ is the solution to the homogeneous problem and $x_p$ a solution^[A so-called particular solution. Btw., *all solutions = a particular plus all solutions to the homogeneous problem* is the superposition principle for general linear problems.] to the initial value problem, then $x = x_p + \alpha x_h$ solves the initial value problem for any $\alpha \in \mathbb R$.
 
 To illustrate the difficulties with singular or non-square DAEs, consider the example
 $$
@@ -498,7 +576,7 @@ The second part reads
 \dot x_3 &= f_2 \\
 -x_3 &= f_3
 \end{align*}
-which does **not** permit a solution, if $\dot f_3 \neq f_2$.
+which does **not** permit a solution, if ${\dot{f}}_3 \neq f_2$.
 
 
 <div class="JHSAYS">

@@ -543,7 +543,106 @@ where <span class="math inline">\(d_1\)</span>, <span class="math inline">\(d_2\
 
 
 <div class="proof">
- <span class="proof"><em>Proof. </em></span> to be provided.
+<p> <span class="proof"><em>Proof. </em></span> To show that <span class="math inline">\(d_1=d_2\)</span>, without loss of generality, we can assume that <span class="math inline">\(N_i\)</span> are in Jordan form too. This, in particular, means that they are upper triangular with zeros on the diagonal. (If this was not the case, we can use <span class="math inline">\(N_i = T^{-1}\tilde N_i T\)</span> in the arguments below).</p>
+<p>Then, we have that the characteristic polynomials
+<span class="math display">\[
+\det (\lambda E - A) = \det (\lambda N_i-I_{n-d_i})\det (\lambda I_{d_i} - J_i) = (-1)^{n-d_i}\det (\lambda I_{d_i} - J_i)
+\]</span>
+are polynomials of degree <span class="math inline">\(d_i\)</span>, <span class="math inline">\(i=1,2\)</span>.</p>
+<p>Since the characteristic polynomials of strongly equivalent matrix pairs only differ by a constant factor (see the proof of Lemma <a href="linear-daes-with-constant-coefficients.html#lem:invariance-regularity">3.2</a>), this implies that <span class="math inline">\(d_1=d_2\)</span>.</p>
+<p>Now we show, that the indices of nilpotency of <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> coincide. If the <span class="math inline">\(N\)</span>-blocks weren’t present, there would be nothing to show. So let’s assume that they are there.</p>
+<p>Let now be <span class="math inline">\(P\)</span>, <span class="math inline">\(Q \in \mathbb R^{n,n}\)</span> that invertible matrices that realize the strong equivalence of the canonical forms, i.e.
+<span class="math display" id="eq:equiv-wcf-i">\[\begin{equation}
+\tag{3.8}
+\begin{bmatrix}
+P_{11} &amp; P_{12} \\
+P_{21} &amp; P_{22}
+\end{bmatrix}
+\begin{bmatrix}
+I \\
+&amp; N_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+I \\
+&amp; N_1 
+\end{bmatrix}
+\begin{bmatrix}
+Q_{11} &amp; Q_{12} \\
+Q_{21} &amp; Q_{22}
+\end{bmatrix}
+\end{equation}\]</span>
+and
+<span class="math display" id="eq:equiv-wcf-ii">\[\begin{equation}
+\tag{3.9}
+\begin{bmatrix}
+P_{11} &amp; P_{12} \\
+P_{21} &amp; P_{22}
+\end{bmatrix}
+\begin{bmatrix}
+J_2 \\
+&amp; I 
+\end{bmatrix}
+=
+\begin{bmatrix}
+J_1 \\
+&amp; I 
+\end{bmatrix}
+\begin{bmatrix}
+Q_{11} &amp; Q_{12} \\
+Q_{21} &amp; Q_{22}
+\end{bmatrix},
+\end{equation}\]</span>
+where <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> have been partitioned in line with the canonical forms.</p>
+<p>Taking the blockwise matrix product and equating the blocks separately, the following relations are obtained:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="13%" />
+<col width="21%" />
+<col width="21%" />
+<col width="21%" />
+<col width="21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Block:</th>
+<th align="center">(1,1)</th>
+<th align="center">(1,2)</th>
+<th align="center">(2,1)</th>
+<th align="center">(2,2)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-i">(3.8)</a>:</td>
+<td align="center"><span class="math inline">\(P_{11}=Q_{11}\)</span></td>
+<td align="center"><span class="math inline">\(P_{12}N_2=Q_{12}\)</span></td>
+<td align="center"><span class="math inline">\(P_{21}=N_1Q_{21}\)</span></td>
+<td align="center"><span class="math inline">\(P_{22}N_2=N_1Q_{22}\)</span></td>
+</tr>
+<tr class="even">
+<td><a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-ii">(3.9)</a>:</td>
+<td align="center"><span class="math inline">\(P_{11}J_2=J_1Q_{11}\)</span></td>
+<td align="center"><span class="math inline">\(P_{12}=J_1Q_{12}\)</span></td>
+<td align="center"><span class="math inline">\(P_{21}J_2=Q_{21}\)</span></td>
+<td align="center"><span class="math inline">\(P_{22}=Q_{22}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>If we combine the <strong>(2,1)</strong> blocks, we obtain that
+<span class="math display">\[
+P_{21}=N_1Q_{21}=N_1P_{21}J_2=N_1^2P_{21}J_2^2=N_1^3P_{21}J_2^3=\dotsc=0
+\]</span>
+since <span class="math inline">\(N_1\)</span> is nilpotent.</p>
+Since <span class="math inline">\(P\)</span> is invertible and, because of <span class="math inline">\(P_{21}=0\)</span>, block upper triangular, the blocks on the diagonals <span class="math inline">\(P_{11}\)</span> and <span class="math inline">\(P_{22}\)</span> must be invertible. With <span class="math inline">\(Q_{22}=P_{22}\)</span> the <strong>(2,2)</strong> block of <a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-i">(3.8)</a> implies that
+<span class="math display">\[
+N_2 = P_{22}^{-1}N_1P_{22}
+\]</span>
+and, further,
+<span class="math display">\[
+N_2^k = P_{22}^{-1}N_1^kP_{22}
+\]</span>
+for all <span class="math inline">\(k\in\mathbb N\)</span>. So that a power <span class="math inline">\(N_2^k=0\)</span> if, and only if, <span class="math inline">\(N_1^k=0\)</span>. Consequently, the indices of nilpotency of <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> coincide.
 </div>
 
 </div>
@@ -636,7 +735,7 @@ is not solvable.</li>
  <span class="proof"><em>Proof. </em></span> The proof is given for Theorem 2.14 in <em>Kunkel/Mehrmann</em> with, however, the second claim being formulated slightly differently. To reduce our formulation to <em>theirs</em>, one may identify that columns of <span class="math inline">\(\lambda E - A\)</span> that achieve the maximal rank and split off the redundant columns, e.g., the parts of <span class="math inline">\(x\)</span> associated with them.
 </div>
 
-<p>Note that a nontrivial solution to the <em>homogeneous</em> problem, means that existence of one implies infinitely many solutions to the initial value problem. In fact, if <span class="math inline">\(x_h\)</span> is the solution to the homogeneous problem and <span class="math inline">\(x_p\)</span> a solution<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> to the initial value problem, then <span class="math inline">\(x = x_p + \alpha x_h\)</span> solves the initial value problem for any <span class="math inline">\(\alpha \in \mathbb R\)</span>.</p>
+<p>Note that a nontrivial solution to the <em>homogeneous</em> problem, means that existence of <strong>a</strong> solution implies <strong>infinitely many</strong> solutions to the initial value problem. In fact, if <span class="math inline">\(x_h\)</span> is the solution to the homogeneous problem and <span class="math inline">\(x_p\)</span> a solution<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a> to the initial value problem, then <span class="math inline">\(x = x_p + \alpha x_h\)</span> solves the initial value problem for any <span class="math inline">\(\alpha \in \mathbb R\)</span>.</p>
 <p>To illustrate the difficulties with singular or non-square DAEs, consider the example
 <span class="math display">\[
 \begin{bmatrix}
@@ -672,7 +771,7 @@ which defines a solution <span class="math inline">\(x_2=g\)</span> for any <spa
 \dot x_3 &amp;= f_2 \\
 -x_3 &amp;= f_3
 \end{align*}\]</span>
-which does <strong>not</strong> permit a solution, if <span class="math inline">\(\dot f_3 \neq f_2\)</span>.</p>
+which does <strong>not</strong> permit a solution, if <span class="math inline">\({\dot{f}}_3 \neq f_2\)</span>.</p>
 <div class="JHSAYS">
 <p>
 <strong>X</strong>: find such a <span class="math inline"><span class="math inline">\(g\)</span></span> for the first part.

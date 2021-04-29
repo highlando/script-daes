@@ -29,6 +29,8 @@ lem:ndae-explicit-solution
 eq:ndae-exp-solution
 def:matrix-pair-index
 lem:kronecker-index-well-defined
+eq:equiv-wcf-i
+eq:equiv-wcf-ii
 thm:regularity-means-solvability
 thm:unnamed-chunk-22
 thm:local-canonical-form
