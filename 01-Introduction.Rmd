@@ -1,4 +1,7 @@
 \newcommand{\ind}{\operatorname{ind}}
+\newcommand{\rank}{\operatorname{rank}}
+<!--
+-->
 
 # Introduction
 

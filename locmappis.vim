@@ -12,6 +12,8 @@ imap ,bbm \begin{bmatrix}<CR>\end{bmatrix}<esc>O
 imap mc \mathcal 
 imap pmo ^{-1}
 imap idr ^{(i)}
+imap kk \
+imap ii $
 
 imap xil X_{i\ell}
 imap dxil \dot X_{i\ell}

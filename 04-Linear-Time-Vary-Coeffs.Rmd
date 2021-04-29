@@ -1,4 +1,3 @@
-\newcommand{\rank}{\operatorname{rank}}
 \newcommand{\kernel}{\operatorname{kernel}}
 \newcommand{\corange}{\operatorname{corange}}
 \newcommand{\range}{\operatorname{range}}
