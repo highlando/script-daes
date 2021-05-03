@@ -11,6 +11,7 @@ imap ,eq \begin{equation}<CR>\end{equation}<esc>O
 imap ,bbm \begin{bmatrix}<CR>\end{bmatrix}<esc>O
 imap mc \mathcal 
 imap pmo ^{-1}
+imap pmd ^{D}
 imap idr ^{(i)}
 imap kk \
 imap ii $
