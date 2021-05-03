@@ -895,13 +895,13 @@ For this DAE there is an explicit solution formula:
 \begin{lemma}
 \protect\hypertarget{lem:ndae-explicit-solution}{}{\label{lem:ndae-explicit-solution} }Consider \eqref{eq:ndae}. If \(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\), \(n\geq 1\), where \(\nu\) is the index of nilpotency of \(N\), then \eqref{eq:ndae} has a unique solution given as
 \begin{equation}
-x(t) = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t), \label{eq:ndae-exp-solution}
+x(t) = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t), \label{eq:iii-ndae-exp-solution}
 \end{equation}
 where \(f^{(i)}\) denotes the \(i\)-th derivative of \(f\).
 \end{lemma}
 
 \begin{proof}
-\iffalse{} {Proof. } \fi{}There are a few ways to prove the explicit form \eqref{eq:ndae-exp-solution}
+\iffalse{} {Proof. } \fi{}There are a few ways to prove the explicit form \eqref{eq:iii-ndae-exp-solution}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -929,7 +929,7 @@ If one successively replaces \(N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}\), \(k=1,2
 \[
 x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_{i=0}^{\nu-1} N^if^{(i)},
 \]
-with \(N^\nu=0\), one arrives at formula \eqref{eq:ndae-exp-solution}.
+with \(N^\nu=0\), one arrives at formula \eqref{eq:iii-ndae-exp-solution}.
 
 Since this construction holds for any solution, uniqueness is guaranteed too.
 \end{proof}
@@ -1289,7 +1289,13 @@ which does \textbf{not} permit a solution, if \({\dot{f}}_3 \neq f_2\).
 
 In this section, we want to derive an explicit solution formula for linear DAEs with constant coefficients \(E\dot x(t) = Ax(t)+f(t)\) similar to the formula that exist for linear time-invariant (i.e.~with constant coefficients) ODEs.
 
-Certainly, a solution formula is given through the transformation to the Weierstrass canonical form and through \eqref{eq:ndae-exp-solution}. This however is not an explicit solution representation in so far as both the coefficients and the solution \(x\) itself had to be undertaken a transformation first.
+\begin{JHSAYS}
+Certainly, a solution formula is given through the transformation to the
+Weierstrass canonical form and through \eqref{eq:iii-ndae-exp-solution}.
+This however is not an explicit solution representation in so far as
+both the coefficients and the solution \(x\) itself had to be undertaken
+a transformation first.
+\end{JHSAYS}
 
 \hypertarget{the-outline-for-deriving-the-explicit-formula}{%
 \subsection*{The outline for deriving the explicit formula}\label{the-outline-for-deriving-the-explicit-formula}}
@@ -1299,17 +1305,115 @@ The following derivations and arguments base on two major components
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
-\item
-  Representation of solutions as \(x=x_h+x_p\)
-\item
-  Additive splitting of DAEs into nilpotent and almost ODE parts:
-\end{enumerate}
-
-\begin{itemize}
 \tightlist
 \item
-  Motivation: Duhamel for \(E\dot x = x\)
-\end{itemize}
+  Representation of solutions as \(x=x_h+x_p\), where
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(x_h\) describes all solutions to the \emph{homogeneous} problem \(E\dot x = Ax\) and
+  \item
+    \(x_p\) denotes a (so-called \emph{particular}) solution to \(E\dot x = Ax + f\).
+  \end{itemize}
+\item
+  Additive splitting of DAEs into nilpotent and almost ODE parts, in the way that \(x\) solves \(E\dot x = Ax+f\), if, and only if, \(x=x_1+x_2\) where \(x_1\) and \(x_2\) fulfill
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(\tilde C \dot x_1 = A x_1 + f_1\), with \(\tilde C\) \emph{almost invertible}
+  \item
+    \(\tilde N \dot x_2 = A x_2 + f_2\), with \(\tilde N\) nilpotent.
+  \end{itemize}
+\end{enumerate}
+
+We start with defining what was meant by \emph{almost invertible}. For that consider the differential equation
+\[
+E\dot x(t) = x(t), \quad x(t_0) = x_0 \label{eq:iii-sdae-edx-x}
+\]
+with \(E\in \mathbb C^{n,n}\).
+
+If \(E\) was invertible, then the unique solution to \eqref{eq:iii-sdae-edx-x} would be given as
+\[
+x(t) = e^{(t-t_0)E^{-1}}x_0.
+\]
+If \(E\) is not invertible, then there exists a matrix \(T\in \mathbb R^{n,n}\), invertible, that brings \(E\) into Jordan canonical form \(J=T^{-1}ET\) so that \eqref{eq:iii-sdae-edx-x} becomes
+\[
+T^{-1}ET \dot x(t)= 
+\begin{bmatrix}
+C \\ & N
+\end{bmatrix}
+\begin{bmatrix}
+\dot x_1(t) \\ \dot x_2(t)
+\end{bmatrix}
+=
+\begin{bmatrix}
+I \\ & I
+\end{bmatrix}
+\begin{bmatrix}
+x_1(t) \\ x_2(t)
+\end{bmatrix},
+\quad 
+\begin{bmatrix}
+ x_1(t_0) \\ x_2(t_0)
+\end{bmatrix}
+=
+\begin{bmatrix}
+ x_{1,0} \\ x_{2,0}
+\end{bmatrix}
+=T^{-1}x_0,
+\]
+with \(C\) being invertible and \(N\) nilpotent.
+
+Since there is no right hand side, by the formula \eqref{eq:iii-ndae-exp-solution} for the special DAE \(N\dot x=x+f\), we conclude that \(x_2=0\), so that only the ODE part \(C\dot x_1 = x_1\) remains and the overall solution writes
+\[
+\begin{bmatrix}
+x_1(t) \\ x_2(t)
+\end{bmatrix}=
+\begin{bmatrix}
+e^{(t-t_0)C^{-1}} \\ & 0
+\end{bmatrix}
+\begin{bmatrix}
+ x_{1,0} \\ x_{2,0}
+\end{bmatrix}.
+\]
+If we define
+\[
+J^D = 
+\begin{bmatrix}
+C \\ & N
+\end{bmatrix}^D
+:=
+\begin{bmatrix}
+C^{-1} \\ & 0
+\end{bmatrix},
+\]
+the solution to \eqref{eq:iii-sdae-edx-x} can be expressed as
+\[
+Tx(t) = e^{(t-t_0)J^D}Tx_0
+\]
+or with
+\[
+E^D := T^{-1}J^{D}T, \quad e^{(t-t_0)T^{-1}J^{D}T} = T^{-1}e^{(t-t_0)J^{D}}T
+\]
+as
+\[
+x(t) = e^{(t-t_0)E^D}x_0.
+\]
+
+A few observations
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The formula looks like the solution formula for the ODE case.
+\item
+  In fact, if \(E\) is invertible, then \(E^{D}=E^{-1}\) and the formulas coincide.
+\item
+  Thus, \(E^D\) is a generalized inverse -- the so-called \emph{Drazin} inverse.
+\end{enumerate}
 
 \begin{definition}
 \protect\hypertarget{def:drazin-inverse}{}{\label{def:drazin-inverse} }

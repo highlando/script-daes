@@ -26,13 +26,14 @@ eq:reg-dae-wcf-diffpart
 eq:reg-dae-wcf-algpart
 eq:ndae
 lem:ndae-explicit-solution
-eq:ndae-exp-solution
+eq:iii-ndae-exp-solution
 def:matrix-pair-index
 lem:kronecker-index-well-defined
 eq:equiv-wcf-i
 eq:equiv-wcf-ii
 thm:regularity-means-solvability
 thm:unnamed-chunk-22
+eq:iii-sdae-edx-x
 def:drazin-inverse
 eq:def-drazin-a
 eq:def-drazin-b
