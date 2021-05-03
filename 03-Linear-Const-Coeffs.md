@@ -583,8 +583,23 @@ which does **not** permit a solution, if ${\dot{f}}_3 \neq f_2$.
 <p><strong>X</strong>: find such a <span class="math inline">\(g\)</span> for the first part.</p>
 </div>
 
+## A Variation of Constant Formula
 
-<!--
+In this section, we want to derive an explicit solution formula for linear DAEs with constant coefficients $E\dot x(t) = Ax(t)+f(t)$ similar to the formula that exist for linear time-invariant (i.e. with constant coefficients) ODEs.
+
+Certainly, a solution formula is given through the transformation to the Weierstrass canonical form and through \@ref(eq:ndae-exp-solution). This however is not an explicit solution representation in so far as both the coefficients and the solution $x$ itself had to be undertaken a transformation first.
+
+### The outline for deriving the explicit formula {-}
+
+The following derivations and arguments base on two major components
+
+1. Representation of solutions as $x=x_h+x_p$
+
+2. Additive splitting of DAEs into nilpotent and almost ODE parts:
+
+
+* Motivation: Duhamel for $E\dot x = x$
+
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:drazin-inverse"><strong>(\#def:drazin-inverse) </strong></span>
 Let $E\in \mathbb C^{n,n}$ and $\nu = \ind(E)$. A matrix $X\in \mathbb C^{n,n}$ that fulfills 
 
@@ -617,6 +632,64 @@ where in the second last step we used the identities
 $$
 	E^{\nu+1}X_1=X_1E^{\nu+1}=E^{\nu}=X_2E^{\nu+1}=E^{\nu+1}X_2.
 $$</div>\EndKnitrBlock{proof}
--->
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:ae-commute-ade-commute"><strong>(\#lem:ae-commute-ade-commute) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ commuting, i.e. $EA=AE$. Then also
+\begin{equation}
+EA^D = A^DE. (\#eq:commute-ea-ead-ade)
+\end{equation}</div>\EndKnitrBlock{lemma}
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:decomposition-e-cpn"><strong>(\#thm:decomposition-e-cpn) </strong></span>Let $E\in \mathbb C^{n,n}$ with $\nu = \ind E$. Then there exists a unique decomposition
+$$
+E=\tilde C + \tilde N
+$$
+with the properties
+\begin{align}
+\tilde C \tilde N = \tilde N \tilde C = 0, (\#eq:tctn-tntc-zero) \\
+\tilde N^\nu = 0, \quad \tilde N^{\nu-1} \neq 0, (\#eq:tn-nilpotent)\\
+\ind  \tilde C \leq 1, (\#eq:tc-index-1)
+\end{align}
+and, in particular
+\begin{align}
+\tilde C = EE^DE, \quad \tilde N = E(I - E^DE). (\#eq:def-tc-tn)
+\end{align}
+</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}
+1. Show that such a decomposition with the properties \@ref(eq:tctn-tntc-zero)-\@ref(eq:tc-index-1) also fulfills \@ref(eq:def-tc-tn), i.e. existence.
+
+2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. uniqueness.
+</div>\EndKnitrBlock{proof}
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:exp-formula-homogeneous-problem"><strong>(\#thm:exp-formula-homogeneous-problem) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ commuting, i.e. $EA=AE$, and let $(E,A)$ be regular. Then every solution $x\in \mathcal C^1(\mathcal I, \mathbb C^n)$ of $E\dot x=Ax$ has the form
+\begin{equation}
+x(t) = e^{E^DAt}E^DEv
+\end{equation}
+for some $v\in \mathbb C^n$.</div>\EndKnitrBlock{theorem}
+
+<div class="JHSAYS">
+<p>It remains to find <strong>a</strong> particular solution.</p>
+</div>
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:exp-formula-particular-solution"><strong>(\#thm:exp-formula-particular-solution) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ commuting, i.e. $EA=AE$, and let $(E,A)$ be regular. Let $f\in \mathcal C^\nu(\mathcal I, \mathbb C^n)$ with $\nu = \ind E$. Then $x\in \mathcal C^1(\mathcal I, \mathbb C^n)$ defined by
+$$
+x(t) = \int_{t_0}^t e^{E^DA(t-s)}E^Df(s)ds - (I-E^DE)\sum_{i=0}^{\nu-1}(EA^D)^iA^Df^{(i)}(t)
+$$
+is a particular solution of $E\dot x(t) = Ax(t)+f(t)$.</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:explicit-sol-representation"><strong>(\#thm:explicit-sol-representation) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ commuting, i.e. $EA=AE$, and let $(E,A)$ be regular. Let $f\in \mathcal C^\nu(\mathcal I, \mathbb C^n)$ with $\nu = \ind E$. Then every solution $x\in \mathcal C^1(\mathcal I, \mathbb C^n)$ to $E\dot x(t) = Ax(t)+f(t)$ has the representation 
+$$
+x(t) = e^{(t-t_0)E^DA}E^DEv +\int_{t_0}^t e^{E^DA(t-s)}E^Df(s)ds - (I-E^DE)\sum_{i=0}^{\nu-1}(EA^D)^iA^Df^{(i)}(t)
+$$
+for some $v\in \mathbb C^n$.</div>\EndKnitrBlock{theorem}
+
+<div class="JHSAYS">
+<p>We have derived the solution formula under the assumption that <span class="math inline">\(EA=AE\)</span> which is hardly ever the case.</p>
+</div>
+
+The following lemma states that the assumption of commutativity is not a restriction for regular matrix pairs.
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:regular-ea-commute"><strong>(\#lem:regular-ea-commute) </strong></span>Let $(E,A)$ be regular and let $\tilde \lambda$ be such that $\tilde \lambda E - A$ is invertible. Then 
+$$\bigl (\tilde E,\tilde A\bigr ):=\bigl ( (\tilde \lambda E-A)^{-1}E, (\tilde \lambda E-A)^{-1}A \bigr )  \sim \bigl (E,A \bigr )$$
+and $\tilde E$ and $\tilde A$ commute.</div>\EndKnitrBlock{lemma}
 
 [^2]: Paul v. Dooren [The Computation of Kronecker’s Canonical Form of a Singular Pencil](https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf)
