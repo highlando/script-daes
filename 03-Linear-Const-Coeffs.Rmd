@@ -1,6 +1,6 @@
 <!--
--->
 \newcommand{\ind}{\operatorname{ind}}
+-->
 
 # Linear DAEs with Constant Coefficients
 
