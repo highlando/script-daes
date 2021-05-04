@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-05-03" />
+<meta name="date" content="2021-05-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -811,9 +811,15 @@ with <span class="math inline">\(E\in \mathbb C^{n,n}\)</span>.</p>
 <span class="math display">\[
 x(t) = e^{(t-t_0)E^{-1}}x_0.
 \]</span>
-If <span class="math inline">\(E\)</span> is not invertible, then there exists a matrix <span class="math inline">\(T\in \mathbb R^{n,n}\)</span>, invertible, that brings <span class="math inline">\(E\)</span> into Jordan canonical form <span class="math inline">\(J=T^{-1}ET\)</span> so that <a href="linear-daes-with-constant-coefficients.html#eq:iii-sdae-edx-x">(3.10)</a> becomes
+If <span class="math inline">\(E\)</span> is not invertible, then there exists a matrix <span class="math inline">\(T\in \mathbb R^{n,n}\)</span>, invertible, that brings <span class="math inline">\(E\)</span> into Jordan canonical form
 <span class="math display">\[
-T^{-1}ET \dot x(t)= 
+J=TET^{-1}=
+\begin{bmatrix}
+C \\ &amp; N
+\end{bmatrix}
+\]</span>
+with <span class="math inline">\(C\)</span> invertible and <span class="math inline">\(N\)</span> nilpotent so that <a href="linear-daes-with-constant-coefficients.html#eq:iii-sdae-edx-x">(3.10)</a> can be written
+<span class="math display">\[
 \begin{bmatrix}
 C \\ &amp; N
 \end{bmatrix}
@@ -835,9 +841,8 @@ x_1(t) \\ x_2(t)
 \begin{bmatrix}
  x_{1,0} \\ x_{2,0}
 \end{bmatrix}
-=T^{-1}x_0,
-\]</span>
-with <span class="math inline">\(C\)</span> being invertible and <span class="math inline">\(N\)</span> nilpotent.</p>
+=Tx_0.
+\]</span></p>
 <p>Since there is no right hand side, by the formula <a href="linear-daes-with-constant-coefficients.html#eq:iii-ndae-exp-solution">(3.7)</a> for the special DAE <span class="math inline">\(N\dot x=x+f\)</span>, we conclude that <span class="math inline">\(x_2=0\)</span>, so that only the ODE part <span class="math inline">\(C\dot x_1 = x_1\)</span> remains and the overall solution writes
 <span class="math display">\[
 \begin{bmatrix}
@@ -867,7 +872,7 @@ Tx(t) = e^{(t-t_0)J^D}Tx_0
 \]</span>
 or with
 <span class="math display">\[
-E^D := T^{-1}J^{D}T, \quad e^{(t-t_0)T^{-1}J^{D}T} = T^{-1}e^{(t-t_0)J^{D}}T
+E^D := TJ^{D}T^{-1}, \quad e^{(t-t_0)TJ^{D}T^{-1}} = Te^{(t-t_0)J^{D}}T^{-1}
 \]</span>
 as
 <span class="math display">\[
@@ -949,6 +954,38 @@ and, in particular
 </ol>
 </div>
 
+<p>Now we can define, how the general DAE can be split <em>additively</em> into an <em>almost</em> ODE and a particular nilpotent DAE.</p>
+
+<div class="lemma">
+<span id="lem:additive-split-dae-tntc" class="lemma"><strong>Lemma 3.6  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span> and <span class="math inline">\(f\colon \mathcal I \to \mathbb C^{n}\)</span>. If <span class="math inline">\(E\)</span> and <span class="math inline">\(A\)</span> commute, then the system
+<span class="math display">\[
+E\dot x(t) = Ax(t) + f(t)
+\]</span>
+is equivalent – in the sense that solutions correspond one-to-one via <span class="math inline">\(x=x_1+x_2\)</span> – to the system
+<span class="math display">\[\begin{align*}
+\tilde C \dot x_1(t) &amp;= Ax_1(t) + f_1(t), \\
+\tilde N \dot x_2(t) &amp;= Ax_2(t) + f_2(t), 
+\end{align*}\]</span>
+where
+<span class="math display">\[\begin{equation}
+x_1 = E^{D}Ex, \quad x_2 = (I-E^{D}E)x,
+\end{equation}\]</span>
+where
+<span class="math display">\[\begin{equation}
+f_1 = E^{D}Ef, \quad f_2 = (I-E^{D}E)f,
+\end{equation}\]</span>
+and where
+<span class="math display">\[
+\tilde N + \tilde C = E
+\]</span>
+are a decomposition as in Theorem <a href="linear-daes-with-constant-coefficients.html#thm:decomposition-e-cpn">3.6</a>.
+</div>
+
+<div class="JHSAYS">
+<p>
+This decomposition is used to characterize <strong>all</strong> solutions to the homogeneous problem <span class="math inline"><span class="math inline">\(E\dot x = Ax\)</span></span>.
+</p>
+</div>
 
 <div class="theorem">
 <span id="thm:exp-formula-homogeneous-problem" class="theorem"><strong>Theorem 3.7  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A \in \mathbb C^{n,n}\)</span> commuting, i.e. <span class="math inline">\(EA=AE\)</span>, and let <span class="math inline">\((E,A)\)</span> be regular. Then every solution <span class="math inline">\(x\in \mathcal C^1(\mathcal I, \mathbb C^n)\)</span> of <span class="math inline">\(E\dot x=Ax\)</span> has the form
@@ -956,6 +993,15 @@ and, in particular
 x(t) = e^{E^DAt}E^DEv
 \end{equation}\]</span>
 for some <span class="math inline">\(v\in \mathbb C^n\)</span>.
+</div>
+
+
+<div class="proof">
+<p> <span class="proof"><em>Proof. </em></span> 
+1. Confirm directly that <span class="math inline">\(x\colon t \mapsto e^{E^DAt}E^DEv\)</span> satisfies <span class="math inline">\(E\dot x - Ax=0\)</span>. Note that regularity of <span class="math inline">\((E,A)\)</span> is not needed here.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Use regularity and the splitting to show that any solution has this form.</li>
+</ol>
 </div>
 
 <div class="JHSAYS">
@@ -983,13 +1029,31 @@ for some <span class="math inline">\(v\in \mathbb C^n\)</span>.
 
 <div class="JHSAYS">
 <p>
+This theorem also defines what is a consistent initial value.
+</p>
+</div>
+
+<div class="corollary">
+<span id="cor:unnamed-chunk-32" class="corollary"><strong>Corollary 3.1  </strong></span>Let the assumptions of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:explicit-sol-representation">3.9</a> hold. The initial value problem <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a>,
+<span class="math display">\[
+E\dot x (t) = Ax(t) + f(t), \quad x(t_0)=x_0,
+\]</span>
+possesses a solution if, and only if, there exists a <span class="math inline">\(v\in \mathbb C^n\)</span> such that
+<span class="math display">\[
+x_0 = E^{D}Ev - (I-E^DE)\sum_{i=0}^{\nu-1}(EA^D)^iA^Df^{(i)}(t_0).
+\]</span>
+If this is the case, then the solution is unique.
+</div>
+
+<div class="JHSAYS">
+<p>
 We have derived the solution formula under the assumption that <span class="math inline"><span class="math inline">\(EA=AE\)</span></span> which is hardly ever the case.
 </p>
 </div>
 <p>The following lemma states that the assumption of commutativity is not a restriction for regular matrix pairs.</p>
 
 <div class="lemma">
-<span id="lem:regular-ea-commute" class="lemma"><strong>Lemma 3.6  </strong></span>Let <span class="math inline">\((E,A)\)</span> be regular and let <span class="math inline">\(\tilde \lambda\)</span> be such that <span class="math inline">\(\tilde \lambda E - A\)</span> is invertible. Then
+<span id="lem:regular-ea-commute" class="lemma"><strong>Lemma 3.7  </strong></span>Let <span class="math inline">\((E,A)\)</span> be regular and let <span class="math inline">\(\tilde \lambda\)</span> be such that <span class="math inline">\(\tilde \lambda E - A\)</span> is invertible. Then
 <span class="math display">\[\bigl (\tilde E,\tilde A\bigr ):=\bigl ( (\tilde \lambda E-A)^{-1}E, (\tilde \lambda E-A)^{-1}A \bigr )  \sim \bigl (E,A \bigr )\]</span>
 and <span class="math inline">\(\tilde E\)</span> and <span class="math inline">\(\tilde A\)</span> commute.
 </div>

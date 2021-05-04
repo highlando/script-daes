@@ -613,9 +613,15 @@ If $E$ was invertible, then the unique solution to \@ref(eq:iii-sdae-edx-x) woul
 $$
 x(t) = e^{(t-t_0)E^{-1}}x_0.
 $$
-If $E$ is not invertible, then there exists a matrix $T\in \mathbb R^{n,n}$, invertible, that brings $E$ into Jordan canonical form $J=T^{-1}ET$ so that \@ref(eq:iii-sdae-edx-x) becomes
+If $E$ is not invertible, then there exists a matrix $T\in \mathbb R^{n,n}$, invertible, that brings $E$ into Jordan canonical form 
 $$
-T^{-1}ET \dot x(t)= 
+J=TET^{-1}=
+\begin{bmatrix}
+C \\ & N
+\end{bmatrix}
+$$
+with $C$ invertible and $N$ nilpotent so that \@ref(eq:iii-sdae-edx-x) can be written
+$$
 \begin{bmatrix}
 C \\ & N
 \end{bmatrix}
@@ -637,9 +643,8 @@ x_1(t) \\ x_2(t)
 \begin{bmatrix}
  x_{1,0} \\ x_{2,0}
 \end{bmatrix}
-=T^{-1}x_0,
+=Tx_0.
 $$
-with $C$ being invertible and $N$ nilpotent.
 
 Since there is no right hand side, by the formula \@ref(eq:iii-ndae-exp-solution) for the special DAE $N\dot x=x+f$, we conclude that $x_2=0$, so that only the ODE part $C\dot x_1 = x_1$ remains and the overall solution writes
 $$
@@ -670,7 +675,7 @@ Tx(t) = e^{(t-t_0)J^D}Tx_0
 $$
 or with
 $$
-E^D := T^{-1}J^{D}T, \quad e^{(t-t_0)T^{-1}J^{D}T} = T^{-1}e^{(t-t_0)J^{D}}T
+E^D := TJ^{D}T^{-1}, \quad e^{(t-t_0)TJ^{D}T^{-1}} = Te^{(t-t_0)J^{D}}T^{-1}
 $$
 as
 $$
@@ -744,11 +749,46 @@ and, in particular
 2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. uniqueness.
 </div>\EndKnitrBlock{proof}
 
+Now we can define, how the general DAE can be split *additively* into an *almost* ODE and a particular nilpotent DAE.
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:additive-split-dae-tntc"><strong>(\#lem:additive-split-dae-tntc) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ and $f\colon \mathcal I \to \mathbb C^{n}$. If $E$ and $A$ commute, then the system
+$$
+E\dot x(t) = Ax(t) + f(t)
+$$
+is equivalent -- in the sense that solutions correspond one-to-one via $x=x_1+x_2$ -- to the system
+\begin{align*}
+\tilde C \dot x_1(t) &= Ax_1(t) + f_1(t), \\
+\tilde N \dot x_2(t) &= Ax_2(t) + f_2(t), 
+\end{align*}
+where
+\begin{equation}
+x_1 = E^{D}Ex, \quad x_2 = (I-E^{D}E)x,
+\end{equation}
+where
+\begin{equation}
+f_1 = E^{D}Ef, \quad f_2 = (I-E^{D}E)f,
+\end{equation}
+and where 
+$$
+\tilde N + \tilde C = E
+$$
+are a decomposition as in Theorem \@ref(thm:decomposition-e-cpn).</div>\EndKnitrBlock{lemma}
+<div class="JHSAYS">
+<p>This decomposition is used to characterize <strong>all</strong> solutions to the homogeneous problem <span class="math inline">\(E\dot x = Ax\)</span>.</p>
+</div>
+
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:exp-formula-homogeneous-problem"><strong>(\#thm:exp-formula-homogeneous-problem) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ commuting, i.e. $EA=AE$, and let $(E,A)$ be regular. Then every solution $x\in \mathcal C^1(\mathcal I, \mathbb C^n)$ of $E\dot x=Ax$ has the form
 \begin{equation}
 x(t) = e^{E^DAt}E^DEv
 \end{equation}
 for some $v\in \mathbb C^n$.</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}
+1. Confirm directly that $x\colon t \mapsto e^{E^DAt}E^DEv$ satisfies $E\dot x - Ax=0$. Note that regularity of $(E,A)$ is not needed here.
+
+2. Use regularity and the splitting to show that any solution has this form.
+</div>\EndKnitrBlock{proof}
+
 
 <div class="JHSAYS">
 <p>It remains to find <strong>a</strong> particular solution.</p>
@@ -765,6 +805,20 @@ $$
 x(t) = e^{(t-t_0)E^DA}E^DEv +\int_{t_0}^t e^{E^DA(t-s)}E^Df(s)ds - (I-E^DE)\sum_{i=0}^{\nu-1}(EA^D)^iA^Df^{(i)}(t)
 $$
 for some $v\in \mathbb C^n$.</div>\EndKnitrBlock{theorem}
+
+<div class="JHSAYS">
+<p>This theorem also defines what is a consistent initial value.</p>
+</div>
+
+\BeginKnitrBlock{corollary}<div class="corollary"><span class="corollary" id="cor:unnamed-chunk-32"><strong>(\#cor:unnamed-chunk-32) </strong></span>Let the assumptions of Theorem \@ref(thm:explicit-sol-representation) hold. The initial value problem \@ref(eq:gen-lin-cc-dae)--\@ref(eq:gen-lin-cc-dae-inic),
+$$
+E\dot x (t) = Ax(t) + f(t), \quad x(t_0)=x_0,
+$$
+possesses a solution if, and only if, there exists a $v\in \mathbb C^n$ such that
+$$
+x_0 = E^{D}Ev - (I-E^DE)\sum_{i=0}^{\nu-1}(EA^D)^iA^Df^{(i)}(t_0).
+$$
+If this is the case, then the solution is unique.</div>\EndKnitrBlock{corollary}
 
 <div class="JHSAYS">
 <p>We have derived the solution formula under the assumption that <span class="math inline">\(EA=AE\)</span> which is hardly ever the case.</p>

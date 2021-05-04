@@ -46,9 +46,11 @@ eq:tctn-tntc-zero
 eq:tn-nilpotent
 eq:tc-index-1
 eq:def-tc-tn
+lem:additive-split-dae-tntc
 thm:exp-formula-homogeneous-problem
 thm:exp-formula-particular-solution
 thm:explicit-sol-representation
+cor:unnamed-chunk-32
 lem:regular-ea-commute
 thm:local-canonical-form
 eq:lcf-subspaces
