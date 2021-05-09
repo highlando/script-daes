@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-05-04" />
+<meta name="date" content="2021-05-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="basic-definitions-and-notions.html"/>
-<link rel="next" href="linear-daes-with-time-varying-coefficients.html"/>
+<link rel="next" href="IV.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -84,14 +84,14 @@
 <li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
 <li class="chapter" data-level="2.3" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#additional-remarks"><i class="fa fa-check"></i><b>2.3</b> Additional Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
-<li class="chapter" data-level="3.2" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
-<li class="chapter" data-level="3.3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair"><i class="fa fa-check"></i><b>3.3</b> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</a></li>
-<li class="chapter" data-level="3.4" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#existence-of-solutions"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
+<li class="chapter" data-level="3" data-path="III.html"><a href="III.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
+<li class="chapter" data-level="3.1" data-path="III.html"><a href="III.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
+<li class="chapter" data-level="3.2" data-path="III.html"><a href="III.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
+<li class="chapter" data-level="3.3" data-path="III.html"><a href="III.html#solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair"><i class="fa fa-check"></i><b>3.3</b> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</a></li>
+<li class="chapter" data-level="3.4" data-path="III.html"><a href="III.html#III-ex-sols"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
+<li class="chapter" data-level="3.5" data-path="III.html"><a href="III.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="IV.html"><a href="IV.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
@@ -128,7 +128,7 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="linear-daes-with-constant-coefficients" class="section level1">
+<div id="III" class="section level1">
 <h1><span class="header-section-number">3</span> Linear DAEs with Constant Coefficients</h1>
 <div id="basic-notions-and-definitions" class="section level2">
 <h2><span class="header-section-number">3.1</span> Basic Notions and Definitions</h2>
@@ -147,7 +147,7 @@ For utmost generality, we consider the case that <span class="math inline"><span
 </div>
 <div id="scalings-and-state-transformations" class="section level3">
 <h3><span class="header-section-number">3.1.1</span> Scalings and State Transformations</h3>
-<p>One can confirm that if <span class="math inline">\(x\)</span> is a solution to <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> and <span class="math inline">\(P\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(x\)</span> is a solution to
+<p>One can confirm that if <span class="math inline">\(x\)</span> is a solution to <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a> and <span class="math inline">\(P\in \mathbb R^{n,n}\)</span> is invertible, then <span class="math inline">\(x\)</span> is a solution to
 <span class="math display">\[\begin{equation*}
 PE \dot x (t) = PAx(t) + Pf(t).
 \end{equation*}\]</span></p>
@@ -165,7 +165,7 @@ E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
 This is a state transformation of the system.
 </p>
 </div>
-<p>Thus, when talking of solvability of <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>, one may equivalently consider any regular <span class="math inline">\(Q\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(P\in \mathbb R^{m,m}\)</span> and the scaled and transformed system
+<p>Thus, when talking of solvability of <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a>, one may equivalently consider any regular <span class="math inline">\(Q\in \mathbb R^{m,m}\)</span>, <span class="math inline">\(P\in \mathbb R^{m,m}\)</span> and the scaled and transformed system
 <span class="math display">\[\begin{equation}
 \tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}\]</span>
@@ -186,7 +186,7 @@ In this case, we write
 
 
 <div class="lemma">
-<span id="lem:strong-equivalence-RSI" class="lemma"><strong>Lemma 3.1  </strong></span>The relation <span class="math inline">\(\sim\)</span> defined in Definition <a href="linear-daes-with-constant-coefficients.html#def:matrix-pair-equivalent">3.1</a> defines an equivalence relation<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
+<span id="lem:strong-equivalence-RSI" class="lemma"><strong>Lemma 3.1  </strong></span>The relation <span class="math inline">\(\sim\)</span> defined in Definition <a href="III.html#def:matrix-pair-equivalent">3.1</a> defines an equivalence relation<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
 </div>
 
 
@@ -370,7 +370,7 @@ J \\
 <li>where <span class="math inline">\(n_1\)</span>, <span class="math inline">\(n_2 \in \mathbb N\)</span> such that <span class="math inline">\(n=n_1+n_2\)</span>,</li>
 <li>where <span class="math inline">\(I_{n_1}\)</span> and <span class="math inline">\(I_{n_2}\)</span> denote the identity matrices of size <span class="math inline">\(n_1\times n_1\)</span> and <span class="math inline">\(n_2\times n_2\)</span>, respectively,</li>
 <li>where <span class="math inline">\(J\in \mathbb C^{n_1,n_1}\)</span> is in <em>Jordan canonical form</em>,</li>
-<li>and where <span class="math inline">\(N \in \mathbb C^{n_2,n_2}\)</span> is a <a href="linear-daes-with-constant-coefficients.html#def:nilpotent-matrix"><em>nilpotent</em> matrix</a>.</li>
+<li>and where <span class="math inline">\(N \in \mathbb C^{n_2,n_2}\)</span> is a <a href="III.html#def:nilpotent-matrix"><em>nilpotent</em> matrix</a>.</li>
 <li>Moreover, it is allowed that the one or the other block is not present, i.e., <span class="math inline">\(n_1\)</span> or <span class="math inline">\(n_2\)</span> can be zero.</li>
 </ul>
 </div>
@@ -391,7 +391,7 @@ J \\
 With the convention that <span class="math inline"><span class="math inline">\(\mathbf 0^0=I\)</span></span>, the zero matrix <span class="math inline"><span class="math inline">\(\mathbf 0 \in \mathbb R^{n,n}\)</span></span> is of (nilpotency) index 1.
 </p>
 </div>
-<p>The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:weierstrass-cf">3.2</a>. In fact, it states that through regular scalings and state transforms, any DAE with</p>
+<p>The relation of solvability and regularity of DAEs becomes evident in the canonical form of Theorem <a href="III.html#thm:weierstrass-cf">3.2</a>. In fact, it states that through regular scalings and state transforms, any DAE with</p>
 <p><span class="math display">\[
 E\dot x(t) =  A x(t) + f(t)
 \]</span></p>
@@ -405,10 +405,10 @@ N \dot x_2(t) = x_2(t) + f_2(t) \tag{3.5},
 \end{equation}\]</span></p>
 <p>i.e</p>
 <ul>
-<li>into an <strong>ODE</strong> <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-diffpart">(3.4)</a> that already is in <em>Jordan canonical form</em></li>
-<li>and a separated(!) <strong>DAE</strong> <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-algpart">(3.5)</a> of a particular type.</li>
+<li>into an <strong>ODE</strong> <a href="III.html#eq:reg-dae-wcf-diffpart">(3.4)</a> that already is in <em>Jordan canonical form</em></li>
+<li>and a separated(!) <strong>DAE</strong> <a href="III.html#eq:reg-dae-wcf-algpart">(3.5)</a> of a particular type.</li>
 </ul>
-<p>Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part <a href="linear-daes-with-constant-coefficients.html#eq:reg-dae-wcf-algpart">(3.5)</a>.</p>
+<p>Since linear ODEs always have a unique solution for any initial value, solvability of a general linear DAE with constant, regular coefficients will be completely defined by solvability of the special DAE part <a href="III.html#eq:reg-dae-wcf-algpart">(3.5)</a>.</p>
 </div>
 <div id="solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair" class="section level2">
 <h2><span class="header-section-number">3.3</span> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</h2>
@@ -416,11 +416,11 @@ N \dot x_2(t) = x_2(t) + f_2(t) \tag{3.5},
 <span class="math display" id="eq:ndae">\[\begin{equation}
 N \dot x(t) = x(t) + f(t) \tag{3.6}
 \end{equation}\]</span>
-with <span class="math inline">\(N \in \mathbb R^{n,n}\)</span> nilpotent with <span class="math inline">\(\nu\)</span> being the <a href="linear-daes-with-constant-coefficients.html#def:nilpotent-matrix">index of nilpotency</a>.
+with <span class="math inline">\(N \in \mathbb R^{n,n}\)</span> nilpotent with <span class="math inline">\(\nu\)</span> being the <a href="III.html#def:nilpotent-matrix">index of nilpotency</a>.
 For this DAE there is an explicit solution formula:</p>
 
 <div class="lemma">
-<span id="lem:ndae-explicit-solution" class="lemma"><strong>Lemma 3.3  </strong></span>Consider <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a>. If <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>, <span class="math inline">\(n\geq 1\)</span>, where <span class="math inline">\(\nu\)</span> is the index of nilpotency of <span class="math inline">\(N\)</span>, then <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> has a unique solution given as
+<span id="lem:ndae-explicit-solution" class="lemma"><strong>Lemma 3.3  </strong></span>Consider <a href="III.html#eq:ndae">(3.6)</a>. If <span class="math inline">\(f \in \mathcal C^\nu(\mathcal I, \mathbb R^{n})\)</span>, <span class="math inline">\(n\geq 1\)</span>, where <span class="math inline">\(\nu\)</span> is the index of nilpotency of <span class="math inline">\(N\)</span>, then <a href="III.html#eq:ndae">(3.6)</a> has a unique solution given as
 <span class="math display" id="eq:iii-ndae-exp-solution">\[\begin{equation}
 x(t) = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t), \tag{3.7}
 \end{equation}\]</span>
@@ -429,10 +429,10 @@ where <span class="math inline">\(f^{(i)}\)</span> denotes the <span class="math
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> There are a few ways to prove the explicit form <a href="linear-daes-with-constant-coefficients.html#eq:iii-ndae-exp-solution">(3.7)</a></p>
+<p> <span class="proof"><em>Proof. </em></span> There are a few ways to prove the explicit form <a href="III.html#eq:iii-ndae-exp-solution">(3.7)</a></p>
 <ol style="list-style-type: decimal">
 <li><p>Bring <span class="math inline">\(N\)</span> into Jordan canonical form and prove the formula for the Jordan blocks of arbitrary size by induction.</p></li>
-<li><p>Write <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> as <span class="math display">\[(N\frac{d}{dt}-I)x = f\]</span> and show that<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> <span class="math display">\[(N\frac{d}{dt}-I)^{-1} = - \sum_{i=0}^{\nu-1}N^i\frac{d^i}{dt^i}\]</span>.</p></li>
+<li><p>Write <a href="III.html#eq:ndae">(3.6)</a> as <span class="math display">\[(N\frac{d}{dt}-I)x = f\]</span> and show that<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> <span class="math display">\[(N\frac{d}{dt}-I)^{-1} = - \sum_{i=0}^{\nu-1}N^i\frac{d^i}{dt^i}\]</span>.</p></li>
 <li><p>We take the direct approach as it can be found in the book by Dai<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>:</p></li>
 </ol>
 <p>Firstly, we observe that
@@ -457,7 +457,7 @@ If one successively replaces <span class="math inline">\(N^kx^{(k)}=N^{k+1}x^{(k
 <span class="math display">\[
 x=N\dot x -f = N^2\ddot x - N\dot f -f = \dots = N^\nu x^{(\nu)} - \sum_{i=0}^{\nu-1} N^if^{(i)},
 \]</span>
-with <span class="math inline">\(N^\nu=0\)</span>, one arrives at formula <a href="linear-daes-with-constant-coefficients.html#eq:iii-ndae-exp-solution">(3.7)</a>.</p>
+with <span class="math inline">\(N^\nu=0\)</span>, one arrives at formula <a href="III.html#eq:iii-ndae-exp-solution">(3.7)</a>.</p>
 Since this construction holds for any solution, uniqueness is guaranteed too.
 </div>
 
@@ -467,7 +467,7 @@ We make three important observations here.
 </p>
 </div>
 <ol style="list-style-type: decimal">
-<li><p>The solution <span class="math inline">\(x\)</span> to <a href="linear-daes-with-constant-coefficients.html#eq:ndae">(3.6)</a> is uniquely defined without specifying a value at <span class="math inline">\(t_0\)</span>. Vice versa, an initial value <span class="math inline">\(x_0\)</span> is consistent if, and only if,
+<li><p>The solution <span class="math inline">\(x\)</span> to <a href="III.html#eq:ndae">(3.6)</a> is uniquely defined without specifying a value at <span class="math inline">\(t_0\)</span>. Vice versa, an initial value <span class="math inline">\(x_0\)</span> is consistent if, and only if,
 <span class="math display">\[
 x_0 = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t_0)
 \]</span></p></li>
@@ -476,7 +476,7 @@ x_0 = - \sum_{i=0}^{\nu-1}N^if^{(i)}(t_0)
 </ol>
 <div class="JHSAYS">
 <p>
-The index of nilpotency in the <span class="math inline"><span class="math inline">\(N\)</span></span> part of the <a href="linear-daes-with-constant-coefficients.html#eq:weierstrass-cf">Weierstrass canonical form</a> is characteristic for a matrix pair and defines an <em>index</em> of the associated DAE.
+The index of nilpotency in the <span class="math inline"><span class="math inline">\(N\)</span></span> part of the <a href="III.html#eq:weierstrass-cf">Weierstrass canonical form</a> is characteristic for a matrix pair and defines an <em>index</em> of the associated DAE.
 </p>
 </div>
 
@@ -507,7 +507,7 @@ Furthermore, for a nilpotent matrix <span class="math inline"><span class="math 
 <p>To be on the safe side and to learn how to handle block structured matrices in the analysis, we confirm that this definition of the index is well-posed, i.e. for any regular matrix <span class="math inline">\((E,A)\)</span> there is a unique index <span class="math inline">\(\nu\)</span>.</p>
 <div class="JHSAYS">
 <p>
-If one considers the Weierstrass canonical form as a special case of the <a href="linear-daes-with-constant-coefficients.html#thm:kcf">Kronecker canonical form</a>, then the statement that <em>the canonical form is well-posed up to permutations in the order of the blocks</em> already implies that the index is well defined (since it only depends on the size of the largest nilpotent block but not in which order it appears).
+If one considers the Weierstrass canonical form as a special case of the <a href="III.html#thm:kcf">Kronecker canonical form</a>, then the statement that <em>the canonical form is well-posed up to permutations in the order of the blocks</em> already implies that the index is well defined (since it only depends on the size of the largest nilpotent block but not in which order it appears).
 </p>
 </div>
 
@@ -550,7 +550,7 @@ where <span class="math inline">\(d_1\)</span>, <span class="math inline">\(d_2\
 \det (\lambda E - A) = \det (\lambda N_i-I_{n-d_i})\det (\lambda I_{d_i} - J_i) = (-1)^{n-d_i}\det (\lambda I_{d_i} - J_i)
 \]</span>
 are polynomials of degree <span class="math inline">\(d_i\)</span>, <span class="math inline">\(i=1,2\)</span>.</p>
-<p>Since the characteristic polynomials of strongly equivalent matrix pairs only differ by a constant factor (see the proof of Lemma <a href="linear-daes-with-constant-coefficients.html#lem:invariance-regularity">3.2</a>), this implies that <span class="math inline">\(d_1=d_2\)</span>.</p>
+<p>Since the characteristic polynomials of strongly equivalent matrix pairs only differ by a constant factor (see the proof of Lemma <a href="III.html#lem:invariance-regularity">3.2</a>), this implies that <span class="math inline">\(d_1=d_2\)</span>.</p>
 <p>Now we show, that the indices of nilpotency of <span class="math inline">\(N_1\)</span> and <span class="math inline">\(N_2\)</span> coincide. If the <span class="math inline">\(N\)</span>-blocks weren’t present, there would be nothing to show. So let’s assume that they are there.</p>
 <p>Let now be <span class="math inline">\(P\)</span>, <span class="math inline">\(Q \in \mathbb R^{n,n}\)</span> that invertible matrices that realize the strong equivalence of the canonical forms, i.e.
 <span class="math display" id="eq:equiv-wcf-i">\[\begin{equation}
@@ -615,14 +615,14 @@ where <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-i">(3.8)</a>:</td>
+<td><a href="III.html#eq:equiv-wcf-i">(3.8)</a>:</td>
 <td align="center"><span class="math inline">\(P_{11}=Q_{11}\)</span></td>
 <td align="center"><span class="math inline">\(P_{12}N_2=Q_{12}\)</span></td>
 <td align="center"><span class="math inline">\(P_{21}=N_1Q_{21}\)</span></td>
 <td align="center"><span class="math inline">\(P_{22}N_2=N_1Q_{22}\)</span></td>
 </tr>
 <tr class="even">
-<td><a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-ii">(3.9)</a>:</td>
+<td><a href="III.html#eq:equiv-wcf-ii">(3.9)</a>:</td>
 <td align="center"><span class="math inline">\(P_{11}J_2=J_1Q_{11}\)</span></td>
 <td align="center"><span class="math inline">\(P_{12}=J_1Q_{12}\)</span></td>
 <td align="center"><span class="math inline">\(P_{21}J_2=Q_{21}\)</span></td>
@@ -635,7 +635,7 @@ where <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)
 P_{21}=N_1Q_{21}=N_1P_{21}J_2=N_1^2P_{21}J_2^2=N_1^3P_{21}J_2^3=\dotsc=0
 \]</span>
 since <span class="math inline">\(N_1\)</span> is nilpotent.</p>
-Since <span class="math inline">\(P\)</span> is invertible and, because of <span class="math inline">\(P_{21}=0\)</span>, block upper triangular, the blocks on the diagonals <span class="math inline">\(P_{11}\)</span> and <span class="math inline">\(P_{22}\)</span> must be invertible. With <span class="math inline">\(Q_{22}=P_{22}\)</span> the <strong>(2,2)</strong> block of <a href="linear-daes-with-constant-coefficients.html#eq:equiv-wcf-i">(3.8)</a> implies that
+Since <span class="math inline">\(P\)</span> is invertible and, because of <span class="math inline">\(P_{21}=0\)</span>, block upper triangular, the blocks on the diagonals <span class="math inline">\(P_{11}\)</span> and <span class="math inline">\(P_{22}\)</span> must be invertible. With <span class="math inline">\(Q_{22}=P_{22}\)</span> the <strong>(2,2)</strong> block of <a href="III.html#eq:equiv-wcf-i">(3.8)</a> implies that
 <span class="math display">\[
 N_2 = P_{22}^{-1}N_1P_{22}
 \]</span>
@@ -647,7 +647,7 @@ for all <span class="math inline">\(k\in\mathbb N\)</span>. So that a power <spa
 </div>
 
 </div>
-<div id="existence-of-solutions" class="section level2">
+<div id="III-ex-sols" class="section level2">
 <h2><span class="header-section-number">3.4</span> Existence of Solutions</h2>
 <div class="JHSAYS">
 <p>
@@ -657,7 +657,7 @@ We can now summarize all results and considerations in a theorem.
 
 <div class="theorem">
 <p><span id="thm:regularity-means-solvability" class="theorem"><strong>Theorem 3.3  </strong></span>
-Consider the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> with initial condition <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a>,
+Consider the DAE <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a> with initial condition <a href="III.html#eq:gen-lin-cc-dae-inic">(3.2)</a>,
 <span class="math display">\[
 E \dot x (t) = Ax(t) + f(t), \quad x(t_0) = x_0 \in \mathbb R^{n}.
 \]</span>
@@ -692,13 +692,13 @@ and consider the conforming splitting of the transformed variables
 Furthermore, let <span class="math inline">\(\nu\)</span> be the index of the matrix pair <span class="math inline">\((E,A)\)</span>.</p>
 <p>If <span class="math inline">\(f\in \mathcal C^\nu(\mathcal I,\mathbb C^{n})\)</span>, then</p>
 <ol style="list-style-type: decimal">
-<li><p>The differential algebraic equation <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> is solvable.</p></li>
-<li><p>The initial condition <span class="math inline">\(x_0\)</span> in <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> is consistent if, and only if, for the transformed initial condition <span class="math inline">\(\tilde x_0\)</span> it holds that
+<li><p>The differential algebraic equation <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a> is solvable.</p></li>
+<li><p>The initial condition <span class="math inline">\(x_0\)</span> in <a href="III.html#eq:gen-lin-cc-dae-inic">(3.2)</a> is consistent if, and only if, for the transformed initial condition <span class="math inline">\(\tilde x_0\)</span> it holds that
 <span class="math display">\[
   \tilde x_{2,0} = - \sum_{i=0}^{\nu-1}N^i\tilde f^{(i)}(t_0)
 \]</span>
-In particular, a consistent initial condition to <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> exists.</p></li>
-<li>Every initial value problem <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> with a consistent initial condition is uniquely solvable.</li>
+In particular, a consistent initial condition to <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a> exists.</p></li>
+<li>Every initial value problem <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="III.html#eq:gen-lin-cc-dae-inic">(3.2)</a> with a consistent initial condition is uniquely solvable.</li>
 </ol>
 </div>
 
@@ -707,7 +707,7 @@ In particular, a consistent initial condition to <a href="linear-daes-with-const
  <span class="proof"><em>Proof. </em></span> A summary of the preceding results.
 </div>
 
-<p>From Theorem <a href="linear-daes-with-constant-coefficients.html#thm:regularity-means-solvability">3.3</a> it follows that the regularity of the matrix pair <span class="math inline">\((E, A)\)</span> implies the existence of a unique solution to the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a> with an initial condition <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a> provided that the initial condition is consistent.</p>
+<p>From Theorem <a href="III.html#thm:regularity-means-solvability">3.3</a> it follows that the regularity of the matrix pair <span class="math inline">\((E, A)\)</span> implies the existence of a unique solution to the DAE <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a> with an initial condition <a href="III.html#eq:gen-lin-cc-dae-inic">(3.2)</a> provided that the initial condition is consistent.</p>
 <div class="JHSAYS">
 <p>
 The negation of this statement is a bit diffuse because there are several things that <em>can go wrong</em> if the DAE is not regular. Depending on the irregularity there might be infinite many solutions to the initial value problem or no solutions at all to the DAE (even without the initial condition).
@@ -723,7 +723,7 @@ The negation of this statement is a bit diffuse because there are several things
 E\dot x(t) = Ax(t), \quad x(t_0) = 0, 
 \]</span>
 has a nontrivial solution.</p></li>
-<li>If <span class="math inline">\(\operatorname{rank}(\lambda E -A) &lt; m\)</span> for all <span class="math inline">\(\lambda\in \mathbb C\)</span>, then there exist arbitrarily smooth inhomogeneities <span class="math inline">\(f\)</span> for which the DAE <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>
+<li>If <span class="math inline">\(\operatorname{rank}(\lambda E -A) &lt; m\)</span> for all <span class="math inline">\(\lambda\in \mathbb C\)</span>, then there exist arbitrarily smooth inhomogeneities <span class="math inline">\(f\)</span> for which the DAE <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a>
 <span class="math display">\[ 
 E\dot x(t) = Ax(t)+f(t),
 \]</span>
@@ -807,7 +807,7 @@ Certainly, a solution formula is given through the transformation to the Weierst
 E\dot x(t) = x(t), \quad x(t_0) = x_0 \tag{3.10}
 \]</span>
 with <span class="math inline">\(E\in \mathbb C^{n,n}\)</span>.</p>
-<p>If <span class="math inline">\(E\)</span> was invertible, then the unique solution to <a href="linear-daes-with-constant-coefficients.html#eq:iii-sdae-edx-x">(3.10)</a> would be given as
+<p>If <span class="math inline">\(E\)</span> was invertible, then the unique solution to <a href="III.html#eq:iii-sdae-edx-x">(3.10)</a> would be given as
 <span class="math display">\[
 x(t) = e^{(t-t_0)E^{-1}}x_0.
 \]</span>
@@ -818,7 +818,7 @@ J=TET^{-1}=
 C \\ &amp; N
 \end{bmatrix}
 \]</span>
-with <span class="math inline">\(C\)</span> invertible and <span class="math inline">\(N\)</span> nilpotent so that <a href="linear-daes-with-constant-coefficients.html#eq:iii-sdae-edx-x">(3.10)</a> can be written
+with <span class="math inline">\(C\)</span> invertible and <span class="math inline">\(N\)</span> nilpotent so that <a href="III.html#eq:iii-sdae-edx-x">(3.10)</a> can be written
 <span class="math display">\[
 \begin{bmatrix}
 C \\ &amp; N
@@ -843,7 +843,7 @@ x_1(t) \\ x_2(t)
 \end{bmatrix}
 =Tx_0.
 \]</span></p>
-<p>Since there is no right hand side, by the formula <a href="linear-daes-with-constant-coefficients.html#eq:iii-ndae-exp-solution">(3.7)</a> for the special DAE <span class="math inline">\(N\dot x=x+f\)</span>, we conclude that <span class="math inline">\(x_2=0\)</span>, so that only the ODE part <span class="math inline">\(C\dot x_1 = x_1\)</span> remains and the overall solution writes
+<p>Since there is no right hand side, by the formula <a href="III.html#eq:iii-ndae-exp-solution">(3.7)</a> for the special DAE <span class="math inline">\(N\dot x=x+f\)</span>, we conclude that <span class="math inline">\(x_2=0\)</span>, so that only the ODE part <span class="math inline">\(C\dot x_1 = x_1\)</span> remains and the overall solution writes
 <span class="math display">\[
 \begin{bmatrix}
 x_1(t) \\ x_2(t)
@@ -866,7 +866,7 @@ C \\ &amp; N
 C^{-1} \\ &amp; 0
 \end{bmatrix},
 \]</span>
-the solution to <a href="linear-daes-with-constant-coefficients.html#eq:iii-sdae-edx-x">(3.10)</a> can be expressed as
+the solution to <a href="III.html#eq:iii-sdae-edx-x">(3.10)</a> can be expressed as
 <span class="math display">\[
 Tx(t) = e^{(t-t_0)J^D}Tx_0
 \]</span>
@@ -905,7 +905,7 @@ Every matrix <span class="math inline">\(E\in\mathbb{C}^{n,n}\)</span> has one, 
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> Uniqueness: Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be two Drazin inverses of <span class="math inline">\(E\)</span>. Then by repeated application of the identities in <a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-a">(3.11)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:def-drazin-c">(3.13)</a> one derives that</p>
+<p> <span class="proof"><em>Proof. </em></span> Uniqueness: Let <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span> be two Drazin inverses of <span class="math inline">\(E\)</span>. Then by repeated application of the identities in <a href="III.html#eq:def-drazin-a">(3.11)</a>–<a href="III.html#eq:def-drazin-c">(3.13)</a> one derives that</p>
 <p><span class="math display">\[\begin{align*}
 X_1 EX_1 E X_2 =   &amp;X_1EX_2 = X_1EX_2EX_2  \\
 X_1^2 E^2 X_2 = \dotsm=   &amp;X_1EX_2 = \dotsm= X_1E^2X_2^2  \\
@@ -948,9 +948,9 @@ and, in particular
 
 <div class="proof">
 <p> <span class="proof"><em>Proof. </em></span> 
-1. Show that such a decomposition with the properties <a href="linear-daes-with-constant-coefficients.html#eq:tctn-tntc-zero">(3.15)</a>-<a href="linear-daes-with-constant-coefficients.html#eq:tc-index-1">(3.17)</a> also fulfills <a href="linear-daes-with-constant-coefficients.html#eq:def-tc-tn">(3.18)</a>, i.e. existence.</p>
+1. Show that such a decomposition with the properties <a href="III.html#eq:tctn-tntc-zero">(3.15)</a>-<a href="III.html#eq:tc-index-1">(3.17)</a> also fulfills <a href="III.html#eq:def-tc-tn">(3.18)</a>, i.e. existence.</p>
 <ol start="2" style="list-style-type: decimal">
-<li>Show that <span class="math inline">\(\tilde C\)</span>, <span class="math inline">\(\tilde N\)</span> as in <a href="linear-daes-with-constant-coefficients.html#eq:def-tc-tn">(3.18)</a> are such a decomposition, i.e. uniqueness.</li>
+<li>Show that <span class="math inline">\(\tilde C\)</span>, <span class="math inline">\(\tilde N\)</span> as in <a href="III.html#eq:def-tc-tn">(3.18)</a> are such a decomposition, i.e. uniqueness.</li>
 </ol>
 </div>
 
@@ -978,7 +978,7 @@ and where
 <span class="math display">\[
 \tilde N + \tilde C = E
 \]</span>
-are a decomposition as in Theorem <a href="linear-daes-with-constant-coefficients.html#thm:decomposition-e-cpn">3.6</a>.
+are a decomposition as in Theorem <a href="III.html#thm:decomposition-e-cpn">3.6</a>.
 </div>
 
 <div class="JHSAYS">
@@ -1034,7 +1034,7 @@ This theorem also defines what is a consistent initial value.
 </div>
 
 <div class="corollary">
-<span id="cor:unnamed-chunk-32" class="corollary"><strong>Corollary 3.1  </strong></span>Let the assumptions of Theorem <a href="linear-daes-with-constant-coefficients.html#thm:explicit-sol-representation">3.9</a> hold. The initial value problem <a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="linear-daes-with-constant-coefficients.html#eq:gen-lin-cc-dae-inic">(3.2)</a>,
+<span id="cor:unnamed-chunk-32" class="corollary"><strong>Corollary 3.1  </strong></span>Let the assumptions of Theorem <a href="III.html#thm:explicit-sol-representation">3.9</a> hold. The initial value problem <a href="III.html#eq:gen-lin-cc-dae">(3.1)</a>–<a href="III.html#eq:gen-lin-cc-dae-inic">(3.2)</a>,
 <span class="math display">\[
 E\dot x (t) = Ax(t) + f(t), \quad x(t_0)=x_0,
 \]</span>
@@ -1066,11 +1066,11 @@ and <span class="math inline">\(\tilde E\)</span> and <span class="math inline">
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>Equivalence relation – <strong>RST</strong>. <strong>R</strong>eflexive: <span class="math inline">\(A\sim A\)</span>. <strong>S</strong>ymmetric: <span class="math inline">\(A\sim B\)</span>, then <span class="math inline">\(B\sim A\)</span>. <strong>T</strong>ransitive: <span class="math inline">\(A\sim B\)</span> and <span class="math inline">\(B\sim C\)</span>, then <span class="math inline">\(A\sim C\)</span>.<a href="linear-daes-with-constant-coefficients.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Paul v. Dooren <a href="https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf">The Computation of Kronecker’s Canonical Form of a Singular Pencil</a><a href="linear-daes-with-constant-coefficients.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>See the proof of Lemma 2.8 in <em>Kunkel/Mehrmann</em><a href="linear-daes-with-constant-coefficients.html#fnref3" class="footnote-back">↩</a></p></li>
-<li id="fn4"><p>Dai (1989): <em>Singular Control Systems</em><a href="linear-daes-with-constant-coefficients.html#fnref4" class="footnote-back">↩</a></p></li>
-<li id="fn5"><p>A so-called particular solution. Btw., <em>all solutions = a particular plus all solutions to the homogeneous problem</em> is the superposition principle for general linear problems.<a href="linear-daes-with-constant-coefficients.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Equivalence relation – <strong>RST</strong>. <strong>R</strong>eflexive: <span class="math inline">\(A\sim A\)</span>. <strong>S</strong>ymmetric: <span class="math inline">\(A\sim B\)</span>, then <span class="math inline">\(B\sim A\)</span>. <strong>T</strong>ransitive: <span class="math inline">\(A\sim B\)</span> and <span class="math inline">\(B\sim C\)</span>, then <span class="math inline">\(A\sim C\)</span>.<a href="III.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Paul v. Dooren <a href="https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf">The Computation of Kronecker’s Canonical Form of a Singular Pencil</a><a href="III.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>See the proof of Lemma 2.8 in <em>Kunkel/Mehrmann</em><a href="III.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>Dai (1989): <em>Singular Control Systems</em><a href="III.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>A so-called particular solution. Btw., <em>all solutions = a particular plus all solutions to the homogeneous problem</em> is the superposition principle for general linear problems.<a href="III.html#fnref5" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -1079,7 +1079,7 @@ and <span class="math inline">\(\tilde E\)</span> and <span class="math inline">
         </div>
       </div>
 <a href="basic-definitions-and-notions.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linear-daes-with-time-varying-coefficients.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="IV.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

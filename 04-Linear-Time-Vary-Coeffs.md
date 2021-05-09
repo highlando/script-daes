@@ -3,7 +3,51 @@
 \newcommand{\range}{\operatorname{range}}
 \newcommand{\cokernel}{\operatorname{cokernel}}
 
-# Linear DAEs with Time-varying Coefficients
+# Linear DAEs with Time-varying Coefficients {#IV}
+
+In this section, we consider linear DAEs with *variable* or *time-dependent* coefficients. This means, for matrix-valued functions
+$$
+E \in \mathcal C(\mathcal I, \mathbb C^{m,n}), \quad A\in \mathcal C(\mathcal I, \mathbb C^{m,n})
+$$
+and $f\in \mathcal C(\mathcal I, \mathbb C^{m})$, we consider the DAE
+\begin{equation}
+E(t)\dot x(t) = A(t)x(t) + f(t) (\#eq:iv-ltv-dae)
+\end{equation}
+with, possibly, an initial condition
+\begin{equation}
+x(t_0) = x_0 \in \mathbb C^{n}. (\#eq:iv-ltv-inicond)
+\end{equation}
+
+<div class="JHSAYS">
+<p>The same <a href="#def:dae-solution">general solution concept</a> applies. Basically <span class="math inline">\(x\)</span> should be differentiable, fulfill the DAE, and, if stated, the initial condition too.</p>
+</div>
+
+In the constant coefficient case, [regularity](III.html/#def:regularity) played a decisive role for the existence and uniqueness of solutions; see, e.g. [Section](#III-ex-sols) \@ref(III-ex-sols). Thus it seems natural to extend this concept to the time-varying case, e.g., through requiring that $(E(t), A(t))$ is a regular matrix pair independent of $t$. However, the following two examples show that this will not work *out of the box*.
+
+\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:ltv-regular-infinite-sols"><strong>(\#exm:ltv-regular-infinite-sols) </strong></span>Let $E$, $A$ be given as 
+$$
+E(t) = 
+\begin{bmatrix}
+-t & t^2 \\ -1 & t 
+\end{bmatrix}, \quad
+A(t) = 
+\begin{bmatrix}
+-1 & 0 \\ 0& -1
+\end{bmatrix}
+$$
+Then
+$$
+\det ( \lambda E(t) - A(t)) = (1-\lambda t)(1+\lambda t) + \lambda ^2 t^2 \equiv 1,
+$$
+for all $t\in \mathcal I$. Still, for every $c \in \mathcal C^1(\mathcal I, \mathbb C)$ with $c(t_0)=0$, the function
+$$
+x\colon t \mapsto c(t)\begin{bmatrix} t\\1 \end{bmatrix}
+$$
+solves the *homogeneous* initial value problem \@ref(eq:iv-ltv-dae)--\@ref(eq:iv-ltv-inicond).</div>\EndKnitrBlock{example}
+
+<div class="JHSAYS">
+<p>This is an example where the pair <span class="math inline">\((E,A)\)</span> is regular uniformly with respect to <span class="math inline">\(t\)</span> but still allows for infinitely many solutions to the associated DAE.</p>
+</div>
 
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:local-canonical-form"><strong>(\#thm:local-canonical-form) </strong></span>Let $E, A \in \mathbb C^{m,n}$ and let
 \begin{equation}

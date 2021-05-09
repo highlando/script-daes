@@ -24,14 +24,14 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-05-04" />
+<meta name="date" content="2021-05-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="linear-daes-with-constant-coefficients.html"/>
+<link rel="prev" href="III.html"/>
 <link rel="next" href="numerical-approximation-of-daes.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -84,14 +84,14 @@
 <li class="chapter" data-level="2.2" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#initial-conditions-and-consistency"><i class="fa fa-check"></i><b>2.2</b> Initial Conditions and Consistency</a></li>
 <li class="chapter" data-level="2.3" data-path="basic-definitions-and-notions.html"><a href="basic-definitions-and-notions.html#additional-remarks"><i class="fa fa-check"></i><b>2.3</b> Additional Remarks</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
-<li class="chapter" data-level="3.1" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
-<li class="chapter" data-level="3.2" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
-<li class="chapter" data-level="3.3" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair"><i class="fa fa-check"></i><b>3.3</b> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</a></li>
-<li class="chapter" data-level="3.4" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#existence-of-solutions"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
-<li class="chapter" data-level="3.5" data-path="linear-daes-with-constant-coefficients.html"><a href="linear-daes-with-constant-coefficients.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
+<li class="chapter" data-level="3" data-path="III.html"><a href="III.html"><i class="fa fa-check"></i><b>3</b> Linear DAEs with Constant Coefficients</a><ul>
+<li class="chapter" data-level="3.1" data-path="III.html"><a href="III.html#basic-notions-and-definitions"><i class="fa fa-check"></i><b>3.1</b> Basic Notions and Definitions</a></li>
+<li class="chapter" data-level="3.2" data-path="III.html"><a href="III.html#regularity-and-solvability"><i class="fa fa-check"></i><b>3.2</b> Regularity and Solvability</a></li>
+<li class="chapter" data-level="3.3" data-path="III.html"><a href="III.html#solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair"><i class="fa fa-check"></i><b>3.3</b> Solution to the <em>N-DAE</em>, Regularity, and Index of a Matrix Pair</a></li>
+<li class="chapter" data-level="3.4" data-path="III.html"><a href="III.html#III-ex-sols"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
+<li class="chapter" data-level="3.5" data-path="III.html"><a href="III.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="linear-daes-with-time-varying-coefficients.html"><a href="linear-daes-with-time-varying-coefficients.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="IV.html"><a href="IV.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
@@ -128,13 +128,60 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="linear-daes-with-time-varying-coefficients" class="section level1">
+<div id="IV" class="section level1">
 <h1><span class="header-section-number">4</span> Linear DAEs with Time-varying Coefficients</h1>
+<p>In this section, we consider linear DAEs with <em>variable</em> or <em>time-dependent</em> coefficients. This means, for matrix-valued functions
+<span class="math display">\[
+E \in \mathcal C(\mathcal I, \mathbb C^{m,n}), \quad A\in \mathcal C(\mathcal I, \mathbb C^{m,n})
+\]</span>
+and <span class="math inline">\(f\in \mathcal C(\mathcal I, \mathbb C^{m})\)</span>, we consider the DAE
+<span class="math display" id="eq:iv-ltv-dae">\[\begin{equation}
+E(t)\dot x(t) = A(t)x(t) + f(t) \tag{4.1}
+\end{equation}\]</span>
+with, possibly, an initial condition
+<span class="math display" id="eq:iv-ltv-inicond">\[\begin{equation}
+x(t_0) = x_0 \in \mathbb C^{n}. \tag{4.2}
+\end{equation}\]</span></p>
+<div class="JHSAYS">
+<p>
+The same <a href="basic-definitions-and-notions.html#def:dae-solution">general solution concept</a> applies. Basically <span class="math inline"><span class="math inline">\(x\)</span></span> should be differentiable, fulfill the DAE, and, if stated, the initial condition too.
+</p>
+</div>
+<p>In the constant coefficient case, <a href="III.html/#def:regularity">regularity</a> played a decisive role for the existence and uniqueness of solutions; see, e.g. <a href="III.html#III-ex-sols">Section</a> <a href="III.html#III-ex-sols">3.4</a>. Thus it seems natural to extend this concept to the time-varying case, e.g., through requiring that <span class="math inline">\((E(t), A(t))\)</span> is a regular matrix pair independent of <span class="math inline">\(t\)</span>. However, the following two examples show that this will not work <em>out of the box</em>.</p>
+
+<div class="example">
+<span id="exm:ltv-regular-infinite-sols" class="example"><strong>Example 4.1  </strong></span>Let <span class="math inline">\(E\)</span>, <span class="math inline">\(A\)</span> be given as
+<span class="math display">\[
+E(t) = 
+\begin{bmatrix}
+-t &amp; t^2 \\ -1 &amp; t 
+\end{bmatrix}, \quad
+A(t) = 
+\begin{bmatrix}
+-1 &amp; 0 \\ 0&amp; -1
+\end{bmatrix}
+\]</span>
+Then
+<span class="math display">\[
+\det ( \lambda E(t) - A(t)) = (1-\lambda t)(1+\lambda t) + \lambda ^2 t^2 \equiv 1,
+\]</span>
+for all <span class="math inline">\(t\in \mathcal I\)</span>. Still, for every <span class="math inline">\(c \in \mathcal C^1(\mathcal I, \mathbb C)\)</span> with <span class="math inline">\(c(t_0)=0\)</span>, the function
+<span class="math display">\[
+x\colon t \mapsto c(t)\begin{bmatrix} t\\1 \end{bmatrix}
+\]</span>
+solves the <em>homogeneous</em> initial value problem <a href="IV.html#eq:iv-ltv-dae">(4.1)</a>–<a href="IV.html#eq:iv-ltv-inicond">(4.2)</a>.
+</div>
+
+<div class="JHSAYS">
+<p>
+This is an example where the pair <span class="math inline"><span class="math inline">\((E,A)\)</span></span> is regular uniformly with respect to <span class="math inline"><span class="math inline">\(t\)</span></span> but still allows for infinitely many solutions to the associated DAE.
+</p>
+</div>
 
 <div class="theorem">
 <p><span id="thm:local-canonical-form" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(E, A \in \mathbb C^{m,n}\)</span> and let
 <span class="math display" id="eq:lcf-subspaces">\[\begin{equation}
-T,~Z,~T&#39;,~V \tag{4.1}
+T,~Z,~T&#39;,~V \tag{4.3}
 \end{equation}\]</span>
 be</p>
 <table>
@@ -165,7 +212,7 @@ be</p>
 </table>
 <p>then the quantities
 <span class="math display" id="eq:lcf-quantities">\[\begin{equation}
-r,~a,~s,~d,~u,~v \tag{4.2}
+r,~a,~s,~d,~u,~v \tag{4.4}
 \end{equation}\]</span>
 defined as</p>
 <table>
@@ -225,7 +272,7 @@ I_s &amp; 0 &amp; 0 &amp; 0 \\
 I_s &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0
 \end{bmatrix}\right),
-\tag{4.3}
+\tag{4.5}
 \end{equation}\]</span>
 where all diagonal blocks are square, except maybe the last one.
 </div>
@@ -250,7 +297,7 @@ where all diagonal blocks are square, except maybe the last one.
 </blockquote>
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.1  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
+<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.2  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
 <span class="math display">\[
 (E, A) \backsim 
 \left(
@@ -259,7 +306,7 @@ where all diagonal blocks are square, except maybe the last one.
 \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; I_1 \end{bmatrix}
 \right).
 \]</span></p>
-<p>We compute the subspaces as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-subspaces">(4.1)</a>:</p>
+<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.3)</a>:</p>
 <table>
 <colgroup>
 <col width="30%" />
@@ -298,7 +345,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 </tbody>
 </table>
-<p>and derive the quantities as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-quantities">(4.2)</a>:</p>
+<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.4)</a>:</p>
 <table>
 <colgroup>
 <col width="22%" />
@@ -349,7 +396,7 @@ where all diagonal blocks are square, except maybe the last one.
 
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.2  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
+<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.3  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
 <span class="math display">\[
 (\mathcal E, \mathcal A) =
 \left(
@@ -364,7 +411,7 @@ where all diagonal blocks are square, except maybe the last one.
 \begin{bmatrix} A_{11} &amp; A_{12} &amp; I_{n_1} \\ A_{21} &amp; A_{22} &amp; 0 \\ I_{n_1} &amp; 0 &amp; 0\end{bmatrix}
 \right).
 \]</span></p>
-<p>We compute the subspaces as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-subspaces">(4.1)</a>:</p>
+<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.3)</a>:</p>
 <table>
 <colgroup>
 <col width="30%" />
@@ -403,7 +450,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 </tbody>
 </table>
-<p>and derive the quantities as defined in <a href="linear-daes-with-time-varying-coefficients.html#eq:lcf-quantities">(4.2)</a>:</p>
+<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.4)</a>:</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -471,7 +518,7 @@ with pointwise nonsingular <span class="math inline">\(\Sigma \in \mathcal C^l(I
 <p><span id="thm:global-canonical-form" class="theorem"><strong>Theorem 4.3  </strong></span>
 Let <span class="math inline">\(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\)</span> be sufficiently smooth and suppose that
 <span class="math display" id="eq:glob-local-char-vals">\[\begin{equation}
-    r(t) = r, \quad a(t)=a, \quad s(t)=s \tag{4.4}
+    r(t) = r, \quad a(t)=a, \quad s(t)=s \tag{4.6}
 \end{equation}\]</span></p>
 <p>for the local characteristic values of <span class="math inline">\((E(t), A(t))\)</span>. Then <span class="math inline">\((E, A)\)</span> is globally equivalent to the canonical form
 <span class="math display" id="eq:glob-can-form">\[\begin{equation}
@@ -491,14 +538,14 @@ I_s &amp;   0   &amp;  0  &amp; 0 \\
 0   &amp;   0   &amp;  0  &amp; 0
 \end{bmatrix}
 \right ).
-\tag{4.5}
+\tag{4.7}
 \end{equation}\]</span></p>
-<p>All entries are again matrix functions on <span class="math inline">\(I\)</span> and the last block column in both matrix functions of <a href="linear-daes-with-time-varying-coefficients.html#eq:glob-can-form">(4.5)</a> has size <span class="math inline">\(u=n-s-d-a\)</span>.</p>
+<p>All entries are again matrix functions on <span class="math inline">\(I\)</span> and the last block column in both matrix functions of <a href="IV.html#eq:glob-can-form">(4.7)</a> has size <span class="math inline">\(u=n-s-d-a\)</span>.</p>
 </div>
 
 
 <div class="proof">
- <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="linear-daes-with-time-varying-coefficients.html#thm:global-canonical-form">4.3</a>.
+ <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="IV.html#thm:global-canonical-form">4.3</a>.
 <!-- \begin{ofalltheseblockmats} -->
 <span class="math display">\[\begin{align*}
 (E,A) &amp; 
@@ -689,7 +736,7 @@ Then, <span class="math inline">\(A_{22}\)</span> vanishes because of the specia
           </div>
         </div>
       </div>
-<a href="linear-daes-with-constant-coefficients.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="III.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="numerical-approximation-of-daes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

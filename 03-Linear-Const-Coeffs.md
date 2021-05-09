@@ -2,7 +2,7 @@
 \newcommand{\ind}{\operatorname{ind}}
 -->
 
-# Linear DAEs with Constant Coefficients
+# Linear DAEs with Constant Coefficients {#III}
 
 ## Basic Notions and Definitions
 
@@ -457,7 +457,7 @@ $$
 for all $k\in\mathbb N$. So that a power $N_2^k=0$ if, and only if, $N_1^k=0$. Consequently, the indices of nilpotency of $N_1$ and $N_2$ coincide.</div>\EndKnitrBlock{proof}
 
 
-## Existence of Solutions
+## Existence of Solutions {#III-ex-sols}
 
 <div class="JHSAYS">
 <p>We can now summarize all results and considerations in a theorem.</p>
