@@ -4,6 +4,9 @@ set iskeyword+=:
 set iskeyword+=-
 imap ,le (\#eq:
 imap ,re \@ref(eq:<c-x><c-]>
+imap ,rdf \@ref(def:<c-x><c-]>
+imap ,rtm \@ref(thm:<c-x><c-]>
+imap ,rlm \@ref(lem:<c-x><c-]>
 nmap ,io o<esc>C * 
 imap ,io <CR><esc>C * 
 imap ,bg \begin{

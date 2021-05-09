@@ -3,3 +3,6 @@
 --langdef=Bookdown
 --langmap=Bookdown:.Rmd
 --regex-Bookdown=/\\\#(eq:[a-z_-]*)/\1/l,label/
+--regex-Bookdown=/lemma.*label="(.*)"/lem:\1/l,label/
+--regex-Bookdown=/theorem.*label="(.*)"/thm:\1/l,label/
+--regex-Bookdown=/definition.*label="(.*)"/def:\1/l,label/
