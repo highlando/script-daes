@@ -2,7 +2,7 @@
 \newcommand{\ind}{\operatorname{ind}}
 -->
 
-# Linear DAEs with Constant Coefficients
+# Linear DAEs with Constant Coefficients {#III}
 
 ## Basic Notions and Definitions
 
@@ -489,7 +489,7 @@ for all $k\in\mathbb N$. So that a power $N_2^k=0$ if, and only if, $N_1^k=0$. C
 ```
 
 
-## Existence of Solutions
+## Existence of Solutions {#III-ex-sols}
 
 ```{block, type='JHSAYS'}
 We can now summarize all results and considerations in a theorem.

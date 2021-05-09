@@ -21,7 +21,7 @@ imap ii $
 
 imap xil X_{i\ell}
 imap dxil \dot X_{i\ell}
-imap ,rr \mathbb R^{
+imap ,rr \mathbb C^{
 
 map ,m <esc>:!source mkdc.sh<CR>
 imap ,jhs ```{block, type='JHSAYS'}<CR>```<esc>O
