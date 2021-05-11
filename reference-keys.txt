@@ -55,6 +55,13 @@ lem:regular-ea-commute
 eq:iv-ltv-dae
 eq:iv-ltv-inicond
 exm:ltv-regular-infinite-sols
+exm:ltv-singular-unique-sol
+def:global-equivalence
+eq:iv-glob-equiv-mpairs
+lem:iv-glob-equiv-rst
+def:local-equivalence
+eq:iv-loc-equiv-mpairs
+lem:iv-loc-equiv-rst
 thm:local-canonical-form
 eq:lcf-subspaces
 eq:lcf-quantities
@@ -96,6 +103,8 @@ solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair
 III-ex-sols
 a-variation-of-constant-formula
 IV
+we-are-here
+and-not-here-yet
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes
 general-rkm-for-semi-explicit-strangeness-free-daes

@@ -46,8 +46,119 @@ $$
 solves the *homogeneous* initial value problem \@ref(eq:iv-ltv-dae)--\@ref(eq:iv-ltv-inicond).</div>\EndKnitrBlock{example}
 
 <div class="JHSAYS">
-<p>This is an example where the pair <span class="math inline">\((E,A)\)</span> is regular uniformly with respect to <span class="math inline">\(t\)</span> but still allows for infinitely many solutions to the associated DAE.</p>
+<p>This was an example where the pair <span class="math inline">\((E,A)\)</span> is regular uniformly with respect to <span class="math inline">\(t\)</span> but still allows for infinitely many solutions to the associated DAE. <strong>X</strong>: What about the initial value? Why it won’t help to make the solution unique?</p>
+<p>Next we see the contrary – a matrix pair that is singular for any <span class="math inline">\(t\)</span> but defines a unique solution.</p>
 </div>
+
+\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:ltv-singular-unique-sol"><strong>(\#exm:ltv-singular-unique-sol) </strong></span>For 
+$$
+E(t) = 
+\begin{bmatrix}
+0 & 0 \\ 1 & -t 
+\end{bmatrix}, \quad
+A(t) = 
+\begin{bmatrix}
+-1 & t \\ 0&0 
+\end{bmatrix}, \quad
+f(t) = 
+\begin{bmatrix}
+f_1(t) \\ f_2(t)
+\end{bmatrix}, 
+$$
+one has
+$$
+\det ( \lambda E(t) - A(t)) = 0
+$$
+for all $t\in \mathcal I$. Still, if $x=(x_1, x_2)$ denotes the solution, from the first line of the DAE
+\begin{align*}
+0 &= -x_1(t) + tx_2(t) + f_1(t) \\
+\dot x_1 - t\dot x_2(t) &= \phantom{-x_1(t) + tx_2(t) +}f_2(t)
+\end{align*}
+one can calculate directly that
+$$
+\dot x_1(t) = t\dot x_2(t) +x_2 + \dot{f_1}(t)
+$$
+or that 
+$$
+\dot x_1(t) - t\dot x_2(t) = x_2 + \dot{f_1}(t)
+$$
+so that the second line becomes
+$$
+x_2(t) +  \dot{f_1}(t) = f_2(t)
+$$
+which uniquely defines 
+$$
+x_2(t) =  - \dot{f_1}(t) + f_2(t)
+$$
+and also
+$$
+x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+$$</div>\EndKnitrBlock{example}
+
+<div class="JHSAYS">
+<p>For both examples one can then simply choose <span class="math inline">\(x(t_0)\)</span> in accordance with the right hand side to argue about whether and how a solution exists.</p>
+</div>
+
+\@ref(exm:ltv-singular-unique-sol)
+
+Recall that for the *constant coefficient* case, we were using invertible scaling and state transformation matrices $P$ and $Q$ for the equivalence transformations
+$$
+E \dot x(t) = Ax(t) +f(t) \quad \sim \quad \tilde E \dot {\tilde x(t)} = \tilde A\tilde x(t) +\tilde f(t) 
+$$
+
+with
+
+$$
+x=Q\tilde x, \quad \tilde E = PEQ, \quad \tilde A = PAQ, \quad \tilde f = Pf.
+$$
+
+For the time-varying case, we will use time-varying transformations and require that they are invertible at every point $t$ in time.
+
+\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:global-equivalence"><strong>(\#def:global-equivalence) </strong></span>Two pairs $(E_i,A_i)$, $E_i$, $A_i \in \mathcal C(\mathcal I, \mathbb C^{m,n})$,
+$i=1,2$, of matrix functions are called *(globally) equivalent*, if there exist
+pointwise nonsingular matrix functions $P\in \mathcal C(\mathcal I, \mathbb
+C^{m,m})$ and $Q\in \mathcal C^1(\mathcal I, \mathbb C^{n,n})$ such that
+\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1\dot Q (\#eq:iv-glob-equiv-mpairs)
+\end{equation}
+for all $t\in \mathcal I$. Again, we write $(E_1,A_1) \sim (E_2, A_2)$.</div>\EndKnitrBlock{definition}
+
+## We are here
+
+<div class="JHSAYS">
+<p>The need of <span class="math inline">\(Q\)</span> being differentiable and the appearance of <span class="math inline">\(E_1\dot Q\)</span> in the definition of <span class="math inline">\(A_2\)</span> comes from the relation <span class="math display">\[
+E\dot x(t) = E\frac{d}{dt} (Q\tilde x)(t) = E\bigl(Q(t)\dot {\tilde x}(t) + \dot Q(t)\tilde x(t) \bigr)
+\]</span> for the transformed state <span class="math inline">\(\tilde x\)</span> with the actual state <span class="math inline">\(x\)</span>.</p>
+</div>
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:iv-glob-equiv-rst"><strong>(\#lem:iv-glob-equiv-rst) </strong></span>The relation on pairs of matrix functions as defined in Definition \@ref(def:global-equivalence) is an equivalence relation.</div>\EndKnitrBlock{lemma}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}Exercise!</div>\EndKnitrBlock{proof}
+
+Next we will define *local* equivalence of matrix pairs.
+
+\BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:local-equivalence"><strong>(\#def:local-equivalence) </strong></span>Two pairs $(E_i,A_i)$, $E_i$, $A_i \in \mathbb C^{m,n}$,
+$i=1,2$, of matrices are called *locally equivalent*, if there exist
+pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ such that as well as matrix $R\in \mathbb C^{n,n}$ such that
+\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R (\#eq:iv-loc-equiv-mpairs).
+\end{equation}
+Again, we write $(E_1,A_1) \sim (E_2, A_2)$ and differentiate by context.</div>\EndKnitrBlock{definition}
+
+\BeginKnitrBlock{lemma}<div class="lemma"><span class="lemma" id="lem:iv-loc-equiv-rst"><strong>(\#lem:iv-loc-equiv-rst) </strong></span>The local equivalence as defined in Definition \@ref(def:local-equivalence) is an equivalence relation on pairs of matrices.</div>\EndKnitrBlock{lemma}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}Exercise!</div>\EndKnitrBlock{proof}
+
+We state a few observations:
+
+* Global equivalence implies local equivalence at all points of time $t$.
+* Vice versa, pointwise local equivalence, e.g. at some time instances $t_i$ with suitable matrices $P_i$, $Q_i$, $R_i$, can be interpolated to a continuous matrix function $P$ and a differentiable matrix function $Q$ by *Hermite interpolation*, i.e. via 
+  $$
+  P(t_i) = P_i, \quad Q(t_i) = Q_i, \quad \dot Q(t_i) = R_i.
+  $$
+* Local equivalence is more powerful than the simple equivalence of matrix pairs (cp. Definition \@ref(def:matrix-pair-equivalent)) for which $R=0$. This means we can expect more structure in a normal form.
+
+## And not here yet
 
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:local-canonical-form"><strong>(\#thm:local-canonical-form) </strong></span>Let $E, A \in \mathbb C^{m,n}$ and let
 \begin{equation}

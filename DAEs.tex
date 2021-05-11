@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-05-09}
+\date{2021-05-11}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1650,10 +1650,148 @@ solves the \emph{homogeneous} initial value problem \eqref{eq:iv-ltv-dae}--\eqre
 \end{example}
 
 \begin{JHSAYS}
-This is an example where the pair \((E,A)\) is regular uniformly with
+This was an example where the pair \((E,A)\) is regular uniformly with
 respect to \(t\) but still allows for infinitely many solutions to the
-associated DAE.
+associated DAE. \textbf{X}: What about the initial value? Why it won't
+help to make the solution unique?
+
+Next we see the contrary -- a matrix pair that is singular for any \(t\)
+but defines a unique solution.
 \end{JHSAYS}
+
+\begin{example}
+\protect\hypertarget{exm:ltv-singular-unique-sol}{}{\label{exm:ltv-singular-unique-sol} }For
+\[
+E(t) = 
+\begin{bmatrix}
+0 & 0 \\ 1 & -t 
+\end{bmatrix}, \quad
+A(t) = 
+\begin{bmatrix}
+-1 & t \\ 0&0 
+\end{bmatrix}, \quad
+f(t) = 
+\begin{bmatrix}
+f_1(t) \\ f_2(t)
+\end{bmatrix}, 
+\]
+one has
+\[
+\det ( \lambda E(t) - A(t)) = 0
+\]
+for all \(t\in \mathcal I\). Still, if \(x=(x_1, x_2)\) denotes the solution, from the first line of the DAE
+\begin{align*}
+0 &= -x_1(t) + tx_2(t) + f_1(t) \\
+\dot x_1 - t\dot x_2(t) &= \phantom{-x_1(t) + tx_2(t) +}f_2(t)
+\end{align*}
+one can calculate directly that
+\[
+\dot x_1(t) = t\dot x_2(t) +x_2 + \dot{f_1}(t)
+\]
+or that
+\[
+\dot x_1(t) - t\dot x_2(t) = x_2 + \dot{f_1}(t)
+\]
+so that the second line becomes
+\[
+x_2(t) +  \dot{f_1}(t) = f_2(t)
+\]
+which uniquely defines
+\[
+x_2(t) =  - \dot{f_1}(t) + f_2(t)
+\]
+and also
+\[
+x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+\]
+\end{example}
+
+\begin{JHSAYS}
+For both examples one can then simply choose \(x(t_0)\) in accordance
+with the right hand side to argue about whether and how a solution
+exists.
+\end{JHSAYS}
+
+\ref{exm:ltv-singular-unique-sol}
+
+Recall that for the \emph{constant coefficient} case, we were using invertible scaling and state transformation matrices \(P\) and \(Q\) for the equivalence transformations
+\[
+E \dot x(t) = Ax(t) +f(t) \quad \sim \quad \tilde E \dot {\tilde x(t)} = \tilde A\tilde x(t) +\tilde f(t) 
+\]
+
+with
+
+\[
+x=Q\tilde x, \quad \tilde E = PEQ, \quad \tilde A = PAQ, \quad \tilde f = Pf.
+\]
+
+For the time-varying case, we will use time-varying transformations and require that they are invertible at every point \(t\) in time.
+
+\begin{definition}
+\protect\hypertarget{def:global-equivalence}{}{\label{def:global-equivalence} }Two pairs \((E_i,A_i)\), \(E_i\), \(A_i \in \mathcal C(\mathcal I, \mathbb C^{m,n})\),
+\(i=1,2\), of matrix functions are called \emph{(globally) equivalent}, if there exist
+pointwise nonsingular matrix functions \(P\in \mathcal C(\mathcal I, \mathbb C^{m,m})\) and \(Q\in \mathcal C^1(\mathcal I, \mathbb C^{n,n})\) such that
+\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1\dot Q \label{eq:iv-glob-equiv-mpairs}
+\end{equation}
+for all \(t\in \mathcal I\). Again, we write \((E_1,A_1) \sim (E_2, A_2)\).
+\end{definition}
+
+\hypertarget{we-are-here}{%
+\section{We are here}\label{we-are-here}}
+
+\begin{JHSAYS}
+The need of \(Q\) being differentiable and the appearance of
+\(E_1\dot Q\) in the definition of \(A_2\) comes from the relation \[
+E\dot x(t) = E\frac{d}{dt} (Q\tilde x)(t) = E\bigl(Q(t)\dot {\tilde x}(t) + \dot Q(t)\tilde x(t) \bigr)
+\] for the transformed state \(\tilde x\) with the actual state \(x\).
+\end{JHSAYS}
+
+\begin{lemma}
+\protect\hypertarget{lem:iv-glob-equiv-rst}{}{\label{lem:iv-glob-equiv-rst} }The relation on pairs of matrix functions as defined in Definition \ref{def:global-equivalence} is an equivalence relation.
+\end{lemma}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Exercise!
+\end{proof}
+
+Next we will define \emph{local} equivalence of matrix pairs.
+
+\begin{definition}
+\protect\hypertarget{def:local-equivalence}{}{\label{def:local-equivalence} }Two pairs \((E_i,A_i)\), \(E_i\), \(A_i \in \mathbb C^{m,n}\),
+\(i=1,2\), of matrices are called \emph{locally equivalent}, if there exist
+pointwise nonsingular matrices \(P \in \mathbb C^{m,m})\) and \(Q\in \mathbb C^{n,n}\) such that as well as matrix \(R\in \mathbb C^{n,n}\) such that
+\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R \label{eq:iv-loc-equiv-mpairs}.
+\end{equation}
+Again, we write \((E_1,A_1) \sim (E_2, A_2)\) and differentiate by context.
+\end{definition}
+
+\begin{lemma}
+\protect\hypertarget{lem:iv-loc-equiv-rst}{}{\label{lem:iv-loc-equiv-rst} }The local equivalence as defined in Definition \ref{def:local-equivalence} is an equivalence relation on pairs of matrices.
+\end{lemma}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}Exercise!
+\end{proof}
+
+We state a few observations:
+
+\begin{itemize}
+\tightlist
+\item
+  Global equivalence implies local equivalence at all points of time \(t\).
+\item
+  Vice versa, pointwise local equivalence, e.g.~at some time instances \(t_i\) with suitable matrices \(P_i\), \(Q_i\), \(R_i\), can be interpolated to a continuous matrix function \(P\) and a differentiable matrix function \(Q\) by \emph{Hermite interpolation}, i.e.~via
+  \[
+  P(t_i) = P_i, \quad Q(t_i) = Q_i, \quad \dot Q(t_i) = R_i.
+  \]
+\item
+  Local equivalence is more powerful than the simple equivalence of matrix pairs (cp.~Definition \ref{def:matrix-pair-equivalent}) for which \(R=0\). This means we can expect more structure in a normal form.
+\end{itemize}
+
+\hypertarget{and-not-here-yet}{%
+\section{And not here yet}\label{and-not-here-yet}}
 
 \begin{theorem}
 \protect\hypertarget{thm:local-canonical-form}{}{\label{thm:local-canonical-form} }Let \(E, A \in \mathbb C^{m,n}\) and let

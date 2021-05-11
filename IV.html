@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-05-09" />
+<meta name="date" content="2021-05-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -91,7 +91,10 @@
 <li class="chapter" data-level="3.4" data-path="III.html"><a href="III.html#III-ex-sols"><i class="fa fa-check"></i><b>3.4</b> Existence of Solutions</a></li>
 <li class="chapter" data-level="3.5" data-path="III.html"><a href="III.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="IV.html"><a href="IV.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a></li>
+<li class="chapter" data-level="4" data-path="IV.html"><a href="IV.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a><ul>
+<li class="chapter" data-level="4.1" data-path="IV.html"><a href="IV.html#we-are-here"><i class="fa fa-check"></i><b>4.1</b> We are here</a></li>
+<li class="chapter" data-level="4.2" data-path="IV.html"><a href="IV.html#and-not-here-yet"><i class="fa fa-check"></i><b>4.2</b> And not here yet</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
@@ -174,14 +177,144 @@ solves the <em>homogeneous</em> initial value problem <a href="IV.html#eq:iv-ltv
 
 <div class="JHSAYS">
 <p>
-This is an example where the pair <span class="math inline"><span class="math inline">\((E,A)\)</span></span> is regular uniformly with respect to <span class="math inline"><span class="math inline">\(t\)</span></span> but still allows for infinitely many solutions to the associated DAE.
+This was an example where the pair <span class="math inline"><span class="math inline">\((E,A)\)</span></span> is regular uniformly with respect to <span class="math inline"><span class="math inline">\(t\)</span></span> but still allows for infinitely many solutions to the associated DAE. <strong>X</strong>: What about the initial value? Why it won’t help to make the solution unique?
+</p>
+<p>
+Next we see the contrary – a matrix pair that is singular for any <span class="math inline"><span class="math inline">\(t\)</span></span> but defines a unique solution.
 </p>
 </div>
+
+<div class="example">
+<span id="exm:ltv-singular-unique-sol" class="example"><strong>Example 4.2  </strong></span>For
+<span class="math display">\[
+E(t) = 
+\begin{bmatrix}
+0 &amp; 0 \\ 1 &amp; -t 
+\end{bmatrix}, \quad
+A(t) = 
+\begin{bmatrix}
+-1 &amp; t \\ 0&amp;0 
+\end{bmatrix}, \quad
+f(t) = 
+\begin{bmatrix}
+f_1(t) \\ f_2(t)
+\end{bmatrix}, 
+\]</span>
+one has
+<span class="math display">\[
+\det ( \lambda E(t) - A(t)) = 0
+\]</span>
+for all <span class="math inline">\(t\in \mathcal I\)</span>. Still, if <span class="math inline">\(x=(x_1, x_2)\)</span> denotes the solution, from the first line of the DAE
+<span class="math display">\[\begin{align*}
+0 &amp;= -x_1(t) + tx_2(t) + f_1(t) \\
+\dot x_1 - t\dot x_2(t) &amp;= \phantom{-x_1(t) + tx_2(t) +}f_2(t)
+\end{align*}\]</span>
+one can calculate directly that
+<span class="math display">\[
+\dot x_1(t) = t\dot x_2(t) +x_2 + \dot{f_1}(t)
+\]</span>
+or that
+<span class="math display">\[
+\dot x_1(t) - t\dot x_2(t) = x_2 + \dot{f_1}(t)
+\]</span>
+so that the second line becomes
+<span class="math display">\[
+x_2(t) +  \dot{f_1}(t) = f_2(t)
+\]</span>
+which uniquely defines
+<span class="math display">\[
+x_2(t) =  - \dot{f_1}(t) + f_2(t)
+\]</span>
+and also
+<span class="math display">\[
+x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+\]</span>
+</div>
+
+<div class="JHSAYS">
+<p>
+For both examples one can then simply choose <span class="math inline"><span class="math inline">\(x(t_0)\)</span></span> in accordance with the right hand side to argue about whether and how a solution exists.
+</p>
+</div>
+<p><a href="IV.html#exm:ltv-singular-unique-sol">4.2</a></p>
+<p>Recall that for the <em>constant coefficient</em> case, we were using invertible scaling and state transformation matrices <span class="math inline">\(P\)</span> and <span class="math inline">\(Q\)</span> for the equivalence transformations
+<span class="math display">\[
+E \dot x(t) = Ax(t) +f(t) \quad \sim \quad \tilde E \dot {\tilde x(t)} = \tilde A\tilde x(t) +\tilde f(t) 
+\]</span></p>
+<p>with</p>
+<p><span class="math display">\[
+x=Q\tilde x, \quad \tilde E = PEQ, \quad \tilde A = PAQ, \quad \tilde f = Pf.
+\]</span></p>
+<p>For the time-varying case, we will use time-varying transformations and require that they are invertible at every point <span class="math inline">\(t\)</span> in time.</p>
+
+<div class="definition">
+<span id="def:global-equivalence" class="definition"><strong>Definition 4.1  </strong></span>Two pairs <span class="math inline">\((E_i,A_i)\)</span>, <span class="math inline">\(E_i\)</span>, <span class="math inline">\(A_i \in \mathcal C(\mathcal I, \mathbb C^{m,n})\)</span>,
+<span class="math inline">\(i=1,2\)</span>, of matrix functions are called <em>(globally) equivalent</em>, if there exist
+pointwise nonsingular matrix functions <span class="math inline">\(P\in \mathcal C(\mathcal I, \mathbb C^{m,m})\)</span> and <span class="math inline">\(Q\in \mathcal C^1(\mathcal I, \mathbb C^{n,n})\)</span> such that
+<span class="math display" id="eq:iv-glob-equiv-mpairs">\[\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1\dot Q \tag{4.3}
+\end{equation}\]</span>
+for all <span class="math inline">\(t\in \mathcal I\)</span>. Again, we write <span class="math inline">\((E_1,A_1) \sim (E_2, A_2)\)</span>.
+</div>
+
+<div id="we-are-here" class="section level2">
+<h2><span class="header-section-number">4.1</span> We are here</h2>
+<div class="JHSAYS">
+<p>
+The need of <span class="math inline"><span class="math inline">\(Q\)</span></span> being differentiable and the appearance of <span class="math inline"><span class="math inline">\(E_1\dot Q\)</span></span> in the definition of <span class="math inline"><span class="math inline">\(A_2\)</span></span> comes from the relation <span class="math display"><span class="math display">\[
+E\dot x(t) = E\frac{d}{dt} (Q\tilde x)(t) = E\bigl(Q(t)\dot {\tilde x}(t) + \dot Q(t)\tilde x(t) \bigr)
+\]</span></span> for the transformed state <span class="math inline"><span class="math inline">\(\tilde x\)</span></span> with the actual state <span class="math inline"><span class="math inline">\(x\)</span></span>.
+</p>
+</div>
+
+<div class="lemma">
+<span id="lem:iv-glob-equiv-rst" class="lemma"><strong>Lemma 4.1  </strong></span>The relation on pairs of matrix functions as defined in Definition <a href="IV.html#def:global-equivalence">4.1</a> is an equivalence relation.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> Exercise!
+</div>
+
+<p>Next we will define <em>local</em> equivalence of matrix pairs.</p>
+
+<div class="definition">
+<span id="def:local-equivalence" class="definition"><strong>Definition 4.2  </strong></span>Two pairs <span class="math inline">\((E_i,A_i)\)</span>, <span class="math inline">\(E_i\)</span>, <span class="math inline">\(A_i \in \mathbb C^{m,n}\)</span>,
+<span class="math inline">\(i=1,2\)</span>, of matrices are called <em>locally equivalent</em>, if there exist
+pointwise nonsingular matrices <span class="math inline">\(P \in \mathbb C^{m,m})\)</span> and <span class="math inline">\(Q\in \mathbb C^{n,n}\)</span> such that as well as matrix <span class="math inline">\(R\in \mathbb C^{n,n}\)</span> such that
+<span class="math display" id="eq:iv-loc-equiv-mpairs">\[\begin{equation}
+E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R \tag{4.4}.
+\end{equation}\]</span>
+Again, we write <span class="math inline">\((E_1,A_1) \sim (E_2, A_2)\)</span> and differentiate by context.
+</div>
+
+
+<div class="lemma">
+<span id="lem:iv-loc-equiv-rst" class="lemma"><strong>Lemma 4.2  </strong></span>The local equivalence as defined in Definition <a href="IV.html#def:local-equivalence">4.2</a> is an equivalence relation on pairs of matrices.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> Exercise!
+</div>
+
+<p>We state a few observations:</p>
+<ul>
+<li>Global equivalence implies local equivalence at all points of time <span class="math inline">\(t\)</span>.</li>
+<li>Vice versa, pointwise local equivalence, e.g. at some time instances <span class="math inline">\(t_i\)</span> with suitable matrices <span class="math inline">\(P_i\)</span>, <span class="math inline">\(Q_i\)</span>, <span class="math inline">\(R_i\)</span>, can be interpolated to a continuous matrix function <span class="math inline">\(P\)</span> and a differentiable matrix function <span class="math inline">\(Q\)</span> by <em>Hermite interpolation</em>, i.e. via
+<span class="math display">\[
+P(t_i) = P_i, \quad Q(t_i) = Q_i, \quad \dot Q(t_i) = R_i.
+\]</span></li>
+<li>Local equivalence is more powerful than the simple equivalence of matrix pairs (cp. Definition <a href="III.html#def:matrix-pair-equivalent">3.1</a>) for which <span class="math inline">\(R=0\)</span>. This means we can expect more structure in a normal form.</li>
+</ul>
+</div>
+<div id="and-not-here-yet" class="section level2">
+<h2><span class="header-section-number">4.2</span> And not here yet</h2>
 
 <div class="theorem">
 <p><span id="thm:local-canonical-form" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(E, A \in \mathbb C^{m,n}\)</span> and let
 <span class="math display" id="eq:lcf-subspaces">\[\begin{equation}
-T,~Z,~T&#39;,~V \tag{4.3}
+T,~Z,~T&#39;,~V \tag{4.5}
 \end{equation}\]</span>
 be</p>
 <table>
@@ -212,7 +345,7 @@ be</p>
 </table>
 <p>then the quantities
 <span class="math display" id="eq:lcf-quantities">\[\begin{equation}
-r,~a,~s,~d,~u,~v \tag{4.4}
+r,~a,~s,~d,~u,~v \tag{4.6}
 \end{equation}\]</span>
 defined as</p>
 <table>
@@ -272,7 +405,7 @@ I_s &amp; 0 &amp; 0 &amp; 0 \\
 I_s &amp; 0 &amp; 0 &amp; 0 \\
 0 &amp; 0 &amp; 0 &amp; 0
 \end{bmatrix}\right),
-\tag{4.5}
+\tag{4.7}
 \end{equation}\]</span>
 where all diagonal blocks are square, except maybe the last one.
 </div>
@@ -297,7 +430,7 @@ where all diagonal blocks are square, except maybe the last one.
 </blockquote>
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.2  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
+<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.3  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
 <span class="math display">\[
 (E, A) \backsim 
 \left(
@@ -306,7 +439,7 @@ where all diagonal blocks are square, except maybe the last one.
 \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; I_1 \end{bmatrix}
 \right).
 \]</span></p>
-<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.3)</a>:</p>
+<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.5)</a>:</p>
 <table>
 <colgroup>
 <col width="30%" />
@@ -345,7 +478,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 </tbody>
 </table>
-<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.4)</a>:</p>
+<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.6)</a>:</p>
 <table>
 <colgroup>
 <col width="22%" />
@@ -396,7 +529,7 @@ where all diagonal blocks are square, except maybe the last one.
 
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.3  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
+<p><span id="exm:strangeness-in-the-nse" class="example"><strong>Example 4.4  </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
 <span class="math display">\[
 (\mathcal E, \mathcal A) =
 \left(
@@ -411,7 +544,7 @@ where all diagonal blocks are square, except maybe the last one.
 \begin{bmatrix} A_{11} &amp; A_{12} &amp; I_{n_1} \\ A_{21} &amp; A_{22} &amp; 0 \\ I_{n_1} &amp; 0 &amp; 0\end{bmatrix}
 \right).
 \]</span></p>
-<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.3)</a>:</p>
+<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.5)</a>:</p>
 <table>
 <colgroup>
 <col width="30%" />
@@ -450,7 +583,7 @@ where all diagonal blocks are square, except maybe the last one.
 </tr>
 </tbody>
 </table>
-<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.4)</a>:</p>
+<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.6)</a>:</p>
 <table>
 <colgroup>
 <col width="33%" />
@@ -518,7 +651,7 @@ with pointwise nonsingular <span class="math inline">\(\Sigma \in \mathcal C^l(I
 <p><span id="thm:global-canonical-form" class="theorem"><strong>Theorem 4.3  </strong></span>
 Let <span class="math inline">\(E, A \in \mathcal C^l(I, \mathbb C^{m,n})\)</span> be sufficiently smooth and suppose that
 <span class="math display" id="eq:glob-local-char-vals">\[\begin{equation}
-    r(t) = r, \quad a(t)=a, \quad s(t)=s \tag{4.6}
+    r(t) = r, \quad a(t)=a, \quad s(t)=s \tag{4.8}
 \end{equation}\]</span></p>
 <p>for the local characteristic values of <span class="math inline">\((E(t), A(t))\)</span>. Then <span class="math inline">\((E, A)\)</span> is globally equivalent to the canonical form
 <span class="math display" id="eq:glob-can-form">\[\begin{equation}
@@ -538,9 +671,9 @@ I_s &amp;   0   &amp;  0  &amp; 0 \\
 0   &amp;   0   &amp;  0  &amp; 0
 \end{bmatrix}
 \right ).
-\tag{4.7}
+\tag{4.9}
 \end{equation}\]</span></p>
-<p>All entries are again matrix functions on <span class="math inline">\(I\)</span> and the last block column in both matrix functions of <a href="IV.html#eq:glob-can-form">(4.7)</a> has size <span class="math inline">\(u=n-s-d-a\)</span>.</p>
+<p>All entries are again matrix functions on <span class="math inline">\(I\)</span> and the last block column in both matrix functions of <a href="IV.html#eq:glob-can-form">(4.9)</a> has size <span class="math inline">\(u=n-s-d-a\)</span>.</p>
 </div>
 
 
@@ -730,6 +863,7 @@ Then, <span class="math inline">\(A_{22}\)</span> vanishes because of the specia
 </div>
 
 
+</div>
 </div>
             </section>
 
