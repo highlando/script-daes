@@ -99,8 +99,6 @@ $$</div>\EndKnitrBlock{example}
 <p>For both examples one can then simply choose <span class="math inline">\(x(t_0)\)</span> in accordance with the right hand side to argue about whether and how a solution exists.</p>
 </div>
 
-\@ref(exm:ltv-singular-unique-sol)
-
 Recall that for the *constant coefficient* case, we were using invertible scaling and state transformation matrices $P$ and $Q$ for the equivalence transformations
 $$
 E \dot x(t) = Ax(t) +f(t) \quad \sim \quad \tilde E \dot {\tilde x(t)} = \tilde A\tilde x(t) +\tilde f(t) 
@@ -122,8 +120,6 @@ C^{m,m})$ and $Q\in \mathcal C^1(\mathcal I, \mathbb C^{n,n})$ such that
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1\dot Q (\#eq:iv-glob-equiv-mpairs)
 \end{equation}
 for all $t\in \mathcal I$. Again, we write $(E_1,A_1) \sim (E_2, A_2)$.</div>\EndKnitrBlock{definition}
-
-## We are here
 
 <div class="JHSAYS">
 <p>The need of <span class="math inline">\(Q\)</span> being differentiable and the appearance of <span class="math inline">\(E_1\dot Q\)</span> in the definition of <span class="math inline">\(A_2\)</span> comes from the relation <span class="math display">\[
@@ -158,7 +154,7 @@ We state a few observations:
   $$
 * Local equivalence is more powerful than the simple equivalence of matrix pairs (cp. Definition \@ref(def:matrix-pair-equivalent)) for which $R=0$. This means we can expect more structure in a normal form.
 
-## And not here yet
+## Don't read any further
 
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:local-canonical-form"><strong>(\#thm:local-canonical-form) </strong></span>Let $E, A \in \mathbb C^{m,n}$ and let
 \begin{equation}
