@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ctags *
 git pull
 FILETOEDIT=04-Linear-Time-Vary-Coeffs.Rmd
 echo $FILETOEDIT
