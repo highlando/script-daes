@@ -154,7 +154,16 @@ We state a few observations:
   $$
 * Local equivalence is more powerful than the simple equivalence of matrix pairs (cp. Definition \@ref(def:matrix-pair-equivalent)) for which $R=0$. This means we can expect more structure in a normal form.
 
-## Don't read any further
+## A Local Canonical Form
+
+For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that the $V$ is the span of the columns of $V$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
+
+Some more notation:
+
+| Notation | Explanation |
+| -------- | ----------- |
+| $V^H\in \mathbb C^{n,m}$ | the [*conjugate transpose* or *Hermitian transpose*](https://en.wikipedia.org/wiki/Conjugate_transpose)  of a matrix $V\in \mathbb C^{m,n}$ | 
+| $T' \in \mathbb C^{n,n-k}$ | The *complementary space* as a matrix. If $T\in \mathbb C^{n,k}$ is a basis of $V$, then $T'$ contains a basis of $V'$ so that $V\oplus V' = \mathbb C^{n}$. In particular, the matrix $\begin{bmatrix}T&T'\end{bmatrix}$ is square and invertible. |
 
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:local-canonical-form"><strong>(\#thm:local-canonical-form) </strong></span>Let $E, A \in \mathbb C^{m,n}$ and let
 \begin{equation}
@@ -205,6 +214,8 @@ I_s & 0 & 0 & 0 \\
 (\#eq:local-canonical-form)
 \end{equation}
 where all diagonal blocks are square, except maybe the last one.</div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}To be provided. Until then, see Theorem 3.7 in Kunkel/Mehrmann.</div>\EndKnitrBlock{proof}
 Some remarks on the spaces and how the names are derived for the case $E\dot x = Ax +f$ with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients. 
 
 Let 
@@ -212,7 +223,9 @@ $$x(t) = Ty(t) + T'y'(t),$$
 
 where $y$ denotes the components of $x$ that evolve in the range of $T$ and $y'$ the respective complement. (Since $[T|T']$ is a basis of $\mathbb C^{n}$, there exist such $y$ and $y'$ that uniquely define $x$ and vice versa). With $T$ spanning $\ker E$ we find that 
 
-$$E \dot x(t) = ET\dot y(t) + ET'\dot y'(t)$$
+$$
+E \dot x(t) = ET\dot y(t) + ET'\dot y'(t) = ET'\dot y'(t)
+$$
 
 so that the DAE basically reads
 
@@ -234,7 +247,11 @@ $$V^HZ^HAT'y'(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,$$
 
 is the part of $E\dot x = Ax + f$ in which those components $y'$ that are also differentiated are algebraically equated to a right-hand side. This is the *strangeness* (rather in the sense of *skewness*) of DAEs that variables can be both differential and algebraic. Accordingly, $\rank V^HZ^HAT'$ describes the size of the skewness component. 
 
-> **Outlook**: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size $s$ of the *strange* block here) will define the strangeness index.
+Finally, those variables that are neither *strange* nor purely algebraic, i.e. those that are differentiated but not defined algebraically, are the *differential* variables. There is no direct characterization of them, but one can calculate their number as $r-s$, which means number of differentiated minus number of *strange* variables.
+
+<div class="JHSAYS">
+<p><strong>Outlook</strong>: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size <span class="math inline">\(s\)</span> of the <em>strange</em> block here) will define the strangeness index.</p>
+</div>
 
 
 \BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:strangeness-in-the-circuit"><strong>(\#exm:strangeness-in-the-circuit) </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example \@ref(exm:the-circuit) that:
@@ -308,6 +325,8 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 | undetermined variables | $u=n_1$ | $u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0$ |
 | vanishing equations | $v=0$ | $v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1$ |
 </div>\EndKnitrBlock{example}
+
+## Don't read any further
 
 \BeginKnitrBlock{theorem}\iffalse{-91-115-101-101-32-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-51-46-57-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:continuous-svd"><strong>(\#thm:continuous-svd)  \iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} </strong></span>
 Let $E\in \mathcal C^l(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions $U$ and $V$, such that 

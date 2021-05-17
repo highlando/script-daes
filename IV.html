@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-05-11" />
+<meta name="date" content="2021-05-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -92,7 +92,8 @@
 <li class="chapter" data-level="3.5" data-path="III.html"><a href="III.html#a-variation-of-constant-formula"><i class="fa fa-check"></i><b>3.5</b> A Variation of Constant Formula</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="IV.html"><a href="IV.html"><i class="fa fa-check"></i><b>4</b> Linear DAEs with Time-varying Coefficients</a><ul>
-<li class="chapter" data-level="4.1" data-path="IV.html"><a href="IV.html#dont-read-any-further"><i class="fa fa-check"></i><b>4.1</b> Don’t read any further</a></li>
+<li class="chapter" data-level="4.1" data-path="IV.html"><a href="IV.html#a-local-canonical-form"><i class="fa fa-check"></i><b>4.1</b> A Local Canonical Form</a></li>
+<li class="chapter" data-level="4.2" data-path="IV.html"><a href="IV.html#dont-read-any-further"><i class="fa fa-check"></i><b>4.2</b> Don’t read any further</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
@@ -303,8 +304,32 @@ P(t_i) = P_i, \quad Q(t_i) = Q_i, \quad \dot Q(t_i) = R_i.
 \]</span></li>
 <li>Local equivalence is more powerful than the simple equivalence of matrix pairs (cp. Definition <a href="III.html#def:matrix-pair-equivalent">3.1</a>) for which <span class="math inline">\(R=0\)</span>. This means we can expect more structure in a normal form.</li>
 </ul>
-<div id="dont-read-any-further" class="section level2">
-<h2><span class="header-section-number">4.1</span> Don’t read any further</h2>
+<div id="a-local-canonical-form" class="section level2">
+<h2><span class="header-section-number">4.1</span> A Local Canonical Form</h2>
+<p>For easier explanations, we introduce the slightly incorrect wording that a <em>matrix</em> <span class="math inline">\(M\)</span> <em>spans</em> a vector space <span class="math inline">\(V\)</span> to express that the <span class="math inline">\(V\)</span> is the span of the columns of <span class="math inline">\(V\)</span>. Similarly, we will say that <span class="math inline">\(M\)</span> <em>is a basis of</em> <span class="math inline">\(V\)</span>, if the columns of <span class="math inline">\(M\)</span> form a basis for <span class="math inline">\(V\)</span>.</p>
+<p>Some more notation:</p>
+<table>
+<colgroup>
+<col width="42%" />
+<col width="57%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Notation</th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(V^H\in \mathbb C^{n,m}\)</span></td>
+<td>the <a href="https://en.wikipedia.org/wiki/Conjugate_transpose"><em>conjugate transpose</em> or <em>Hermitian transpose</em></a> of a matrix <span class="math inline">\(V\in \mathbb C^{m,n}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T&#39; \in \mathbb C^{n,n-k}\)</span></td>
+<td>The <em>complementary space</em> as a matrix. If <span class="math inline">\(T\in \mathbb C^{n,k}\)</span> is a basis of <span class="math inline">\(V\)</span>, then <span class="math inline">\(T&#39;\)</span> contains a basis of <span class="math inline">\(V&#39;\)</span> so that <span class="math inline">\(V\oplus V&#39; = \mathbb C^{n}\)</span>. In particular, the matrix <span class="math inline">\(\begin{bmatrix}T&amp;T&#39;\end{bmatrix}\)</span> is square and invertible.</td>
+</tr>
+</tbody>
+</table>
 
 <div class="theorem">
 <p><span id="thm:local-canonical-form" class="theorem"><strong>Theorem 4.1  </strong></span>Let <span class="math inline">\(E, A \in \mathbb C^{m,n}\)</span> and let
@@ -405,11 +430,18 @@ I_s &amp; 0 &amp; 0 &amp; 0 \\
 where all diagonal blocks are square, except maybe the last one.
 </div>
 
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> To be provided. Until then, see Theorem 3.7 in Kunkel/Mehrmann.
+</div>
+
 <p>Some remarks on the spaces and how the names are derived for the case <span class="math inline">\(E\dot x = Ax +f\)</span> with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients.</p>
 <p>Let
 <span class="math display">\[x(t) = Ty(t) + T&#39;y&#39;(t),\]</span></p>
 <p>where <span class="math inline">\(y\)</span> denotes the components of <span class="math inline">\(x\)</span> that evolve in the range of <span class="math inline">\(T\)</span> and <span class="math inline">\(y&#39;\)</span> the respective complement. (Since <span class="math inline">\([T|T&#39;]\)</span> is a basis of <span class="math inline">\(\mathbb C^{n}\)</span>, there exist such <span class="math inline">\(y\)</span> and <span class="math inline">\(y&#39;\)</span> that uniquely define <span class="math inline">\(x\)</span> and vice versa). With <span class="math inline">\(T\)</span> spanning <span class="math inline">\(\ker E\)</span> we find that</p>
-<p><span class="math display">\[E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t)\]</span></p>
+<p><span class="math display">\[
+E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t) = ET&#39;\dot y&#39;(t)
+\]</span></p>
 <p>so that the DAE basically reads</p>
 <p><span class="math display">\[ET&#39;\dot y&#39;(t) = ATy(t) + AT&#39;y&#39;(t)+f,\]</span></p>
 <p>i.e. the components of <span class="math inline">\(x\)</span> defined through <span class="math inline">\(y\)</span> are, effectively, not differentiated. With <span class="math inline">\(Z\)</span> containing exactly those <span class="math inline">\(v\)</span>, for which <span class="math inline">\(v^HE=0\)</span>, it follows that</p>
@@ -420,9 +452,12 @@ where all diagonal blocks are square, except maybe the last one.
 <p>With the same arguments and with <span class="math inline">\(V=\operatorname{corange}Z^HAT\)</span>, it follows that</p>
 <p><span class="math display">\[V^HZ^HAT&#39;y&#39;(t) = -V^HZ^HATy(t) -V^HZ^Hf=-V^HZ^Hf,\]</span></p>
 <p>is the part of <span class="math inline">\(E\dot x = Ax + f\)</span> in which those components <span class="math inline">\(y&#39;\)</span> that are also differentiated are algebraically equated to a right-hand side. This is the <em>strangeness</em> (rather in the sense of <em>skewness</em>) of DAEs that variables can be both differential and algebraic. Accordingly, <span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39;\)</span> describes the size of the skewness component.</p>
-<blockquote>
-<p><strong>Outlook</strong>: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size <span class="math inline">\(s\)</span> of the <em>strange</em> block here) will define the strangeness index.</p>
-</blockquote>
+<p>Finally, those variables that are neither <em>strange</em> nor purely algebraic, i.e. those that are differentiated but not defined algebraically, are the <em>differential</em> variables. There is no direct characterization of them, but one can calculate their number as <span class="math inline">\(r-s\)</span>, which means number of differentiated minus number of <em>strange</em> variables.</p>
+<div class="JHSAYS">
+<p>
+<strong>Outlook</strong>: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size <span class="math inline"><span class="math inline">\(s\)</span></span> of the <em>strange</em> block here) will define the strangeness index.
+</p>
+</div>
 
 <div class="example">
 <p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.3  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
@@ -627,6 +662,9 @@ where all diagonal blocks are square, except maybe the last one.
 </table>
 </div>
 
+</div>
+<div id="dont-read-any-further" class="section level2">
+<h2><span class="header-section-number">4.2</span> Don’t read any further</h2>
 
 <div class="theorem">
 <p><span id="thm:continuous-svd" class="theorem"><strong>Theorem 4.2  (see Kunkel/Mehrmann, Thm. 3.9)  </strong></span>

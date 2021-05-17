@@ -103,6 +103,7 @@ solution-to-the-n-dae-regularity-and-index-of-a-matrix-pair
 III-ex-sols
 a-variation-of-constant-formula
 IV
+a-local-canonical-form
 dont-read-any-further
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes

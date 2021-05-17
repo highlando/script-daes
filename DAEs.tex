@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-05-11}
+\date{2021-05-17}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1785,8 +1785,34 @@ We state a few observations:
   Local equivalence is more powerful than the simple equivalence of matrix pairs (cp.~Definition \ref{def:matrix-pair-equivalent}) for which \(R=0\). This means we can expect more structure in a normal form.
 \end{itemize}
 
-\hypertarget{dont-read-any-further}{%
-\section{Don't read any further}\label{dont-read-any-further}}
+\hypertarget{a-local-canonical-form}{%
+\section{A Local Canonical Form}\label{a-local-canonical-form}}
+
+For easier explanations, we introduce the slightly incorrect wording that a \emph{matrix} \(M\) \emph{spans} a vector space \(V\) to express that the \(V\) is the span of the columns of \(V\). Similarly, we will say that \(M\) \emph{is a basis of} \(V\), if the columns of \(M\) form a basis for \(V\).
+
+Some more notation:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.40\columnwidth}\raggedright
+Notation\strut
+\end{minipage} & \begin{minipage}[b]{0.54\columnwidth}\raggedright
+Explanation\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.40\columnwidth}\raggedright
+\(V^H\in \mathbb C^{n,m}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+the \href{https://en.wikipedia.org/wiki/Conjugate_transpose}{\emph{conjugate transpose} or \emph{Hermitian transpose}} of a matrix \(V\in \mathbb C^{m,n}\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.40\columnwidth}\raggedright
+\(T' \in \mathbb C^{n,n-k}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.54\columnwidth}\raggedright
+The \emph{complementary space} as a matrix. If \(T\in \mathbb C^{n,k}\) is a basis of \(V\), then \(T'\) contains a basis of \(V'\) so that \(V\oplus V' = \mathbb C^{n}\). In particular, the matrix \(\begin{bmatrix}T&T'\end{bmatrix}\) is square and invertible.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \begin{theorem}
 \protect\hypertarget{thm:local-canonical-form}{}{\label{thm:local-canonical-form} }Let \(E, A \in \mathbb C^{m,n}\) and let
@@ -1848,6 +1874,10 @@ I_s & 0 & 0 & 0 \\
 \end{equation}
 where all diagonal blocks are square, except maybe the last one.
 \end{theorem}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}To be provided. Until then, see Theorem 3.7 in Kunkel/Mehrmann.
+\end{proof}
 Some remarks on the spaces and how the names are derived for the case \(E\dot x = Ax +f\) with constant coefficients. The ideas are readily transferred to the case with time-varying coefficients.
 
 Let
@@ -1855,7 +1885,9 @@ Let
 
 where \(y\) denotes the components of \(x\) that evolve in the range of \(T\) and \(y'\) the respective complement. (Since \([T|T']\) is a basis of \(\mathbb C^{n}\), there exist such \(y\) and \(y'\) that uniquely define \(x\) and vice versa). With \(T\) spanning \(\ker E\) we find that
 
-\[E \dot x(t) = ET\dot y(t) + ET'\dot y'(t)\]
+\[
+E \dot x(t) = ET\dot y(t) + ET'\dot y'(t) = ET'\dot y'(t)
+\]
 
 so that the DAE basically reads
 
@@ -1877,9 +1909,15 @@ With the same arguments and with \(V=\operatorname{corange}Z^HAT\), it follows t
 
 is the part of \(E\dot x = Ax + f\) in which those components \(y'\) that are also differentiated are algebraically equated to a right-hand side. This is the \emph{strangeness} (rather in the sense of \emph{skewness}) of DAEs that variables can be both differential and algebraic. Accordingly, \(\operatorname{rank}V^HZ^HAT'\) describes the size of the skewness component.
 
-\begin{quote}
-\textbf{Outlook}: If there is no strangeness, the DAE is called strangeness-free. Strangeness can be eliminated through iterated differentiation and substitution. The needed number of such iterations (that is independent of the the size \(s\) of the \emph{strange} block here) will define the strangeness index.
-\end{quote}
+Finally, those variables that are neither \emph{strange} nor purely algebraic, i.e.~those that are differentiated but not defined algebraically, are the \emph{differential} variables. There is no direct characterization of them, but one can calculate their number as \(r-s\), which means number of differentiated minus number of \emph{strange} variables.
+
+\begin{JHSAYS}
+\textbf{Outlook}: If there is no strangeness, the DAE is called
+strangeness-free. Strangeness can be eliminated through iterated
+differentiation and substitution. The needed number of such iterations
+(that is independent of the the size \(s\) of the \emph{strange} block
+here) will define the strangeness index.
+\end{JHSAYS}
 
 \begin{example}
 \protect\hypertarget{exm:strangeness-in-the-circuit}{}{\label{exm:strangeness-in-the-circuit} }With basic scalings and state transforms, one finds for the coefficients of Example \ref{exm:the-circuit} that:
@@ -2114,6 +2152,9 @@ vanishing equations\strut
 \bottomrule
 \end{longtable}
 \end{example}
+
+\hypertarget{dont-read-any-further}{%
+\section{Don't read any further}\label{dont-read-any-further}}
 
 \begin{theorem}[see Kunkel/Mehrmann, Thm. 3.9]
 \protect\hypertarget{thm:continuous-svd}{}{\label{thm:continuous-svd} \iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} }
