@@ -460,13 +460,23 @@ E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t) = ET&#39;\dot y&#39;(t)
 </div>
 
 <div class="example">
-<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.3  </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
+<p><span id="exm:strangeness-in-the-circuit" class="example"><strong>Example 4.3  </strong></span>With a basic state transformation
+<span class="math display">\[
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2 \\ \tilde x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+x_3 - x_2 \\ x_2-x_1 \\ x_3
+\end{bmatrix},
+\]</span>
+one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
 <span class="math display">\[
 (E, A) \backsim 
 \left(
-\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
+\begin{bmatrix} C &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp;0 \\ 0 &amp; 0 &amp;0  \end{bmatrix}
 ,
-\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; I_1 \end{bmatrix}
+\begin{bmatrix} 0 &amp; \frac{1}{R} &amp; 0 \\ -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}
 \right).
 \]</span></p>
 <p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.5)</a>:</p>
@@ -483,28 +493,28 @@ E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t) = ET&#39;\dot y&#39;(t)
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><span class="math inline">\(T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{kernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(T=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(\operatorname{kernel}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math inline">\(Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
+<td align="left"><span class="math inline">\(Z=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(\operatorname{corange}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}^H\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math inline">\(T&#39;=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{cokernel}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}=\operatorname{range}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}^H\)</span></td>
+<td align="left"><span class="math inline">\(T&#39;=\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(\operatorname{cokernel}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}=\operatorname{range}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}^H\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math inline">\(Z^HAT=I_1\)</span></td>
-<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; I_1 \end{bmatrix}\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(Z^HAT=I_2\)</span></td>
+<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 &amp; \frac{1}{R} &amp; 0 \\ -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)</span></td>
 </tr>
 <tr class="odd">
-<td align="left"><span class="math inline">\(V=0\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
+<td align="left"><span class="math inline">\(V=\begin{bmatrix} 0 \\ 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_2^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
 </tr>
 <tr class="even">
-<td align="left"><span class="math inline">\(Z^HAT&#39;=0_{2\times 1}\)</span></td>
-<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 &amp; 0 \\ 0 &amp; I_1 \end{bmatrix}\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(V^HZ^HAT&#39;=\begin{bmatrix} 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ 0 \end{bmatrix}^H\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 &amp; \frac{1}{R} &amp; 0 \\ -1 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}\begin{bmatrix} 1 \\0 \\ 0 \end{bmatrix}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -525,23 +535,23 @@ E \dot x(t) = ET\dot y(t) + ET&#39;\dot y&#39;(t) = ET&#39;\dot y&#39;(t)
 <tbody>
 <tr class="odd">
 <td align="left">rank</td>
-<td align="left"><span class="math inline">\(r=2\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_2 &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
+<td align="left"><span class="math inline">\(r=1\)</span></td>
+<td><span class="math inline">\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} C &amp; 0 \\ 0 &amp; 0_2 \end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">algebraic part</td>
-<td align="left"><span class="math inline">\(a=1\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}Z^HAT = \operatorname{rank}I_1\)</span></td>
+<td align="left"><span class="math inline">\(a=2\)</span></td>
+<td><span class="math inline">\(\operatorname{rank}Z^HAT = \operatorname{rank}I_2\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">strangeness</td>
 <td align="left"><span class="math inline">\(s=0\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39; = \operatorname{rank}0_{2\times 1}\)</span></td>
+<td><span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39; = \operatorname{rank}\begin{bmatrix} 0\end{bmatrix}\)</span></td>
 </tr>
 <tr class="even">
 <td align="left">differential part</td>
-<td align="left"><span class="math inline">\(d=2\)</span></td>
-<td><span class="math inline">\(d=r-s=2-0\)</span></td>
+<td align="left"><span class="math inline">\(d=1\)</span></td>
+<td><span class="math inline">\(d=r-s=1-0\)</span></td>
 </tr>
 <tr class="odd">
 <td align="left">undetermined variables</td>

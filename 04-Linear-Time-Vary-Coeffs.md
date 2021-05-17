@@ -254,13 +254,23 @@ Finally, those variables that are neither *strange* nor purely algebraic, i.e. t
 </div>
 
 
-\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:strangeness-in-the-circuit"><strong>(\#exm:strangeness-in-the-circuit) </strong></span>With basic scalings and state transforms, one finds for the coefficients of Example \@ref(exm:the-circuit) that:
+\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:strangeness-in-the-circuit"><strong>(\#exm:strangeness-in-the-circuit) </strong></span>With a basic state transformation 
+$$
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2 \\ \tilde x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+x_3 - x_2 \\ x_2-x_1 \\ x_3
+\end{bmatrix},
+$$
+one finds for the coefficients of Example \@ref(exm:the-circuit) that:
 $$
 (E, A) \backsim 
 \left(
-\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
-\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}
+\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
 \right).
 $$
 
@@ -268,21 +278,21 @@ We compute the subspaces as defined in \@ref(eq:lcf-subspaces):
 
 | Matrix | as the basis of/computed as |
 |:----------|:------------------------|
-| $T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ | $\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}$ |
-| $Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ | $\corange\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\kernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H$ |
-| $T'=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}$ | $\cokernel\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\range\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H$ |
-| $Z^HAT=I_1$ | $\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} 0 \\ I_1 \end{bmatrix}$ |
-| $V=0$ | $\corange (Z^HAT) = \kernel I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}$ |
-| $Z^HAT'=0_{2\times 1}$ | $\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} I_2 \\ 0 \end{bmatrix}$ |
+| $T=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}$ | $\kernel\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}$ |
+| $Z=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}$ | $\corange\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}=\kernel\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}^H$ |
+| $T'=\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}$ | $\cokernel\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}=\range\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}^H$ |
+| $Z^HAT=I_2$ | $\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 \\ I_2 \end{bmatrix}$ |
+| $V=\begin{bmatrix} 0 \\ 0 \end{bmatrix}$ | $\corange (Z^HAT) = \kernel I_2^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}$ |
+| $V^HZ^HAT'=\begin{bmatrix} 0 \end{bmatrix}$ | $\begin{bmatrix} 0 \\ 0 \end{bmatrix}^H\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 \\0 \\ 0 \end{bmatrix}$ |
 
 and derive the quantities as defined in \@ref(eq:lcf-quantities):
 
 | Name | Value | Derived from |
 |:-----|:------|--------------|
-| rank | $r=2$ | $\rank E = \rank \begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}$ |
-| algebraic part | $a=1$ | $\rank Z^HAT = \rank I_1$ |
-| strangeness | $s=0$ | $\rank V^HZ^HAT' = \rank 0_{2\times 1}$ |
-| differential part | $d=2$ | $d=r-s=2-0$ |
+| rank | $r=1$ | $\rank E = \rank \begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}$ |
+| algebraic part | $a=2$ | $\rank Z^HAT = \rank I_2$ |
+| strangeness | $s=0$ | $\rank V^HZ^HAT' = \rank \begin{bmatrix} 0\end{bmatrix}$ |
+| differential part | $d=1$ | $d=r-s=1-0$ |
 | undetermined variables | $u=0$ | $u=n-r-a=3-2-1$ |
 | vanishing equations | $v=0$ | $v=m-r-a-s=3-2-1-0$ |
 </div>\EndKnitrBlock{example}

@@ -1920,13 +1920,23 @@ here) will define the strangeness index.
 \end{JHSAYS}
 
 \begin{example}
-\protect\hypertarget{exm:strangeness-in-the-circuit}{}{\label{exm:strangeness-in-the-circuit} }With basic scalings and state transforms, one finds for the coefficients of Example \ref{exm:the-circuit} that:
+\protect\hypertarget{exm:strangeness-in-the-circuit}{}{\label{exm:strangeness-in-the-circuit} }With a basic state transformation
+\[
+\begin{bmatrix}
+\tilde x_1 \\ \tilde x_2 \\ \tilde x_3
+\end{bmatrix}
+= 
+\begin{bmatrix}
+x_3 - x_2 \\ x_2-x_1 \\ x_3
+\end{bmatrix},
+\]
+one finds for the coefficients of Example \ref{exm:the-circuit} that:
 \[
 (E, A) \backsim 
 \left(
-\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}
+\begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
-\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}
+\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
 \right).
 \]
 
@@ -1942,34 +1952,34 @@ as the basis of/computed as\strut
 \midrule
 \endhead
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(T=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
+\(T=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\operatorname{kernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\strut
+\(\operatorname{kernel}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(Z=\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
+\(Z=\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\operatorname{corange}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
+\(\operatorname{corange}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}=\operatorname{kernel}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}^H\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(T'=\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)\strut
+\(T'=\begin{bmatrix} 1 \\ 0 \\ 0 \end{bmatrix}\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\operatorname{cokernel}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}=\operatorname{range}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}^H\)\strut
+\(\operatorname{cokernel}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}=\operatorname{range}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}^H\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(Z^HAT=I_1\)\strut
+\(Z^HAT=I_2\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} 0 \\ I_1 \end{bmatrix}\)\strut
+\(\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 0 \\ I_2 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(V=0\)\strut
+\(V=\begin{bmatrix} 0 \\ 0 \end{bmatrix}\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_1^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
+\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}I_2^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.29\columnwidth}\raggedright
-\(Z^HAT'=0_{2\times 1}\)\strut
+\(V^HZ^HAT'=\begin{bmatrix} 0 \end{bmatrix}\)\strut
 \end{minipage} & \begin{minipage}[t]{0.65\columnwidth}\raggedright
-\(\begin{bmatrix} 0 \\ I_1 \end{bmatrix}^H\begin{bmatrix} 0 & 0 \\ 0 & I_1 \end{bmatrix}\begin{bmatrix} I_2 \\ 0 \end{bmatrix}\)\strut
+\(\begin{bmatrix} 0 \\ 0 \end{bmatrix}^H\begin{bmatrix} 0 \\ I_2 \end{bmatrix}^H\begin{bmatrix} 0 & \frac{1}{R} & 0 \\ -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}\begin{bmatrix} 1 \\0 \\ 0 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
@@ -1990,30 +2000,30 @@ Derived from\strut
 \begin{minipage}[t]{0.20\columnwidth}\raggedright
 rank\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
-\(r=2\)\strut
+\(r=1\)\strut
 \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_2 & 0 \\ 0 & 0 \end{bmatrix}\)\strut
+\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} C & 0 \\ 0 & 0_2 \end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.20\columnwidth}\raggedright
 algebraic part\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
-\(a=1\)\strut
+\(a=2\)\strut
 \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\(\operatorname{rank}Z^HAT = \operatorname{rank}I_1\)\strut
+\(\operatorname{rank}Z^HAT = \operatorname{rank}I_2\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.20\columnwidth}\raggedright
 strangeness\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
 \(s=0\)\strut
 \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\(\operatorname{rank}V^HZ^HAT' = \operatorname{rank}0_{2\times 1}\)\strut
+\(\operatorname{rank}V^HZ^HAT' = \operatorname{rank}\begin{bmatrix} 0\end{bmatrix}\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.20\columnwidth}\raggedright
 differential part\strut
 \end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
-\(d=2\)\strut
+\(d=1\)\strut
 \end{minipage} & \begin{minipage}[t]{0.47\columnwidth}\raggedright
-\(d=r-s=2-0\)\strut
+\(d=r-s=1-0\)\strut
 \end{minipage}\tabularnewline
 \begin{minipage}[t]{0.20\columnwidth}\raggedright
 undetermined variables\strut
