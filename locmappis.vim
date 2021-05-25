@@ -19,6 +19,7 @@ imap idr ^{(i)}
 imap kk \
 imap ii $
 imap ,bb ```{lemma, label="xxx"}<CR>```<esc>kfl
+imap == &= 
 
 imap xil X_{i\ell}
 imap dxil \dot X_{i\ell}
