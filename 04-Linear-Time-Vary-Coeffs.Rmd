@@ -625,6 +625,8 @@ $$
 Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
+## Don't read any further
+
 The following theorem states that this *differentiation-elimination* step 
 (which is **not** a global equivalence operation on matrix pairs) is well-defined in the sense that the *next iteration* characteristic values are invariant under global equivalence transformations.
 
@@ -645,4 +647,3 @@ Theorem \@ref(thm:iv-diff-elim-invariant) comes with a number of implications:
  * Since $r_{i+1} = r_i - s_i$ and $r_i \geq 0$ (rank of a matrix is always greater than zero) there exists a $\mu \in \mathbb N \cup \{0\}$ for which $s_\mu = 0$.
  * This $\mu$ is also characteristic for a matrix pair (because $r_i$ and $s_i$ are).
 
-## Don't read any further
