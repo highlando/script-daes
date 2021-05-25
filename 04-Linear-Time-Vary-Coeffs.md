@@ -301,7 +301,11 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 <div class="JHSAYS">
 <p>For the semi-discrete linearized Navier-Stokes equations, the derivation of the <em>local characteristic quantities</em> is laid out in the <a href="#x-nse-local-char-vals">Example Section</a>.</p>
 </div>
+
 ```
+
+
+## A Global Canonical Form {#IV-Global-Canonical-Form}
 
 A few observations:
 
@@ -315,8 +319,6 @@ A few observations:
 <div class="JHSAYS">
 <p>About a few and known jumps in the rank: A change in the ranks means an instantaneous change in the model itself. In fact the characteristic values, like the number of purely algebraic equations, would change suddenly. An example is the activation of a switch in an electrical circuit or <em>switched systems</em> in general.</p>
 </div>
-
-## A Global Canonical Form {#IV-Global-Canonical-Form}
 
 \BeginKnitrBlock{theorem}\iffalse{-91-115-101-101-32-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-51-46-57-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:continuous-svd"><strong>(\#thm:continuous-svd)  \iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} </strong></span>
 Let $E\in \mathcal C^\ell(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist pointwise unitary (and, thus, nonsingular) matrix functions $U\in \mathcal C^\ell(I, \mathbb C^{m,m})$ and $V\in \mathcal C^\ell(I, \mathbb C^{n,n})$, such that 
