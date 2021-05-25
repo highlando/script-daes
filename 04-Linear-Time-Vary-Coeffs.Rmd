@@ -323,10 +323,15 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 ```
 
 ```{example, label="strangeness-in-the-nse"}
+
 ```{block, type='JHSAYS'}
 For the semi-discrete linearized Navier-Stokes equations, the derivation of the *local characteristic quantities* is laid out in the [Example Section](#x-nse-local-char-vals).
 ```
+
 ```
+
+
+## A Global Canonical Form {#IV-Global-Canonical-Form}
 
 A few observations:
 
@@ -340,8 +345,6 @@ A few observations:
 ```{block, type='JHSAYS'}
 About a few and known jumps in the rank: A change in the ranks means an instantaneous change in the model itself. In fact the characteristic values, like the number of purely algebraic equations, would change suddenly. An example is the activation of a switch in an electrical circuit or *switched systems* in general.
 ```
-
-## A Global Canonical Form {#IV-Global-Canonical-Form}
 
 ```{theorem, label="continuous-svd", name="see Kunkel/Mehrmann, Thm. 3.9"}
 
