@@ -72,6 +72,12 @@ thm:continuous-svd
 thm:global-canonical-form
 eq:glob-local-char-vals
 eq:glob-can-form
+eq:iv-gcf-spart-1
+eq:iv-gcf-dpart
+eq:iv-gcf-spart-2
+cor:iv-diff-elim
+eq:iv-gcf-post-diff
+thm:iv-diff-elim-invariant
 eq:spec-dae-rkm-cc
 thm:local-consistency-error-rkm-lcc
 eq:semexp-dae-diff
@@ -104,6 +110,7 @@ III-ex-sols
 a-variation-of-constant-formula
 IV
 a-local-canonical-form
+IV-Global-Canonical-Form
 dont-read-any-further
 numerical-approximation-of-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes
@@ -111,6 +118,8 @@ general-rkm-for-semi-explicit-strangeness-free-daes
 collocation-rkm-for-implicit-strangeness-free-daes
 examples-1
 semi-discrete-navier-stokes-equations
+transformation-to-a-more-handy-form
+x-nse-local-char-vals
 exercises
 ii.c.1
 numerical-analysis-and-software-overview

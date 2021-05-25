@@ -297,49 +297,29 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 | vanishing equations | $v=0$ | $v=m-r-a-s=3-2-1-0$ |
 </div>\EndKnitrBlock{example}
 
-\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:strangeness-in-the-nse"><strong>(\#exm:strangeness-in-the-nse) </strong></span>With more involved scalings and state transforms, one finds for the coefficients of the linearized and spatially discretized Navier-Stokes equations (see Exercise I) that:
-$$
-(\mathcal E, \mathcal A) =
-\left(
-\begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
-,
-\begin{bmatrix} A & B^H \\ B & 0 \end{bmatrix}
-\right)
-\backsim 
-\left(
-\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}
-,
-\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}
-\right).
-$$
+\BeginKnitrBlock{example}<div class="example"><span class="example" id="exm:strangeness-in-the-nse"><strong>(\#exm:strangeness-in-the-nse) </strong></span></div>\EndKnitrBlock{example}
+<div class="JHSAYS">
+<p>For the semi-discrete linearized Navier-Stokes equations, the derivation of the <em>local characteristic quantities</em> is laid out in the <a href="#x-nse-local-char-vals">Example Section</a>.</p>
+</div>
+```
 
-We compute the subspaces as defined in \@ref(eq:lcf-subspaces):
+A few observations:
 
-| Matrix | as the basis of/computed as|
-|:-----------|:--------------------------|
-| $T=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ | $\kernel \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
-| $Z=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ | $\corange \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
-| $T'=\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}$ | $\cokernel\begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
-| $Z^HAT=0_{n_1}$ | $\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}$ |
-| $V=I_{n_1}$ | $\corange (Z^HAT) = \kernel 0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}$ |
-| $Z^HAT'=\begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}$ | $\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} & A_{12} & I_{n_1} \\ A_{21} & A_{22} & 0 \\ I_{n_1} & 0 & 0\end{bmatrix}\begin{bmatrix} I_{n_1} & 0 \\ 0 & I_{n_2} \\ 0 & 0 \end{bmatrix}$ |
+ * For a pair of $(E, A)$ of **matrix functions**, we can compute the characteristic values $r$, $a$, $s$, $d$ as in \@ref(eq:lcf-quantities) for any given $t\in \mathcal I$.
+ * Thus, $r$, $a$, $s$, $d\colon \mathcal I \to \mathbb R$ are functions of time $t$.
+ * We will assume that $r$, $a$, $s$, $d$ are constant in time:
+   * Analysis will be enabled through a so-called smooth singular value decomposition (SVD -- see the following theorem) that applies for matrices of constant rank.
+   * Smooth matrix functions have countably many jumps in the rank. The analysis can be performed on subintervals, where the rank of the matrices are constant.
+   * In practice, typically, there are but a few jumps in the rank at somewhat particular but known time instances or circumstances. 
 
-and derive the quantities as defined in \@ref(eq:lcf-quantities):
+<div class="JHSAYS">
+<p>About a few and known jumps in the rank: A change in the ranks means an instantaneous change in the model itself. In fact the characteristic values, like the number of purely algebraic equations, would change suddenly. An example is the activation of a switch in an electrical circuit or <em>switched systems</em> in general.</p>
+</div>
 
-| Name | Value | Derived from |
-|:-----------------|:------|----------------------------|
-| rank | $r=n_1+n_2$ | $\rank E = \rank \begin{bmatrix} I_{n_1} & 0 & 0 \\ 0 & I_{n_2} & 0 \\ 0 & 0 & 0\end{bmatrix}$ |
-| algebraic part | $a=0$ | $\rank Z^HAT = \rank 0_{n_1}$ |
-| strangeness | $s=n_1$ | $\rank V^HZ^HAT' = \rank \begin{bmatrix} I_{n_1} & 0_{n_1\times n_2}\end{bmatrix}$ |
-| differential part | $d=n_2$ | $d=r-s=(n_1 + n_2) - n_1$ |
-| undetermined variables | $u=n_1$ | $u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0$ |
-| vanishing equations | $v=0$ | $v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1$ |
-</div>\EndKnitrBlock{example}
-
-## Don't read any further
+## A Global Canonical Form {#IV-Global-Canonical-Form}
 
 \BeginKnitrBlock{theorem}\iffalse{-91-115-101-101-32-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-51-46-57-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:continuous-svd"><strong>(\#thm:continuous-svd)  \iffalse (see Kunkel/Mehrmann, Thm. 3.9) \fi{} </strong></span>
-Let $E\in \mathcal C^l(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist smooth and pointwise unitary (and, thus, nonsingular) matrix functions $U$ and $V$, such that 
+Let $E\in \mathcal C^\ell(I, \mathbb C^{m,n})$ with $\rank E(t)=r$ for all $t\in I$. Then there exist pointwise unitary (and, thus, nonsingular) matrix functions $U\in \mathcal C^\ell(I, \mathbb C^{m,m})$ and $V\in \mathcal C^\ell(I, \mathbb C^{n,n})$, such that 
 
 $$
  U^HEV =
@@ -380,7 +360,13 @@ I_s &   0   &  0  & 0 \\
 All entries are again matrix functions on $I$ and the last block column in both matrix functions of \@ref(eq:glob-can-form) has size $u=n-s-d-a$.
 </div>\EndKnitrBlock{theorem}
 
-\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form).
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form). In what follows, the basic operations of 
+
+ * condensing blocks by the continuous SVD, e.g. $U_2^HA_{31}V_2=\begin{bmatrix} I_s & 0 \\ 0 & 0 \end{bmatrix}$
+ * and eliminating blocks through by adding multiples of columns or rows
+
+are applied repeatedly:
+
 <!-- \begin{ofalltheseblockmats} -->
 \begin{align*}
 (E,A) & 
@@ -561,4 +547,65 @@ where the final equivalence holds, if $Q_2$ is chosen as the (unique and pointwi
 $$
 \dot Q_2 = A_{22}(t)Q_2 ,  \quad Q_2 (t_0 ) = I_d.
 $$
-Then, $A_{22}$ vanishes because of the special choice of $Q_2$ and $E_{22}$ becomes $I_d$ after scaling the second block line by $Q_2^{-1}$.</div>\EndKnitrBlock{proof}
+Then, the prefinal $A_{22}$-block vanishes because of the special choice of $Q_2$ and $E_{22}$ becomes $I_d$ after scaling the second block line by $Q_2^{-1}$.</div>\EndKnitrBlock{proof}
+
+If we write down the transformed DAE that corresponds to the canonical form \@ref(eq:glob-can-form), i.e.
+\begin{align}
+\dot x_1 &= A_{12}(t)x_2 + A_{14}x_4 + f_1(t) (\#eq:iv-gcf-spart-1) \\
+\dot x_2 &= A_{24}(t)x_4 + f_2(t) (\#eq:iv-gcf-dpart)\\
+0 &= x_3 + f_3(t) \\
+0 &= x_1 + f_4(t) (\#eq:iv-gcf-spart-2) \\
+0 &= f_5(t) 
+\end{align}
+we can read off a few properties:
+
+1. the part $x_4$ is *free to choose*, i.e. the undetermined part
+2. the equation $f_5=0$ does not define any variable, i.e. it is the vanishing or redundant part
+3. the part $x_2$ is defined through an ODE (in this representation)
+4. **however**, the part $x_1$ is *strange* (both differential and algebraic) and still linked to $x_2$.
+
+\BeginKnitrBlock{corollary}<div class="corollary"><span class="corollary" id="cor:iv-diff-elim"><strong>(\#cor:iv-diff-elim) </strong></span>In fact, one may **differentiate** \@ref(eq:iv-gcf-spart-2) and **eliminate** $\dot x_1$ in \@ref(eq:iv-gcf-spart-1) to obtain
+$$
+-\dot f_4 = A_{12}(t)x_2 + A_{14}x_4 + f_1(t)
+$$
+which together with \@ref(eq:iv-gcf-dpart) becomes a new DAE for $x_2$:
+$$
+\bar E(t) \dot x_2 = \bar A(t) x_2 + \bar f(t)
+$$
+with
+\begin{equation}
+\bar E(t) = 
+\begin{bmatrix}
+I_{d_0} \\ 0_{s_0, d_0} 
+\end{bmatrix}\in \mathbb C^{d_0+s_0, d_0}, \quad
+\bar A(t) =
+\begin{bmatrix}
+0_{d_0} \\ A_{12}(t)
+\end{bmatrix} \in \mathbb C^{d_0+s_0, d_0}, \quad (\#eq:iv-gcf-post-diff)
+\end{equation}
+and
+$$
+\bar f(t) =
+\begin{bmatrix}
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+\end{bmatrix} \in \mathbb C^{d_0+s_0}.
+$$
+Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).</div>\EndKnitrBlock{corollary}
+
+The following theorem states that this *differentiation-elimination* step 
+(which is **not** a global equivalence operation on matrix pairs) is well-defined in the sense that the *next iteration* characteristic values are invariant under global equivalence transformations.
+
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-diff-elim-invariant"><strong>(\#thm:iv-diff-elim-invariant) </strong></span>Assume that the pairs $(E, A)$ and $(\tilde E, \tilde A)$ are globally equivalent and in the global canonical form \@ref(eq:glob-can-form). Then the pairs $(E_1, A_1)$ and $(\tilde E_1, \tilde A_1)$ that are obtained by differentiation and elimination as described in Corollary \@ref(cor:iv-diff-elim) are globally equivalent too. </div>\EndKnitrBlock{theorem}
+
+\BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}See Kunkel/Mehrmann: Theorem 3.14.</div>\EndKnitrBlock{proof}
+
+Theorem \@ref(thm:iv-diff-elim-invariant) comes with a number of implications:
+
+ * Starting with $(E, A):=(E_0, A_0)$, we can define $(E_i, A_i)$, $i \in \mathbb N \cup {0}$ as follows
+   1. $(E_i, A_i)$ is the global canonical form
+   2. differentiate and eliminate as in Corollary \@ref(cor:iv-diff-elim) and bring the obtained pair into global canonical form to obtain $(E_{i+1}, A_{i+1})$.
+ * this gives a series of invariants $(r_i, a_i, s_i)$ -- invariant under global equivalence transforms --
+ * Since $r_{i+1} = r_i - s_i$ and $r_i \geq 0$ (rank of a matrix is always greater than zero) there exists a $\mu \in \mathbb N \cup \{0\}$ for which $s_\mu = 0$.
+ * This $\mu$ is also characteristic for a matrix pair (because $r_i$ and $s_i$ are).
+
+## Don't read any further
