@@ -697,6 +697,7 @@ Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C
    related to \@ref(eq:iv-snf-equi-sys-apart) hold.
 
 3. The corresponding initial value problem \@ref(eq:iv-ltv-dae)--\@ref(eq:iv-ltv-inicond) is uniquely solvable if, and only if, in addition $u_\mu=0$, i.e., $x_3$ is not present in \@ref(eq:iv-snf-equi-sys-dpart).
+
 ```
 
 ```{block2, type='JHSAYS'}
@@ -704,6 +705,7 @@ Just by comparing the solvability conditions with those for the constant coeffic
 
 1. that $\mu \sim \nu -1$ (unless $\nu =0$) and
 2. a matrix pair is regular if $u_\mu = v_\mu = 0$.
+
 ```
 
 ## Derivative Arrays
