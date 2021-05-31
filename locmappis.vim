@@ -26,7 +26,7 @@ imap dxil \dot X_{i\ell}
 imap ,rr \mathbb C^{
 
 map ,m <esc>:!source mkdc.sh<CR>
-imap ,jhs ```{block, type='JHSAYS'}<CR>```<esc>O
+imap ,jhs ```{block2, type='JHSAYS'}<CR>```<esc>O
 
 " function! MarkdownLevel()
 "     if getline(v:lnum) =~ '^# .*$'

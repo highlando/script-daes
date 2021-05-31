@@ -1,5 +1,6 @@
 \newcommand{\kernel}{\operatorname{kernel}}
 \newcommand{\corange}{\operatorname{corange}}
+\newcommand{\corank}{\operatorname{corank}}
 \newcommand{\range}{\operatorname{range}}
 \newcommand{\cokernel}{\operatorname{cokernel}}
 
@@ -18,7 +19,7 @@ with, possibly, an initial condition
 x(t_0) = x_0 \in \mathbb C^{n}. (\#eq:iv-ltv-inicond)
 \end{equation}
 
-```{block, type='JHSAYS'}
+```{block2, type='JHSAYS'}
 The same [general solution concept](#def:dae-solution) applies. Basically $x$ should be differentiable, fulfill the DAE, and, if stated, the initial condition too.
 ```
 
@@ -385,10 +386,10 @@ I_s &   0   &  0  & 0 \\
 0   &   0   &  0  & 0
 \end{bmatrix}
 \right ).
-(\#eq:glob-can-form)
+(\#eq:iv-glob-can-form)
 \end{equation}
 
-All entries are again matrix functions on $I$ and the last block column in both matrix functions of \@ref(eq:glob-can-form) has size $u=n-s-d-a$.
+All entries are again matrix functions on $I$ and the last block column in both matrix functions of \@ref(eq:iv-glob-can-form) has size $u=n-s-d-a$.
 
 ```
 
@@ -431,8 +432,7 @@ I_r & 0 \\
 \begin{bmatrix}
 A_{11} & A_{12}V_1 \\
 U_1^HA_{21} & U_1^HA_{22}V_1 
-\end{bmatrix}
--
+\end{bmatrix} -
 \begin{bmatrix} I_r & 0 \\ 0 & 0 \end{bmatrix}
 \begin{bmatrix} 0 & 0 \\ 0 & \dot V_1 \end{bmatrix}
 \right) \\
@@ -459,8 +459,7 @@ V_2 & 0 & 0 \\
 A_{11}V_2 & A_{12} & A_{13}\\
 A_{21}V_2 & I_a & 0 \\
 U_2^HA_{31}V_2 & 0 & 0
-\end{bmatrix}
--
+\end{bmatrix} -
 \begin{bmatrix}
 \dot I_r & 0 & 0 \\
 0 & 0 & 0 \\
@@ -583,7 +582,7 @@ $$
 Then, the prefinal $A_{22}$-block vanishes because of the special choice of $Q_2$ and $E_{22}$ becomes $I_d$ after scaling the second block line by $Q_2^{-1}$.
 ```
 
-If we write down the transformed DAE that corresponds to the canonical form \@ref(eq:glob-can-form), i.e.
+If we write down the transformed DAE that corresponds to the canonical form \@ref(eq:iv-glob-can-form), i.e.
 \begin{align}
 \dot x_1 &= A_{12}(t)x_2 + A_{14}x_4 + f_1(t) (\#eq:iv-gcf-spart-1) \\
 \dot x_2 &= A_{24}(t)x_4 + f_2(t) (\#eq:iv-gcf-dpart)\\
@@ -625,21 +624,22 @@ $$
 A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 $$
-Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
+Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
-## Don't read any further
 
 The following theorem states that this *differentiation-elimination* step 
 (which is **not** a global equivalence operation on matrix pairs) is well-defined in the sense that the *next iteration* characteristic values are invariant under global equivalence transformations.
 
 ```{theorem,  label='iv-diff-elim-invariant'}
-Assume that the pairs $(E, A)$ and $(\tilde E, \tilde A)$ are globally equivalent and in the global canonical form \@ref(eq:glob-can-form). Then the pairs $(E_1, A_1)$ and $(\tilde E_1, \tilde A_1)$ that are obtained by differentiation and elimination as described in Corollary \@ref(cor:iv-diff-elim) are globally equivalent too. 
+Assume that the pairs $(E, A)$ and $(\tilde E, \tilde A)$ are globally equivalent and in the global canonical form \@ref(eq:iv-glob-can-form). Then the pairs $(E_1, A_1)$ and $(\tilde E_1, \tilde A_1)$ that are obtained by differentiation and elimination as described in Corollary \@ref(cor:iv-diff-elim) are globally equivalent too. 
 ```
 
 ```{proof}
 See Kunkel/Mehrmann: Theorem 3.14.
 ```
+
+## The Strangeness Index 
 
 Theorem \@ref(thm:iv-diff-elim-invariant) comes with a number of implications:
 
@@ -650,3 +650,252 @@ Theorem \@ref(thm:iv-diff-elim-invariant) comes with a number of implications:
  * Since $r_{i+1} = r_i - s_i$ and $r_i \geq 0$ (rank of a matrix is always greater than zero) there exists a $\mu \in \mathbb N \cup \{0\}$ for which $s_\mu = 0$.
  * This $\mu$ is also characteristic for a matrix pair (because $r_i$ and $s_i$ are).
 
+With these observations, the following definition is well-posed.
+
+```{definition, label="iv-strangeness-index"}
+Let $(E,A)$ be a pair of sufficiently smooth matrix functions and let the sequence $(r_i, a_i, s_i)$, $i=0,1,2,3,...$, of global characteristic values for the pairs $(E_i, A_i)$ that are generated as 
+
+ * $(E_0, A_0):= (E, A)$
+ * $(E_{i+1}, A_{i+1})$ is derived from bringing $(E_i, A_i)$ into the global canonical form as in Theorem \@ref(thm:global-canonical-form) and removing the $I_s$ block in $E_{i+1}$ through differentiation and elimination as in Corollary \@ref(cor:iv-diff-elim)
+
+be well-defined. Then, the quantity 
+$$
+\mu := \min\{i\in \mathbb N_0 | s_i=0\}
+$$
+is called the *strangeness index* of the DAE \@ref(eq:iv-ltv-dae). If $\mu=0$, then the DAE is called *strangeness-free*.
+```
+
+The practical implications of the strangeness index and the procedure of its derivation are laid out in the following theorem.
+
+```{theorem, label="iv-strangeness-free-equiv-system"}
+Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then the DAE \@ref(eq:iv-ltv-dae) is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
+\begin{align}
+\dot x_1(t) &= A_{13}(t)x_3(t) + f_1(t) (\#eq:iv-snf-equi-sys-dpart)\\
+0 &= x_2(t) + f_2(t) (\#eq:iv-snf-equi-sys-apart)\\
+0 &= f_3(t), (\#eq:iv-snf-equi-sys-vpart)
+\end{align}
+where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}$ and where $f_1$, $f_2$, $f_3$ are defined through $f$, $\dot f$, \dots, $f^{(\mu)}$.
+```
+
+```{block2, type='JHSAYS'}
+System \@ref(eq:iv-snf-equi-sys-dpart)--\@ref(eq:iv-snf-equi-sys-vpart) is in the form of \@ref(eq:iv-glob-can-form) with the $I_s$ blocks not present and the remaining parts of the variables, coefficients, and right hand side renumbered accordingly.
+```
+
+```{corollary, label="iv-snf-solvability"}
+Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then
+
+1. The DAE \@ref(eq:iv-ltv-dae) is solvable if and only if the $v_\mu$ consistency conditions \@ref(eq:iv-snf-equi-sys-vpart)
+   $$
+     0=f_3(t)
+   $$
+   are fulfilled.
+
+2. An initial condition \@ref(eq:iv-ltv-inicond) is consistent if, and only if, in the the $a_\mu$ conditions 
+   $$
+   0=x_2(t_0) + f_2(t_0)
+   $$
+   related to \@ref(eq:iv-snf-equi-sys-apart) hold.
+
+3. The corresponding initial value problem \@ref(eq:iv-ltv-dae)--\@ref(eq:iv-ltv-inicond) is uniquely solvable if, and only if, in addition $u_\mu=0$, i.e., $x_3$ is not present in \@ref(eq:iv-snf-equi-sys-dpart).
+```
+
+```{block2, type='JHSAYS'}
+Just by comparing the solvability conditions with those for the constant coefficient case, e.g. Theorem \@ref(thm:regularity-means-solvability), we can observe that
+
+1. that $\mu \sim \nu -1$ (unless $\nu =0$) and
+2. a matrix pair is regular if $u_\mu = v_\mu = 0$.
+```
+
+## Derivative Arrays
+
+The concept and the derivation of the *strangeness index* gives a complete characterization of solvability of linear DAEs with time-varying coefficients (provided sufficient regularity of the coefficients and the right hand side). However, for practical considerations there are two shortcomings
+
+1. The formulation through the canonical form is very implicit and requires the derivatives of computed quantities (like the $\dot V_2$ in the proof of Theorem \@ref(thm:global-canonical-form)).
+
+2. There is no direct generalization to nonlinear systems.
+
+Both these issues are better addressed in the approach to a *strangeness free* form like through *derivative arrays*.
+
+For that, we consider the DAE 
+$$
+E(t) \dot x = A(t) x+f
+$$
+differentiate it
+$$
+E(t) \ddot x(t) + \dot E(t) \dot x(t) = \dot A(t) x + A(t) \dot x+\dot f,
+$$
+and add these equations to the system to obtain the inflated DAE
+$$
+\begin{bmatrix}
+E & 0\\
+\dot E - A & E 
+\end{bmatrix}
+\frac{d}{dt}
+\begin{bmatrix}
+x \\ \dot x
+\end{bmatrix} =
+\begin{bmatrix}
+A & 0\\
+\dot A & 0 
+\end{bmatrix}
+\begin{bmatrix}
+x \\ \dot x
+\end{bmatrix}
++
+\begin{bmatrix}
+f \\ \dot f
+\end{bmatrix}.
+$$
+
+If we add also the second derivative of the equations, we obtain
+$$
+\begin{bmatrix}
+E & 0 & 0\\
+\dot E - A & E &0  \\
+\ddot E - 2A & 2\dot E -A &E 
+\end{bmatrix}
+\frac{d}{dt}
+\begin{bmatrix}
+x \\ \dot x \\ \ddot x
+\end{bmatrix} =
+\begin{bmatrix}
+A & 0 & 0\\
+\dot A & 0 & 0\\
+\ddot A & 0  & 0
+\end{bmatrix}
+\begin{bmatrix}
+x \\ \dot x \\ \ddot x
+\end{bmatrix}
++
+\begin{bmatrix}
+f \\ \dot f \\ \ddot f
+\end{bmatrix}.
+$$
+
+If we do this $\ell$ times, we arrive at the so-called *derivative array*
+```{definition, label="iv-derivative-array"}
+Consider the DAE \@ref(eq:iv-ltv-dae) and let $E$, $A$, $f$ be $\ell$-times differentiable for some integear $\ell\geq 0$. Then the *derivative array* of order $\ell$ is given as
+\begin{equation}
+M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
+\end{equation}
+where
+$$
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+$$
+
+where
+$$
+(N_\ell)_{i,j} = 
+\begin{cases}
+A^{(i)}, \quad &\text{for } i=1,\dotsc, \ell, \, j=0 \\
+0, \quad & \text{else}
+\end{cases},
+$$
+
+and where
+
+$$
+z_\ell = \begin{bmatrix}
+x \\ \dot x \\ \vdots \\ x^{(\ell)}
+\end{bmatrix}, \quad
+g_\ell = \begin{bmatrix}
+f \\ \dot f \\ \vdots \\ f^{(\ell)}
+\end{bmatrix}.
+$$
+```
+
+The following theorem connects the derivative array to the strangeness index and provides a *strangeness free* reformulation of the DAE \@ref(eq:iv-ltv-dae).
+
+```{theorem, label="iv-derivative-arrays-projections"}
+Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
+
+1. $\corank M_{\mu+1}- \corank M_\mu = v_\mu$
+
+2. $\rank M_\mu(t) = (\mu+1)m-a_\mu - v_\mu$ on $\mathcal I$, and there exists a smooth matrix function $Z_{2,3}$ (that spans the left null space of $M_\mu$) with 
+   $$
+    Z_{2,3}^H M_\mu(t) =0.
+   $$
+
+3. The projection $Z_{2,3}$ can be partitioned into two parts:
+   * $Z_3$ (left nullspace of $(M_\mu, N_\mu)$) so that $$Z_3^HN_\mu(t) =0$$.
+   * $Z_2$ such that 
+     $$
+     Z_2^HN_\mu 
+     \begin{bmatrix}
+     I_n \\ 0 \\ \vdots \\ 0 
+     \end{bmatrix}
+     =
+     Z_2^H
+     \begin{bmatrix}
+     A \\ \dot A \\ \vdots \\ A^{(\mu)}=:\hat A_2
+     \end{bmatrix}
+     $$
+     has full rank.
+
+4. Furthermore, let $T_2$ be a smooth matrix function such that $\hat A_2 T_2=0$ (right nullspace of $\hat A_2$). Then
+   $$
+   \rank E(t) T_2 = d_\mu
+   $$
+   and there exists a smooth matrix function $Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}$ with $$\rank (Z_1^TE) = d_\mu$$.
+   We define $Z_1^HE=\hat E_1$.
+
+```
+
+```{proof}
+Kunkel/Mehrmann: Thm. 3.29, Thm. 3.30, Thm. 3.32.
+```
+
+A few observations and implications:
+
+* $Z_{2,3}^H$ operates on the derivative array 
+  $$
+    M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
+  $$
+
+* Specifically, it picks out all constraint equations including the redundancies ($Z_3^H$) and all explicit and hidden constraints ($Z_2^H$).
+* $Z_1^H$ operates on the original system
+  $$
+  E(t)\dot x = A(t)x + f(t)
+  $$
+  and picks out the dynamic part.
+
+By means of the projections defined in Theorem \@ref(thm:iv-derivative-arrays-projections), one can define (Kunkel/Mehrmann: Theorem 3.32) a *strangeness-free* condensed form
+
+\begin{align}
+\hat E_1(t) \dot x(t) &= \hat A_{1}(t)x(t) + \hat f_1(t) (\#eq:iv-cndnsd-snff-dpart) \\
+0 &= \hat A_2 x_2(t) + \hat f_2(t) (\#eq:iv-cndnsd-snff-apart)\\
+0 &= \hat f_3(t), (\#eq:iv-cndnsd-snff-vpart)
+\end{align}
+
+where
+$$
+\hat E_1(t) := Z_1(t)^HE(t) \in \mathbb C^{d_\mu, n}, \quad \hat A_1(t) := Z_1^H(t)A (t)\in \mathbb C^{d_\mu, n}, \quad \hat f_1(t) = Z_1^Hf(t) \in \mathbb C^{d_\mu},
+$$
+where
+$$
+\hat A_2(t) = Z_2(t)^H
+     \begin{bmatrix}
+     A(t) \\ \dot A(t) \\ \vdots \\ A^{(\mu)(t)}
+     \end{bmatrix}
+\in \mathbb C^{a_\mu, n}, 
+\quad
+\hat f_2(t) = Z_2^Hg_\mu(t) \in \mathbb C^{a_\mu},
+\quad
+$$
+and where
+$$
+\hat f_3(t) = Z_3^Hg_\mu(t) \in \mathbb C^{(\mu+1)m-a_\mu-d_\mu}.
+$$
+
+**Remark**: This condensed equivalent strangeness free form \@ref(eq:iv-cndnsd-snff-dpart)--\@ref(eq:iv-cndnsd-snff-vpart) comes with a number of advantages over the one defined in Theorem \@ref(thm:iv-strangeness-free-equiv-system). 
+
+1. It can be derived by only differentiating the given functions $E$, $A$, and $f$. This is much preferable since a given function can be evaluated with high accuracy (which is needed for computing derivatives numerically) or can be even differentiated analytically.
+
+2. It is formulated in the original variable $x$ -- no state transformation involved.
+
+3. It can be generalized to nonlinear systems.
+
+
+**Example 1** Cp. Examples 3.33 and 3.34 in Kunkel/Mehrmann that provide the strangeness free forms for the motivating examples of this section.
+
+**Example 2** Compute the forms for the incompressible Navier-Stokes equations (to be provided).
