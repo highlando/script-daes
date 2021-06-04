@@ -591,7 +591,6 @@ A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
 $$
 Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).</div>\EndKnitrBlock{corollary}
 
-
 The following theorem states that this *differentiation-elimination* step 
 (which is **not** a global equivalence operation on matrix pairs) is well-defined in the sense that the *next iteration* characteristic values are invariant under global equivalence transformations.
 
@@ -754,6 +753,13 @@ f \\ \dot f \\ \vdots \\ f^{(\ell)}
 \end{bmatrix}.
 $$</div>\EndKnitrBlock{definition}
 
+
+\BeginKnitrBlock{JHSAYS}<div class="JHSAYS">
+ * By construction, any solution $x$ that solves the derivative array, solves the DAE and vice versa. 
+ * The *strangeness-free* form from above is an equivalent system too with $d_\mu$ differential relations, $a_\mu$ algebraic equations, and $v_\mu$ redundant (or consistency) relations. 
+ * Next, we will show that from the derivative array we can extract $d_\mu$ differential and $a_\mu$ well separated algebraic relations for $x$, i.e. an equivalent strangeness free form.
+</div>\EndKnitrBlock{JHSAYS}
+
 The following theorem connects the derivative array to the strangeness index and provides a *strangeness free* reformulation of the DAE \@ref(eq:iv-ltv-dae).
 
 \BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-derivative-arrays-projections"><strong>(\#thm:iv-derivative-arrays-projections) </strong></span>Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
@@ -786,7 +792,7 @@ The following theorem connects the derivative array to the strangeness index and
    $$
    \rank E(t) T_2 = d_\mu
    $$
-   and there exists a smooth matrix function $Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}$ with $$\rank (Z_1^TE) = d_\mu$$.
+   and there exists a smooth matrix function $Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}$ with $$\rank (Z_1^TE) = d_\mu.$$
    We define $Z_1^HE=\hat E_1$.
 </div>\EndKnitrBlock{theorem}
 

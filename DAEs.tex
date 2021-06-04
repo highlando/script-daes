@@ -2588,6 +2588,18 @@ f \\ \dot f \\ \vdots \\ f^{(\ell)}
 \]
 \end{definition}
 
+\begin{JHSAYS}
+\begin{itemize}
+\tightlist
+\item
+  By construction, any solution \(x\) that solves the derivative array, solves the DAE and vice versa.
+\item
+  The \emph{strangeness-free} form from above is an equivalent system too with \(d_\mu\) differential relations, \(a_\mu\) algebraic equations, and \(v_\mu\) redundant (or consistency) relations.
+\item
+  Next, we will show that from the derivative array we can extract \(d_\mu\) differential and \(a_\mu\) well separated algebraic relations for \(x\), i.e.~an equivalent strangeness free form.
+\end{itemize}
+\end{JHSAYS}
+
 The following theorem connects the derivative array to the strangeness index and provides a \emph{strangeness free} reformulation of the DAE \eqref{eq:iv-ltv-dae}.
 
 \begin{theorem}
@@ -2630,7 +2642,7 @@ The following theorem connects the derivative array to the strangeness index and
   \[
   \operatorname{rank}E(t) T_2 = d_\mu
   \]
-  and there exists a smooth matrix function \(Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}\) with \[\operatorname{rank}(Z_1^TE) = d_\mu\].
+  and there exists a smooth matrix function \(Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}\) with \[\operatorname{rank}(Z_1^TE) = d_\mu.\]
   We define \(Z_1^HE=\hat E_1\).
 \end{enumerate}
 \end{theorem}
