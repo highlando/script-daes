@@ -839,7 +839,7 @@ Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be wel
    $$
    \rank E(t) T_2 = d_\mu
    $$
-   and there exists a smooth matrix function $Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}$ with $$\rank (Z_1^TE) = d_\mu$$.
+   and there exists a smooth matrix function $Z_1\colon \mathcal I \to \mathbb C^{n,d_\mu}$ with $$\rank (Z_1^TE) = d_\mu.$$
    We define $Z_1^HE=\hat E_1$.
 
 ```
