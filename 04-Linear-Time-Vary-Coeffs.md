@@ -776,8 +776,9 @@ The following theorem connects the derivative array to the strangeness index and
      =
      Z_2^H
      \begin{bmatrix}
-     A \\ \dot A \\ \vdots \\ A^{(\mu)}=:\hat A_2
+     A \\ \dot A \\ \vdots \\ A^{(\mu)}
      \end{bmatrix}
+      =:\hat A_2
      $$
      has full rank.
 
