@@ -627,7 +627,6 @@ $$
 Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
-
 The following theorem states that this *differentiation-elimination* step 
 (which is **not** a global equivalence operation on matrix pairs) is well-defined in the sense that the *next iteration* characteristic values are invariant under global equivalence transformations.
 
@@ -804,6 +803,15 @@ g_\ell = \begin{bmatrix}
 f \\ \dot f \\ \vdots \\ f^{(\ell)}
 \end{bmatrix}.
 $$
+```
+
+
+```{block2, type='JHSAYS'}
+
+ * By construction, any solution $x$ that solves the derivative array, solves the DAE and vice versa. 
+ * The *strangeness-free* form from above is an equivalent system too with $d_\mu$ differential relations, $a_\mu$ algebraic equations, and $v_\mu$ redundant (or consistency) relations. 
+ * Next, we will show that from the derivative array we can extract $d_\mu$ differential and $a_\mu$ well separated algebraic relations for $x$, i.e. an equivalent strangeness free form.
+
 ```
 
 The following theorem connects the derivative array to the strangeness index and provides a *strangeness free* reformulation of the DAE \@ref(eq:iv-ltv-dae).
