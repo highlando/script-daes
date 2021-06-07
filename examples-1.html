@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-04" />
+<meta name="date" content="2021-06-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,14 +140,14 @@
 <div id="transformation-to-a-more-handy-form" class="section level3">
 <h3><span class="header-section-number">7.1.1</span> Transformation to a more handy form</h3>
 <p>By scalings and state transforms, we find that the coefficients of the spatially discretized Navier-Stokes equations
-<span class="math display">\[
+<span class="math display" id="eq:x-lin-sd-ns\tag{7.1}on}(#eq:x-lin-sd-nse)
 (\mathcal E, \mathcal A )= \left(
 \begin{bmatrix} M &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
 ,
 \begin{bmatrix} A &amp; B^H \\ B &amp; 0 \end{bmatrix}
 \right )
-\]</span>
-are equivalent to a more structured form like:
+\end{equation}\]</span></p>
+<p>are equivalent to a more structured form like:
 <span class="math display">\[\begin{align*}
 \{\lambda \mathcal E - \mathcal A\} &amp;=
 \left\{\lambda 
@@ -277,6 +277,35 @@ where we have used a <em>QR</em>-decomposition: <span class="math display">\[M^{
 </tr>
 </tbody>
 </table>
+</div>
+<div id="nse-da-cf" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Derivative Array and the Condensed Form</h3>
+<p>Since the differentiation index of <a href="#eq:x-lin-sd-nse">(7.1)</a> is <span class="math inline">\(\nu=1\)</span>, we anticipate for the strangeness index that <span class="math inline">\(\mu=1\)</span> and consider the derivative array of order <span class="math inline">\(\ell =1\)</span>:</p>
+<p><span class="math display">\[\begin{equation}
+\left ( \mathcal M_1 , \mathcal N_1 \right )
+=
+\left (
+\begin{bmatrix} 
+M &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0\\
+A &amp; B^H &amp; M &amp; 0\\
+B &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+,
+\begin{bmatrix} 
+A &amp; B^H&amp; 0 &amp; 0\\
+B &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp; 0
+\end{bmatrix}
+\right )
+,
+\quad
+g_1 =
+\begin{bmatrix}
+f_1 \\ f_2 \\ \dot f_1 \\ \dot f_2
+\end{bmatrix}.
+\end{equation}\]</span></p>
 
 <!--
 \newcommand{\ker}{\operatorname{ker}}

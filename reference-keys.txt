@@ -102,6 +102,7 @@ eq:rkm-coll-collpol
 eq:rkm-coll-staged
 eq:impl-sf-dae-collo
 eq:collo-is-RKM-formula
+eq:x-lin-sd-nse
 tab:RKMs-DAEs-results
 tab:unnamed-chunk-1
 introduction
@@ -132,6 +133,7 @@ examples-1
 semi-discrete-navier-stokes-equations
 transformation-to-a-more-handy-form
 x-nse-local-char-vals
+nse-da-cf
 exercises
 ii.c.1
 numerical-analysis-and-software-overview
