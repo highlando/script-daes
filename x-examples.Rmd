@@ -5,13 +5,14 @@
 ### Transformation to a more handy form
 
 By scalings and state transforms, we find that the coefficients of the spatially discretized Navier-Stokes equations 
-$$
+\begin{equation}(\#eq:x-lin-sd-nse)
 (\mathcal E, \mathcal A )= \left(
 \begin{bmatrix} M & 0 \\ 0 & 0 \end{bmatrix}
 ,
 \begin{bmatrix} A & B^H \\ B & 0 \end{bmatrix}
 \right )
-$$
+\end{equation}
+
 are equivalent to a more structured form like:
 \begin{align*}
 \{\lambda \mathcal E - \mathcal A\} &=
@@ -79,3 +80,33 @@ and derive the quantities as defined in \@ref(eq:lcf-quantities):
 | undetermined variables | $u=n_1$ | $u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0$ |
 | vanishing equations | $v=0$ | $v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1$ |
 
+
+### Derivative Array and the Condensed Form {#nse-da-cf}
+
+Since the differentiation index of \@ref(eq:x-lin-sd-nse) is $\nu=1$, we anticipate for the strangeness index that $\mu=1$ and consider the derivative array of order $\ell =1$:
+
+\begin{equation}
+\left ( \mathcal M_1 , \mathcal N_1 \right )
+=
+\left (
+\begin{bmatrix} 
+M & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+A & B^H & M & 0\\
+B & 0 & 0 & 0
+\end{bmatrix}
+,
+\begin{bmatrix} 
+A & B^H& 0 & 0\\
+B & 0 & 0 & 0\\
+0 & 0 & 0 & 0\\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\right )
+,
+\quad
+g_1 =
+\begin{bmatrix}
+f_1 \\ f_2 \\ \dot f_1 \\ \dot f_2
+\end{bmatrix}.
+\end{equation}
