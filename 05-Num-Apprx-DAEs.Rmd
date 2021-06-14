@@ -1,5 +1,97 @@
 # Numerical Approximation of DAEs
 
+## Notions and Notations {#Vi}
+
+We will consider an equidistant time grid of a fixed time interval $[t_0,t_e]$:
+$$
+t_0 < t_1 < t_2 < \dotsm < t_N=t_e
+$$
+with time step size $h$, i.e. $t_i = t_0 + ih$, for $i=1,2,\dotsc,N$, or $h=\frac{t_e - t_0}{N}$.
+
+```{block2, type='JHSAYS'}
+The restriction of equidistant grids is convenient for the analysis and does not mean a great loss of generality. Typically, in all the estimates that follow and in which the *constants* remain unspecified, a non equidistant grid can be accommodated by setting $h$ to be the largest time step under consideration.
+
+In practice, however, one really uses adaptive and, thus, nonuniform time grids.
+```
+
+Throughout this chapter, we will assume that system under consideration has a unique solution $x$ and we will use the notation
+$$
+x_i \approx x(t_i)
+$$
+to express that $x_i$ is defined as the numerically computed approximation to the solution $x$ at time $t_i$.
+
+```{block2, type='JHSAYS'}
+It is unfortunate that $x_i$ has been used to denote parts of the actual solution, but I hope this inconsistency can be tolerated in favor of a more pleasant and more standard notation.
+```
+
+Generally, the approximants $x_i$ are computed iteratively by a numerical scheme $\phi$ like
+$$
+x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). (\#eq:v-one-step-scheme)
+$$
+If $x_{i+1}$ appears in the definition of the function $\phi$, then the scheme is called *implicit*. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like $x_{i-1}$, $x_{i-2}$, ..., $x_{i-k}$ with $k\geq 0$, then the scheme is called a *multi-step scheme*. Otherwise, it is called a *single-step scheme*.
+
+Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
+$$
+\|x_N - x(t_e)\| \to 0
+$$
+as $h \to 0$. More precisely, tries to establish estimates like
+$$
+x_N - x(t_e) = \mathcal O(h^p)
+$$
+meaning that the error approaches $0$ at least as fast as the convergence order $p$. This $p$ is then called the *order of convergence* (of the method $\phi$). 
+
+If the method $\phi$ is stable[^1], then an estimate on the (local) consistency error (cp. the definition of the iteration \@ref(eq:v-one-step-scheme)) like
+$$
+x(t_{i+1}) - \phi(t_i, h, x(t_i), x(t_{i+1})) = \mathcal O(h^q),
+$$
+i.e. the *order of consistency* of $\phi$, transfers to the global convergence order as $p=q-1$.
+
+[^1]: *Stability* can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.
+
+We will start with one-step methods and in particular with Runge-Kutta methods that represent the most commonly applied time discretization schemes. A Runge-Kutta method is defined by its number of stages $s$, and by parameter vectors
+$$
+\beta = \{\beta_j\}_{j=1, \dotsc, s}, \quad \gamma=\{\gamma_j\}_{j=1,\dotsc,s}, \quad 
+\mathcal A = \{\alpha_{j\ell}\}_{j,\ell=1, \dotsc, s}
+$$
+that, in turn, define the increment $x_{i+1}=\phi(t_i,h,x_i,x_{i+1})$ via
+$$
+x_{i+1}=x_i+h\sum_{j=1}^s\beta_j \dot X_{ij},
+$$
+where the *stage derivatives* $\dot X_{ij}$ are connected with the *stage values* $X_{ij}$ via the following possibly nonlinear (depending on the problem: $\dot x(t) = f(t,x(t))$) and possibly implicit (depending on the method) system of equations
+\begin{align}
+\dot X_{ij} &= f(t_i+\gamma_jh, X_{ij}), \\
+X_{ij} &= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+\end{align}
+
+The matrix $\mathcal A$ and the vectors $\beta$ and $\gamma$ of parameters are conveniently written into the so-called *Butcher-tableau*
+$$
+\left[
+\begin{array}{c|c}
+ \gamma & \mathcal A \\
+ \hline
+  & \beta^T \\
+\end{array}
+\right]
+$$
+
+It is well-known that one-step methods are stable (see also the first paragraph of Kunkel/Mehrmann Ch. 5.2). Accordingly, convergence can be derived directly from the consistency error. For a general Runge-Kutta method, the convergence conditions -- if applied to an ODE $\dot x = f(t,x)$ -- can be expressed in terms of the coefficients:
+
+```{theorem, name="Butcher's Theorem", label="v-butcher"}
+If the coefficients $\beta_j$, $\gamma_j$, and $\alpha_{j\ell}$ fulfill the conditions
+
+|   | Condition                   | range of $k$    |
+|:---|:----------------------------|:----------------|
+| B(p): |	$\sum_{j=1}^s\beta_j\gamma_j^{k-1} = \frac 1k$ | $k=1,2,\cdots,p$ |
+| C(q): |	$\sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{k-1} = \frac 1k\gamma_j^k,\quad$ for $j=1,\dotsc s$ | $k=1,2,\cdots,q$ |
+| D(r): |	$\sum_{j=1}^s\beta_j\gamma_j^{k-1} \alpha_{j\ell}= \frac 1k\beta_\ell(1-\gamma_\ell^k),\quad$ for $\ell=1,\dotsc s$ | $k=1,2,\cdots,r$ |
+
+with $p\leq q+r+1$ and $p \leq 2q+2$, then the Runge-Kutta method is convergent of order $p$.
+
+```
+
+
+so that, in what follows, we will examine only the consistency error for the approximation of DAEs.
+
 In order to analyse the approximation error of the RKM $(\mathcal A, \beta, \gamma)$ applied to a regular linear DAE with constant coefficients
 
 $$

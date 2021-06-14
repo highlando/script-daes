@@ -22,7 +22,10 @@ imap ,bb ```{lemma, label="xxx"}<CR>```<esc>kfl
 imap == &= 
 
 imap xil X_{i\ell}
+imap xij X_{ij}
 imap dxil \dot X_{i\ell}
+imap dxij \dot X_{ij}
+imap sjs \sum_{j=1}^s
 imap ,rr \mathbb C^{
 
 map ,m <esc>:!source mkdc.sh<CR>

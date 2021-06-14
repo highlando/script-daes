@@ -2,6 +2,6 @@
 
 ctags *
 git pull
-FILETOEDIT=04-Linear-Time-Vary-Coeffs.Rmd
+FILETOEDIT=05-Num-Apprx-DAEs.Rmd
 echo $FILETOEDIT
 nvim $FILETOEDIT -S locmappis.vim
