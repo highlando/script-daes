@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-07" />
+<meta name="date" content="2021-06-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -97,7 +97,9 @@
 <li class="chapter" data-level="4.3" data-path="IV.html"><a href="IV.html#the-strangeness-index"><i class="fa fa-check"></i><b>4.3</b> The Strangeness Index</a></li>
 <li class="chapter" data-level="4.4" data-path="IV.html"><a href="IV.html#derivative-arrays"><i class="fa fa-check"></i><b>4.4</b> Derivative Arrays</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a></li>
+<li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a><ul>
+<li class="chapter" data-level="5.1" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#Vi"><i class="fa fa-check"></i><b>5.1</b> Notions and Notations</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
 <li class="chapter" data-level="6.2" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#collocation-rkm-for-implicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.2</b> Collocation RKM for Implicit Strangeness-free DAEs</a></li>
@@ -135,6 +137,111 @@
             <section class="normal" id="section-">
 <div id="numerical-approximation-of-daes" class="section level1">
 <h1><span class="header-section-number">5</span> Numerical Approximation of DAEs</h1>
+<div id="Vi" class="section level2">
+<h2><span class="header-section-number">5.1</span> Notions and Notations</h2>
+<p>We will consider an equidistant time grid of a fixed time interval <span class="math inline">\([t_0,t_e]\)</span>:
+<span class="math display">\[
+t_0 &lt; t_1 &lt; t_2 &lt; \dotsm &lt; t_N=t_e
+\]</span>
+with time step size <span class="math inline">\(h\)</span>, i.e. <span class="math inline">\(t_i = t_0 + ih\)</span>, for <span class="math inline">\(i=1,2,\dotsc,N\)</span>, or <span class="math inline">\(h=\frac{t_e - t_0}{N}\)</span>.</p>
+
+<div class="JHSAYS">
+<p>The restriction of equidistant grids is convenient for the analysis and does not mean a great loss of generality. Typically, in all the estimates that follow and in which the <em>constants</em> remain unspecified, a non equidistant grid can be accommodated by setting <span class="math inline">\(h\)</span> to be the largest time step under consideration.</p>
+In practice, however, one really uses adaptive and, thus, nonuniform time grids.
+</div>
+
+<p>Throughout this chapter, we will assume that system under consideration has a unique solution <span class="math inline">\(x\)</span> and we will use the notation
+<span class="math display">\[
+x_i \approx x(t_i)
+\]</span>
+to express that <span class="math inline">\(x_i\)</span> is defined as the numerically computed approximation to the solution <span class="math inline">\(x\)</span> at time <span class="math inline">\(t_i\)</span>.</p>
+
+<div class="JHSAYS">
+It is unfortunate that <span class="math inline">\(x_i\)</span> has been used to denote parts of the actual solution, but I hope this inconsistency can be tolerated in favor of a more pleasant and more standard notation.
+</div>
+
+<p>Generally, the approximants <span class="math inline">\(x_i\)</span> are computed iteratively by a numerical scheme <span class="math inline">\(\phi\)</span> like
+<span class="math display" id="eq:v-one-step-scheme">\[
+x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). \tag{5.1}
+\]</span>
+If <span class="math inline">\(x_{i+1}\)</span> appears in the definition of the function <span class="math inline">\(\phi\)</span>, then the scheme is called <em>implicit</em>. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like <span class="math inline">\(x_{i-1}\)</span>, <span class="math inline">\(x_{i-2}\)</span>, …, <span class="math inline">\(x_{i-k}\)</span> with <span class="math inline">\(k\geq 0\)</span>, then the scheme is called a <em>multi-step scheme</em>. Otherwise, it is called a <em>single-step scheme</em>.</p>
+<p>Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
+<span class="math display">\[
+\|x_N - x(t_e)\| \to 0
+\]</span>
+as <span class="math inline">\(h \to 0\)</span>. More precisely, tries to establish estimates like
+<span class="math display">\[
+x_N - x(t_e) = \mathcal O(h^p)
+\]</span>
+meaning that the error approaches <span class="math inline">\(0\)</span> at least as fast as the convergence order <span class="math inline">\(p\)</span>. This <span class="math inline">\(p\)</span> is then called the <em>order of convergence</em> (of the method <span class="math inline">\(\phi\)</span>).</p>
+<p>If the method <span class="math inline">\(\phi\)</span> is stable<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>, then an estimate on the (local) consistency error (cp. the definition of the iteration <a href="numerical-approximation-of-daes.html#eq:v-one-step-scheme">(5.1)</a>) like
+<span class="math display">\[
+x(t_{i+1}) - \phi(t_i, h, x(t_i), x(t_{i+1})) = \mathcal O(h^q),
+\]</span>
+i.e. the <em>order of consistency</em> of <span class="math inline">\(\phi\)</span>, transfers to the global convergence order as <span class="math inline">\(p=q-1\)</span>.</p>
+<p>We will start with one-step methods and in particular with Runge-Kutta methods that represent the most commonly applied time discretization schemes. A Runge-Kutta method is defined by its number of stages <span class="math inline">\(s\)</span>, and by parameter vectors
+<span class="math display">\[
+\beta = \{\beta_j\}_{j=1, \dotsc, s}, \quad \gamma=\{\gamma_j\}_{j=1,\dotsc,s}, \quad 
+\mathcal A = \{\alpha_{j\ell}\}_{j,\ell=1, \dotsc, s}
+\]</span>
+that, in turn, define the increment <span class="math inline">\(x_{i+1}=\phi(t_i,h,x_i,x_{i+1})\)</span> via
+<span class="math display">\[
+x_{i+1}=x_i+h\sum_{j=1}^s\beta_j \dot X_{ij},
+\]</span>
+where the <em>stage derivatives</em> <span class="math inline">\(\dot X_{ij}\)</span> are connected with the <em>stage values</em> <span class="math inline">\(X_{ij}\)</span> via the following possibly nonlinear (depending on the problem: <span class="math inline">\(\dot x(t) = f(t,x(t))\)</span>) and possibly implicit (depending on the method) system of equations
+<span class="math display">\[\begin{align}
+\dot X_{ij} &amp;= f(t_i+\gamma_jh, X_{ij}), \\
+X_{ij} &amp;= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+\end{align}\]</span></p>
+<p>The matrix <span class="math inline">\(\mathcal A\)</span> and the vectors <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span> of parameters are conveniently written into the so-called <em>Butcher-tableau</em>
+<span class="math display">\[
+\left[
+\begin{array}{c|c}
+ \gamma &amp; \mathcal A \\
+ \hline
+  &amp; \beta^T \\
+\end{array}
+\right]
+\]</span></p>
+<p>It is well-known that one-step methods are stable (see also the first paragraph of Kunkel/Mehrmann Ch. 5.2). Accordingly, convergence can be derived directly from the consistency error. For a general Runge-Kutta method, the convergence conditions – if applied to an ODE <span class="math inline">\(\dot x = f(t,x)\)</span> – can be expressed in terms of the coefficients:</p>
+
+<div class="theorem">
+<p><span id="thm:v-butcher" class="theorem"><strong>Theorem 5.1  (Butcher’s Theorem)  </strong></span>If the coefficients <span class="math inline">\(\beta_j\)</span>, <span class="math inline">\(\gamma_j\)</span>, and <span class="math inline">\(\alpha_{j\ell}\)</span> fulfill the conditions</p>
+<table>
+<colgroup>
+<col width="8%" />
+<col width="57%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Condition</th>
+<th align="left">range of <span class="math inline">\(k\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">B(p):</td>
+<td align="left"><span class="math inline">\(\sum_{j=1}^s\beta_j\gamma_j^{k-1} = \frac 1k\)</span></td>
+<td align="left"><span class="math inline">\(k=1,2,\cdots,p\)</span></td>
+</tr>
+<tr class="even">
+<td align="left">C(q):</td>
+<td align="left"><span class="math inline">\(\sum_{\ell=1}^s\alpha_{j\ell}\gamma_\ell^{k-1} = \frac 1k\gamma_j^k,\quad\)</span> for <span class="math inline">\(j=1,\dotsc s\)</span></td>
+<td align="left"><span class="math inline">\(k=1,2,\cdots,q\)</span></td>
+</tr>
+<tr class="odd">
+<td align="left">D(r):</td>
+<td align="left"><span class="math inline">\(\sum_{j=1}^s\beta_j\gamma_j^{k-1} \alpha_{j\ell}= \frac 1k\beta_\ell(1-\gamma_\ell^k),\quad\)</span> for <span class="math inline">\(\ell=1,\dotsc s\)</span></td>
+<td align="left"><span class="math inline">\(k=1,2,\cdots,r\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>with <span class="math inline">\(p\leq q+r+1\)</span> and <span class="math inline">\(p \leq 2q+2\)</span>, then the Runge-Kutta method is convergent of order <span class="math inline">\(p\)</span>.</p>
+</div>
+
+<p>so that, in what follows, we will examine only the consistency error for the approximation of DAEs.</p>
 <p>In order to analyse the approximation error of the RKM <span class="math inline">\((\mathcal A, \beta, \gamma)\)</span> applied to a regular linear DAE with constant coefficients</p>
 <p><span class="math display">\[
  E\dot x = Ax+f(t).
@@ -155,7 +262,7 @@
   &amp;   &amp;        &amp;         &amp; 0 
 \end{bmatrix}
 \dot x = x + f(t),
-\tag{5.1}
+\tag{5.2}
 \end{equation}\]</span></p>
 <p>where</p>
 <p><span class="math display">\[
@@ -165,7 +272,7 @@
  \]</span></p>
 
 <div class="theorem">
-<p><span id="thm:local-consistency-error-rkm-lcc" class="theorem"><strong>Theorem 5.1  </strong></span>The local error of an RKM with <span class="math inline">\(\mathcal A\)</span> invertible applied to <a href="numerical-approximation-of-daes.html#eq:spec-dae-rkm-cc">(5.1)</a> behaves like</p>
+<p><span id="thm:local-consistency-error-rkm-lcc" class="theorem"><strong>Theorem 5.2  </strong></span>The local error of an RKM with <span class="math inline">\(\mathcal A\)</span> invertible applied to <a href="numerical-approximation-of-daes.html#eq:spec-dae-rkm-cc">(5.2)</a> behaves like</p>
 <p><span class="math display">\[
 x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
 \]</span></p>
@@ -253,6 +360,13 @@ x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 </div>
 
 
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="6">
+<li id="fn6"><p><em>Stability</em> can be defined in many different ways. It basically means that small errors can be accumulated (that’s why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.<a href="numerical-approximation-of-daes.html#fnref6" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
