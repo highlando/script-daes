@@ -91,6 +91,10 @@ eq:iv-cndnsd-snff-apart
 eq:iv-cndnsd-snff-vpart
 eq:v-one-step-scheme
 thm:v-butcher
+def:v-kronecker-product
+lem:v-kronecker-perfect-shuffle
+lem:v-kronecker-associativity
+eq:v-lin-dae-cc
 eq:spec-dae-rkm-cc
 thm:local-consistency-error-rkm-lcc
 eq:semexp-dae-diff
@@ -129,6 +133,7 @@ the-strangeness-index
 derivative-arrays
 numerical-approximation-of-daes
 Vi
+runge-kutta-methods-for-linear-daes-with-constant-coefficients
 construction-and-analysis-of-rkm-for-nonlinear-daes
 general-rkm-for-semi-explicit-strangeness-free-daes
 collocation-rkm-for-implicit-strangeness-free-daes

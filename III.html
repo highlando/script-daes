@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-14" />
+<meta name="date" content="2021-06-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -99,6 +99,7 @@
 </ul></li>
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a><ul>
 <li class="chapter" data-level="5.1" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#Vi"><i class="fa fa-check"></i><b>5.1</b> Notions and Notations</a></li>
+<li class="chapter" data-level="5.2" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#runge-kutta-methods-for-linear-daes-with-constant-coefficients"><i class="fa fa-check"></i><b>5.2</b> Runge-Kutta Methods for Linear DAEs with Constant Coefficients</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
@@ -1073,8 +1074,8 @@ and <span class="math inline">\(\tilde E\)</span> and <span class="math inline">
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p><em>Stability</em> can be defined in many different ways. It basically means that small errors can be accumulated (that’s why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.<a href="III.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Paul v. Dooren <a href="https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf">The Computation of Kronecker’s Canonical Form of a Singular Pencil</a><a href="III.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>Equivalence relation – <strong>RST</strong>. <strong>R</strong>eflexive: <span class="math inline">\(A\sim A\)</span>. <strong>S</strong>ymmetric: <span class="math inline">\(A\sim B\)</span>, then <span class="math inline">\(B\sim A\)</span>. <strong>T</strong>ransitive: <span class="math inline">\(A\sim B\)</span> and <span class="math inline">\(B\sim C\)</span>, then <span class="math inline">\(A\sim C\)</span>.<a href="III.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p><em>Stability</em> can be defined in many different ways. It basically means that small errors can be accumulated (that’s why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.<a href="III.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>See the proof of Lemma 2.8 in <em>Kunkel/Mehrmann</em><a href="III.html#fnref3" class="footnote-back">↩</a></p></li>
 <li id="fn4"><p>Dai (1989): <em>Singular Control Systems</em><a href="III.html#fnref4" class="footnote-back">↩</a></p></li>
 <li id="fn5"><p>A so-called particular solution. Btw., <em>all solutions = a particular plus all solutions to the homogeneous problem</em> is the superposition principle for general linear problems.<a href="III.html#fnref5" class="footnote-back">↩</a></p></li>

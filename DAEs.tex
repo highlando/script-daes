@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-06-14}
+\date{2021-06-15}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -629,7 +629,7 @@ In this case, we write
 \end{definition}
 
 \begin{lemma}
-\protect\hypertarget{lem:strong-equivalence-RSI}{}{\label{lem:strong-equivalence-RSI} }The relation \(\sim\) defined in Definition \ref{def:matrix-pair-equivalent} defines an equivalence relation\footnote{\emph{Stability} can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g.~Kunkel/Mehrmann Def. 5.2.}.
+\protect\hypertarget{lem:strong-equivalence-RSI}{}{\label{lem:strong-equivalence-RSI} }The relation \(\sim\) defined in Definition \ref{def:matrix-pair-equivalent} defines an equivalence relation\footnote{Equivalence relation -- \textbf{RST}. \textbf{R}eflexive: \(A\sim A\). \textbf{S}ymmetric: \(A\sim B\), then \(B\sim A\). \textbf{T}ransitive: \(A\sim B\) and \(B\sim C\), then \(A\sim C\).}.
 \end{lemma}
 \begin{proof}
 \iffalse{} {Proof. } \fi{}Exercise.
@@ -756,7 +756,7 @@ The \emph{Kronecker Canonical Form} is uniquely defined up to permutations of th
 \iffalse{} {Proof. } \fi{}Very technical. Can be found, e.g., in the book: Gantmacher (1959) \emph{The Theory of Matrices II}.
 \end{proof}
 
-Algorithm for computations exist\footnote{Paul v. Dooren \href{https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf}{The Computation of Kronecker's Canonical Form of a Singular Pencil}} but the computation is notoriously ill posed.
+Algorithm for computations exist\footnote{\emph{Stability} can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g.~Kunkel/Mehrmann Def. 5.2.} but the computation is notoriously ill posed.
 
 \hypertarget{regularity-and-solvability}{%
 \section{Regularity and Solvability}\label{regularity-and-solvability}}
@@ -2763,7 +2763,7 @@ x(t_{i+1}) - \phi(t_i, h, x(t_i), x(t_{i+1})) = \mathcal O(h^q),
 \]
 i.e.~the \emph{order of consistency} of \(\phi\), transfers to the global convergence order as \(p=q-1\).
 
-We will start with one-step methods and in particular with Runge-Kutta methods that represent the most commonly applied time discretization schemes. A Runge-Kutta method is defined by its number of stages \(s\), and by parameter vectors
+We will start with one-step methods and in particular with Runge-Kutta methods (RKM) that represent the most commonly applied time discretization schemes. A Runge-Kutta method is defined by its number of stages \(s\), and by parameter vectors
 \[
 \beta = \{\beta_j\}_{j=1, \dotsc, s}, \quad \gamma=\{\gamma_j\}_{j=1,\dotsc,s}, \quad 
 \mathcal A = \{\alpha_{j\ell}\}_{j,\ell=1, \dotsc, s}
@@ -2780,13 +2780,11 @@ X_{ij} &= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 
 The matrix \(\mathcal A\) and the vectors \(\beta\) and \(\gamma\) of parameters are conveniently written into the so-called \emph{Butcher-tableau}
 \[
-\left[
 \begin{array}{c|c}
  \gamma & \mathcal A \\
  \hline
   & \beta^T \\
 \end{array}
-\right]
 \]
 
 It is well-known that one-step methods are stable (see also the first paragraph of Kunkel/Mehrmann Ch. 5.2). Accordingly, convergence can be derived directly from the consistency error. For a general Runge-Kutta method, the convergence conditions -- if applied to an ODE \(\dot x = f(t,x)\) -- can be expressed in terms of the coefficients:
@@ -2829,30 +2827,147 @@ D(r):\strut
 \bottomrule
 \end{longtable}
 
-with \(p\leq q+r+1\) and \(p \leq 2q+2\), then the Runge-Kutta method is convergent of order \(p\).
+with
+\[ p\leq q+r+1 \] and \[ p \leq 2q+2,\] then the Runge-Kutta method is convergent of order \(p\).
 \end{theorem}
 
-so that, in what follows, we will examine only the consistency error for the approximation of DAEs.
+\begin{JHSAYS}
+Knowing that one-step methods are stable, in what follows, we will examine only the consistency error for the approximation of DAEs.
+\end{JHSAYS}
 
-In order to analyse the approximation error of the RKM \((\mathcal A, \beta, \gamma)\) applied to a regular linear DAE with constant coefficients
+In particular for the analysis of the approximation of linear DAEs, the Kronecker product \(\otimes\) and two of its properties will be helpful:
 
+\begin{definition}
+\protect\hypertarget{def:v-kronecker-product}{}{\label{def:v-kronecker-product} }For two matrices \(U \in \mathbb C^{m,n}\) and \(V\in \mathbb C^{k,l}\), with
 \[
- E\dot x = Ax+f(t).
+U = 
+\begin{bmatrix}
+u_{11} & \dots & u_{1n} \\
+\vdots & \ddots & \vdots \\
+u_{m1} & \dots & u_{mn}
+\end{bmatrix}
+\]
+their \emph{Kronecker product} \(U \otimes V\) is defined as
+\[
+U\otimes V = 
+\begin{bmatrix}
+u_{11}V & \dots & u_{1n}V \\
+\vdots & \ddots & \vdots \\
+u_{m1}V & \dots & u_{mn}V
+\end{bmatrix}
+\in \mathbb C^{mk, nl}.
+\]
+\end{definition}
+
+\begin{lemma}
+\protect\hypertarget{lem:v-kronecker-perfect-shuffle}{}{\label{lem:v-kronecker-perfect-shuffle} }For given dimensions \(m\), \(n\), \(k\), \(l\), there exist permutations matrices
+\[
+\Pi_1 \in \mathbb R^{mk, mk}, \quad \Pi_2 \in \mathbb C^{kl, kl},
+\]
+so that for any matrices \(U \in \mathbb C^{m,n}\) and \(V\in \mathbb C^{k,l}\) it holds that
+\[
+U\otimes V = \Pi_1^T (V\otimes U) \Pi_2.
+\]
+If \(n=m\) and \(k=l\), then \(\Pi_1=\Pi_2\).
+\end{lemma}
+
+Note that the inverse of a permutation matrix \(\Pi\) is its transpose \(\Pi^T\), so that for equally sized matrices \(U\) and \(V\) with \(\Pi_1=\Pi_2=:\Pi\), it holds that
+\[
+U\otimes V = \Pi^T(V\otimes U)\Pi \sim V\otimes U.
 \]
 
-Without loss of generality, we can assume that
+\begin{lemma}
+\protect\hypertarget{lem:v-kronecker-associativity}{}{\label{lem:v-kronecker-associativity} }If the given matrices \(R\), \(S\), \(U\), \(V\) have compatible dimensions so that the products \(UR\) and \(VS\) exist, then
+\[
+(U\otimes V)(R\otimes S) = UR \otimes VS.
+\]
+\end{lemma}
+
+\hypertarget{runge-kutta-methods-for-linear-daes-with-constant-coefficients}{%
+\section{Runge-Kutta Methods for Linear DAEs with Constant Coefficients}\label{runge-kutta-methods-for-linear-daes-with-constant-coefficients}}
+
+In this section, we will analyse the approximation error of the RKM \((\mathcal A, \beta, \gamma)\) applied to a regular linear DAE with constant coefficients
+
+\[
+ E\dot x = Ax+f(t). \label{eq:v-lin-dae-cc}
+\]
+
+To motivate the following arguments and assumptions, we just try to apply the \emph{explicit Euler} to \eqref{eq:v-lin-dae-cc} so that a single iteration step reads
+\[
+Ex_{i+1} = Ex_i + h(Ax_i + f(t_i)),
+\]
+which can not fully define \(x_{i+1}\) if \(E\) is not invertible.
+
+On the other hand, if \((E,A)\) is regular, then one step of the \emph{implicit Euler} scheme,
+\[
+(E-hA)x_{i+1} = Ex_i + hf(t_i),
+\]
+well defines the next iterate for any choice of \(h\) except a few.
+
+In more generality, a complete iteration step of a general RKM applied to \eqref{eq:v-lin-dae-cc}, can be expressed via the solution\footnote{The proof is left as an exercise.} of the linear system
+
+\[
+(I_s \otimes E - h\mathcal A \otimes A) \dot X_i = Z_i
+\]
+with
+\[
+\dot X_i = 
+\begin{bmatrix}
+\dot X_{i1} \\ \vdots \\ \dot X_{is}
+\end{bmatrix}, \quad
+\dot Z_i = 
+\begin{bmatrix}
+Ax_{i}+f(t_i+\gamma_1h) \\ \vdots \\ Ax_{i}+f(t_i+\gamma_sh)
+\end{bmatrix}
+\]
+If \((E, A)\) is regular, and \(P\) and \(Q\) are those matrices that bring \((E,A)\) into Kronecker normal form, then, with Lemma \ref{lem:v-kronecker-associativity}, we can find that
+\[
+(I_s\otimes P)(I_s \otimes E - h\mathcal A \otimes A)(I_s \otimes Q) = (I_s \otimes PEQ - h(\mathcal A \otimes PAQ))
+\]
+which by Lemma \ref{lem:v-kronecker-perfect-shuffle} is similar to
+\[
+PEQ\otimes I_s - PAQ \otimes h\mathcal A = 
+\begin{bmatrix}
+I \otimes I_s & \\ & N\otimes I_s
+\end{bmatrix}
+- h
+\begin{bmatrix}
+J \otimes \mathcal A & \\ & I\otimes \mathcal A 
+\end{bmatrix},
+\]
+which means that for a regular DAE, one step of an RKM can be interpreted as one step of an RKM for the ODE and one step for the DAE part in the canonical form.
+
+As for the invertibility of the coefficient matrix, we first observe that for \(h\) sufficiently small, the part \(I\otimes I_s - hJ\otimes \mathcal A\) is invertible. For the second part, we assume that \(N\) is in Jordan form and consists of only one block (otherwise the arguments can be formulated for each block separately) to find that
+\[
+N\otimes I_s - I \otimes h \mathcal A = 
+\begin{bmatrix}
+-h\mathcal A & I_s \\
+& \ddots & \ddots \\
+&& -h\mathcal A & I_s \\
+&&& -h\mathcal A
+\end{bmatrix}
+\]
+is invertible if, and only if, \(\mathcal A\) is invertible.
+
+\begin{JHSAYS}
+Generally, the numerical solution of DAEs requires implicit schemes.
+\end{JHSAYS}
+
+By the previous considerations, the following assumptions are well justified -- at least for the theoretical analysis of the schemes.
 
 \begin{itemize}
 \tightlist
+\item
+  \((E,A)\) is regular \(\leftarrow\) the theory needs a unique solution
 \item
   \((E,A)\) is in Kronecker Canonical Form \(\leftarrow\) RKM are invariant under equivalence transformation
 \item
   \((E,A)=(N,I)\) \(\leftarrow\) the \emph{regular part} can be treated by ODE theory
 \item
-  \(E=N=N_\nu\) consists of a single Jordan block \(\leftarrow\) otherwise consider each Jordan block separately
+  \(E=N=N_\nu\) consists of a single Jordan block \(\leftarrow\) otherwise consider each Jordan block separately.
 \end{itemize}
 
-Thus, we can consider the special DAE
+Thus, we will consider the special DAE
 
 \begin{equation}
 \begin{bmatrix}
@@ -2873,6 +2988,12 @@ where
  \quad\text{and}\quad
  f(t) = \begin{bmatrix} f_1(t) \\ f_2(t) \\ \vdots \\ f_\nu(t) \end{bmatrix}
  \]
+
+\begin{JHSAYS}
+Please excuse the double use of the subscript like in \(x_1\).
+\end{JHSAYS}
+
+In the following theorem, the consistency error of a general implicit RKM applied to the special nilpotent DAE is analysed.
 
 \begin{theorem}
 \protect\hypertarget{thm:local-consistency-error-rkm-lcc}{}{\label{thm:local-consistency-error-rkm-lcc} }The local error of an RKM with \(\mathcal A\) invertible applied to \eqref{eq:spec-dae-rkm-cc} behaves like
@@ -2911,11 +3032,15 @@ b.)\strut
 \bottomrule
 \end{longtable}
 
-for all \(k\leq \kappa_j\) and for \(j=1, \cdots, \nu\).
+for all \(k\leq \kappa_j\) and for \(j=1, \cdots, \nu\) and where \(e\in \mathbb R^{\nu}\) is the vector of ones.
 \end{theorem}
 
 \begin{proof}
-\iffalse{} {Proof. } \fi{}Since we consider the pure consistency error, we can assume that \(x_i=x(t_i)\). With that and with the definition of the RKM, the error is given as
+\iffalse{} {Proof. } \fi{}Since we consider the pure consistency error, we can assume that \(x_i=x(t_i)\). With that, with the Taylor expansion of the solution
+\[
+x(t_{i+1}) = x(t_i+h) = x(t_i) + \sum_{k\geq 1} \frac{h^k}{k!}x^{(k)}(t_i),
+\]
+and with the definition of the RKM, the error is given as
 \[
 \tau = x(t_{i+1}) - x_{i+1} = -h\sum_{j=1}^s \beta_j \dot X_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x^{(k)}(t_i).
 \]
