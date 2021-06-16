@@ -117,7 +117,7 @@ $$
 If $n=m$ and $k=l$, then $\Pi_1=\Pi_2$.</div>\EndKnitrBlock{lemma}
 
 
-Note that the inverse of a permutation matrix $\Pi$ is its transpose $\Pi^T$, so that for equally sized matrices $U$ and $V$ with $\Pi_1=\Pi_2=:\Pi$, it holds that
+Note that the inverse of a permutation matrix $\Pi$ is its transpose $\Pi^T$, so that for square matrices $U$ and $V$ with $\Pi_1=\Pi_2=:\Pi$, it holds that
 $$
 U\otimes V = \Pi^T(V\otimes U)\Pi \sim V\otimes U.
 $$
