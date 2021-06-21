@@ -96,7 +96,7 @@ lem:v-kronecker-perfect-shuffle
 lem:v-kronecker-associativity
 eq:v-lin-dae-cc
 eq:spec-dae-rkm-cc
-thm:local-consistency-error-rkm-lcc
+thm:v-local-consistency-error-rkm-lcc
 thm:v-convergence-RKM-LTI
 eq:v-RKM-stab-cond
 eq:semexp-dae-diff
@@ -136,7 +136,7 @@ derivative-arrays
 numerical-approximation-of-daes
 Vi
 runge-kutta-methods-for-linear-daes-with-constant-coefficients
-hier-sind-wir
+a-note-on-rkm-for-time-varying-daes
 construction-and-analysis-of-rkm-for-nonlinear-daes
 general-rkm-for-semi-explicit-strangeness-free-daes
 collocation-rkm-for-implicit-strangeness-free-daes

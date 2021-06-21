@@ -229,7 +229,7 @@ Thus, we will consider the special DAE
 
 In the following theorem, the consistency error of a general implicit RKM applied to the special nilpotent DAE is analysed.
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:local-consistency-error-rkm-lcc"><strong>(\#thm:local-consistency-error-rkm-lcc) </strong></span>The local error of an RKM with $\mathcal A$ invertible applied to \@ref(eq:spec-dae-rkm-cc) behaves like 
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:v-local-consistency-error-rkm-lcc"><strong>(\#thm:v-local-consistency-error-rkm-lcc) </strong></span>The local error of an RKM with $\mathcal A$ invertible applied to \@ref(eq:spec-dae-rkm-cc) behaves like 
 
 $$
 x(t_{i+1}) - x_{i+1} = \mathcal O(h^{\kappa_\nu - \nu + 2} + h^{\kappa_{\nu-1} - \nu + 3} + \cdots + h^{\kappa_1 +1})
@@ -310,13 +310,11 @@ A shift of indices, $\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)$ and $\sum_{k\geq 
 and a comparison of the coefficients for the same orders of $h$ and diffentials of $f$ leads to the conditions. Note the ranges of the sums that depend on $j=1, \dotsc, \nu$.
 </div>\EndKnitrBlock{proof}
 
-\BeginKnitrBlock{JHSAYS}<div class="JHSAYS">Theorem \@ref(thm:local-consistency-error-rkm-lcc) was formulated for the special case of $\dot x = Nx +f(t)$. By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of $E\dot x = Ax+f(t)$. If one estimates the ODE parts as for standard ODEs and the *smaller* nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.</div>\EndKnitrBlock{JHSAYS}
-
-## Hier sind wir
+\BeginKnitrBlock{JHSAYS}<div class="JHSAYS">Theorem \@ref(thm:v-local-consistency-error-rkm-lcc) was formulated for the special case of $\dot x = Nx +f(t)$. By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of $E\dot x = Ax+f(t)$. If one estimates the ODE parts as for standard ODEs and the *smaller* nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.</div>\EndKnitrBlock{JHSAYS}
 
 To prove convergence of the approximations another stability condition is added.
 
-\BeginKnitrBlock{theorem}\iffalse{-91-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-53-46-49-50-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:v-convergence-RKM-LTI"><strong>(\#thm:v-convergence-RKM-LTI)  \iffalse (Kunkel/Mehrmann, Thm. 5.12) \fi{} </strong></span>Consider an implicit RKM with coefficients $\mathcal A$, $\beta$, and $\gamma$ and a linear time invariant DAE $E\dot x = Ax+f(t)$ with $(E,A)$ regular and of index $\nu$. Let $\kappa_j$, $j=1,\dots,\nu$, be the quantities of $(\mathcal A,\beta, \gamma)$ as defined in Theorem \@ref(thm:local-consistency-error-rkm-lcc) and assume that
+\BeginKnitrBlock{theorem}\iffalse{-91-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-53-46-49-50-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:v-convergence-RKM-LTI"><strong>(\#thm:v-convergence-RKM-LTI)  \iffalse (Kunkel/Mehrmann, Thm. 5.12) \fi{} </strong></span>Consider an implicit RKM with coefficients $\mathcal A$, $\beta$, and $\gamma$ and a linear time invariant DAE $E\dot x = Ax+f(t)$ with $(E,A)$ regular and of index $\nu$. Let $\kappa_j$, $j=1,\dots,\nu$, be the quantities of $(\mathcal A,\beta, \gamma)$ as defined in Theorem \@ref(thm:v-local-consistency-error-rkm-lcc) and assume that
 \begin{equation}
 | 1-\beta ^T\mathcal Ae| < 1. (\#eq:v-RKM-stab-cond)
 \end{equation}
@@ -328,4 +326,56 @@ where $p$ is the order of the RKM when applied to ordinary differential equation
 
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}See Kunkel/Mehrmann, Theorem 5.12.</div>\EndKnitrBlock{proof}
 
-Some remarks on the *stability condition* \@ref(eq:v-RKM-stab-cond). In the proof of the theorem, the quantity $\rho = 1-\beta ^T\mathcal Ae$ defines the spectral radius 
+Some remarks on the *stability condition* \@ref(eq:v-RKM-stab-cond). As laid out in the proof of the theorem, the quantity $\rho = 1-\beta ^T\mathcal Ae$ defines an amplification factor of the numerical errors. Accordingly, $|\rho| < 1$ is one of the sufficient conditions for convergence. For $\rho = 0$, utmost stability is reached which, as we will see below for the general nonlinear case, means that *index-1* (or *strangeness-free*) problems are integrated with the same order as ODEs.
+
+For example, so-called *stiffly-implicit* schemes (we will consider them again at a later point in the lecture) come with the property that 
+$$
+\alpha_{sj} = \beta_j, \quad j=1,2,\dotsc,s,
+$$
+i.e. the last row of the $\mathcal A$ matrix equals the vector $\beta$ or, in other terms,
+$$
+\beta^T = e_s^T\mathcal A, \quad e_s^T:=
+\begin{bmatrix}
+0& 0& \dots &1
+\end{bmatrix},
+$$
+so that 
+$$
+1-\beta^T\mathcal A^{-1}e= 1-e_s^T\mathcal A\mathcal A^{-1}e = 1-e_s^Te=1-1=0.
+$$
+
+If also $\sum_{\ell=1}^s\alpha_{j\ell}=\gamma_j$ (which is the case for all RKM that treat the autonomous case $\dot x=f(x)$ like the nonautonomous case $\dot x=f(t,x)$) and since, for every consistent RKM, one has that $\sum_{j=1}^s\beta_j=1$ (cp. Butcher's Theorem \@ref(thm:v-butcher)), we find that for *stiffly accurate* RKM, necessarily
+\begin{equation}
+\gamma_s =\sum_{\ell=1}^s\alpha_{s\ell} = \sum_{j=1}^s\beta_j=1.
+\end{equation}
+
+This implies that condition b.) in Theorem \@ref(thm:v-local-consistency-error-rkm-lcc) with $j=1$ is fulfilled for any $k$, as
+$$
+\beta^T\mathcal A^{-1}\gamma^k = e_s^T\gamma^k = \gamma_s^k = 1 = \frac{k\,!}{k\,!}.
+$$
+
+This means that $\kappa_1=\infty$ and, thus, no order reduction for problems of index $\nu=1$.
+
+## A Note on RKM for Time-Varying DAEs
+
+For a general linear time-varying DAE
+$$
+E(t)\dot x = A(t)x +f(t),
+$$
+the application of *Implicit Euler* as a general Runge-Kutta method reads
+$$
+x_{i+1} = x_i + h\dot X_{i1}
+$$
+with the stage derivative $\dot X_{i1}$ implicitly defined via
+\begin{align}
+E(t_{i+1})\dot X_{i1} &= A(t_{i+1})X_{i1} + f(t_i+h) \\
+X_{i1} &= x_i + h \dot X_{i1},
+\end{align}
+i.e., via
+$$
+[E(t_{i+1})-hA(t_{i+1})]\dot X_{i1} = A(t_{i+1})x_i + f(t_i+h).
+$$
+If we compare with the examples from the chapter on linear time-varying DAEs, we need to record that
+
+ * if $(E(t), A(t))$ is regular for all $t$, then the RKM may return a unique solution despite the fact that there are infinitely many; cp. Example \@ref(exm:ltv-regular-infinite-sols)
+ * if $(E(t), A(t))$ is singular for all $t$, then the RKM cannot determine an approximation despite the fact that the problem has a unique solution; cp. Example \@ref(exa:ltv-singular-unique-sol). 
