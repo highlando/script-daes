@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-16" />
+<meta name="date" content="2021-06-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,6 +100,7 @@
 <li class="chapter" data-level="5" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html"><i class="fa fa-check"></i><b>5</b> Numerical Approximation of DAEs</a><ul>
 <li class="chapter" data-level="5.1" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#Vi"><i class="fa fa-check"></i><b>5.1</b> Notions and Notations</a></li>
 <li class="chapter" data-level="5.2" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#runge-kutta-methods-for-linear-daes-with-constant-coefficients"><i class="fa fa-check"></i><b>5.2</b> Runge-Kutta Methods for Linear DAEs with Constant Coefficients</a></li>
+<li class="chapter" data-level="5.3" data-path="numerical-approximation-of-daes.html"><a href="numerical-approximation-of-daes.html#hier-sind-wir"><i class="fa fa-check"></i><b>5.3</b> Hier sind wir</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><i class="fa fa-check"></i><b>6</b> Construction and Analysis of RKM for nonlinear DAEs</a><ul>
 <li class="chapter" data-level="6.1" data-path="construction-and-analysis-of-rkm-for-nonlinear-daes.html"><a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#general-rkm-for-semi-explicit-strangeness-free-daes"><i class="fa fa-check"></i><b>6.1</b> General RKM for Semi-Explicit Strangeness-free DAEs</a></li>
@@ -243,7 +244,7 @@ X_{ij} &amp;= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 
 
 <div class="JHSAYS">
-Knowing that one-step methods are stable, in what follows, we will examine only the consistency error for the approximation of DAEs.
+Knowing that one-step methods are stable, one typically examines only the consistency error for the approximation of ODEs. For DAEs, however, we will have to identify stable RKM methods.
 </div>
 
 <p>In particular for the analysis of the approximation of linear DAEs, the Kronecker product <span class="math inline">\(\otimes\)</span> and two of its properties will be helpful:</p>
@@ -481,8 +482,37 @@ x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 <span class="math display">\[\begin{align*}
     \tau_1 &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &amp;\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
 \end{align*}\]</span></p>
+<p>and a comparison of the coefficients for the same orders of <span class="math inline">\(h\)</span> and diffentials of <span class="math inline">\(f\)</span> leads to the conditions. Note the ranges of the sums that depend on <span class="math inline">\(j=1, \dotsc, \nu\)</span>.</p>
 </div>
 
+
+<div class="JHSAYS">
+Theorem <a href="numerical-approximation-of-daes.html#thm:local-consistency-error-rkm-lcc">5.2</a> was formulated for the special case of <span class="math inline">\(\dot x = Nx +f(t)\)</span>. By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of <span class="math inline">\(E\dot x = Ax+f(t)\)</span>. If one estimates the ODE parts as for standard ODEs and the <em>smaller</em> nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.
+</div>
+
+</div>
+<div id="hier-sind-wir" class="section level2">
+<h2><span class="header-section-number">5.3</span> Hier sind wir</h2>
+<p>To prove convergence of the approximations another stability condition is added.</p>
+
+<div class="theorem">
+<span id="thm:v-convergence-RKM-LTI" class="theorem"><strong>Theorem 5.3  (Kunkel/Mehrmann, Thm. 5.12)  </strong></span>Consider an implicit RKM with coefficients <span class="math inline">\(\mathcal A\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\gamma\)</span> and a linear time invariant DAE <span class="math inline">\(E\dot x = Ax+f(t)\)</span> with <span class="math inline">\((E,A)\)</span> regular and of index <span class="math inline">\(\nu\)</span>. Let <span class="math inline">\(\kappa_j\)</span>, <span class="math inline">\(j=1,\dots,\nu\)</span>, be the quantities of <span class="math inline">\((\mathcal A,\beta, \gamma)\)</span> as defined in Theorem <a href="numerical-approximation-of-daes.html#thm:local-consistency-error-rkm-lcc">5.2</a> and assume that
+<span class="math display" id="eq:v-RKM-stab-cond">\[\begin{equation}
+| 1-\beta ^T\mathcal Ae| &lt; 1. \tag{5.4}
+\end{equation}\]</span>
+Then, the RKM is convergent of order
+<span class="math display">\[\begin{equation}
+\min_{1\leq j \leq \nu}\{p, \kappa_j - \nu +2\},
+\end{equation}\]</span>
+where <span class="math inline">\(p\)</span> is the order of the RKM when applied to ordinary differential equations.
+</div>
+
+
+<div class="proof">
+ <span class="proof"><em>Proof. </em></span> See Kunkel/Mehrmann, Theorem 5.12.
+</div>
+
+<p>Some remarks on the <em>stability condition</em> <a href="numerical-approximation-of-daes.html#eq:v-RKM-stab-cond">(5.4)</a>. In the proof of the theorem, the quantity <span class="math inline">\(\rho = 1-\beta ^T\mathcal Ae\)</span> defines the spectral radius</p>
 
 </div>
 </div>

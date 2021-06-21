@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-06-16}
+\date{2021-06-21}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -756,7 +756,7 @@ The \emph{Kronecker Canonical Form} is uniquely defined up to permutations of th
 \iffalse{} {Proof. } \fi{}Very technical. Can be found, e.g., in the book: Gantmacher (1959) \emph{The Theory of Matrices II}.
 \end{proof}
 
-Algorithm for computations exist\footnote{\emph{Stability} can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g.~Kunkel/Mehrmann Def. 5.2.} but the computation is notoriously ill posed.
+Algorithm for computations exist\footnote{Paul v. Dooren \href{https://perso.uclouvain.be/paul.vandooren/publications/VDooren79.pdf}{The Computation of Kronecker's Canonical Form of a Singular Pencil}} but the computation is notoriously ill posed.
 
 \hypertarget{regularity-and-solvability}{%
 \section{Regularity and Solvability}\label{regularity-and-solvability}}
@@ -2832,7 +2832,7 @@ with
 \end{theorem}
 
 \begin{JHSAYS}
-Knowing that one-step methods are stable, in what follows, we will examine only the consistency error for the approximation of DAEs.
+Knowing that one-step methods are stable, one typically examines only the consistency error for the approximation of ODEs. For DAEs, however, we will have to identify stable RKM methods.
 \end{JHSAYS}
 
 In particular for the analysis of the approximation of linear DAEs, the Kronecker product \(\otimes\) and two of its properties will be helpful:
@@ -3097,7 +3097,36 @@ A shift of indices, \(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\) and \(\sum_{k\g
 \begin{align*}
     \tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
 \end{align*}
+
+and a comparison of the coefficients for the same orders of \(h\) and diffentials of \(f\) leads to the conditions. Note the ranges of the sums that depend on \(j=1, \dotsc, \nu\).
 \end{proof}
+
+\begin{JHSAYS}
+Theorem \ref{thm:local-consistency-error-rkm-lcc} was formulated for the special case of \(\dot x = Nx +f(t)\). By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of \(E\dot x = Ax+f(t)\). If one estimates the ODE parts as for standard ODEs and the \emph{smaller} nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.
+\end{JHSAYS}
+
+\hypertarget{hier-sind-wir}{%
+\section{Hier sind wir}\label{hier-sind-wir}}
+
+To prove convergence of the approximations another stability condition is added.
+
+\begin{theorem}[Kunkel/Mehrmann, Thm. 5.12]
+\protect\hypertarget{thm:v-convergence-RKM-LTI}{}{\label{thm:v-convergence-RKM-LTI} \iffalse (Kunkel/Mehrmann, Thm. 5.12) \fi{} }Consider an implicit RKM with coefficients \(\mathcal A\), \(\beta\), and \(\gamma\) and a linear time invariant DAE \(E\dot x = Ax+f(t)\) with \((E,A)\) regular and of index \(\nu\). Let \(\kappa_j\), \(j=1,\dots,\nu\), be the quantities of \((\mathcal A,\beta, \gamma)\) as defined in Theorem \ref{thm:local-consistency-error-rkm-lcc} and assume that
+\begin{equation}
+| 1-\beta ^T\mathcal Ae| < 1. \label{eq:v-RKM-stab-cond}
+\end{equation}
+Then, the RKM is convergent of order
+\begin{equation}
+\min_{1\leq j \leq \nu}\{p, \kappa_j - \nu +2\},
+\end{equation}
+where \(p\) is the order of the RKM when applied to ordinary differential equations.
+\end{theorem}
+
+\begin{proof}
+\iffalse{} {Proof. } \fi{}See Kunkel/Mehrmann, Theorem 5.12.
+\end{proof}
+
+Some remarks on the \emph{stability condition} \eqref{eq:v-RKM-stab-cond}. In the proof of the theorem, the quantity \(\rho = 1-\beta ^T\mathcal Ae\) defines the spectral radius
 
 \hypertarget{construction-and-analysis-of-rkm-for-nonlinear-daes}{%
 \chapter{Construction and Analysis of RKM for nonlinear DAEs}\label{construction-and-analysis-of-rkm-for-nonlinear-daes}}
