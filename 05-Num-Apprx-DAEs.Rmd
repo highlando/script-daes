@@ -40,13 +40,13 @@ x_N - x(t_e) = \mathcal O(h^p)
 $$
 meaning that the error approaches $0$ at least as fast as the convergence order $p$. This $p$ is then called the *order of convergence* (of the method $\phi$). 
 
-If the method $\phi$ is stable[^2], then an estimate on the (local) consistency error (cp. the definition of the iteration \@ref(eq:v-one-step-scheme)) like
+If the method $\phi$ is stable[^6], then an estimate on the (local) consistency error (cp. the definition of the iteration \@ref(eq:v-one-step-scheme)) like
 $$
 x(t_{i+1}) - \phi(t_i, h, x(t_i), x(t_{i+1})) = \mathcal O(h^q),
 $$
 i.e. the *order of consistency* of $\phi$, transfers to the global convergence order as $p=q-1$.
 
-[^2]: *Stability* can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.
+[^6]: *Stability* can be defined in many different ways. It basically means that small errors can be accumulated (that's why the order of convergence is one less the the order of consistency) but are not amplified by the method. See e.g. Kunkel/Mehrmann Def. 5.2.
 
 We will start with one-step methods and in particular with Runge-Kutta methods (RKM) that represent the most commonly applied time discretization schemes. A Runge-Kutta method is defined by its number of stages $s$, and by parameter vectors
 $$
@@ -89,7 +89,7 @@ $$ p\leq q+r+1 $$ and $$ p \leq 2q+2,$$ then the Runge-Kutta method is convergen
 ```
 
 ```{block2, type='JHSAYS'}
-Knowing that one-step methods are stable, in what follows, we will examine only the consistency error for the approximation of DAEs.
+Knowing that one-step methods are stable, one typically examines only the consistency error for the approximation of ODEs. For DAEs, however, we will have to identify stable RKM methods.
 ```
 
 In particular for the analysis of the approximation of linear DAEs, the Kronecker product $\otimes$ and two of its properties will be helpful:
@@ -161,9 +161,9 @@ $$
 $$
 well defines the next iterate for any choice of $h$ except a few. 
 
-In more generality, a complete iteration step of a general RKM applied to \@ref(eq:v-lin-dae-cc), can be expressed via the solution[^3] of the linear system
+In more generality, a complete iteration step of a general RKM applied to \@ref(eq:v-lin-dae-cc), can be expressed via the solution[^7] of the linear system
 
-[^3]: The proof is left as an exercise.
+[^7]: The proof is left as an exercise.
 
 $$
 (I_s \otimes E - h\mathcal A \otimes A) \dot X_i = Z_i
@@ -328,5 +328,32 @@ A shift of indices, $\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)$ and $\sum_{k\geq 
 	\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
 \end{align*}
 
+and a comparison of the coefficients for the same orders of $h$ and diffentials of $f$ leads to the conditions. Note the ranges of the sums that depend on $j=1, \dotsc, \nu$.
+
 ```
 
+```{block2, type='JHSAYS'}
+Theorem \@ref(thm:local-consistency-error-rkm-lcc) was formulated for the special case of $\dot x = Nx +f(t)$. By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of $E\dot x = Ax+f(t)$. If one estimates the ODE parts as for standard ODEs and the *smaller* nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.
+```
+
+## Hier sind wir
+
+To prove convergence of the approximations another stability condition is added.
+
+```{theorem, name="Kunkel/Mehrmann, Thm. 5.12", label="v-convergence-RKM-LTI"}
+Consider an implicit RKM with coefficients $\mathcal A$, $\beta$, and $\gamma$ and a linear time invariant DAE $E\dot x = Ax+f(t)$ with $(E,A)$ regular and of index $\nu$. Let $\kappa_j$, $j=1,\dots,\nu$, be the quantities of $(\mathcal A,\beta, \gamma)$ as defined in Theorem \@ref(thm:local-consistency-error-rkm-lcc) and assume that
+\begin{equation}
+| 1-\beta ^T\mathcal Ae| < 1. (\#eq:v-RKM-stab-cond)
+\end{equation}
+Then, the RKM is convergent of order
+\begin{equation}
+\min_{1\leq j \leq \nu}\{p, \kappa_j - \nu +2\},
+\end{equation}
+where $p$ is the order of the RKM when applied to ordinary differential equations.
+```
+
+```{proof}
+See Kunkel/Mehrmann, Theorem 5.12.
+```
+
+Some remarks on the *stability condition* \@ref(eq:v-RKM-stab-cond). In the proof of the theorem, the quantity $\rho = 1-\beta ^T\mathcal Ae$ defines the spectral radius 
