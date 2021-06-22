@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-21" />
+<meta name="date" content="2021-06-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -547,17 +547,17 @@ x_{i+1} = x_i + h\dot X_{i1}
 \]</span>
 with the stage derivative <span class="math inline">\(\dot X_{i1}\)</span> implicitly defined via
 <span class="math display">\[\begin{align}
-E(t_{i+1})\dot X_{i1} &amp;= A(t_{i+1})X_{i1} + f(t_i+h) \\
+E(t_{i+1})\dot X_{i1} &amp;= A(t_{i+1})X_{i1} + f(t_{i+1}) \\
 X_{i1} &amp;= x_i + h \dot X_{i1},
 \end{align}\]</span>
-i.e., via
-<span class="math display">\[
-[E(t_{i+1})-hA(t_{i+1})]\dot X_{i1} = A(t_{i+1})x_i + f(t_i+h).
+which, with <span class="math inline">\(h \dot X_{i1}=X_{i1}-x_i\)</span> and <span class="math inline">\(X_{i1}=x_{i+1}\)</span> gives the system</p>
+<p><span class="math display">\[
+[E(t_{i+1})-hA(t_{i+1})]x_{i+1} = E(t_{i+1})x_i + hf(t_{i+1}).
 \]</span>
 If we compare with the examples from the chapter on linear time-varying DAEs, we need to record that</p>
 <ul>
 <li>if <span class="math inline">\((E(t), A(t))\)</span> is regular for all <span class="math inline">\(t\)</span>, then the RKM may return a unique solution despite the fact that there are infinitely many; cp. Example <a href="IV.html#exm:ltv-regular-infinite-sols">4.1</a></li>
-<li>if <span class="math inline">\((E(t), A(t))\)</span> is singular for all <span class="math inline">\(t\)</span>, then the RKM cannot determine an approximation despite the fact that the problem has a unique solution; cp. Example <a href="#exa:ltv-singular-unique-sol"><strong>??</strong></a>.</li>
+<li>if <span class="math inline">\((E(t), A(t))\)</span> is singular for all <span class="math inline">\(t\)</span>, then the RKM cannot determine an approximation despite the fact that the problem has a unique solution; cp. Example <a href="IV.html#exm:ltv-singular-unique-sol">4.2</a>.</li>
 </ul>
 
 </div>

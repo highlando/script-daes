@@ -368,14 +368,15 @@ x_{i+1} = x_i + h\dot X_{i1}
 $$
 with the stage derivative $\dot X_{i1}$ implicitly defined via
 \begin{align}
-E(t_{i+1})\dot X_{i1} &= A(t_{i+1})X_{i1} + f(t_i+h) \\
+E(t_{i+1})\dot X_{i1} &= A(t_{i+1})X_{i1} + f(t_{i+1}) \\
 X_{i1} &= x_i + h \dot X_{i1},
 \end{align}
-i.e., via
+which, with $h \dot X_{i1}=X_{i1}-x_i$ and $X_{i1}=x_{i+1}$ gives the system
+
 $$
-[E(t_{i+1})-hA(t_{i+1})]\dot X_{i1} = A(t_{i+1})x_i + f(t_i+h).
+[E(t_{i+1})-hA(t_{i+1})]x_{i+1} = E(t_{i+1})x_i + hf(t_{i+1}).
 $$
 If we compare with the examples from the chapter on linear time-varying DAEs, we need to record that
 
  * if $(E(t), A(t))$ is regular for all $t$, then the RKM may return a unique solution despite the fact that there are infinitely many; cp. Example \@ref(exm:ltv-regular-infinite-sols)
- * if $(E(t), A(t))$ is singular for all $t$, then the RKM cannot determine an approximation despite the fact that the problem has a unique solution; cp. Example \@ref(exa:ltv-singular-unique-sol). 
+ * if $(E(t), A(t))$ is singular for all $t$, then the RKM cannot determine an approximation despite the fact that the problem has a unique solution; cp. Example \@ref(exm:ltv-singular-unique-sol). 
