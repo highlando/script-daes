@@ -316,7 +316,7 @@ To prove convergence of the approximations another stability condition is added.
 
 \BeginKnitrBlock{theorem}\iffalse{-91-75-117-110-107-101-108-47-77-101-104-114-109-97-110-110-44-32-84-104-109-46-32-53-46-49-50-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:v-convergence-RKM-LTI"><strong>(\#thm:v-convergence-RKM-LTI)  \iffalse (Kunkel/Mehrmann, Thm. 5.12) \fi{} </strong></span>Consider an implicit RKM with coefficients $\mathcal A$, $\beta$, and $\gamma$ and a linear time invariant DAE $E\dot x = Ax+f(t)$ with $(E,A)$ regular and of index $\nu$. Let $\kappa_j$, $j=1,\dots,\nu$, be the quantities of $(\mathcal A,\beta, \gamma)$ as defined in Theorem \@ref(thm:v-local-consistency-error-rkm-lcc) and assume that
 \begin{equation}
-| 1-\beta ^T\mathcal Ae| < 1. (\#eq:v-RKM-stab-cond)
+| 1-\beta ^T\mathcal A^{-1}e| < 1. (\#eq:v-RKM-stab-cond)
 \end{equation}
 Then, the RKM is convergent of order
 \begin{equation}
@@ -344,7 +344,7 @@ $$
 1-\beta^T\mathcal A^{-1}e= 1-e_s^T\mathcal A\mathcal A^{-1}e = 1-e_s^Te=1-1=0.
 $$
 
-If also $\sum_{\ell=1}^s\alpha_{j\ell}=\gamma_j$ (which is the case for all RKM that treat the autonomous case $\dot x=f(x)$ like the nonautonomous case $\dot x=f(t,x)$) and since, for every consistent RKM, one has that $\sum_{j=1}^s\beta_j=1$ (cp. Butcher's Theorem \@ref(thm:v-butcher)), we find that for *stiffly accurate* RKM, necessarily
+If also $\sum_{\ell=1}^s\alpha_{j\ell}=\gamma_j$ (which is the case for all RKM that treat the autonomous case $\dot x=f(x)$ like the nonautonomous case $\dot x=f(t,x)$) and since, for every consistent RKM, one has that $\sum_{j=1}^s\beta_j=1$ (cp. Butcher's Theorem \@ref(thm:v-butcher)), we find that for such *stiffly accurate* RKM, necessarily
 \begin{equation}
 \gamma_s =\sum_{\ell=1}^s\alpha_{s\ell} = \sum_{j=1}^s\beta_j=1.
 \end{equation}

@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-22" />
+<meta name="date" content="2021-06-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -495,7 +495,7 @@ Theorem <a href="numerical-approximation-of-daes.html#thm:v-local-consistency-er
 <div class="theorem">
 <span id="thm:v-convergence-RKM-LTI" class="theorem"><strong>Theorem 5.3  (Kunkel/Mehrmann, Thm. 5.12)  </strong></span>Consider an implicit RKM with coefficients <span class="math inline">\(\mathcal A\)</span>, <span class="math inline">\(\beta\)</span>, and <span class="math inline">\(\gamma\)</span> and a linear time invariant DAE <span class="math inline">\(E\dot x = Ax+f(t)\)</span> with <span class="math inline">\((E,A)\)</span> regular and of index <span class="math inline">\(\nu\)</span>. Let <span class="math inline">\(\kappa_j\)</span>, <span class="math inline">\(j=1,\dots,\nu\)</span>, be the quantities of <span class="math inline">\((\mathcal A,\beta, \gamma)\)</span> as defined in Theorem <a href="numerical-approximation-of-daes.html#thm:v-local-consistency-error-rkm-lcc">5.2</a> and assume that
 <span class="math display" id="eq:v-RKM-stab-cond">\[\begin{equation}
-| 1-\beta ^T\mathcal Ae| &lt; 1. \tag{5.4}
+| 1-\beta ^T\mathcal A^{-1}e| &lt; 1. \tag{5.4}
 \end{equation}\]</span>
 Then, the RKM is convergent of order
 <span class="math display">\[\begin{equation}
@@ -525,7 +525,7 @@ so that
 <span class="math display">\[
 1-\beta^T\mathcal A^{-1}e= 1-e_s^T\mathcal A\mathcal A^{-1}e = 1-e_s^Te=1-1=0.
 \]</span></p>
-<p>If also <span class="math inline">\(\sum_{\ell=1}^s\alpha_{j\ell}=\gamma_j\)</span> (which is the case for all RKM that treat the autonomous case <span class="math inline">\(\dot x=f(x)\)</span> like the nonautonomous case <span class="math inline">\(\dot x=f(t,x)\)</span>) and since, for every consistent RKM, one has that <span class="math inline">\(\sum_{j=1}^s\beta_j=1\)</span> (cp. Butcher’s Theorem <a href="numerical-approximation-of-daes.html#thm:v-butcher">5.1</a>), we find that for <em>stiffly accurate</em> RKM, necessarily
+<p>If also <span class="math inline">\(\sum_{\ell=1}^s\alpha_{j\ell}=\gamma_j\)</span> (which is the case for all RKM that treat the autonomous case <span class="math inline">\(\dot x=f(x)\)</span> like the nonautonomous case <span class="math inline">\(\dot x=f(t,x)\)</span>) and since, for every consistent RKM, one has that <span class="math inline">\(\sum_{j=1}^s\beta_j=1\)</span> (cp. Butcher’s Theorem <a href="numerical-approximation-of-daes.html#thm:v-butcher">5.1</a>), we find that for such <em>stiffly accurate</em> RKM, necessarily
 <span class="math display">\[\begin{equation}
 \gamma_s =\sum_{\ell=1}^s\alpha_{s\ell} = \sum_{j=1}^s\beta_j=1.
 \end{equation}\]</span></p>
