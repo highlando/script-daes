@@ -394,7 +394,7 @@ All entries are again matrix functions on $I$ and the last block column in both 
 ```
 
 ```{proof}
-In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form). In what follows, the basic operations of 
+In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:continuous-svd). In what follows, the basic operations of
 
  * condensing blocks by the continuous SVD, e.g. $U_2^HA_{31}V_2=\begin{bmatrix} I_s & 0 \\ 0 & 0 \end{bmatrix}$
  * and eliminating blocks through by adding multiples of columns or rows
