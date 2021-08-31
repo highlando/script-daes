@@ -312,9 +312,9 @@ Secondly, that (having multiplied by $N$ and differentiated once)
 $$
 N\dot x = N^2 \ddot x - N \dot f.
 $$
-And, finally, that (having muliplied $k$-times by $N$ and differentiated $k$-times)
+And, finally, that (having multiplied $k$-times by $N$ and differentiated $k$-times)
 $$
-N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
+N^k x^{(k)} = N^{k+1} x^{(k+1)} - N^k f^{(k)}.
 $$
 <!--
 and that (since $N^\nu=0$)
