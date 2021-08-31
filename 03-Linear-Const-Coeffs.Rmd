@@ -215,7 +215,7 @@ is not identically zero, since $\det Q$ and $\det P$ are not zero and $\det (\la
 
 With that we can derive a *canonical form* for *strongly equivalent* matrix pairs.
 
-```{theorem, label="weierstrass-cf"}
+```{theorem, label="weierstrass-cf", name="Weierstrass canonical form"}
 Let $E$, $A \in \mathbb C^{n,n}$ and $(E,A)$ be regular. Then 
 \begin{equation}
 (E, A) \sim 
