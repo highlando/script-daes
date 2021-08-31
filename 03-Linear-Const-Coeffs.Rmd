@@ -21,7 +21,7 @@ For utmost generality, we consider the case that $m\neq n$, i.e. the number of e
 
 ### Scalings and State Transformations
 
-One can confirm that if $x$ is a solution to \@ref(eq:gen-lin-cc-dae) and $P\in \mathbb R^{n,n}$ is invertible, then $x$ is a solution to
+One can confirm that if $x$ is a solution to \@ref(eq:gen-lin-cc-dae) and $P\in \mathbb R^{m,m}$ is invertible, then $x$ is a solution to
 \begin{equation*}
 PE \dot x (t) = PAx(t) + Pf(t).
 \end{equation*}
@@ -39,7 +39,7 @@ E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
 ```{block, type='JHSAYS'}
 This is a state transformation of the system.
 ```
-Thus, when talking of solvability of \@ref(eq:gen-lin-cc-dae), one may equivalently consider any regular $Q\in \mathbb R^{m,m}$, $P\in \mathbb R^{m,m}$ and the scaled and transformed system
+Thus, when talking of solvability of \@ref(eq:gen-lin-cc-dae), one may equivalently consider any regular $Q\in \mathbb R^{n,n}$, $P\in \mathbb R^{m,m}$ and the scaled and transformed system
 \begin{equation}
 \tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}
