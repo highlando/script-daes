@@ -97,7 +97,7 @@ x_2(t) =  - \dot{f_1}(t) + f_2(t)
 $$
 and also
 $$
-x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+x_1(t) =  t(- \dot{f_1}(t) + f_2(t))+f_1(t).
 $$
 ```
 
@@ -150,7 +150,7 @@ Next we will define *local* equivalence of matrix pairs.
 ```{definition, label="local-equivalence"}
 Two pairs $(E_i,A_i)$, $E_i$, $A_i \in \mathbb C^{m,n}$,
 $i=1,2$, of matrices are called *locally equivalent*, if there exist
-pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ such that as well as matrix $R\in \mathbb C^{n,n}$ such that
+pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ as well as matrix $R\in \mathbb C^{n,n}$ such that
 \begin{equation}
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R (\#eq:iv-loc-equiv-mpairs).
 \end{equation}
@@ -176,7 +176,7 @@ We state a few observations:
 
 ## A Local Canonical Form
 
-For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that the $V$ is the span of the columns of $V$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
+For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that $V$ is the span of the columns of $M$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
 
 Some more notation:
 
@@ -291,7 +291,7 @@ x_3 - x_2 \\ x_2-x_1 \\ x_3
 $$
 one finds for the coefficients of Example \@ref(exm:the-circuit) that:
 $$
-(E, A) \backsim 
+(E, A) \sim
 \left(
 \begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
@@ -394,7 +394,7 @@ All entries are again matrix functions on $I$ and the last block column in both 
 ```
 
 ```{proof}
-In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form). In what follows, the basic operations of 
+In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:continuous-svd). In what follows, the basic operations of
 
  * condensing blocks by the continuous SVD, e.g. $U_2^HA_{31}V_2=\begin{bmatrix} I_s & 0 \\ 0 & 0 \end{bmatrix}$
  * and eliminating blocks through by adding multiples of columns or rows
@@ -621,10 +621,10 @@ and
 $$
 \bar f(t) =
 \begin{bmatrix}
-A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)+\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 $$
-Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
+Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
 The following theorem states that this *differentiation-elimination* step 
