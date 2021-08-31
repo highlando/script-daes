@@ -264,7 +264,7 @@ $$
 
 with $(E,A)$ regular can be transformed and split into
 \begin{equation}
-\dot x_1(t) = x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
+\dot x_1(t) = J x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
 \end{equation}
 and 
 \begin{equation}
