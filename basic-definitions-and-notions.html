@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Basic Definitions and Notions | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Basic Definitions and Notions | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-27" />
+<meta name="date" content="2021-08-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="introduction.html"/>
 <link rel="next" href="III.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -144,11 +144,11 @@
     F(t, x(t), \dot x(t)) = 0
     \tag{2.1}
 \end{equation}\]</span></p>
-<p>with <span class="math inline">\(F\colon \mathbb I \times D_x \times D_{\dot x} \to \mathbb R^m\)</span> and with a time interval <span class="math inline">\(\mathbb I=[t_0,t_e) \subset \mathbb R\)</span> and state spaces <span class="math inline">\(D_x\)</span>, <span class="math inline">\(D_{\dot x} \subset \mathbb R^{n}\)</span> and the task to find a function</p>
+<p>with <span class="math inline">\(F\colon \mathcal I \times D_x \times D_{\dot x} \to \mathbb R^m\)</span> and with a time interval <span class="math inline">\(\mathcal I=[t_0,t_e) \subset \mathbb R\)</span> and state spaces <span class="math inline">\(D_x\)</span>, <span class="math inline">\(D_{\dot x} \subset \mathbb R^{n}\)</span> and the task to find a function</p>
 <p><span class="math display">\[\begin{equation*}
-    x \colon \mathbb I \to \mathbb R^{n}
+    x \colon \mathcal I \to \mathbb R^{n}
 \end{equation*}\]</span></p>
-<p>with time derivative <span class="math inline">\(\dot x \colon \mathbb I \to \mathbb R^{n}\)</span> such that <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> is fulfilled for all <span class="math inline">\(t\in I\)</span>.</p>
+<p>with time derivative <span class="math inline">\(\dot x \colon \mathcal I \to \mathbb R^{n}\)</span> such that <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> is fulfilled for all <span class="math inline">\(t\in \mathcal I\)</span>.</p>
 <p>A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed</p>
 <p><span class="math display" id="eq:gendaeiniv">\[\begin{equation}
     x(t_0) = x_0 \in \mathbb R^{n}. \tag{2.2} 
@@ -165,8 +165,8 @@ The form of <span class="math inline"><span class="math inline">\(F(t, x(t), \do
 <div class="definition">
 <p><span id="def:dae-solution" class="definition"><strong>Definition 2.1  </strong></span><span class="math inline">\(\quad\)</span></p>
 <ol style="list-style-type: decimal">
-<li><p>A function <span class="math inline">\(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\)</span> is called a <em>solution to the DAE</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a>, if <span class="math inline">\(F(t, x(t), \dot x(t)) = 0\)</span> holds for all <span class="math inline">\(t\in \mathbb I\)</span>.</p></li>
-<li><p>A function <span class="math inline">\(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\)</span> is called a <em>solution to the initial value problem</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> and <a href="basic-definitions-and-notions.html#eq:gendaeiniv">(2.2)</a>, if, furthermore, <span class="math inline">\(x(t_0)= x_0\)</span> holds.</p></li>
+<li><p>A function <span class="math inline">\(x \in \mathcal C^1(\mathcal I, \mathbb R^{n})\)</span> is called a <em>solution to the DAE</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a>, if <span class="math inline">\(F(t, x(t), \dot x(t)) = 0\)</span> holds for all <span class="math inline">\(t\in \mathcal I\)</span>.</p></li>
+<li><p>A function <span class="math inline">\(x \in \mathcal C^1(\mathcal I, \mathbb R^{n})\)</span> is called a <em>solution to the initial value problem</em> <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a> and <a href="basic-definitions-and-notions.html#eq:gendaeiniv">(2.2)</a>, if, furthermore, <span class="math inline">\(x(t_0)= x_0\)</span> holds.</p></li>
 <li>An initial condition <a href="basic-definitions-and-notions.html#eq:gendaeiniv">(2.2)</a> is called consistent for the DAE <a href="basic-definitions-and-notions.html#eq:gendae">(2.1)</a>, if there exists at least one solution as defined in 2.</li>
 </ol>
 </div>
@@ -305,6 +305,10 @@ gitbook.start({
 "text": null
 },
 "download": ["DAEs.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

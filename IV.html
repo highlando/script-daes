@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Linear DAEs with Time-varying Coefficients | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
-  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Linear DAEs with Time-varying Coefficients | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-06-27" />
+<meta name="date" content="2021-08-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
   
 <link rel="prev" href="III.html"/>
 <link rel="next" href="numerical-approximation-of-daes.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -233,7 +233,7 @@ x_2(t) =  - \dot{f_1}(t) + f_2(t)
 \]</span>
 and also
 <span class="math display">\[
-x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+x_1(t) =  t(- \dot{f_1}(t) + f_2(t))+f_1(t).
 \]</span>
 </div>
 
@@ -284,7 +284,7 @@ E\dot x(t) = E\frac{d}{dt} (Q\tilde x)(t) = E\bigl(Q(t)\dot {\tilde x}(t) + \dot
 <div class="definition">
 <span id="def:local-equivalence" class="definition"><strong>Definition 4.2  </strong></span>Two pairs <span class="math inline">\((E_i,A_i)\)</span>, <span class="math inline">\(E_i\)</span>, <span class="math inline">\(A_i \in \mathbb C^{m,n}\)</span>,
 <span class="math inline">\(i=1,2\)</span>, of matrices are called <em>locally equivalent</em>, if there exist
-pointwise nonsingular matrices <span class="math inline">\(P \in \mathbb C^{m,m})\)</span> and <span class="math inline">\(Q\in \mathbb C^{n,n}\)</span> such that as well as matrix <span class="math inline">\(R\in \mathbb C^{n,n}\)</span> such that
+pointwise nonsingular matrices <span class="math inline">\(P \in \mathbb C^{m,m})\)</span> and <span class="math inline">\(Q\in \mathbb C^{n,n}\)</span> as well as matrix <span class="math inline">\(R\in \mathbb C^{n,n}\)</span> such that
 <span class="math display" id="eq:iv-loc-equiv-mpairs">\[\begin{equation}
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R \tag{4.4}.
 \end{equation}\]</span>
@@ -312,7 +312,7 @@ P(t_i) = P_i, \quad Q(t_i) = Q_i, \quad \dot Q(t_i) = R_i.
 </ul>
 <div id="a-local-canonical-form" class="section level2">
 <h2><span class="header-section-number">4.1</span> A Local Canonical Form</h2>
-<p>For easier explanations, we introduce the slightly incorrect wording that a <em>matrix</em> <span class="math inline">\(M\)</span> <em>spans</em> a vector space <span class="math inline">\(V\)</span> to express that the <span class="math inline">\(V\)</span> is the span of the columns of <span class="math inline">\(V\)</span>. Similarly, we will say that <span class="math inline">\(M\)</span> <em>is a basis of</em> <span class="math inline">\(V\)</span>, if the columns of <span class="math inline">\(M\)</span> form a basis for <span class="math inline">\(V\)</span>.</p>
+<p>For easier explanations, we introduce the slightly incorrect wording that a <em>matrix</em> <span class="math inline">\(M\)</span> <em>spans</em> a vector space <span class="math inline">\(V\)</span> to express that <span class="math inline">\(V\)</span> is the span of the columns of <span class="math inline">\(M\)</span>. Similarly, we will say that <span class="math inline">\(M\)</span> <em>is a basis of</em> <span class="math inline">\(V\)</span>, if the columns of <span class="math inline">\(M\)</span> form a basis for <span class="math inline">\(V\)</span>.</p>
 <p>Some more notation:</p>
 <table>
 <colgroup>
@@ -478,7 +478,7 @@ x_3 - x_2 \\ x_2-x_1 \\ x_3
 \]</span>
 one finds for the coefficients of Example <a href="introduction.html#exm:the-circuit">1.2</a> that:
 <span class="math display">\[
-(E, A) \backsim 
+(E, A) \sim
 \left(
 \begin{bmatrix} C &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp;0 \\ 0 &amp; 0 &amp;0  \end{bmatrix}
 ,
@@ -649,7 +649,7 @@ I_s &amp;   0   &amp;  0  &amp; 0 \\
 
 
 <div class="proof">
-<p> <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="IV.html#thm:global-canonical-form">4.3</a>. In what follows, the basic operations of</p>
+<p> <span class="proof"><em>Proof. </em></span> In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of <span class="math inline">\(E\)</span>; see Theorem <a href="IV.html#thm:continuous-svd">4.2</a>. In what follows, the basic operations of</p>
 <ul>
 <li>condensing blocks by the continuous SVD, e.g. <span class="math inline">\(U_2^HA_{31}V_2=\begin{bmatrix} I_s &amp; 0 \\ 0 &amp; 0 \end{bmatrix}\)</span></li>
 <li>and eliminating blocks through by adding multiples of columns or rows</li>
@@ -876,10 +876,10 @@ and
 <span class="math display">\[
 \bar f(t) =
 \begin{bmatrix}
-A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)+\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 \]</span>
-Here, we have used the subscript to note that these <span class="math inline">\(d\)</span> and <span class="math inline">\(s\)</span> quantities were characteristic for the initial matrix pair <span class="math inline">\((E, A)\)</span>. Now, after this differentiation step, one can calculate the characteristic values <span class="math inline">\(d_1\)</span>, <span class="math inline">\(a_1\)</span>, <span class="math inline">\(s_1\)</span> again for the pair <span class="math inline">\((E_1, A_1)\)</span> which is obtained from the canonical form of Theorem <a href="IV.html#eq:iv-glob-can-form">(4.9)</a> by replacing equations <a href="IV.html#eq:iv-gcf-spart-1">(4.10)</a>–<a href="IV.html#eq:iv-gcf-dpart">(4.11)</a> by the DAE with <span class="math inline">\((\bar E, \bar A)\)</span> as in <a href="IV.html#eq:iv-gcf-post-diff">(4.13)</a>.
+Here, we have used the subscript to note that these <span class="math inline">\(d\)</span> and <span class="math inline">\(s\)</span> quantities were characteristic for the initial matrix pair <span class="math inline">\((E, A)\)</span>. Now, after this differentiation step, one can calculate the characteristic values <span class="math inline">\(d_1\)</span>, <span class="math inline">\(a_1\)</span>, <span class="math inline">\(s_1\)</span> again for the pair <span class="math inline">\((E_1, A_1)\)</span> which is obtained from the canonical form <a href="IV.html#eq:iv-glob-can-form">(4.9)</a> by replacing equations <a href="IV.html#eq:iv-gcf-spart-1">(4.10)</a>–<a href="IV.html#eq:iv-gcf-dpart">(4.11)</a> by the DAE with <span class="math inline">\((\bar E, \bar A)\)</span> as in <a href="IV.html#eq:iv-gcf-post-diff">(4.13)</a>.
 </div>
 
 <p>The following theorem states that this <em>differentiation-elimination</em> step
@@ -1210,6 +1210,10 @@ gitbook.start({
 "text": null
 },
 "download": ["DAEs.pdf"],
+"search": {
+"engine": "lunr",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

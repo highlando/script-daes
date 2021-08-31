@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Examples | DAEs</title>
+  <title>Page not found | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
   <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Examples | DAEs" />
+  <meta property="og:title" content="Page not found | DAEs" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://www.janheiland.de/script-daes/" />
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="highlando/script-daes" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Examples | DAEs" />
+  <meta name="twitter:title" content="Page not found | DAEs" />
   
   <meta name="twitter:description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"/>
-<link rel="next" href="exercises.html"/>
+
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -137,195 +137,19 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="examples-1" class="section level1">
-<h1><span class="header-section-number">7</span> Examples</h1>
-<div id="semi-discrete-navier-stokes-equations" class="section level2">
-<h2><span class="header-section-number">7.1</span> Semi-discrete Navier-Stokes equations</h2>
-<div id="transformation-to-a-more-handy-form" class="section level3">
-<h3><span class="header-section-number">7.1.1</span> Transformation to a more handy form</h3>
-<p>By scalings and state transforms, we find that the coefficients of the spatially discretized Navier-Stokes equations
-<span class="math display" id="eq:x-lin-sd-ns\tag{7.1}on}(#eq:x-lin-sd-nse)
-(\mathcal E, \mathcal A )= \left(
-\begin{bmatrix} M &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
-,
-\begin{bmatrix} A &amp; B^H \\ B &amp; 0 \end{bmatrix}
-\right )
-\end{equation}\]</span></p>
-<p>are equivalent to a more structured form like:
-<span class="math display">\[\begin{align*}
-\{\lambda \mathcal E - \mathcal A\} &amp;=
-\left\{\lambda 
-\begin{bmatrix} M &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
--
-\begin{bmatrix} A &amp; B^H \\ B &amp; 0 \end{bmatrix}
-\right\} \\
-&amp; \backsim 
-\begin{bmatrix} M^{-1/2} &amp; 0 \\ 0 &amp; I \end{bmatrix}
-\left\{\lambda
-\begin{bmatrix} M &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
--
-\begin{bmatrix} A &amp; B^H \\ B &amp; 0 \end{bmatrix}
-\right\} 
-\begin{bmatrix} M^{-1/2} &amp; 0 \\ 0 &amp; I \end{bmatrix} \\
-&amp; \backsim 
-\begin{bmatrix} Q^H &amp; 0 \\ 0 &amp; I \end{bmatrix}
-\left\{\lambda 
-\begin{bmatrix} I &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
--
-\begin{bmatrix} M^{-1/2}AM^{-1/2} &amp;  M^{-1/2}B^H \\ B M^{-1/2} &amp; 0 \end{bmatrix}
-\right\}
-\begin{bmatrix} Q &amp; 0 \\ 0 &amp; I \end{bmatrix} \\
-&amp; \backsim 
-\begin{bmatrix} I &amp; 0 \\ 0 &amp; R^{-H} \end{bmatrix}
-\left\{ \lambda
-\begin{bmatrix} I &amp; 0 \\ 0 &amp; 0 \end{bmatrix}
--
-\begin{bmatrix} M^{-1/2}AM^{-1/2} &amp;  \begin{bmatrix} R \\ 0 \end{bmatrix} \\ \begin{bmatrix}R^H &amp; 0\end{bmatrix} &amp; 0 \end{bmatrix}
-\right \}
-  \begin{bmatrix} I &amp; 0 \\ 0 &amp; R^{-1} \end{bmatrix} \\
-&amp; \quad =
-\left\{\lambda
-\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}
--
-\begin{bmatrix} A_{11} &amp; A_{12} &amp; I_{n_1} \\ A_{21} &amp; A_{22} &amp; 0 \\ I_{n_1} &amp; 0 &amp; 0\end{bmatrix}
-\right\}.
-\end{align*}\]</span>
-where we have used a <em>QR</em>-decomposition: <span class="math display">\[M^{-1/2}B^H=Q\begin{bmatrix}R \\ 0\end{bmatrix}\]</span> with unitary <span class="math inline">\(Q\)</span> and invertible <span class="math inline">\(R\)</span> in the third step.</p>
-</div>
-<div id="x-nse-local-char-vals" class="section level3">
-<h3><span class="header-section-number">7.1.2</span> Local Characteristic Values</h3>
-<p>Next we derive the local characteristic as in Theorem <a href="IV.html#thm:local-canonical-form">4.1</a>.</p>
-<p>We compute the subspaces as defined in <a href="IV.html#eq:lcf-subspaces">(4.5)</a>:</p>
-<table>
-<colgroup>
-<col width="30%" />
-<col width="69%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Matrix</th>
-<th align="left">as the basis of/computed as</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><span class="math inline">\(T=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{kernel}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(Z=\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left"><span class="math inline">\(T&#39;=\begin{bmatrix} I_{n_1} &amp; 0 \\ 0 &amp; I_{n_2} \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{cokernel}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(Z^HAT=0_{n_1}\)</span></td>
-<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} &amp; A_{12} &amp; I_{n_1} \\ A_{21} &amp; A_{22} &amp; 0 \\ I_{n_1} &amp; 0 &amp; 0\end{bmatrix}\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left"><span class="math inline">\(V=I_{n_1}\)</span></td>
-<td align="left"><span class="math inline">\(\operatorname{corange}(Z^HAT) = \operatorname{kernel}0_{n_1}^H\phantom{\begin{bmatrix} 0 \\ I_1 \end{bmatrix}}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left"><span class="math inline">\(Z^HAT&#39;=\begin{bmatrix} I_{n_1} &amp; 0_{n_1\times n_2}\end{bmatrix}\)</span></td>
-<td align="left"><span class="math inline">\(\begin{bmatrix} 0 \\ 0 \\I_{n_1} \end{bmatrix}^H\begin{bmatrix} A_{11} &amp; A_{12} &amp; I_{n_1} \\ A_{21} &amp; A_{22} &amp; 0 \\ I_{n_1} &amp; 0 &amp; 0\end{bmatrix}\begin{bmatrix} I_{n_1} &amp; 0 \\ 0 &amp; I_{n_2} \\ 0 &amp; 0 \end{bmatrix}\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>and derive the quantities as defined in <a href="IV.html#eq:lcf-quantities">(4.6)</a>:</p>
-<table>
-<colgroup>
-<col width="33%" />
-<col width="13%" />
-<col width="52%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Name</th>
-<th align="left">Value</th>
-<th>Derived from</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">rank</td>
-<td align="left"><span class="math inline">\(r=n_1+n_2\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}E = \operatorname{rank}\begin{bmatrix} I_{n_1} &amp; 0 &amp; 0 \\ 0 &amp; I_{n_2} &amp; 0 \\ 0 &amp; 0 &amp; 0\end{bmatrix}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left">algebraic part</td>
-<td align="left"><span class="math inline">\(a=0\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}Z^HAT = \operatorname{rank}0_{n_1}\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left">strangeness</td>
-<td align="left"><span class="math inline">\(s=n_1\)</span></td>
-<td><span class="math inline">\(\operatorname{rank}V^HZ^HAT&#39; = \operatorname{rank}\begin{bmatrix} I_{n_1} &amp; 0_{n_1\times n_2}\end{bmatrix}\)</span></td>
-</tr>
-<tr class="even">
-<td align="left">differential part</td>
-<td align="left"><span class="math inline">\(d=n_2\)</span></td>
-<td><span class="math inline">\(d=r-s=(n_1 + n_2) - n_1\)</span></td>
-</tr>
-<tr class="odd">
-<td align="left">undetermined variables</td>
-<td align="left"><span class="math inline">\(u=n_1\)</span></td>
-<td><span class="math inline">\(u=n-r-a=(n_1+n_2+n_1)-(n_1+n_2)-0\)</span></td>
-</tr>
-<tr class="even">
-<td align="left">vanishing equations</td>
-<td align="left"><span class="math inline">\(v=0\)</span></td>
-<td><span class="math inline">\(v=m-r-a-s=(n_1+n_2+n_1)-(n_1+n_2)-n_1\)</span></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="nse-da-cf" class="section level3">
-<h3><span class="header-section-number">7.1.3</span> Derivative Array and the Condensed Form</h3>
-<p>Since the differentiation index of <a href="#eq:x-lin-sd-nse">(7.1)</a> is <span class="math inline">\(\nu=1\)</span>, we anticipate for the strangeness index that <span class="math inline">\(\mu=1\)</span> and consider the derivative array of order <span class="math inline">\(\ell =1\)</span>:</p>
-<p><span class="math display">\[\begin{equation}
-\left ( \mathcal M_1 , \mathcal N_1 \right )
-=
-\left (
-\begin{bmatrix} 
-M &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; 0 &amp; 0\\
-A &amp; B^H &amp; M &amp; 0\\
-B &amp; 0 &amp; 0 &amp; 0
-\end{bmatrix}
-,
-\begin{bmatrix} 
-A &amp; B^H&amp; 0 &amp; 0\\
-B &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; 0 &amp; 0\\
-0 &amp; 0 &amp; 0 &amp; 0
-\end{bmatrix}
-\right )
-,
-\quad
-g_1 =
-\begin{bmatrix}
-f_1 \\ f_2 \\ \dot f_1 \\ \dot f_2
-\end{bmatrix}.
-\end{equation}\]</span></p>
-
-<!--
-\newcommand{\ker}{\operatorname{ker}}
-\newcommand{\det}{\operatorname{det}}
--->
-
-</div>
-</div>
+<div id="page-not-found" class="section level1">
+<h1>Page not found</h1>
+<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
+<p>You may want to try searching to find the page's new location, or use
+the table of contents to find the page you are looking for.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="exercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

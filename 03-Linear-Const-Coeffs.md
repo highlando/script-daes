@@ -10,7 +10,7 @@ Consider the DAE in the form
 \begin{equation}
 E \dot x (t) = Ax(t) + f(t), (\#eq:gen-lin-cc-dae)
 \end{equation}
-where $E$, $A\in \mathbb R^{m,n}$ and $f\in \mathcal C(\mathbb I, \mathbb R^m)$ with, possibly, an initial condition
+where $E$, $A\in \mathbb R^{m,n}$ and $f\in \mathcal C(\mathcal I, \mathbb R^m)$ with, possibly, an initial condition
 \begin{equation}
 x(t_0) = x_0 \in \mathbb R^{n}. (\#eq:gen-lin-cc-dae-inic)
 \end{equation}
@@ -21,7 +21,7 @@ x(t_0) = x_0 \in \mathbb R^{n}. (\#eq:gen-lin-cc-dae-inic)
 
 ### Scalings and State Transformations
 
-One can confirm that if $x$ is a solution to \@ref(eq:gen-lin-cc-dae) and $P\in \mathbb R^{n,n}$ is invertible, then $x$ is a solution to
+One can confirm that if $x$ is a solution to \@ref(eq:gen-lin-cc-dae) and $P\in \mathbb R^{m,m}$ is invertible, then $x$ is a solution to
 \begin{equation*}
 PE \dot x (t) = PAx(t) + Pf(t).
 \end{equation*}
@@ -39,7 +39,7 @@ E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
 <div class="JHSAYS">
 <p>This is a state transformation of the system.</p>
 </div>
-Thus, when talking of solvability of \@ref(eq:gen-lin-cc-dae), one may equivalently consider any regular $Q\in \mathbb R^{m,m}$, $P\in \mathbb R^{m,m}$ and the scaled and transformed system
+Thus, when talking of solvability of \@ref(eq:gen-lin-cc-dae), one may equivalently consider any regular $Q\in \mathbb R^{n,n}$, $P\in \mathbb R^{m,m}$ and the scaled and transformed system
 \begin{equation}
 \tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}
@@ -199,7 +199,7 @@ is not identically zero, since $\det Q$ and $\det P$ are not zero and $\det (\la
 
 With that we can derive a *canonical form* for *strongly equivalent* matrix pairs.
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:weierstrass-cf"><strong>(\#thm:weierstrass-cf) </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ and $(E,A)$ be regular. Then 
+\BeginKnitrBlock{theorem}\iffalse{-91-87-101-105-101-114-115-116-114-97-115-115-32-99-97-110-111-110-105-99-97-108-32-102-111-114-109-93-}\fi{}<div class="theorem"><span class="theorem" id="thm:weierstrass-cf"><strong>(\#thm:weierstrass-cf)  \iffalse (Weierstrass canonical form) \fi{} </strong></span>Let $E$, $A \in \mathbb C^{n,n}$ and $(E,A)$ be regular. Then 
 \begin{equation}
 (E, A) \sim 
 \left (
@@ -242,7 +242,7 @@ $$
 
 with $(E,A)$ regular can be transformed and split into
 \begin{equation}
-\dot x_1(t) = x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
+\dot x_1(t) = J x_1(t) + f_1(t) (\#eq:reg-dae-wcf-diffpart)
 \end{equation}
 and 
 \begin{equation}
@@ -287,9 +287,9 @@ Secondly, that (having multiplied by $N$ and differentiated once)
 $$
 N\dot x = N^2 \ddot x - N \dot f.
 $$
-And, finally, that (having muliplied $k$-times by $N$ and differentiated $k$-times)
+And, finally, that (having multiplied $k$-times by $N$ and differentiated $k$-times)
 $$
-N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
+N^k x^{(k)} = N^{k+1} x^{(k+1)} - N^k f^{(k)}.
 $$
 <!--
 and that (since $N^\nu=0$)
@@ -576,7 +576,7 @@ The second part reads
 \dot x_3 &= f_2 \\
 -x_3 &= f_3
 \end{align*}
-which does **not** permit a solution, if ${\dot{f}}_3 \neq f_2$.
+which does **not** permit a solution, if ${-\dot{f}}_3 \neq f_2$.
 
 
 <div class="JHSAYS">
@@ -744,9 +744,9 @@ and, in particular
 </div>\EndKnitrBlock{theorem}
 
 \BeginKnitrBlock{proof}<div class="proof">\iffalse{} <span class="proof"><em>Proof. </em></span>  \fi{}
-1. Show that such a decomposition with the properties \@ref(eq:tctn-tntc-zero)-\@ref(eq:tc-index-1) also fulfills \@ref(eq:def-tc-tn), i.e. existence.
+1. Show that such a decomposition with the properties \@ref(eq:tctn-tntc-zero)-\@ref(eq:tc-index-1) also fulfills \@ref(eq:def-tc-tn), i.e. uniqueness.
 
-2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. uniqueness.
+2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. existence.
 </div>\EndKnitrBlock{proof}
 
 Now we can define, how the general DAE can be split *additively* into an *almost* ODE and a particular nilpotent DAE.

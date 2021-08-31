@@ -7,13 +7,13 @@ In a very general form, a DAE can be written as
    	(\#eq:gendae)
 \end{equation}
 
-with $F\colon \mathbb I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time interval $\mathbb I=[t_0,t_e) \subset \mathbb R$ and state spaces $D_x$, $D_{\dot x} \subset \mathbb R^{n}$ and the task to find a function 
+with $F\colon \mathcal I \times D_x \times D_{\dot x} \to \mathbb R^m$ and with a time interval $\mathcal I=[t_0,t_e) \subset \mathbb R$ and state spaces $D_x$, $D_{\dot x} \subset \mathbb R^{n}$ and the task to find a function 
 
 \begin{equation*}
-    x \colon \mathbb I \to \mathbb R^{n}
+    x \colon \mathcal I \to \mathbb R^{n}
 \end{equation*}
 
-with time derivative $\dot x \colon \mathbb I \to \mathbb R^{n}$ such that \@ref(eq:gendae) is fulfilled for all $t\in I$.
+with time derivative $\dot x \colon \mathcal I \to \mathbb R^{n}$ such that \@ref(eq:gendae) is fulfilled for all $t\in \mathcal I$.
 
 A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed 
 
@@ -32,9 +32,9 @@ In order to talk of solutions, we need to define what we understand as a solutio
 
 \BeginKnitrBlock{definition}<div class="definition"><span class="definition" id="def:dae-solution"><strong>(\#def:dae-solution) </strong></span>$\quad$
 
- 1. A function $x \in \mathcal C^1(\mathbb I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in \mathbb I$.
+ 1. A function $x \in \mathcal C^1(\mathcal I, \mathbb R^{n})$ is called a *solution to the DAE* \@ref(eq:gendae), if $F(t, x(t), \dot x(t)) = 0$ holds for all $t\in \mathcal I$.
 
- 2. A function $x \in \mathcal C^1(\mathbb I, \mathbb R^{n})$ is called a *solution to the initial value problem* \@ref(eq:gendae) and \@ref(eq:gendaeiniv), if, furthermore,  $x(t_0)= x_0$ holds.
+ 2. A function $x \in \mathcal C^1(\mathcal I, \mathbb R^{n})$ is called a *solution to the initial value problem* \@ref(eq:gendae) and \@ref(eq:gendaeiniv), if, furthermore,  $x(t_0)= x_0$ holds.
 
  3. An initial condition \@ref(eq:gendaeiniv) is called consistent for the DAE \@ref(eq:gendae), if there exists at least one solution as defined in 2.
 </div>\EndKnitrBlock{definition}

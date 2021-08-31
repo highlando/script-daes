@@ -82,7 +82,7 @@ one obtains a system of equations:
 | Generalized coordinate | Equation |
 |:-----------------------|---------:|
 |$q \leftarrow x$ | $m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0$ |
-|$q \leftarrow y$ | $m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0$ |
+|$q \leftarrow y$ | $m\ddot y(t) - mg + 2 \lambda(t) (y(t) - c_y) = 0$ |
 |$q \leftarrow \lambda$ | $(x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0$ |
 
 \BeginKnitrBlock{example}\iffalse{-91-84-104-101-32-80-101-110-100-117-108-117-109-93-}\fi{}<div class="example"><span class="example" id="exm:the-pendulum"><strong>(\#exm:the-pendulum)  \iffalse (The Pendulum) \fi{} </strong></span>
@@ -93,7 +93,7 @@ After an order reduction via the new variables $u:=\dot x$ and $v=\dot y$ the ov
 \dot x &= u \\
 \dot y &= v \\
 m \dot u &= - 2 \lambda (x - c_x) \\ 
-m \dot v &= - 2 \lambda (y - c_y) - mgy \\
+m \dot v &= - 2 \lambda (y - c_y) + mg \\
 0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 (\#eq:pendulum)

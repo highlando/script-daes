@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-06-27}
+\date{2021-08-31}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -218,7 +218,7 @@ Generalized coordinate & Equation\tabularnewline
 \midrule
 \endhead
 \(q \leftarrow x\) & \(m\ddot x(t) + 2 \lambda(t) (x(t) - c_x) = 0\)\tabularnewline
-\(q \leftarrow y\) & \(m\ddot y(t) + mgy + 2 \lambda(t) (y(t) - c_y) = 0\)\tabularnewline
+\(q \leftarrow y\) & \(m\ddot y(t) - mg + 2 \lambda(t) (y(t) - c_y) = 0\)\tabularnewline
 \(q \leftarrow \lambda\) & \((x(t) - c_x)^2 + (y(t) - c_y)^2 - l^2 =0\)\tabularnewline
 \bottomrule
 \end{longtable}
@@ -232,7 +232,7 @@ After an order reduction via the new variables \(u:=\dot x\) and \(v=\dot y\) th
 \dot x &= u \\
 \dot y &= v \\
 m \dot u &= - 2 \lambda (x - c_x) \\ 
-m \dot v &= - 2 \lambda (y - c_y) - mgy \\
+m \dot v &= - 2 \lambda (y - c_y) + mg \\
 0&=(x - c_x)^2 + (y - c_y)^2 - l^2, 
 \end{split}
 \label{eq:pendulum}
@@ -415,13 +415,13 @@ In a very general form, a DAE can be written as
     \label{eq:gendae}
 \end{equation}
 
-with \(F\colon \mathbb I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with a time interval \(\mathbb I=[t_0,t_e) \subset \mathbb R\) and state spaces \(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a function
+with \(F\colon \mathcal I \times D_x \times D_{\dot x} \to \mathbb R^m\) and with a time interval \(\mathcal I=[t_0,t_e) \subset \mathbb R\) and state spaces \(D_x\), \(D_{\dot x} \subset \mathbb R^{n}\) and the task to find a function
 
 \begin{equation*}
-    x \colon \mathbb I \to \mathbb R^{n}
+    x \colon \mathcal I \to \mathbb R^{n}
 \end{equation*}
 
-with time derivative \(\dot x \colon \mathbb I \to \mathbb R^{n}\) such that \eqref{eq:gendae} is fulfilled for all \(t\in I\).
+with time derivative \(\dot x \colon \mathcal I \to \mathbb R^{n}\) such that \eqref{eq:gendae} is fulfilled for all \(t\in \mathcal I\).
 
 A dynamical process that evolves in time needs an initial state. Thus, one can expect a unique solution to the DAEs only if an initial value is prescribed
 
@@ -447,9 +447,9 @@ In order to talk of solutions, we need to define what we understand as a solutio
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \item
-  A function \(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in \mathbb I\).
+  A function \(x \in \mathcal C^1(\mathcal I, \mathbb R^{n})\) is called a \emph{solution to the DAE} \eqref{eq:gendae}, if \(F(t, x(t), \dot x(t)) = 0\) holds for all \(t\in \mathcal I\).
 \item
-  A function \(x \in \mathcal C^1(\mathbb I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
+  A function \(x \in \mathcal C^1(\mathcal I, \mathbb R^{n})\) is called a \emph{solution to the initial value problem} \eqref{eq:gendae} and \eqref{eq:gendaeiniv}, if, furthermore, \(x(t_0)= x_0\) holds.
 \item
   An initial condition \eqref{eq:gendaeiniv} is called consistent for the DAE \eqref{eq:gendae}, if there exists at least one solution as defined in 2.
 \end{enumerate}
@@ -575,7 +575,7 @@ Consider the DAE in the form
 \begin{equation}
 E \dot x (t) = Ax(t) + f(t), \label{eq:gen-lin-cc-dae}
 \end{equation}
-where \(E\), \(A\in \mathbb R^{m,n}\) and \(f\in \mathcal C(\mathbb I, \mathbb R^m)\) with, possibly, an initial condition
+where \(E\), \(A\in \mathbb R^{m,n}\) and \(f\in \mathcal C(\mathcal I, \mathbb R^m)\) with, possibly, an initial condition
 \begin{equation}
 x(t_0) = x_0 \in \mathbb R^{n}. \label{eq:gen-lin-cc-dae-inic}
 \end{equation}
@@ -589,7 +589,7 @@ turn to the square case of \(m=n\) soon.
 \hypertarget{scalings-and-state-transformations}{%
 \subsection{Scalings and State Transformations}\label{scalings-and-state-transformations}}
 
-One can confirm that if \(x\) is a solution to \eqref{eq:gen-lin-cc-dae} and \(P\in \mathbb R^{n,n}\) is invertible, then \(x\) is a solution to
+One can confirm that if \(x\) is a solution to \eqref{eq:gen-lin-cc-dae} and \(P\in \mathbb R^{m,m}\) is invertible, then \(x\) is a solution to
 \begin{equation*}
 PE \dot x (t) = PAx(t) + Pf(t).
 \end{equation*}
@@ -608,7 +608,7 @@ E Q \dot {\tilde x} (t) = AQ \tilde x(t) + f(t).
 This is a state transformation of the system.
 \end{JHSAYS}
 
-Thus, when talking of solvability of \eqref{eq:gen-lin-cc-dae}, one may equivalently consider any regular \(Q\in \mathbb R^{m,m}\), \(P\in \mathbb R^{m,m}\) and the scaled and transformed system
+Thus, when talking of solvability of \eqref{eq:gen-lin-cc-dae}, one may equivalently consider any regular \(Q\in \mathbb R^{n,n}\), \(P\in \mathbb R^{m,m}\) and the scaled and transformed system
 \begin{equation}
 \tilde E \dot{\tilde x}(t) = \tilde A \tilde x (t) + \tilde f(t), \quad \tilde x(0) = Q^{-1}x_0,
 \end{equation}
@@ -807,8 +807,8 @@ is not identically zero, since \(\det Q\) and \(\det P\) are not zero and \(\det
 
 With that we can derive a \emph{canonical form} for \emph{strongly equivalent} matrix pairs.
 
-\begin{theorem}
-\protect\hypertarget{thm:weierstrass-cf}{}{\label{thm:weierstrass-cf} }Let \(E\), \(A \in \mathbb C^{n,n}\) and \((E,A)\) be regular. Then
+\begin{theorem}[Weierstrass canonical form]
+\protect\hypertarget{thm:weierstrass-cf}{}{\label{thm:weierstrass-cf} \iffalse (Weierstrass canonical form) \fi{} }Let \(E\), \(A \in \mathbb C^{n,n}\) and \((E,A)\) be regular. Then
 \begin{equation}
 (E, A) \sim 
 \left (
@@ -863,7 +863,7 @@ E\dot x(t) =  A x(t) + f(t)
 
 with \((E,A)\) regular can be transformed and split into
 \begin{equation}
-\dot x_1(t) = x_1(t) + f_1(t) \label{eq:reg-dae-wcf-diffpart}
+\dot x_1(t) = J x_1(t) + f_1(t) \label{eq:reg-dae-wcf-diffpart}
 \end{equation}
 and
 \begin{equation}
@@ -921,9 +921,9 @@ Secondly, that (having multiplied by \(N\) and differentiated once)
 \[
 N\dot x = N^2 \ddot x - N \dot f.
 \]
-And, finally, that (having muliplied \(k\)-times by \(N\) and differentiated \(k\)-times)
+And, finally, that (having multiplied \(k\)-times by \(N\) and differentiated \(k\)-times)
 \[
-N^k\dot x^{(k)} = N^{k+1} \dot x^{(k+1)} - N^k \dot f^{(k)}.
+N^k x^{(k)} = N^{k+1} x^{(k+1)} - N^k f^{(k)}.
 \]
 If one successively replaces \(N^kx^{(k)}=N^{k+1}x^{(k+1)}-N^kf^{(k)}\), \(k=1,2,...,\nu-1\) in
 \[
@@ -1278,7 +1278,7 @@ The second part reads
 \dot x_3 &= f_2 \\
 -x_3 &= f_3
 \end{align*}
-which does \textbf{not} permit a solution, if \({\dot{f}}_3 \neq f_2\).
+which does \textbf{not} permit a solution, if \({-\dot{f}}_3 \neq f_2\).
 
 \begin{JHSAYS}
 \textbf{X}: find such a \(g\) for the first part.
@@ -1484,14 +1484,14 @@ and, in particular
 
 \begin{proof}
 \iffalse{} {Proof. } \fi{}
-1. Show that such a decomposition with the properties \eqref{eq:tctn-tntc-zero}-\eqref{eq:tc-index-1} also fulfills \eqref{eq:def-tc-tn}, i.e.~existence.
+1. Show that such a decomposition with the properties \eqref{eq:tctn-tntc-zero}-\eqref{eq:tc-index-1} also fulfills \eqref{eq:def-tc-tn}, i.e.~uniqueness.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
 \tightlist
 \item
-  Show that \(\tilde C\), \(\tilde N\) as in \eqref{eq:def-tc-tn} are such a decomposition, i.e.~uniqueness.
+  Show that \(\tilde C\), \(\tilde N\) as in \eqref{eq:def-tc-tn} are such a decomposition, i.e.~existence.
 \end{enumerate}
 \end{proof}
 
@@ -1701,7 +1701,7 @@ x_2(t) =  - \dot{f_1}(t) + f_2(t)
 \]
 and also
 \[
-x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+x_1(t) =  t(- \dot{f_1}(t) + f_2(t))+f_1(t).
 \]
 \end{example}
 
@@ -1754,7 +1754,7 @@ Next we will define \emph{local} equivalence of matrix pairs.
 \begin{definition}
 \protect\hypertarget{def:local-equivalence}{}{\label{def:local-equivalence} }Two pairs \((E_i,A_i)\), \(E_i\), \(A_i \in \mathbb C^{m,n}\),
 \(i=1,2\), of matrices are called \emph{locally equivalent}, if there exist
-pointwise nonsingular matrices \(P \in \mathbb C^{m,m})\) and \(Q\in \mathbb C^{n,n}\) such that as well as matrix \(R\in \mathbb C^{n,n}\) such that
+pointwise nonsingular matrices \(P \in \mathbb C^{m,m})\) and \(Q\in \mathbb C^{n,n}\) as well as matrix \(R\in \mathbb C^{n,n}\) such that
 \begin{equation}
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R \label{eq:iv-loc-equiv-mpairs}.
 \end{equation}
@@ -1787,7 +1787,7 @@ We state a few observations:
 \hypertarget{a-local-canonical-form}{%
 \section{A Local Canonical Form}\label{a-local-canonical-form}}
 
-For easier explanations, we introduce the slightly incorrect wording that a \emph{matrix} \(M\) \emph{spans} a vector space \(V\) to express that the \(V\) is the span of the columns of \(V\). Similarly, we will say that \(M\) \emph{is a basis of} \(V\), if the columns of \(M\) form a basis for \(V\).
+For easier explanations, we introduce the slightly incorrect wording that a \emph{matrix} \(M\) \emph{spans} a vector space \(V\) to express that \(V\) is the span of the columns of \(M\). Similarly, we will say that \(M\) \emph{is a basis of} \(V\), if the columns of \(M\) form a basis for \(V\).
 
 Some more notation:
 
@@ -1931,7 +1931,7 @@ x_3 - x_2 \\ x_2-x_1 \\ x_3
 \]
 one finds for the coefficients of Example \ref{exm:the-circuit} that:
 \[
-(E, A) \backsim 
+(E, A) \sim
 \left(
 \begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
@@ -2133,7 +2133,7 @@ All entries are again matrix functions on \(I\) and the last block column in bot
 \end{theorem}
 
 \begin{proof}
-\iffalse{} {Proof. } \fi{}In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of \(E\); see Theorem \ref{thm:global-canonical-form}. In what follows, the basic operations of
+\iffalse{} {Proof. } \fi{}In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of \(E\); see Theorem \ref{thm:continuous-svd}. In what follows, the basic operations of
 
 \begin{itemize}
 \tightlist
@@ -2371,10 +2371,10 @@ and
 \[
 \bar f(t) =
 \begin{bmatrix}
-A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)+\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 \]
-Here, we have used the subscript to note that these \(d\) and \(s\) quantities were characteristic for the initial matrix pair \((E, A)\). Now, after this differentiation step, one can calculate the characteristic values \(d_1\), \(a_1\), \(s_1\) again for the pair \((E_1, A_1)\) which is obtained from the canonical form of Theorem \eqref{eq:iv-glob-can-form} by replacing equations \eqref{eq:iv-gcf-spart-1}--\eqref{eq:iv-gcf-dpart} by the DAE with \((\bar E, \bar A)\) as in \eqref{eq:iv-gcf-post-diff}.
+Here, we have used the subscript to note that these \(d\) and \(s\) quantities were characteristic for the initial matrix pair \((E, A)\). Now, after this differentiation step, one can calculate the characteristic values \(d_1\), \(a_1\), \(s_1\) again for the pair \((E_1, A_1)\) which is obtained from the canonical form \eqref{eq:iv-glob-can-form} by replacing equations \eqref{eq:iv-gcf-spart-1}--\eqref{eq:iv-gcf-dpart} by the DAE with \((\bar E, \bar A)\) as in \eqref{eq:iv-gcf-post-diff}.
 \end{corollary}
 
 The following theorem states that this \emph{differentiation-elimination} step
