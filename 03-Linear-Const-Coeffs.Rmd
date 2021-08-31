@@ -795,9 +795,9 @@ and, in particular
 
 ```{proof}
 
-1. Show that such a decomposition with the properties \@ref(eq:tctn-tntc-zero)-\@ref(eq:tc-index-1) also fulfills \@ref(eq:def-tc-tn), i.e. existence.
+1. Show that such a decomposition with the properties \@ref(eq:tctn-tntc-zero)-\@ref(eq:tc-index-1) also fulfills \@ref(eq:def-tc-tn), i.e. uniqueness.
 
-2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. uniqueness.
+2. Show that $\tilde C$, $\tilde N$ as in \@ref(eq:def-tc-tn) are such a decomposition, i.e. existence.
 
 ```
 
