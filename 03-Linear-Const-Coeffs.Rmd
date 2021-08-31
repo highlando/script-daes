@@ -616,7 +616,7 @@ The second part reads
 \dot x_3 &= f_2 \\
 -x_3 &= f_3
 \end{align*}
-which does **not** permit a solution, if ${\dot{f}}_3 \neq f_2$.
+which does **not** permit a solution, if ${-\dot{f}}_3 \neq f_2$.
 
 
 ```{block, type='JHSAYS'}
