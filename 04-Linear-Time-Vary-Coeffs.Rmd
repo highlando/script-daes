@@ -150,7 +150,7 @@ Next we will define *local* equivalence of matrix pairs.
 ```{definition, label="local-equivalence"}
 Two pairs $(E_i,A_i)$, $E_i$, $A_i \in \mathbb C^{m,n}$,
 $i=1,2$, of matrices are called *locally equivalent*, if there exist
-pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ such that as well as matrix $R\in \mathbb C^{n,n}$ such that
+pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ as well as matrix $R\in \mathbb C^{n,n}$ such that
 \begin{equation}
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R (\#eq:iv-loc-equiv-mpairs).
 \end{equation}
@@ -176,7 +176,7 @@ We state a few observations:
 
 ## A Local Canonical Form
 
-For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that the $V$ is the span of the columns of $V$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
+For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that $V$ is the span of the columns of $M$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
 
 Some more notation:
 
@@ -291,7 +291,7 @@ x_3 - x_2 \\ x_2-x_1 \\ x_3
 $$
 one finds for the coefficients of Example \@ref(exm:the-circuit) that:
 $$
-(E, A) \backsim 
+(E, A) \sim
 \left(
 \begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
