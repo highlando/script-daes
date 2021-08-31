@@ -621,10 +621,10 @@ and
 $$
 \bar f(t) =
 \begin{bmatrix}
-A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)+\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 $$
-Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
+Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
 The following theorem states that this *differentiation-elimination* step 
