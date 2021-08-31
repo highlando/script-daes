@@ -10,7 +10,7 @@ Consider the DAE in the form
 \begin{equation}
 E \dot x (t) = Ax(t) + f(t), (\#eq:gen-lin-cc-dae)
 \end{equation}
-where $E$, $A\in \mathbb R^{m,n}$ and $f\in \mathcal C(\mathbb I, \mathbb R^m)$ with, possibly, an initial condition
+where $E$, $A\in \mathbb R^{m,n}$ and $f\in \mathcal C(\mathcal I, \mathbb R^m)$ with, possibly, an initial condition
 \begin{equation}
 x(t_0) = x_0 \in \mathbb R^{n}. (\#eq:gen-lin-cc-dae-inic)
 \end{equation}
