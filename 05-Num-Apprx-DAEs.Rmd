@@ -331,7 +331,8 @@ A shift of indices, $\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)$ and $\sum_{k\geq 
 	\tau_1 &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \Bigg].
 \end{align*}
 
-and a comparison of the coefficients for the same orders of $h$ and diffentials of $f$ leads to the conditions. Note the ranges of the sums that depend on $j=1, \dotsc, \nu$.
+and a comparison of the coefficients for the same orders of $h$ and derivatives of $f$ leads to the conditions.
+Note the ranges of the sums that depend on $j=1, \dots, \nu$.
 
 ```
 
