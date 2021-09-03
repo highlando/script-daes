@@ -219,7 +219,7 @@ By the previous considerations, the following assumptions are well justified -- 
 
  * $(E,A)$ is regular $\leftarrow$ the theory needs a unique solution
  * $(E,A)$ is in Kronecker Canonical Form $\leftarrow$ RKM are invariant under equivalence transformation
- * $(E,A)=(N,I)$ $\leftarrow$ the *regular part* can be treated by ODE theory
+ * $(E,A)=(I,J)$ $\leftarrow$ the *regular part* can be treated by ODE theory
  * $E=N=N_\nu$ consists of a single Jordan block $\leftarrow$ otherwise consider each Jordan block separately.
 
 Thus, we will consider the special DAE 
