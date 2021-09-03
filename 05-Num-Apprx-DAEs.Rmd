@@ -63,7 +63,7 @@ $$
 where the *stage derivatives* $\dot X_{ij}$ are connected with the *stage values* $X_{ij}$ via the following possibly nonlinear (depending on the problem: $\dot x(t) = f(t,x(t))$) and possibly implicit (depending on the method) system of equations
 \begin{align}
 \dot X_{ij} &= f(t_i+\gamma_jh, X_{ij}), \\
-X_{ij} &= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+X_{ij} &= x_i + h \sum_{\ell=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 \end{align}
 
 The matrix $\mathcal A$ and the vectors $\beta$ and $\gamma$ of parameters are conveniently written into the so-called *Butcher-tableau*
