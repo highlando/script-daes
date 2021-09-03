@@ -782,14 +782,14 @@ M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
 \end{equation}
 where
 $$
-(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=0,\dotsc,\ell,
 $$
 
 where
 $$
 (N_\ell)_{i,j} = 
 \begin{cases}
-A^{(i)}, \quad &\text{for } i=1,\dotsc, \ell, \, j=0 \\
+A^{(i)}, \quad &\text{for } i=0,\dotsc, \ell, \, j=0 \\
 0, \quad & \text{else}
 \end{cases},
 $$
