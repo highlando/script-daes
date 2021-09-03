@@ -28,7 +28,10 @@ Generally, the approximants $x_i$ are computed iteratively by a numerical scheme
 $$
 x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). (\#eq:v-one-step-scheme)
 $$
-If $x_{i+1}$ appears in the definition of the function $\phi$, then the scheme is called *implicit*. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like $x_{i-1}$, $x_{i-2}$, ..., $x_{i-k}$ with $k\geq 0$, then the scheme is called a *multi-step scheme*. Otherwise, it is called a *single-step scheme*.
+If $x_{i+1}$ appears in the definition of the function $\phi$, then the scheme is called *implicit*.
+Otherwise, it is called an explicit scheme.
+If the scheme bases on previous iterates like $x_{i-1}$, $x_{i-2}$, ..., $x_{i-k}$ with $k\geq 1$, then the scheme is called a *multi-step scheme*.
+Otherwise, it is called a *single-step scheme*.
 
 Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
 $$
