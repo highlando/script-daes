@@ -754,7 +754,7 @@ $$
 \begin{bmatrix}
 E & 0 & 0\\
 \dot E - A & E &0  \\
-\ddot E - 2A & 2\dot E -A &E 
+\ddot E - 2\dot A & 2\dot E -A &E
 \end{bmatrix}
 \frac{d}{dt}
 \begin{bmatrix}
