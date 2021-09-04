@@ -177,7 +177,7 @@ $$
 \begin{bmatrix}
 \dot X_{i1} \\ \vdots \\ \dot X_{is}
 \end{bmatrix}, \quad
-\dot Z_i = 
+Z_i =
 \begin{bmatrix}
 Ax_{i}+f(t_i+\gamma_1h) \\ \vdots \\ Ax_{i}+f(t_i+\gamma_sh)
 \end{bmatrix}
