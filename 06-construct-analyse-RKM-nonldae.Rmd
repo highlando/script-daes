@@ -213,7 +213,7 @@ which, together with \@ref(eq:impl-sf-dae-collo), indeed defines a RKM.
 Some remarks:
 
  * the preceding derivation shows that the collocation \@ref(eq:rkm-coll-collpol) and \@ref(eq:impl-sf-dae-collo) is equivalent to the RKM scheme \@ref(eq:collo-is-RKM-formula) and \@ref(eq:impl-sf-dae-collo)
- * convergence of these schemes applied to \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-fone) is proven in Kunkel/Mehrmann Theorem 5.17
+ * convergence of these schemes applied to \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-ftwo) is proven in Kunkel/Mehrmann Theorem 5.17
  * with fixing $\gamma_s=1$, the obtained RKM is *stiffly accurate*
  * the remaining $s-1$ $\gamma$s can be chosen to get optimal convergence rates $\rightarrow$ RadauIIa schemes
  * if also $\gamma_s$ is chosen optimal in terms of convergence, the Gauss schemes are obtained
