@@ -118,7 +118,7 @@ In what follows we show that a *collocation* approach coincides with certain RKM
 
 Concretely, we parametrize $s$ collocation points via
 \begin{equation}
-0< \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 (\#eq:rkm-collo-gamma)
+0 = \gamma_0 < \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 (\#eq:rkm-collo-gamma)
 \end{equation}
 and define two sets of *Lagrange polynomials*
 $$
@@ -148,7 +148,7 @@ To obtain $x_{i+1}=x_\pi(t_{i+1})=X_{is}$, we require the polynomial to satisfy 
 
 Now we show that this collocation defines a RKM discretization of \@ref(eq:impl-sf-dae-fone)--\@ref(eq:impl-sf-dae-ftwo).
 
-Since $\tilde L \in \mathbb P_s$, it holds that 
+Since $\tilde L_\ell \in \mathbb P_s$ for $\ell=1,\ldots,s$ it holds that
 $$
 P_\ell(\sigma):=\int_0^\sigma \tilde L_\ell (\xi)d\xi \in \mathbb P_{s+1}
 $$
@@ -157,7 +157,7 @@ $$
 P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)L_j(\sigma).
 $$
 
-If we differentiate $P_l$, we get 
+If we differentiate $P_\ell$, we get 
 $$
 \dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
 $$
@@ -165,6 +165,7 @@ where define simply define
 $$
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
 $$
+Note that $\alpha_{0\ell}=0$ such that summation in $\dot P_\ell(\sigma)$ starts at $j=1$ instead of $j=0$.
 Moreover, by definition of $P_\ell$ (and the *fundamental theorem of calculus*), it holds that 
 $$
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
@@ -175,7 +176,7 @@ $$
 \begin{cases}
 1, &\quad \text{if }\ell =m \\
 0, &\quad \text{otherwise} 
-\end{cases}.
+\end{cases}
 $$
 for $\ell, m=1,\dotsc,s$.
 
