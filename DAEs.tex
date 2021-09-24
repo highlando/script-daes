@@ -91,7 +91,7 @@
 \author{Jan Heiland}
 \providecommand{\institute}[1]{}
 \institute{OVGU/MPI}
-\date{2021-08-31}
+\date{2021-09-24}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2437,13 +2437,14 @@ is called the \emph{strangeness index} of the DAE \eqref{eq:iv-ltv-dae}. If \(\m
 The practical implications of the strangeness index and the procedure of its derivation are laid out in the following theorem.
 
 \begin{theorem}
-\protect\hypertarget{thm:iv-strangeness-free-equiv-system}{}{\label{thm:iv-strangeness-free-equiv-system} }Let the strangeness index \(\mu\) of \((E, A)\) be well defined let \(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\). Then the DAE \eqref{eq:iv-ltv-dae} is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
+\protect\hypertarget{thm:iv-strangeness-free-equiv-system}{}{\label{thm:iv-strangeness-free-equiv-system} }Let the strangeness index \(\mu\) of \((E, A)\) be well defined and let \(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\).
+Then the DAE \eqref{eq:iv-ltv-dae} is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
 \begin{align}
 \dot x_1(t) &= A_{13}(t)x_3(t) + f_1(t) \label{eq:iv-snf-equi-sys-dpart}\\
 0 &= x_2(t) + f_2(t) \label{eq:iv-snf-equi-sys-apart}\\
 0 &= f_3(t), \label{eq:iv-snf-equi-sys-vpart}
 \end{align}
-where \(A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}\) and where \(f_1\), \(f_2\), \(f_3\) are defined through \(f\), \(\dot f\), \dots, \(f^{(\mu)}\).
+where \(A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu})\) and where \(f_1\), \(f_2\), \(f_3\) are defined through \(f\), \(\dot f\), \dots, \(f^{(\mu)}\).
 \end{theorem}
 
 \begin{JHSAYS}
@@ -2451,7 +2452,7 @@ System \eqref{eq:iv-snf-equi-sys-dpart}--\eqref{eq:iv-snf-equi-sys-vpart} is in 
 \end{JHSAYS}
 
 \begin{corollary}
-\protect\hypertarget{cor:iv-snf-solvability}{}{\label{cor:iv-snf-solvability} }Let the strangeness index \(\mu\) of \((E, A)\) be well defined let \(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\). Then
+\protect\hypertarget{cor:iv-snf-solvability}{}{\label{cor:iv-snf-solvability} }Let the strangeness index \(\mu\) of \((E, A)\) be well defined and let \(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\). Then
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2462,7 +2463,7 @@ System \eqref{eq:iv-snf-equi-sys-dpart}--\eqref{eq:iv-snf-equi-sys-vpart} is in 
   \]
   are fulfilled.
 \item
-  An initial condition \eqref{eq:iv-ltv-inicond} is consistent if, and only if, in the the \(a_\mu\) conditions
+  An initial condition \eqref{eq:iv-ltv-inicond} is consistent if, and only if, the \(a_\mu\) conditions
   \[
   0=x_2(t_0) + f_2(t_0)
   \]
@@ -2536,7 +2537,7 @@ If we add also the second derivative of the equations, we obtain
 \begin{bmatrix}
 E & 0 & 0\\
 \dot E - A & E &0  \\
-\ddot E - 2A & 2\dot E -A &E 
+\ddot E - 2\dot A & 2\dot E -A &E
 \end{bmatrix}
 \frac{d}{dt}
 \begin{bmatrix}
@@ -2564,14 +2565,14 @@ M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
 \end{equation}
 where
 \[
-(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=0,\dotsc,\ell,
 \]
 
 where
 \[
 (N_\ell)_{i,j} = 
 \begin{cases}
-A^{(i)}, \quad &\text{for } i=1,\dotsc, \ell, \, j=0 \\
+A^{(i)}, \quad &\text{for } i=0,\dotsc, \ell, \, j=0 \\
 0, \quad & \text{else}
 \end{cases},
 \]
@@ -2603,7 +2604,7 @@ f \\ \dot f \\ \vdots \\ f^{(\ell)}
 The following theorem connects the derivative array to the strangeness index and provides a \emph{strangeness free} reformulation of the DAE \eqref{eq:iv-ltv-dae}.
 
 \begin{theorem}
-\protect\hypertarget{thm:iv-derivative-arrays-projections}{}{\label{thm:iv-derivative-arrays-projections} }Let the strangeness index of the pair \((E, A)\) of matrix-valued functions be well defined according to \ref{def:iv-strangeness-index} with the global invariants \(d_\mu\), \(a_\mu\), \(v_\mu\). Then for the derivative array as defined in Definition \ref{def:iv-derivative-array} it holds that
+\protect\hypertarget{thm:iv-derivative-arrays-projections}{}{\label{thm:iv-derivative-arrays-projections} }Let the strangeness index of the pair \((E, A)\) of matrix-valued functions be well defined according to Definition \ref{def:iv-strangeness-index} with the global invariants \(d_\mu\), \(a_\mu\), \(v_\mu\). Then for the derivative array as defined in Definition \ref{def:iv-derivative-array} it holds that
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2745,7 +2746,10 @@ Generally, the approximants \(x_i\) are computed iteratively by a numerical sche
 \[
 x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). \label{eq:v-one-step-scheme}
 \]
-If \(x_{i+1}\) appears in the definition of the function \(\phi\), then the scheme is called \emph{implicit}. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like \(x_{i-1}\), \(x_{i-2}\), \ldots{}, \(x_{i-k}\) with \(k\geq 0\), then the scheme is called a \emph{multi-step scheme}. Otherwise, it is called a \emph{single-step scheme}.
+If \(x_{i+1}\) appears in the definition of the function \(\phi\), then the scheme is called \emph{implicit}.
+Otherwise, it is called an explicit scheme.
+If the scheme bases on previous iterates like \(x_{i-1}\), \(x_{i-2}\), \ldots{}, \(x_{i-k}\) with \(k\geq 1\), then the scheme is called a \emph{multi-step scheme}.
+Otherwise, it is called a \emph{single-step scheme}.
 
 Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
 \[
@@ -2775,7 +2779,7 @@ x_{i+1}=x_i+h\sum_{j=1}^s\beta_j \dot X_{ij},
 where the \emph{stage derivatives} \(\dot X_{ij}\) are connected with the \emph{stage values} \(X_{ij}\) via the following possibly nonlinear (depending on the problem: \(\dot x(t) = f(t,x(t))\)) and possibly implicit (depending on the method) system of equations
 \begin{align}
 \dot X_{ij} &= f(t_i+\gamma_jh, X_{ij}), \\
-X_{ij} &= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+X_{ij} &= x_i + h \sum_{\ell=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 \end{align}
 
 The matrix \(\mathcal A\) and the vectors \(\beta\) and \(\gamma\) of parameters are conveniently written into the so-called \emph{Butcher-tableau}
@@ -2915,7 +2919,7 @@ with
 \begin{bmatrix}
 \dot X_{i1} \\ \vdots \\ \dot X_{is}
 \end{bmatrix}, \quad
-\dot Z_i = 
+Z_i =
 \begin{bmatrix}
 Ax_{i}+f(t_i+\gamma_1h) \\ \vdots \\ Ax_{i}+f(t_i+\gamma_sh)
 \end{bmatrix}
@@ -2962,7 +2966,7 @@ By the previous considerations, the following assumptions are well justified -- 
 \item
   \((E,A)\) is in Kronecker Canonical Form \(\leftarrow\) RKM are invariant under equivalence transformation
 \item
-  \((E,A)=(N,I)\) \(\leftarrow\) the \emph{regular part} can be treated by ODE theory
+  \((E,A)=(N,I)\) \(\leftarrow\) as the other (the \emph{regular part}) can be treated by ODE theory
 \item
   \(E=N=N_\nu\) consists of a single Jordan block \(\leftarrow\) otherwise consider each Jordan block separately.
 \end{itemize}
@@ -3079,26 +3083,27 @@ x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 
 With that and with \(x_i=x(t_i)\), we expand the error \(\tau_1\) as follows:
 \begin{align*}
-\tau_1 &= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
+\tau_1 &= h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
 &= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
 \end{align*}
 
-which, with \(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)\), becomes
+which, with \(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{j=1}^\nu \sum_{k=1}^j g(k,j)\), becomes
 
 \begin{align*}
-\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
- &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\
- &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
+\tau_1 &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg] \\
+ &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\
+ &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg].
 \end{align*}
 
 A shift of indices, \(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\) and \(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\), then gives:
 \begin{align*}
-    \tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
+    \tau_1 &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \Bigg].
 \end{align*}
 
-and a comparison of the coefficients for the same orders of \(h\) and diffentials of \(f\) leads to the conditions. Note the ranges of the sums that depend on \(j=1, \dotsc, \nu\).
+and a comparison of the coefficients for the same orders of \(h\) and derivatives of \(f\) leads to the conditions.
+Note the ranges of the sums that depend on \(j=1, \dots, \nu\).
 \end{proof}
 
 \begin{JHSAYS}
@@ -3358,7 +3363,7 @@ Regression (Collocation): -- If one looks for a function \(x\colon [0,1] \to \ma
 
 Concretely, we parametrize \(s\) collocation points via
 \begin{equation}
-0< \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 \label{eq:rkm-collo-gamma}
+0 = \gamma_0 < \gamma_1 <\gamma_2< \dotsc < \gamma_s=1 \label{eq:rkm-collo-gamma}
 \end{equation}
 and define two sets of \emph{Lagrange polynomials}
 \[
@@ -3388,7 +3393,7 @@ To obtain \(x_{i+1}=x_\pi(t_{i+1})=X_{is}\), we require the polynomial to satisf
 
 Now we show that this collocation defines a RKM discretization of \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo}.
 
-Since \(\tilde L \in \mathbb P_s\), it holds that
+Since \(\tilde L_\ell \in \mathbb P_s\) for \(\ell=1,\ldots,s\) it holds that
 \[
 P_\ell(\sigma):=\int_0^\sigma \tilde L_\ell (\xi)d\xi \in \mathbb P_{s+1}
 \]
@@ -3397,7 +3402,7 @@ that is, by \emph{Lagrange} interpolation, it can be written as
 P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)L_j(\sigma).
 \]
 
-If we differentiate \(P_l\), we get
+If we differentiate \(P_\ell\), we get
 \[
 \dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
 \]
@@ -3405,6 +3410,7 @@ where define simply define
 \[
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
 \]
+Note that \(\alpha_{0\ell}=0\) such that summation in \(\dot P_\ell(\sigma)\) starts at \(j=1\) instead of \(j=0\).
 Moreover, by definition of \(P_\ell\) (and the \emph{fundamental theorem of calculus}), it holds that
 \[
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
@@ -3415,7 +3421,7 @@ which gives that \(\dot P_\ell(\gamma_m) = \delta_{\ell m}\) that is
 \begin{cases}
 1, &\quad \text{if }\ell =m \\
 0, &\quad \text{otherwise} 
-\end{cases}.
+\end{cases}
 \]
 for \(\ell, m=1,\dotsc,s\).
 
@@ -3456,7 +3462,7 @@ Some remarks:
 \item
   the preceding derivation shows that the collocation \eqref{eq:rkm-coll-collpol} and \eqref{eq:impl-sf-dae-collo} is equivalent to the RKM scheme \eqref{eq:collo-is-RKM-formula} and \eqref{eq:impl-sf-dae-collo}
 \item
-  convergence of these schemes applied to \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-fone} is proven in Kunkel/Mehrmann Theorem 5.17
+  convergence of these schemes applied to \eqref{eq:impl-sf-dae-fone}--\eqref{eq:impl-sf-dae-ftwo} is proven in Kunkel/Mehrmann Theorem 5.17
 \item
   with fixing \(\gamma_s=1\), the obtained RKM is \emph{stiffly accurate}
 \item

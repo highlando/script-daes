@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Construction and Analysis of RKM for nonlinear DAEs | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Construction and Analysis of RKM for nonlinear DAEs | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-08-31" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="numerical-approximation-of-daes.html"/>
 <link rel="next" href="examples-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -267,7 +267,7 @@ where the <em>strangeness-free</em> or <em>index-1</em> assumption is encoded in
 </blockquote>
 <p>Concretely, we parametrize <span class="math inline">\(s\)</span> collocation points via
 <span class="math display" id="eq:rkm-collo-gamma">\[\begin{equation}
-0&lt; \gamma_1 &lt;\gamma_2&lt; \dotsc &lt; \gamma_s=1 \tag{6.5}
+0 = \gamma_0 &lt; \gamma_1 &lt;\gamma_2&lt; \dotsc &lt; \gamma_s=1 \tag{6.5}
 \end{equation}\]</span>
 and define two sets of <em>Lagrange polynomials</em>
 <span class="math display">\[
@@ -291,7 +291,7 @@ designed to compute the <em>stage values</em> <span class="math inline">\(X_{i\e
 \hat F_1(t_i+\gamma_jh,X_{ij},\dot X_{ij}) = 0, \quad \hat F_2(t_i+\gamma_jh,X_{ij}) = 0, \quad j=1,\dotsc,s. \phantom{F_1} \tag{6.8}
 \end{equation}\]</span></p>
 <p>Now we show that this collocation defines a RKM discretization of <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a>–<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-ftwo">(6.4)</a>.</p>
-<p>Since <span class="math inline">\(\tilde L \in \mathbb P_s\)</span>, it holds that
+<p>Since <span class="math inline">\(\tilde L_\ell \in \mathbb P_s\)</span> for <span class="math inline">\(\ell=1,\ldots,s\)</span> it holds that
 <span class="math display">\[
 P_\ell(\sigma):=\int_0^\sigma \tilde L_\ell (\xi)d\xi \in \mathbb P_{s+1}
 \]</span>
@@ -299,7 +299,7 @@ that is, by <em>Lagrange</em> interpolation, it can be written as
 <span class="math display">\[
 P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)L_j(\sigma).
 \]</span></p>
-<p>If we differentiate <span class="math inline">\(P_l\)</span>, we get
+<p>If we differentiate <span class="math inline">\(P_\ell\)</span>, we get
 <span class="math display">\[
 \dot P_\ell(\sigma) = \sum_{j=0}^s P_\ell(\gamma_j)\dot L_j(\sigma) = \sum_{j=0}^s \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi \dot L_j(\sigma)=: \sum_{j=0}^s \alpha_{j\ell} \dot L_j(\sigma)
 \]</span>
@@ -307,6 +307,7 @@ where define simply define
 <span class="math display">\[
 \alpha_{j\ell} = \int_0^{\gamma_j} \tilde L_\ell (\xi)d\xi.
 \]</span>
+Note that <span class="math inline">\(\alpha_{0\ell}=0\)</span> such that summation in <span class="math inline">\(\dot P_\ell(\sigma)\)</span> starts at <span class="math inline">\(j=1\)</span> instead of <span class="math inline">\(j=0\)</span>.
 Moreover, by definition of <span class="math inline">\(P_\ell\)</span> (and the <em>fundamental theorem of calculus</em>), it holds that
 <span class="math display">\[
 \dot P_\ell(\sigma) = \tilde L_\ell(\sigma),
@@ -317,7 +318,7 @@ which gives that <span class="math inline">\(\dot P_\ell(\gamma_m) = \delta_{\el
 \begin{cases}
 1, &amp;\quad \text{if }\ell =m \\
 0, &amp;\quad \text{otherwise} 
-\end{cases}.
+\end{cases}
 \]</span>
 for <span class="math inline">\(\ell, m=1,\dotsc,s\)</span>.</p>
 <p>Accordingly, if we define <span class="math inline">\(\mathcal A := \bigl[\alpha_{j\ell}\bigr]_{j,\ell=1,\dotsc,s} \in \mathbb R^{s,s}\)</span> and
@@ -351,7 +352,7 @@ which, together with <a href="construction-and-analysis-of-rkm-for-nonlinear-dae
 <p>Some remarks:</p>
 <ul>
 <li>the preceding derivation shows that the collocation <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:rkm-coll-collpol">(6.6)</a> and <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a> is equivalent to the RKM scheme <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:collo-is-RKM-formula">(6.9)</a> and <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-collo">(6.8)</a></li>
-<li>convergence of these schemes applied to <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a>–<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a> is proven in Kunkel/Mehrmann Theorem 5.17</li>
+<li>convergence of these schemes applied to <a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-fone">(6.3)</a>–<a href="construction-and-analysis-of-rkm-for-nonlinear-daes.html#eq:impl-sf-dae-ftwo">(6.4)</a> is proven in Kunkel/Mehrmann Theorem 5.17</li>
 <li>with fixing <span class="math inline">\(\gamma_s=1\)</span>, the obtained RKM is <em>stiffly accurate</em></li>
 <li>the remaining <span class="math inline">\(s-1\)</span> <span class="math inline">\(\gamma\)</span>s can be chosen to get optimal convergence rates <span class="math inline">\(\rightarrow\)</span> RadauIIa schemes</li>
 <li>if also <span class="math inline">\(\gamma_s\)</span> is chosen optimal in terms of convergence, the Gauss schemes are obtained</li>
@@ -369,7 +370,6 @@ which, together with <a href="construction-and-analysis-of-rkm-for-nonlinear-dae
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -410,7 +410,7 @@ gitbook.start({
 },
 "download": ["DAEs.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

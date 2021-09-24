@@ -24,7 +24,10 @@ Generally, the approximants $x_i$ are computed iteratively by a numerical scheme
 $$
 x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). (\#eq:v-one-step-scheme)
 $$
-If $x_{i+1}$ appears in the definition of the function $\phi$, then the scheme is called *implicit*. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like $x_{i-1}$, $x_{i-2}$, ..., $x_{i-k}$ with $k\geq 0$, then the scheme is called a *multi-step scheme*. Otherwise, it is called a *single-step scheme*.
+If $x_{i+1}$ appears in the definition of the function $\phi$, then the scheme is called *implicit*.
+Otherwise, it is called an explicit scheme.
+If the scheme bases on previous iterates like $x_{i-1}$, $x_{i-2}$, ..., $x_{i-k}$ with $k\geq 1$, then the scheme is called a *multi-step scheme*.
+Otherwise, it is called a *single-step scheme*.
 
 Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
 $$
@@ -56,7 +59,7 @@ $$
 where the *stage derivatives* $\dot X_{ij}$ are connected with the *stage values* $X_{ij}$ via the following possibly nonlinear (depending on the problem: $\dot x(t) = f(t,x(t))$) and possibly implicit (depending on the method) system of equations
 \begin{align}
 \dot X_{ij} &= f(t_i+\gamma_jh, X_{ij}), \\
-X_{ij} &= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+X_{ij} &= x_i + h \sum_{\ell=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 \end{align}
 
 The matrix $\mathcal A$ and the vectors $\beta$ and $\gamma$ of parameters are conveniently written into the so-called *Butcher-tableau*
@@ -160,7 +163,7 @@ $$
 \begin{bmatrix}
 \dot X_{i1} \\ \vdots \\ \dot X_{is}
 \end{bmatrix}, \quad
-\dot Z_i = 
+Z_i =
 \begin{bmatrix}
 Ax_{i}+f(t_i+\gamma_1h) \\ \vdots \\ Ax_{i}+f(t_i+\gamma_sh)
 \end{bmatrix}
@@ -200,7 +203,7 @@ By the previous considerations, the following assumptions are well justified -- 
 
  * $(E,A)$ is regular $\leftarrow$ the theory needs a unique solution
  * $(E,A)$ is in Kronecker Canonical Form $\leftarrow$ RKM are invariant under equivalence transformation
- * $(E,A)=(N,I)$ $\leftarrow$ the *regular part* can be treated by ODE theory
+ * $(E,A)=(N,I)$ $\leftarrow$ as the other (the *regular part*) can be treated by ODE theory
  * $E=N=N_\nu$ consists of a single Jordan block $\leftarrow$ otherwise consider each Jordan block separately.
 
 Thus, we will consider the special DAE 
@@ -288,26 +291,27 @@ x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 
 With that and with $x_i=x(t_i)$, we expand the error $\tau_1$ as follows:
 \begin{align*}
-\tau_1 &= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
+\tau_1 &= h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
 &= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
 \end{align*}
 
-which, with $\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)$, becomes
+which, with $\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{j=1}^\nu \sum_{k=1}^j g(k,j)$, becomes
 
 \begin{align*}
-\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
- &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\
- &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
+\tau_1 &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\&\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg] \\
+ &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\
+ &\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg].
 \end{align*}
 
 A shift of indices, $\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)$ and $\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)$, then gives:
 \begin{align*}
-	\tau_1 &= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
+	\tau_1 &= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \Bigg].
 \end{align*}
 
-and a comparison of the coefficients for the same orders of $h$ and diffentials of $f$ leads to the conditions. Note the ranges of the sums that depend on $j=1, \dotsc, \nu$.
+and a comparison of the coefficients for the same orders of $h$ and derivatives of $f$ leads to the conditions.
+Note the ranges of the sums that depend on $j=1, \dots, \nu$.
 </div>\EndKnitrBlock{proof}
 
 \BeginKnitrBlock{JHSAYS}<div class="JHSAYS">Theorem \@ref(thm:v-local-consistency-error-rkm-lcc) was formulated for the special case of $\dot x = Nx +f(t)$. By the preceding derivations, we have argumented, that it holds for the general largest nilpotent block of $E\dot x = Ax+f(t)$. If one estimates the ODE parts as for standard ODEs and the *smaller* nilpotent blocks separately, the result can be formulated for the general case, as it is used in the theorem below.</div>\EndKnitrBlock{JHSAYS}

@@ -624,17 +624,18 @@ is called the *strangeness index* of the DAE \@ref(eq:iv-ltv-dae). If $\mu=0$, t
 
 The practical implications of the strangeness index and the procedure of its derivation are laid out in the following theorem.
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-strangeness-free-equiv-system"><strong>(\#thm:iv-strangeness-free-equiv-system) </strong></span>Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then the DAE \@ref(eq:iv-ltv-dae) is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-strangeness-free-equiv-system"><strong>(\#thm:iv-strangeness-free-equiv-system) </strong></span>Let the strangeness index $\mu$ of $(E, A)$ be well defined and let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$.
+Then the DAE \@ref(eq:iv-ltv-dae) is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
 \begin{align}
 \dot x_1(t) &= A_{13}(t)x_3(t) + f_1(t) (\#eq:iv-snf-equi-sys-dpart)\\
 0 &= x_2(t) + f_2(t) (\#eq:iv-snf-equi-sys-apart)\\
 0 &= f_3(t), (\#eq:iv-snf-equi-sys-vpart)
 \end{align}
-where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}$ and where $f_1$, $f_2$, $f_3$ are defined through $f$, $\dot f$, \dots, $f^{(\mu)}$.</div>\EndKnitrBlock{theorem}
+where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu})$ and where $f_1$, $f_2$, $f_3$ are defined through $f$, $\dot f$, \dots, $f^{(\mu)}$.</div>\EndKnitrBlock{theorem}
 
 \BeginKnitrBlock{JHSAYS}<div class="JHSAYS">System \@ref(eq:iv-snf-equi-sys-dpart)--\@ref(eq:iv-snf-equi-sys-vpart) is in the form of \@ref(eq:iv-glob-can-form) with the $I_s$ blocks not present and the remaining parts of the variables, coefficients, and right hand side renumbered accordingly.</div>\EndKnitrBlock{JHSAYS}
 
-\BeginKnitrBlock{corollary}<div class="corollary"><span class="corollary" id="cor:iv-snf-solvability"><strong>(\#cor:iv-snf-solvability) </strong></span>Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then
+\BeginKnitrBlock{corollary}<div class="corollary"><span class="corollary" id="cor:iv-snf-solvability"><strong>(\#cor:iv-snf-solvability) </strong></span>Let the strangeness index $\mu$ of $(E, A)$ be well defined and let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then
 
 1. The DAE \@ref(eq:iv-ltv-dae) is solvable if and only if the $v_\mu$ consistency conditions \@ref(eq:iv-snf-equi-sys-vpart)
    $$
@@ -642,7 +643,7 @@ where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}$ and where $f_
    $$
    are fulfilled.
 
-2. An initial condition \@ref(eq:iv-ltv-inicond) is consistent if, and only if, in the the $a_\mu$ conditions 
+2. An initial condition \@ref(eq:iv-ltv-inicond) is consistent if, and only if, the $a_\mu$ conditions
    $$
    0=x_2(t_0) + f_2(t_0)
    $$
@@ -703,7 +704,7 @@ $$
 \begin{bmatrix}
 E & 0 & 0\\
 \dot E - A & E &0  \\
-\ddot E - 2A & 2\dot E -A &E 
+\ddot E - 2\dot A & 2\dot E -A &E
 \end{bmatrix}
 \frac{d}{dt}
 \begin{bmatrix}
@@ -730,14 +731,14 @@ M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
 \end{equation}
 where
 $$
-(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=0,\dotsc,\ell,
 $$
 
 where
 $$
 (N_\ell)_{i,j} = 
 \begin{cases}
-A^{(i)}, \quad &\text{for } i=1,\dotsc, \ell, \, j=0 \\
+A^{(i)}, \quad &\text{for } i=0,\dotsc, \ell, \, j=0 \\
 0, \quad & \text{else}
 \end{cases},
 $$
@@ -762,7 +763,7 @@ $$</div>\EndKnitrBlock{definition}
 
 The following theorem connects the derivative array to the strangeness index and provides a *strangeness free* reformulation of the DAE \@ref(eq:iv-ltv-dae).
 
-\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-derivative-arrays-projections"><strong>(\#thm:iv-derivative-arrays-projections) </strong></span>Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
+\BeginKnitrBlock{theorem}<div class="theorem"><span class="theorem" id="thm:iv-derivative-arrays-projections"><strong>(\#thm:iv-derivative-arrays-projections) </strong></span>Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to Definition \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
 
 1. $\corank M_{\mu+1}- \corank M_\mu = v_\mu$
 

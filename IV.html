@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4 Linear DAEs with Time-varying Coefficients | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4 Linear DAEs with Time-varying Coefficients | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-08-31" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="III.html"/>
 <link rel="next" href="numerical-approximation-of-daes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -926,13 +926,14 @@ is called the <em>strangeness index</em> of the DAE <a href="IV.html#eq:iv-ltv-d
 <p>The practical implications of the strangeness index and the procedure of its derivation are laid out in the following theorem.</p>
 
 <div class="theorem">
-<span id="thm:iv-strangeness-free-equiv-system" class="theorem"><strong>Theorem 4.5  </strong></span>Let the strangeness index <span class="math inline">\(\mu\)</span> of <span class="math inline">\((E, A)\)</span> be well defined let <span class="math inline">\(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\)</span>. Then the DAE <a href="IV.html#eq:iv-ltv-dae">(4.1)</a> is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
+<span id="thm:iv-strangeness-free-equiv-system" class="theorem"><strong>Theorem 4.5  </strong></span>Let the strangeness index <span class="math inline">\(\mu\)</span> of <span class="math inline">\((E, A)\)</span> be well defined and let <span class="math inline">\(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\)</span>.
+Then the DAE <a href="IV.html#eq:iv-ltv-dae">(4.1)</a> is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
 <span class="math display" id="eq:iv-snf-equi-sys-vpart" id="eq:iv-snf-equi-sys-apart" id="eq:iv-snf-equi-sys-dpart">\[\begin{align}
 \dot x_1(t) &amp;= A_{13}(t)x_3(t) + f_1(t) \tag{4.14}\\
 0 &amp;= x_2(t) + f_2(t) \tag{4.15}\\
 0 &amp;= f_3(t), \tag{4.16}
 \end{align}\]</span>
-where <span class="math inline">\(A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}\)</span> and where <span class="math inline">\(f_1\)</span>, <span class="math inline">\(f_2\)</span>, <span class="math inline">\(f_3\)</span> are defined through <span class="math inline">\(f\)</span>, <span class="math inline">\(\dot f\)</span>, , <span class="math inline">\(f^{(\mu)}\)</span>.
+where <span class="math inline">\(A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu})\)</span> and where <span class="math inline">\(f_1\)</span>, <span class="math inline">\(f_2\)</span>, <span class="math inline">\(f_3\)</span> are defined through <span class="math inline">\(f\)</span>, <span class="math inline">\(\dot f\)</span>, , <span class="math inline">\(f^{(\mu)}\)</span>.
 </div>
 
 
@@ -942,14 +943,14 @@ System <a href="IV.html#eq:iv-snf-equi-sys-dpart">(4.14)</a>–<a href="IV.html#
 
 
 <div class="corollary">
-<p><span id="cor:iv-snf-solvability" class="corollary"><strong>Corollary 4.2  </strong></span>Let the strangeness index <span class="math inline">\(\mu\)</span> of <span class="math inline">\((E, A)\)</span> be well defined let <span class="math inline">\(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\)</span>. Then</p>
+<p><span id="cor:iv-snf-solvability" class="corollary"><strong>Corollary 4.2  </strong></span>Let the strangeness index <span class="math inline">\(\mu\)</span> of <span class="math inline">\((E, A)\)</span> be well defined and let <span class="math inline">\(f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})\)</span>. Then</p>
 <ol style="list-style-type: decimal">
 <li><p>The DAE <a href="IV.html#eq:iv-ltv-dae">(4.1)</a> is solvable if and only if the <span class="math inline">\(v_\mu\)</span> consistency conditions <a href="IV.html#eq:iv-snf-equi-sys-vpart">(4.16)</a>
 <span class="math display">\[
   0=f_3(t)
 \]</span>
 are fulfilled.</p></li>
-<li><p>An initial condition <a href="IV.html#eq:iv-ltv-inicond">(4.2)</a> is consistent if, and only if, in the the <span class="math inline">\(a_\mu\)</span> conditions
+<li><p>An initial condition <a href="IV.html#eq:iv-ltv-inicond">(4.2)</a> is consistent if, and only if, the <span class="math inline">\(a_\mu\)</span> conditions
 <span class="math display">\[
 0=x_2(t_0) + f_2(t_0)
 \]</span>
@@ -1011,7 +1012,7 @@ f \\ \dot f
 \begin{bmatrix}
 E &amp; 0 &amp; 0\\
 \dot E - A &amp; E &amp;0  \\
-\ddot E - 2A &amp; 2\dot E -A &amp;E 
+\ddot E - 2\dot A &amp; 2\dot E -A &amp;E
 \end{bmatrix}
 \frac{d}{dt}
 \begin{bmatrix}
@@ -1039,13 +1040,13 @@ M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
 \end{equation}\]</span>
 where
 <span class="math display">\[
-(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=0,\dotsc,\ell,
 \]</span></p>
 <p>where
 <span class="math display">\[
 (N_\ell)_{i,j} = 
 \begin{cases}
-A^{(i)}, \quad &amp;\text{for } i=1,\dotsc, \ell, \, j=0 \\
+A^{(i)}, \quad &amp;\text{for } i=0,\dotsc, \ell, \, j=0 \\
 0, \quad &amp; \text{else}
 \end{cases},
 \]</span></p>
@@ -1072,7 +1073,7 @@ f \\ \dot f \\ \vdots \\ f^{(\ell)}
 <p>The following theorem connects the derivative array to the strangeness index and provides a <em>strangeness free</em> reformulation of the DAE <a href="IV.html#eq:iv-ltv-dae">(4.1)</a>.</p>
 
 <div class="theorem">
-<p><span id="thm:iv-derivative-arrays-projections" class="theorem"><strong>Theorem 4.6  </strong></span>Let the strangeness index of the pair <span class="math inline">\((E, A)\)</span> of matrix-valued functions be well defined according to <a href="IV.html#def:iv-strangeness-index">4.3</a> with the global invariants <span class="math inline">\(d_\mu\)</span>, <span class="math inline">\(a_\mu\)</span>, <span class="math inline">\(v_\mu\)</span>. Then for the derivative array as defined in Definition <a href="IV.html#def:iv-derivative-array">4.4</a> it holds that</p>
+<p><span id="thm:iv-derivative-arrays-projections" class="theorem"><strong>Theorem 4.6  </strong></span>Let the strangeness index of the pair <span class="math inline">\((E, A)\)</span> of matrix-valued functions be well defined according to Definition <a href="IV.html#def:iv-strangeness-index">4.3</a> with the global invariants <span class="math inline">\(d_\mu\)</span>, <span class="math inline">\(a_\mu\)</span>, <span class="math inline">\(v_\mu\)</span>. Then for the derivative array as defined in Definition <a href="IV.html#def:iv-derivative-array">4.4</a> it holds that</p>
 <ol style="list-style-type: decimal">
 <li><p><span class="math inline">\(\operatorname{corank}M_{\mu+1}- \operatorname{corank}M_\mu = v_\mu\)</span></p></li>
 <li><p><span class="math inline">\(\operatorname{rank}M_\mu(t) = (\mu+1)m-a_\mu - v_\mu\)</span> on <span class="math inline">\(\mathcal I\)</span>, and there exists a smooth matrix function <span class="math inline">\(Z_{2,3}\)</span> (that spans the left null space of <span class="math inline">\(M_\mu\)</span>) with
@@ -1170,7 +1171,6 @@ and where
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -1211,7 +1211,7 @@ gitbook.start({
 },
 "download": ["DAEs.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {

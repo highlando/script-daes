@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 Numerical Approximation of DAEs | DAEs</title>
   <meta name="description" content="Script to my DAE course at the OVGU in Fall 2018 / Spring 2021" />
-  <meta name="generator" content="bookdown 0.23 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 Numerical Approximation of DAEs | DAEs" />
   <meta property="og:type" content="book" />
@@ -24,7 +24,7 @@
 <meta name="author" content="Jan Heiland" />
 
 
-<meta name="date" content="2021-08-31" />
+<meta name="date" content="2021-09-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -34,6 +34,7 @@
 <link rel="prev" href="IV.html"/>
 <link rel="next" href="construction-and-analysis-of-rkm-for-nonlinear-daes.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -41,7 +42,6 @@
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
 
 
 
@@ -166,7 +166,10 @@ It is unfortunate that <span class="math inline">\(x_i\)</span> has been used to
 <span class="math display" id="eq:v-one-step-scheme">\[
 x_{i+1} = \phi(t_i,h,x_i,x_{i+1}). \tag{5.1}
 \]</span>
-If <span class="math inline">\(x_{i+1}\)</span> appears in the definition of the function <span class="math inline">\(\phi\)</span>, then the scheme is called <em>implicit</em>. Otherwise, it is called an explicit scheme. If the scheme bases on previous iterates like <span class="math inline">\(x_{i-1}\)</span>, <span class="math inline">\(x_{i-2}\)</span>, …, <span class="math inline">\(x_{i-k}\)</span> with <span class="math inline">\(k\geq 0\)</span>, then the scheme is called a <em>multi-step scheme</em>. Otherwise, it is called a <em>single-step scheme</em>.</p>
+If <span class="math inline">\(x_{i+1}\)</span> appears in the definition of the function <span class="math inline">\(\phi\)</span>, then the scheme is called <em>implicit</em>.
+Otherwise, it is called an explicit scheme.
+If the scheme bases on previous iterates like <span class="math inline">\(x_{i-1}\)</span>, <span class="math inline">\(x_{i-2}\)</span>, …, <span class="math inline">\(x_{i-k}\)</span> with <span class="math inline">\(k\geq 1\)</span>, then the scheme is called a <em>multi-step scheme</em>.
+Otherwise, it is called a <em>single-step scheme</em>.</p>
 <p>Generally, the analysis of the schemes and their application to problem classes tries to establish convergence, e.g.,
 <span class="math display">\[
 \|x_N - x(t_e)\| \to 0
@@ -193,7 +196,7 @@ x_{i+1}=x_i+h\sum_{j=1}^s\beta_j \dot X_{ij},
 where the <em>stage derivatives</em> <span class="math inline">\(\dot X_{ij}\)</span> are connected with the <em>stage values</em> <span class="math inline">\(X_{ij}\)</span> via the following possibly nonlinear (depending on the problem: <span class="math inline">\(\dot x(t) = f(t,x(t))\)</span>) and possibly implicit (depending on the method) system of equations
 <span class="math display">\[\begin{align}
 \dot X_{ij} &amp;= f(t_i+\gamma_jh, X_{ij}), \\
-X_{ij} &amp;= x_i + h \sum_{j=1}^s \alpha_{j\ell} \dot X_{i\ell}.
+X_{ij} &amp;= x_i + h \sum_{\ell=1}^s \alpha_{j\ell} \dot X_{i\ell}.
 \end{align}\]</span></p>
 <p>The matrix <span class="math inline">\(\mathcal A\)</span> and the vectors <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\gamma\)</span> of parameters are conveniently written into the so-called <em>Butcher-tableau</em>
 <span class="math display">\[
@@ -323,7 +326,7 @@ with
 \begin{bmatrix}
 \dot X_{i1} \\ \vdots \\ \dot X_{is}
 \end{bmatrix}, \quad
-\dot Z_i = 
+Z_i =
 \begin{bmatrix}
 Ax_{i}+f(t_i+\gamma_1h) \\ \vdots \\ Ax_{i}+f(t_i+\gamma_sh)
 \end{bmatrix}
@@ -364,7 +367,7 @@ Generally, the numerical solution of DAEs requires implicit schemes.
 <ul>
 <li><span class="math inline">\((E,A)\)</span> is regular <span class="math inline">\(\leftarrow\)</span> the theory needs a unique solution</li>
 <li><span class="math inline">\((E,A)\)</span> is in Kronecker Canonical Form <span class="math inline">\(\leftarrow\)</span> RKM are invariant under equivalence transformation</li>
-<li><span class="math inline">\((E,A)=(N,I)\)</span> <span class="math inline">\(\leftarrow\)</span> the <em>regular part</em> can be treated by ODE theory</li>
+<li><span class="math inline">\((E,A)=(N,I)\)</span> <span class="math inline">\(\leftarrow\)</span> as the other (the <em>regular part</em>) can be treated by ODE theory</li>
 <li><span class="math inline">\(E=N=N_\nu\)</span> consists of a single Jordan block <span class="math inline">\(\leftarrow\)</span> otherwise consider each Jordan block separately.</li>
 </ul>
 <p>Thus, we will consider the special DAE</p>
@@ -467,22 +470,23 @@ x_{i,\ell}e+\sum_{k\geq 0} \frac{h^k}{k!}f_\ell^{(k)}(t_i)\gamma^k
 \end{align*}\]</span></p>
 <p>With that and with <span class="math inline">\(x_i=x(t_i)\)</span>, we expand the error <span class="math inline">\(\tau_1\)</span> as follows:
 <span class="math display">\[\begin{align*}
-\tau_1 &amp;= \beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&amp;\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
-&amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\bigr[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\bigr] \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
+\tau_1 &amp;= h\beta^T\sum_{j=1}^\nu (h\mathcal A)^{-j}Z_{ij} + \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ x_{j}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&amp;\quad\quad\quad\quad+ \sum_{k\geq 1} \frac{h^k}{k!}x_1^{(k)}(t_i)\\
+&amp;= \beta^T\sum_{j=1}^\nu h^{-j+1}\mathcal A^{-j}\Bigg[ -\sum_{k=j}^{\nu}f_k^{(k-j)}(t_i)e+\sum_{k\geq 0} \frac{h^k}{k!}f_j^{(k)}(t_i)\gamma^k\Bigg] \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1} \frac{h^k}{k!} \sum_{j=1}^{\nu}f_j^{(j-1+k)}(t_i)\\
 &amp;= -\sum_{j=1}^\nu \sum_{k=j}^{\nu} h^{-j+1}\beta^T\mathcal A^{-j} ef_k^{(k-j)}(t_i)+\sum_{j=1}^\nu \sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\sum_{j=1}^{\nu} \frac{h^k}{k!} f_j^{(j-1+k)}(t_i),
 \end{align*}\]</span></p>
-<p>which, with <span class="math inline">\(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{k=1}^\nu \sum_{j=1}^k g(k,j)\)</span>, becomes</p>
+<p>which, with <span class="math inline">\(\sum_{j=1}^\nu \sum_{k=j}^\nu g(j,k) = \sum_{k=1}^\nu \sum_{j=1}^k g(j,k)= \sum_{j=1}^\nu \sum_{k=1}^j g(k,j)\)</span>, becomes</p>
 <p><span class="math display">\[\begin{align*}
-\tau_1 &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\&amp;\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr] \\
- &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)\\
- &amp;\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \bigr].
+\tau_1 &amp;= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\&amp;\quad\quad\quad\quad+\sum_{k\geq 0}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg] \\
+ &amp;= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)\\
+ &amp;\quad\quad\quad\quad+\sum_{k=0}^{j-1}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i)+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) \\&amp;\quad\quad\quad\quad- \sum_{k\geq 1}\frac{h^k}{k!} f_j^{(j-1+k)}(t_i) \Bigg].
 \end{align*}\]</span></p>
 <p>A shift of indices, <span class="math inline">\(\sum_{k=0}^{j-1}g(k)=\sum_{k=1}^j g(j-k)\)</span> and <span class="math inline">\(\sum_{k\geq 1}g(k)=\sum_{k\geq j}g(k-j+1)\)</span>, then gives:
 <span class="math display">\[\begin{align*}
-    \tau_1 &amp;= \sum_{j=1}^{\nu} \bigl[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_k^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &amp;\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \bigr].
+    \tau_1 &amp;= \sum_{j=1}^{\nu} \Bigg[ -\sum_{k=1}^j h^{-k+1}\beta^T\mathcal A^{-k} ef_j^{(j-k)}(t_i)+\sum_{k=1}^{j}\frac{h^{-k+1}}{(j-k)!}\beta^T\mathcal A^{-j} \gamma^{j-k} f_j^{(j-k)}(t_i)\\ &amp;\quad\quad\quad\quad+\sum_{k\geq j}\frac{h^{k-j+1}}{k!}\beta^T\mathcal A^{-j} \gamma^k f_j^{(k)}(t_i) - \sum_{k\geq j}\frac{h^{k-j+1}}{(k-j+1)!} f_j^{(k)}(t_i) \Bigg].
 \end{align*}\]</span></p>
-<p>and a comparison of the coefficients for the same orders of <span class="math inline">\(h\)</span> and diffentials of <span class="math inline">\(f\)</span> leads to the conditions. Note the ranges of the sums that depend on <span class="math inline">\(j=1, \dotsc, \nu\)</span>.</p>
+<p>and a comparison of the coefficients for the same orders of <span class="math inline">\(h\)</span> and derivatives of <span class="math inline">\(f\)</span> leads to the conditions.
+Note the ranges of the sums that depend on <span class="math inline">\(j=1, \dots, \nu\)</span>.</p>
 </div>
 
 
@@ -579,7 +583,6 @@ If we compare with the examples from the chapter on linear time-varying DAEs, we
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -620,7 +623,7 @@ gitbook.start({
 },
 "download": ["DAEs.pdf"],
 "search": {
-"engine": "lunr",
+"engine": "fuse",
 "options": null
 },
 "toc": {
