@@ -97,7 +97,7 @@ x_2(t) =  - \dot{f_1}(t) + f_2(t)
 $$
 and also
 $$
-x_1(t) =  - t(\dot{f_1}(t) + f_2(t))+f_1(t).
+x_1(t) =  t(- \dot{f_1}(t) + f_2(t))+f_1(t).
 $$
 ```
 
@@ -150,7 +150,7 @@ Next we will define *local* equivalence of matrix pairs.
 ```{definition, label="local-equivalence"}
 Two pairs $(E_i,A_i)$, $E_i$, $A_i \in \mathbb C^{m,n}$,
 $i=1,2$, of matrices are called *locally equivalent*, if there exist
-pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ such that as well as matrix $R\in \mathbb C^{n,n}$ such that
+pointwise nonsingular matrices $P \in \mathbb C^{m,m})$ and $Q\in \mathbb C^{n,n}$ as well as matrix $R\in \mathbb C^{n,n}$ such that
 \begin{equation}
 E_2=PE_1Q, \quad A_2 = PA_1Q-PE_1R (\#eq:iv-loc-equiv-mpairs).
 \end{equation}
@@ -176,7 +176,7 @@ We state a few observations:
 
 ## A Local Canonical Form
 
-For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that the $V$ is the span of the columns of $V$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
+For easier explanations, we introduce the slightly incorrect wording that a *matrix* $M$ *spans* a vector space $V$ to express that $V$ is the span of the columns of $M$. Similarly, we will say that $M$ *is a basis of* $V$, if the columns of $M$ form a basis for $V$.
 
 Some more notation:
 
@@ -291,7 +291,7 @@ x_3 - x_2 \\ x_2-x_1 \\ x_3
 $$
 one finds for the coefficients of Example \@ref(exm:the-circuit) that:
 $$
-(E, A) \backsim 
+(E, A) \sim
 \left(
 \begin{bmatrix} C & 0 & 0 \\ 0 & 0 &0 \\ 0 & 0 &0  \end{bmatrix}
 ,
@@ -394,7 +394,7 @@ All entries are again matrix functions on $I$ and the last block column in both 
 ```
 
 ```{proof}
-In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:global-canonical-form). In what follows, the basic operations of 
+In what follows, we will tacitly redefine the block matrix entries that appear after the global equivalence transformations. The first step is the continous SVD of $E$; see Theorem \@ref(thm:continuous-svd). In what follows, the basic operations of
 
  * condensing blocks by the continuous SVD, e.g. $U_2^HA_{31}V_2=\begin{bmatrix} I_s & 0 \\ 0 & 0 \end{bmatrix}$
  * and eliminating blocks through by adding multiples of columns or rows
@@ -621,10 +621,10 @@ and
 $$
 \bar f(t) =
 \begin{bmatrix}
-A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)-\dot f_4(t)
+A_{24}x_4(t) + f_2(t) \\ A_{14}x_4(t)+f_1(t)+\dot f_4(t)
 \end{bmatrix} \in \mathbb C^{d_0+s_0}.
 $$
-Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form of Theorem \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
+Here, we have used the subscript to note that these $d$ and $s$ quantities were characteristic for the initial matrix pair $(E, A)$. Now, after this differentiation step, one can calculate the characteristic values $d_1$, $a_1$, $s_1$ again for the pair $(E_1, A_1)$ which is obtained from the canonical form \@ref(eq:iv-glob-can-form) by replacing equations \@ref(eq:iv-gcf-spart-1)--\@ref(eq:iv-gcf-dpart) by the DAE with $(\bar E, \bar A)$ as in \@ref(eq:iv-gcf-post-diff).
 ```
 
 The following theorem states that this *differentiation-elimination* step 
@@ -667,13 +667,14 @@ is called the *strangeness index* of the DAE \@ref(eq:iv-ltv-dae). If $\mu=0$, t
 The practical implications of the strangeness index and the procedure of its derivation are laid out in the following theorem.
 
 ```{theorem, label="iv-strangeness-free-equiv-system"}
-Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then the DAE \@ref(eq:iv-ltv-dae) is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
+Let the strangeness index $\mu$ of $(E, A)$ be well defined and let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$.
+Then the DAE \@ref(eq:iv-ltv-dae) is equivalent (in the sense that the solution sets are in a one-to-one correspondence via a pointwise nonsingular matrix function) to a DAE of the form
 \begin{align}
 \dot x_1(t) &= A_{13}(t)x_3(t) + f_1(t) (\#eq:iv-snf-equi-sys-dpart)\\
 0 &= x_2(t) + f_2(t) (\#eq:iv-snf-equi-sys-apart)\\
 0 &= f_3(t), (\#eq:iv-snf-equi-sys-vpart)
 \end{align}
-where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu}$ and where $f_1$, $f_2$, $f_3$ are defined through $f$, $\dot f$, \dots, $f^{(\mu)}$.
+where $A_{13} \in \mathcal C(\mathcal I, \mathbb C^{d_\mu, u_\mu})$ and where $f_1$, $f_2$, $f_3$ are defined through $f$, $\dot f$, \dots, $f^{(\mu)}$.
 ```
 
 ```{block2, type='JHSAYS'}
@@ -681,7 +682,7 @@ System \@ref(eq:iv-snf-equi-sys-dpart)--\@ref(eq:iv-snf-equi-sys-vpart) is in th
 ```
 
 ```{corollary, label="iv-snf-solvability"}
-Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then
+Let the strangeness index $\mu$ of $(E, A)$ be well defined and let $f\in \mathcal C^\mu(\mathcal I, \mathbb C^{m})$. Then
 
 1. The DAE \@ref(eq:iv-ltv-dae) is solvable if and only if the $v_\mu$ consistency conditions \@ref(eq:iv-snf-equi-sys-vpart)
    $$
@@ -689,7 +690,7 @@ Let the strangeness index $\mu$ of $(E, A)$ be well defined let $f\in \mathcal C
    $$
    are fulfilled.
 
-2. An initial condition \@ref(eq:iv-ltv-inicond) is consistent if, and only if, in the the $a_\mu$ conditions 
+2. An initial condition \@ref(eq:iv-ltv-inicond) is consistent if, and only if, the $a_\mu$ conditions
    $$
    0=x_2(t_0) + f_2(t_0)
    $$
@@ -753,7 +754,7 @@ $$
 \begin{bmatrix}
 E & 0 & 0\\
 \dot E - A & E &0  \\
-\ddot E - 2A & 2\dot E -A &E 
+\ddot E - 2\dot A & 2\dot E -A &E
 \end{bmatrix}
 \frac{d}{dt}
 \begin{bmatrix}
@@ -781,14 +782,14 @@ M_\ell (t) \dot z_\ell(t) = N_\ell (t) z_\ell(t) + g_\ell(t),
 \end{equation}
 where
 $$
-(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=1,\dotsc,\ell,
+(M_\ell)_{i,j} = \binom{i}{j}E^{(i-j)} - \binom{i}{j+1}A^{(i-j-1)}, \quad i,j=0,\dotsc,\ell,
 $$
 
 where
 $$
 (N_\ell)_{i,j} = 
 \begin{cases}
-A^{(i)}, \quad &\text{for } i=1,\dotsc, \ell, \, j=0 \\
+A^{(i)}, \quad &\text{for } i=0,\dotsc, \ell, \, j=0 \\
 0, \quad & \text{else}
 \end{cases},
 $$
@@ -817,7 +818,7 @@ $$
 The following theorem connects the derivative array to the strangeness index and provides a *strangeness free* reformulation of the DAE \@ref(eq:iv-ltv-dae).
 
 ```{theorem, label="iv-derivative-arrays-projections"}
-Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
+Let the strangeness index of the pair $(E, A)$ of matrix-valued functions be well defined according to Definition \@ref(def:iv-strangeness-index) with the global invariants $d_\mu$, $a_\mu$, $v_\mu$. Then for the derivative array as defined in Definition \@ref(def:iv-derivative-array) it holds that
 
 1. $\corank M_{\mu+1}- \corank M_\mu = v_\mu$
 
